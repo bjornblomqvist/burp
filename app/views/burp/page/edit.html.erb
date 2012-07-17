@@ -1,0 +1,16 @@
+
+<%= form_for :page, :url => (params[:action] == "edit" ? "./update" : "./create" ) do |f| %>
+
+  <%= f.label :path %>
+  <%= f.text_field :path %>
+
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  
+  <% @page.snippets.each_entry do |name,value| %>
+    <%= f.label name %>
+    <%= f.text_area :snippet,:value => value, :name => "page[snippets][#{name}]" %>
+  <% end %>
+
+  <%= f.submit %>
+<% end %>
