@@ -1,5 +1,5 @@
 
-<%= form_for :page, :url => (params[:action] == "edit" ? "./update" : "./create" ) do |f| %>
+<%= form_for :page, :url => (params[:action] == "edit" ? "./update" : "./create"),:html => {:id => "edit-page-form"} do |f| %>
 
   <%= f.label :path %>
   <%= f.text_field :path %>
@@ -8,9 +8,16 @@
   <%= f.text_field :title %>
   
   <% @page.snippets.each_entry do |name,value| %>
-    <%= f.label name %>
+  <div class="snippet">
+    <%= f.label name %> <a class="remove-snippet-link" href="">Remove snippet</a>
     <%= f.text_area :snippet,:value => value, :name => "page[snippets][#{name}]" %>
+  </div>
   <% end %>
-
+  
   <%= f.submit %>
 <% end %>
+
+<label>Snippet name:</label>
+<input id="snippet_name_input" name="snippet_name" >
+<a id="add-snippet-link" href="">Add snippet</a>
+

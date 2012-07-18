@@ -35,6 +35,7 @@ module Burp
   
       @page.title = params[:page][:title]
       @page.path = params[:page][:path]
+      @page.snippets = {}
       (params[:page][:snippets] || {}).each do |name,value|
         @page.snippets[name] = value
       end
