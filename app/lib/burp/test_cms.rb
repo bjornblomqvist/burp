@@ -1,7 +1,6 @@
 module Burp
   class TestCMS
   
-  
     def self.find_by_path(path)
     
       page_model = PageModel.find(path)

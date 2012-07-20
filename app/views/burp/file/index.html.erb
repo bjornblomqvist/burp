@@ -1,0 +1,37 @@
+
+  <% @file_paths.each do |file_path| %>
+  
+    <%= file_path %><br>
+  
+  <% end %>
+  
+  <div id="file-uploader">
+      <noscript>
+          <p>Please enable JavaScript to use file uploader.</p>
+          <!-- or put a simple form for upload here -->
+      </noscript>
+  </div>
+  
+  <script type="text/javascript" charset="utf-8">
+    var uploader = new qq.FileUploader({
+        element: document.getElementById('file-uploader'),
+        action: '/burp/files',
+        onComplete: function(id, fileName, responseJSON){
+          if(responseJSON.success) {
+            document.location.reload(true);
+          } else {
+            var errorMessage = "";
+            $.each(responseJSON.errors,function(index,error) {
+              $.each(error,function(key,value) {
+                errorMessage += value;
+              });
+            });
+            alert(errorMessage);
+          }
+        },
+    });
+    
+    
+    
+  </script>
+  
