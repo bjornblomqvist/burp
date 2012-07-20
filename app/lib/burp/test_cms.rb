@@ -9,7 +9,7 @@ module Burp
       if page_model
         Page.new(page_model.snippets,page_model.title,TestCMS.link_tree)
       else
-        Page.new
+        Page.new(TestCMS.link_tree)
       end
     end
   

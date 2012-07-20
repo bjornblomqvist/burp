@@ -1,4 +1,0 @@
-
-  - Basic edit
-    - Fix so we can add snippets
-    - Fix so we can remove snippets
