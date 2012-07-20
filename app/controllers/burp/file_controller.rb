@@ -37,6 +37,7 @@ module Burp
         if errors.length > 0
           render :json => {:errors => errors}
         else
+          FileUtils.mkdir_p(Burp.upload_directory)
           FileUtils.mv(file.path,Burp.upload_directory+File.basename(file.path))
           render :json => {:success => true}
         end
