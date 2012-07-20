@@ -10,5 +10,8 @@ Burp::Engine.routes.draw do
   
   get "/files/" => "file#index"
   post "/files/" => "file#create"
+  
+  get "/files/*id" => "file#show"
+  
 
 end

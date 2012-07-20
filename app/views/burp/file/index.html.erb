@@ -1,10 +1,11 @@
 
   <% @file_paths.each do |file_path| %>
   
-    <%= file_path %><br>
+    <a href="<%= file_path %>"><%= file_path %></a><br>
   
   <% end %>
   
+  <br><br>
   <div id="file-uploader">
       <noscript>
           <p>Please enable JavaScript to use file uploader.</p>
