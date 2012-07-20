@@ -11,6 +11,14 @@ module Burp
         Page.new(TestCMS.link_tree)
       end
     end
+    
+    def self.cms_page(request_path)
+      @cached_cms_page = Burp::TestCMS.find_by_path(request_path)
+      @cached_cms_page.link_tree.children << Burp::Link.new("Login" => "/login")
+      @cached_cms_page[:sidebar] += "<h1>The end!</h1>".html_safe
+
+      @cached_cms_page
+    end
   
   
     def self.link_tree
