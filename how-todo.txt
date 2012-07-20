@@ -1,0 +1,6 @@
+
+  - How do we handle multiple templates for CMS pages
+  - How does the CMS know what the snippet names are for a given page.
+  
+  
+  
