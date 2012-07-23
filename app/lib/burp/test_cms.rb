@@ -14,9 +14,6 @@ module Burp
     
     def self.cms_page(request_path)
       @cached_cms_page = Burp::TestCMS.find_by_path(request_path)
-      @cached_cms_page.link_tree.children << Burp::Link.new("Login" => "/login")
-      @cached_cms_page[:sidebar] += "<h1>The end!</h1>".html_safe
-
       @cached_cms_page
     end
   
@@ -40,7 +37,7 @@ module Burp
         end
       end
     
-      Group.new("root",:children => groups.values + [Group.new("Test1",:children => [Link.new("Its a bla bla image" => "/")]),Group.new("Test2",:children => [Link.new("Its a bla bla image" => "/blabla.jpg")])])
+      Group.new("root",:children => groups.values)
    
     end
   

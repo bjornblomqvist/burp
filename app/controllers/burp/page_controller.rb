@@ -20,6 +20,7 @@ module Burp
   
       @page.title = params[:page][:title]
       @page.path = params[:page][:path]
+      @path.link_label = params[:page][:link_label]
       (params[:page][:snippets] || {}).each do |name,value|
         @page.snippets[name] = value
       end
@@ -35,6 +36,7 @@ module Burp
   
       @page.title = params[:page][:title]
       @page.path = params[:page][:path]
+      @page.link_label = params[:page][:link_label]
       @page.snippets = {}
       (params[:page][:snippets] || {}).each do |name,value|
         @page.snippets[name] = value

@@ -2,5 +2,10 @@
   - How do we handle multiple templates for CMS pages
   - How does the CMS know what the snippet names are for a given page.
   
+  - Content blocks? (templates)
+    - Defined html structure for data
+    
+  https://github.com/xing/wysihtml5/
+  
   
   
