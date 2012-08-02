@@ -1,0 +1,117 @@
+.admin-dock {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: white;
+}
+.admin-dock .dock-toolbar {
+  clear: both;
+  background: #f0f0f0;
+  /* Old browsers */
+
+  background: -moz-linear-gradient(top, #f6f6f6 0%, #e5e5e5 100%);
+  /* FF3.6+ */
+
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f6f6f6), color-stop(100%, #e5e5e5));
+  /* Chrome,Safari4+ */
+
+  background: -webkit-linear-gradient(top, #f6f6f6 0%, #e5e5e5 100%);
+  /* Chrome10+,Safari5.1+ */
+
+  background: -o-linear-gradient(top, #f6f6f6 0%, #e5e5e5 100%);
+  /* Opera 11.10+ */
+
+  background: -ms-linear-gradient(top, #f6f6f6 0%, #e5e5e5 100%);
+  /* IE10+ */
+
+  background: linear-gradient(to bottom, #f6f6f6 0%, #e5e5e5 100%);
+  /* W3C */
+
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#f6f6f6', endColorstr='#e5e5e5', GradientType=0);
+  /* IE6-9 */
+
+  border-top: 1px solid #d4d4d4;
+  width: 100%;
+  font-family: arial;
+  font-size: 13px;
+  line-height: 24px;
+  color: #333333;
+}
+.admin-dock .dock-toolbar li,
+.admin-dock .dock-toolbar ul {
+  float: left;
+  line-height: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.admin-dock .dock-toolbar li {
+  padding: 1px 8px 0 8px;
+  border-right: 1px solid #d0d0d0;
+}
+.admin-dock .dock-toolbar li label {
+  margin: 0 5px;
+}
+.admin-dock .dock-toolbar .secondary li {
+  border: none;
+  border-left: 1px solid #d0d0d0;
+}
+.admin-dock .dock-toolbar .primary {
+  float: left;
+}
+.admin-dock .dock-toolbar .secondary {
+  float: right;
+}
+.admin-dock .dock-toolbar .title {
+  border: none;
+  font-weight: bold;
+}
+.admin-dock .dock-toolbar li a:hover {
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+  /* Buttons only, perhaps? :P */
+
+}
+.admin-dock .dock-toolbar li a.active {
+  text-shadow: 0 0 2px white;
+  color: #888888;
+}
+.admin-dock .dock-toolbar .toolbar-selector {
+  position: relative;
+}
+.admin-dock .dock-toolbar .toolbar-selector a {
+  display: block;
+}
+.admin-dock .dock-toolbar .toolbar-selector i {
+  color: #666666;
+  font-size: 85%;
+  width: 1em;
+  float: right;
+}
+.admin-dock .dock-toolbar .toolbar-selector ul {
+  border: 1px solid #aaaaaa;
+  background: white;
+  position: absolute;
+  bottom: 22px;
+  left: 0;
+}
+.admin-dock .dock-toolbar .toolbar-selector ul li {
+  border: 1px solid #e8e8e8;
+  float: none;
+}
+.admin-dock .dock-toolbar .toolbar-selector ul li:hover {
+  background: #f8f8f8;
+}
+.admin-dock .close,
+.admin-dock .title {
+  color: #888888;
+}
+.admin-dock i {
+  margin-right: 0;
+}
+.admin-dock a {
+  color: inherit;
+  text-decoration: inherit;
+}
+.clearfix {
+  clear: both;
+}
