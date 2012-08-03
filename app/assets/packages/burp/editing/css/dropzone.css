@@ -1,0 +1,14 @@
+.dropbox { position: relative; }
+.dropzone {
+  position: absolute; top: 0px; height: 100%;
+  border: 1px solid white; background: black; opacity: 0.5;
+  visibility: hidden;
+}
+.dropzone.left { left: 0; width: 20%; }
+.dropzone.center { left: 20%; width: 50%; }
+.dropzone.right { left: 70%; width: 30%; }
+.active .dropzone { visibility: visible; }
+.dropzone.active { opacity: 0.75; }
+
+.movable.ui-draggable-dragging { width: 128px !important; height: auto !important; }
+.hovering { background: yellow; }

@@ -1,0 +1,19 @@
+#gallery { 
+  padding-left: 10px;
+  background: white; 
+  border-top: 1px solid #d4d4d4; 
+  border-bottom: 1px solid #d4d4d4; 
+  height: 80px; 
+  font-size: 26px;
+  line-height: 80px;
+  color: #bbbbbb;
+}
+#gallery ul, #gallery li { list-style: none; padding-left: 0; }
+#gallery .images { margin: 0 26px; }
+#gallery li { margin: 0; float: left; }
+#gallery img { height: 60px; margin: 10px; display: block; box-shadow: 0 0 3px #999999; }
+#gallery .prev { position: absolute; left: 15px; }
+#gallery .next { position: absolute; right: 10px; }
+
+#gallery.delete-active { background: red; }
+#gallery .prev {}
