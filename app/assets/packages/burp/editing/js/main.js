@@ -87,8 +87,42 @@ $(function() {
         alert("Switching to " + option);
       }
     });
+    
+    
+    $('<div id="file-uploader" style="overflow: hidden; width: 0px; height: 0px; position: absolute;"></div>').appendTo('body');
+
+    var uploader = new qq.FileUploader({
+        element: document.getElementById('file-uploader'),
+        action: '/burp/files',
+        onComplete: function(id, fileName, responseJSON){
+          if(responseJSON.success) {
+            $.getJSON('/burp/files/',function(data) {
+              
+              $('#gallery img').remove();
+              
+              $.each(data.paths,function(index,path) {
+                $('#gallery .images').append('<li><img src="'+path+'"></li>');
+              });
+
+              contentDecorator.makeDroppable('#gallery img', function(element, positionClass) {
+                return $("<img src='" + element.src + "' class='" + positionClass + "' />");
+              });
+            });
+          } else {
+            var errorMessage = "";
+            $.each(responseJSON.errors,function(index,error) {
+              $.each(error,function(key,value) {
+                errorMessage += value;
+              });
+            });
+            alert(errorMessage);
+          }
+        },
+    });
   
-    $.adminDock.footer.addButton({ icon: 'upload', text: 'Upload', secondary: true });
+    $.adminDock.footer.addButton({ icon: 'upload', text: 'Upload', secondary: true, click:function() {
+      $('#file-uploader input').click();
+    }});
     $.adminDock.footer.addButton({ icon: 'undo', text: 'Discard', secondary: true });
     $.adminDock.footer.addButton({ icon: 'save', text: 'Save', secondary: true });
   
