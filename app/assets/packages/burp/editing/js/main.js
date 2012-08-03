@@ -29,7 +29,8 @@ $(function() {
         
     elements.appendTo('body');
     
-    $('#code').val($('.snippet-'+snippetName).html());
+    var originalValue = $('.snippet-'+snippetName).html();
+    $('#code').val(originalValue);
     var lastValue = "";
   
     var editor = CodeMirror.fromTextArea($('#code')[0], {
@@ -123,7 +124,9 @@ $(function() {
     $.adminDock.footer.addButton({ icon: 'upload', text: 'Upload', secondary: true, click:function() {
       $('#file-uploader input').click();
     }});
-    $.adminDock.footer.addButton({ icon: 'undo', text: 'Discard', secondary: true });
+    $.adminDock.footer.addButton({ icon: 'undo', text: 'Discard', secondary: true, click:function() {
+      editor.setValue(originalValue);
+    }});
     $.adminDock.footer.addButton({ icon: 'save', text: 'Save', secondary: true });
   
     $.adminDock.show('#gallery', false);
