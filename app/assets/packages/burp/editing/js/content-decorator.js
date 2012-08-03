@@ -65,7 +65,9 @@
       $(element).droppable({
         hoverClass: 'delete-active',
         drop: function(event, ui) {
-          ui.draggable.remove();
+          if(ui.draggable.parents("#gallery").length == 0) {
+            ui.draggable.remove();
+          }
           shortCircuit = true;
           cleanupDropzones(contentEditor);
 

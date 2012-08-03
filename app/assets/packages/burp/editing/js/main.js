@@ -28,19 +28,51 @@ $(function() {
     var snippetName = snippets().names[0];
         
     elements.appendTo('body');
+    
+    $('#code').val($('.snippet-'+snippetName).html());
+    var lastValue = "";
   
     var editor = CodeMirror.fromTextArea($('#code')[0], {
       mode: 'markdown',
       lineNumbers: true,
       matchBrackets: true,
-      theme: "default"
+      theme: "default",
+      onUpdate:function() {
+        if(editor.getValue() != lastValue) {
+          lastValue = editor.getValue();
+          contentDecorator.setMarkdown(lastValue);
+          // Cleanup
+          $('.snippet-'+snippetName).find("p > img").each(function(index,img) {
+            if($(img).parent().children().length == 1) {
+              $(img).unwrap();
+            }
+          });
+        }
+      }
     });
   
     var contentDecorator = new ContentDecorator('.snippet-'+snippetName);
-  
-    contentDecorator.makeDroppable('#gallery img', function(element, positionClass) {
-      return $("<img src='" + element.src + "' class='" + positionClass + "' />");
+    
+    lastValue = editor.getValue();
+    contentDecorator.setMarkdown(lastValue);
+    // Cleanup
+    $('.snippet-'+snippetName).find("p > img").each(function(index,img) {
+      if($(img).parent().children().length == 1) {
+        $(img).unwrap();
+      }
     });
+    
+    $.getJSON('/burp/files/',function(data) {
+      $.each(data.paths,function(index,path) {
+        $('#gallery .images').append('<li><img src="'+path+'"></li>');
+      });
+      
+      contentDecorator.makeDroppable('#gallery img', function(element, positionClass) {
+        return $("<img src='" + element.src + "' class='" + positionClass + "' />");
+      });
+    });
+  
+
     contentDecorator.addRemoveZone('#gallery');
   
     $.adminDock.title('This is the new title');
@@ -63,11 +95,21 @@ $(function() {
     $.adminDock.show('#gallery', false);
   }
   
+  var initDone = false;
+  
+  function init() {
+    if(!initDone) {
+      wrapContent();
+      addEditor();
+      initDone = true;
+    }
+  }
+  
   $(window).keydown(function(event) {
     if (event.altKey == true && event.keyCode == 27) {
 
-      wrapContent();
-      addEditor();
+      init();
+      
       $.adminDock.toggle();
     }
   });
