@@ -1,6 +1,7 @@
 .admin-dock {
   position: fixed;
   bottom: 0;
+  left: 0px;
   width: 100%;
   background: white;
 }

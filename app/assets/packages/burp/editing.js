@@ -11,3 +11,4 @@
 //= require ./editing/dep/CodeMirror-2.3/mode/htmlmixed/htmlmixed.js
 //= require ./editing/dep/CodeMirror-2.3/mode/xml/xml.js
 //= require ./editing/dep/CodeMirror-2.3/mode/markdown/markdown.js
+//= require ./editing/js/main.js
