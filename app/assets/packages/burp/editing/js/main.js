@@ -80,13 +80,13 @@ $(function() {
     $.adminDock.footer.addButton({ icon: 'edit', showModule: $('#myContentEditor'), show: function() {
       editor.refresh();
     } });
-    $.adminDock.footer.addSelector({
-      options: ['main', 'sidebar', 'footer'],
-      default: 'sidebar',
-      change: function(option) {
-        alert("Switching to " + option);
-      }
-    });
+    // $.adminDock.footer.addSelector({
+    //   options: ['main', 'sidebar', 'footer'],
+    //   default: 'sidebar',
+    //   change: function(option) {
+    //     alert("Switching to " + option);
+    //   }
+    // });
     
     
     $('<div id="file-uploader" style="overflow: hidden; width: 0px; height: 0px; position: absolute;"></div>').appendTo('body');
