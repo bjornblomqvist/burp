@@ -3,6 +3,7 @@
   position: absolute; top: 0px; height: 100%;
   border: 1px solid white; background: black; opacity: 0.5;
   visibility: hidden;
+  z-index: 2;
 }
 .dropzone.left { left: 0; width: 20%; }
 .dropzone.center { left: 20%; width: 50%; }
