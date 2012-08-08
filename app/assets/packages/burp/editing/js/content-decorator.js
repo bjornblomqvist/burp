@@ -99,7 +99,30 @@
         opacity: 0.6,
         start: function(event, ui) {
           
-          var wrappers = contentEditor.element.find('.markdown').wrap('<div class="dropbox"></div>').parent();
+          var wrappers = [];
+          
+          var headerPosition = $('body > header').offset();
+          
+          contentEditor.element.find('.markdown').each(function() {
+      
+            var position = $(this).offset();
+            var size = {width:$(this).outerWidth(),height:$(this).outerHeight()}
+            position.left -= headerPosition.left;
+            console.debug(this);
+            console.debug(position,size);
+            
+            var element = $('<div class="dropbox"></div>');
+            wrappers.push(element[0]);
+      
+            element.data("target-element",this);
+      
+            element.css(size);
+            element.css(position);
+            element.css({'position':'absolute'});
+            element.appendTo('body');
+          });
+          
+          wrappers = $(wrappers)
           wrappers.append('<div class="dropzone left" /><div class="dropzone center" /><div class="dropzone right" />');
 
           wrappers.find('.dropzone').droppable({
@@ -129,10 +152,8 @@
                 return element;
               });
 
-              var markdown = $(this).siblings('.markdown');
-              wrappers.each(function() {
-                $(this).replaceWith($(this).find('.markdown'));
-              });
+              var markdown = $(this).parent().data("target-element");
+              wrappers.remove();
 
               insertMovable(img, markdown);
             }
