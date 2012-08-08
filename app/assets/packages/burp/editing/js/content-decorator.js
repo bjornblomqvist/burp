@@ -100,9 +100,13 @@
         revertDuration: 0,
         opacity: 0.6,
         zIndex: 900,
-        refreshPositions: true,
+        appendTo: "body",
+        helper: 'clone',
         drag: function(event, ui) {
-          // ui.position.left -= headerPosition.left;
+          ui.position.left = event.clientX;
+          ui.position.top = event.clientY;
+          ui.position.left -= (ui.helper.width()/2.0);
+          ui.position.top -= (ui.helper.height()/2.0);
         },
         start: function(event, ui) {
           
