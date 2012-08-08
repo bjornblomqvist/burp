@@ -140,7 +140,7 @@ $(function() {
         cache:false,
         dataType:'json',
         success:function(data) {
-
+          
           data.snippets[snippetName] = contentDecorator.getHtml();
           data.misc = data.misc || {markdown:{}};
           data.misc.markdown[snippetName] = contentDecorator.getMarkdown();
@@ -150,6 +150,9 @@ $(function() {
             data:{page:data},
             dataType:'json',
             success:function() {
+              
+              originalValue = contentDecorator.getHtml();
+              
               alert("The page was saved!")
             }
           });
