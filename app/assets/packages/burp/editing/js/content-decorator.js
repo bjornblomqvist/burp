@@ -74,6 +74,7 @@
     addRemoveZone: function(element) {
       $(element).droppable({
         hoverClass: 'delete-active',
+        tolerance: "pointer",
         drop: function(event, ui) {
           if(ui.draggable.parents("#gallery").length == 0) {
             ui.draggable.remove();
@@ -102,6 +103,7 @@
         zIndex: 900,
         appendTo: "body",
         helper: 'clone',
+        refreshPositions: true,
         drag: function(event, ui) {
           ui.position.left = event.clientX;
           ui.position.top = event.clientY;
