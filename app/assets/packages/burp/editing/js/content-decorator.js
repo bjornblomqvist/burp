@@ -72,17 +72,19 @@
       initializeMovable(this, elements, createCallback);
     },
     addRemoveZone: function(element) {
-      contentEditor = this;
       $(element).droppable({
         hoverClass: 'delete-active',
         drop: function(event, ui) {
           if(ui.draggable.parents("#gallery").length == 0) {
             ui.draggable.remove();
+            ui.draggable.data("removed",true);
           }
-          shortCircuit = true;
-          cleanupDropzones(contentEditor);
-
-          setTimeout(function() { shortCircuit = false; }, 1);
+          clearDropBoxes();
+        },
+        over: function(event,ui) { 
+          if(ui.draggable.parents("#gallery").length != 0) {
+            $(this).removeClass('delete-active');
+          }
         }
       });
     }
@@ -92,11 +94,16 @@
     if (!$(elements).hasClass('movable')) {
       
       $(elements).addClass('movable');
-
+      
       $(elements).draggable({
         revert: true,
         revertDuration: 0,
         opacity: 0.6,
+        zIndex: 900,
+        refreshPositions: true,
+        drag: function(event, ui) {
+          // ui.position.left -= headerPosition.left;
+        },
         start: function(event, ui) {
           
           var wrappers = [];
@@ -135,38 +142,37 @@
                 $(this).parent().removeClass('active'); 
               }
             },
-            drop: function(event, ui) {
-              if (shortCircuit) return;
+            drop: function(event, ui) {              
+              
+              if(!ui.draggable.data("removed")) {
+                var className = $(this).removeClass('dropzone')[0].className;
+                var img = createCallback(ui.draggable[0], className);
 
-              var className = $(this).removeClass('dropzone')[0].className;
-              var img = createCallback(ui.draggable[0], className);
+                initializeMovable(contentEditor, img, function(element, positionClass) { 
+                  console.debug(element, positionClass)
+                  $(element).removeClass('left center right');
+                  $(element).addClass(positionClass);
+                  return element;
+                });
 
-              initializeMovable(contentEditor, img, function(element, positionClass) { 
-                $(element).removeClass('left center right');
-                console.debug(element, positionClass)
-                $(element).addClass(positionClass);
-                return element;
-              });
-
-              var markdown = $(this).parent().data("target-element");
-              wrappers.remove();
-
-              insertMovable(img, markdown);
+                var markdown = $(this).parent().data("target-element");
+              
+                insertMovable(img, markdown);
+                clearDropBoxes();
+              }
             }
           });
         },
         stop: function(event, ui) {
-          cleanupDropzones(contentEditor);
+          clearDropBoxes();
         }
       });
     }
   }
-
-  function cleanupDropzones(contentEditor) {
-    contentEditor.element.find('.dropbox').each(function() {
-      $(this).replaceWith($(this).find('.markdown'));
-    });
-  }
+  
+  function clearDropBoxes() {
+    $('body > .dropbox').remove();
+  };
 
   function calculateHash() {
     $(this).attr('id', "hashed-" + MD5($(this)[0].outerHTML.toLowerCase().replace(/\W+/, '')));
