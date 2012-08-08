@@ -108,8 +108,6 @@
             var position = $(this).offset();
             var size = {width:$(this).outerWidth(),height:$(this).outerHeight()}
             position.left -= headerPosition.left;
-            console.debug(this);
-            console.debug(position,size);
             
             var element = $('<div class="dropbox"></div>');
             wrappers.push(element[0]);
@@ -129,12 +127,10 @@
             hoverClass: 'active',
             tolerance: "pointer",
             over: function() { 
-              console.debug("over", this); 
               $(this).parent().addClass('active'); 
               $(this).parent().data('active-child', this);
             },
             out: function() { 
-              console.debug("out", this); 
               if ($(this).parent().data('active-child') == this) {
                 $(this).parent().removeClass('active'); 
               }
