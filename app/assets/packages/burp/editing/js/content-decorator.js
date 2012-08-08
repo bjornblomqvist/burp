@@ -19,19 +19,23 @@
 
     this.id = this.element.attr('id');
     
-    var contentEditor = this;
-    $(this.element).find("> .movable").each(function() {
-      $(this).removeClass('movable');
-      initializeMovable(contentEditor, this, function(element, positionClass) { 
-        $(element).removeClass('left center right');
-        $(element).addClass(positionClass);
-        return element;
-      });
-      fixate(this);
-    });
+    this.initImages();
   }
 
   $.extend(ContentDecorator.prototype, {
+    
+    initImages: function() {
+      var contentEditor = this;
+      $(this.element).find("> .movable").each(function() {
+        $(this).removeClass('movable');
+        initializeMovable(contentEditor, this, function(element, positionClass) { 
+          $(element).removeClass('left center right');
+          $(element).addClass(positionClass);
+          return element;
+        });
+        fixate(this);
+      });
+    },
     
     getHtml: function() {
       return this.element.html();

@@ -125,6 +125,8 @@ $(function() {
       $('#file-uploader input').click();
     }});
     $.adminDock.footer.addButton({ icon: 'undo', text: 'Discard', secondary: true, click:function() {
+      $('.snippet-'+snippetName).html(originalValue);
+      contentDecorator.initImages();
       editor.setValue(originalValue);
     }});
     $.adminDock.footer.addButton({ icon: 'save', text: 'Save', secondary: true, click:function() {
