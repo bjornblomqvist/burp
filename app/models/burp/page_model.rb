@@ -4,7 +4,7 @@ require 'fileutils'
 module Burp
   class PageModel
 
-    attr_accessor :path, :title, :snippets, :link_label
+    attr_accessor :path, :title, :snippets, :link_label, :misc
   
   
   
@@ -36,7 +36,7 @@ module Burp
         page_data = File.exist?("#{on_disk_path}/page.json") ? JSON.parse(File.read("#{on_disk_path}/page.json")) : {}
       
       
-        PageModel.new(:snippets => data,:title => page_data['title'],:link_label => page_data['linkLabel'],:path => path)
+        PageModel.new(:snippets => data,:title => page_data['title'],:link_label => page_data['linkLabel'],:misc => page_data['misc'],:path => path)
       else
         nil
       end
@@ -72,7 +72,7 @@ module Burp
     def save_metadata
     
       File.open("#{on_disk_path}/page.json","w:utf-8") do |file|
-        file.write({:title => title, :linkLabel => link_label}.to_json)
+        file.write({:title => title, :linkLabel => link_label,:misc => misc}.to_json)
       end
     
     end

@@ -18,11 +18,23 @@
     }
 
     this.id = this.element.attr('id');
+    
+    var contentEditor = this;
+    $(this.element).find("> .movable").each(function() {
+      $(this).removeClass('movable');
+      initializeMovable(contentEditor, this, function(element, positionClass) { 
+        $(element).removeClass('left center right');
+        $(element).addClass(positionClass);
+        return element;
+      });
+      fixate(this);
+    });
   }
 
   $.extend(ContentDecorator.prototype, {
+    
     getHtml: function() {
-      return this.html;
+      return this.element.html();
     },
     getMarkdown: function() {
       return this.markdown;
@@ -40,10 +52,9 @@
     updateContent: function() {
       this.parkImages();
 
-      this.html = this.converter.makeHtml(this.markdown);
-      this.element.html(this.html);
+      this.element.html(this.converter.makeHtml(this.markdown));
       $('#' + this.id + '>*').addClass('markdown').each(calculateHash)
-
+      
       this.unparkImages();
     },
     parkImages: function() {
@@ -79,19 +90,21 @@
 
   function initializeMovable(contentEditor, elements, createCallback) {
     if (!$(elements).hasClass('movable')) {
+      
       $(elements).addClass('movable');
 
       $(elements).draggable({
         revert: true,
         revertDuration: 0,
         opacity: 0.6,
-        cursorAt: { top: 32, left: 64 },
         start: function(event, ui) {
+          
           var wrappers = contentEditor.element.find('.markdown').wrap('<div class="dropbox"></div>').parent();
           wrappers.append('<div class="dropzone left" /><div class="dropzone center" /><div class="dropzone right" />');
 
           wrappers.find('.dropzone').droppable({
             hoverClass: 'active',
+            tolerance: "pointer",
             over: function() { 
               console.debug("over", this); 
               $(this).parent().addClass('active'); 
@@ -161,6 +174,7 @@
   }
 
   function fixate(movable) {
+    movable = $(movable);
     var before = movable.nextAll('.markdown')[0];
     if (before) {
       movable.data('before', before.id);

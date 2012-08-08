@@ -10,5 +10,6 @@
 .active .dropzone { visibility: visible; }
 .dropzone.active { opacity: 0.75; }
 
-.movable.ui-draggable-dragging { max-width: 128px !important; height: auto !important; min-width: 30px; max-height: 60px; z-index: 500; }
+/*.movable.ui-draggable-dragging { max-width: 128px !important; height: auto !important; min-width: 30px; max-height: 60px; z-index: 500; }*/
+.movable.ui-draggable-dragging { z-index: 500; }
 .hovering { background: yellow; }

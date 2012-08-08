@@ -7,6 +7,24 @@ module Burp
     
     def edit
       @page = PageModel.find(("/"+params[:id]).gsub("/$root","/"))
+      
+      respond_to do |format|
+        format.html {}
+        format.json { render :json =>  @page }
+      end
+    end
+    
+    def show
+      path = ("/"+params[:id]).gsub("/$root","/")
+      
+      @page = PageModel.find(path)
+
+      respond_to do |format|
+        format.html {
+          redirect_to path
+        }
+        format.json { render :json =>  @page }
+      end
     end
     
     def new
@@ -26,7 +44,12 @@ module Burp
       end
       @page.save
       
-      redirect_to "/burp/pages/"
+      respond_to do |format|
+        format.html {
+          redirect_to "/burp/pages/"
+        }
+        format.json { render :json =>  {:success => true} }
+      end
       
     end
     
@@ -36,6 +59,7 @@ module Burp
   
       @page.title = params[:page][:title]
       @page.path = params[:page][:path]
+      @page.misc = params[:page][:misc]
       @page.link_label = params[:page][:link_label]
       @page.snippets = {}
       (params[:page][:snippets] || {}).each do |name,value|
@@ -43,7 +67,12 @@ module Burp
       end
       @page.save
       
-      redirect_to "/burp/pages/"
+      respond_to do |format|
+        format.html {
+          redirect_to "/burp/pages/"
+        }
+        format.json { render :json =>  {:success => true} }
+      end
       
     end
     

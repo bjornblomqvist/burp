@@ -127,9 +127,65 @@ $(function() {
     $.adminDock.footer.addButton({ icon: 'undo', text: 'Discard', secondary: true, click:function() {
       editor.setValue(originalValue);
     }});
-    $.adminDock.footer.addButton({ icon: 'save', text: 'Save', secondary: true });
+    $.adminDock.footer.addButton({ icon: 'save', text: 'Save', secondary: true, click:function() {
+      
+      path = window.location.pathname;
+      if(path == "/") {
+        path = "/$root"
+      }
+      
+      $.ajax("/burp/pages/"+path,{
+        cache:false,
+        dataType:'json',
+        success:function(data) {
+
+          data.snippets[snippetName] = contentDecorator.getHtml();
+          data.misc = data.misc || {markdown:{}};
+          data.misc.markdown[snippetName] = contentDecorator.getMarkdown();
+
+          $.ajax("/burp/pages/"+path+"/update",{
+            type:"post",
+            data:{page:data},
+            dataType:'json',
+            success:function() {
+              alert("The page was saved!")
+            }
+          });
+        }
+      });
+      
+      
+    }});
   
     $.adminDock.show('#gallery', false);
+    
+    path = window.location.pathname;
+    if(path == "/") {
+      path = "/$root"
+    }
+    
+    $.ajax("/burp/pages/"+path,{
+      cache:false,
+      dataType:'json',
+      success:function(data) {
+        var value = "";
+        if(data.misc && data.misc.markdown && data.misc.markdown[snippetName]) {
+          value = data.misc.markdown[snippetName];
+        } else {
+          value = data.snippets[snippetName];
+        }
+        editor.setValue(value);
+        
+        lastValue = editor.getValue();
+        contentDecorator.setMarkdown(lastValue);
+        // Cleanup
+        $('.snippet-'+snippetName).find("p > img").each(function(index,img) {
+          if($(img).parent().children().length == 1) {
+            $(img).unwrap();
+          }
+        });
+      }
+    });
   }
   
   var initDone = false;
