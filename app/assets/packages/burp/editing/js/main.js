@@ -127,7 +127,7 @@ $(function() {
     $.adminDock.footer.addButton({ icon: 'undo', text: 'Discard', secondary: true, click:function() {
       $('.snippet-'+snippetName).html(originalValue);
       contentDecorator.initImages();
-      editor.setValue(originalValue);
+      editor.setValue(lastValue);
     }});
     $.adminDock.footer.addButton({ icon: 'save', text: 'Save', secondary: true, click:function() {
       
