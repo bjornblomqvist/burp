@@ -1,0 +1,15 @@
+
+  - Fix flashing in Chrome
+    - This means changing so that we do all maping of images before updating the html
+  - Fix scroll for the images
+  - Fix so that we have upload order for the files/images
+  - Add double click to add image/file to editor
+  
+  - Fix so that we don't need a container.
+  - Fix so that we commit on save
+  - Fix script/routine for syncing dev and production
+  
+  - Let Christer write stuff for it.
+  
+  - Fix so that we use a iFrame
+  
