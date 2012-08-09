@@ -54,11 +54,22 @@
       }
     },
     updateContent: function() {
-      this.parkImages();
-
-      this.element.html(this.converter.makeHtml(this.markdown));
-      $('#' + this.id + '>*').addClass('markdown').each(calculateHash)
+      var tempElement = $('<div></div>');
+      tempElement.html(this.converter.makeHtml(this.markdown));
+      tempElement.children().addClass('markdown').each(calculateHash);
       
+      var _this = this;
+      tempElement.find('img').each(function() {
+        var element = _this.element.find('img[src="'+$(this).attr('src')+'"]');
+        if(element.length == 1) {
+          if(element[0].outerHTML == this.outerHTML) {
+            $(this).replaceWith(element);
+          }
+        }
+      });
+      
+      this.parkImages();
+      this.element.children().remove().end().append(tempElement.children());
       this.unparkImages();
     },
     parkImages: function() {
