@@ -1,6 +1,4 @@
 
-  - Fix scroll for the images
-  - Fix so that we have upload order for the files/images
   - Add double click to add image/file to editor
   
   - Fix so that we don't need a container.

@@ -6,7 +6,9 @@ module Burp
     
     def index
       
-      @file_paths  = Dir.glob("#{Burp.upload_directory}**/*").map {|path| path.gsub("#{Burp.upload_directory}","/burp/files/") }
+      @file_paths = Dir.glob("#{Burp.upload_directory}**/*")
+      @file_paths = @file_paths.sort {|p1,p2| File.mtime(p2) <=> File.mtime(p1)}
+      @file_paths = @file_paths.map {|path| path.gsub("#{Burp.upload_directory}","/burp/files/") }
       
       respond_to do |format|
         format.html {}

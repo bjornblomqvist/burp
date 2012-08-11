@@ -109,7 +109,7 @@ $(function() {
                 return $("<img src='" + element.src + "' class='" + positionClass + "' />");
               });
               
-              $('#gallery').trigger('refresh');
+              $('#gallery').trigger('reset');
             });
           } else {
             var errorMessage = "";

@@ -268,6 +268,12 @@
     updateButtonStates();
   });
   
+  $(document).on('reset.gallery',"#gallery",function() {
+    var toLeft = $('#gallery .images').css("left").replace(/px/,'') * -1;
+    $('#gallery .images').stop().animate({left:"+="+toLeft});
+    updateButtonStates(toLeft);
+  });
+  
   $(document).on("click","#gallery .prev.enabled",function() {
     var galleryWidth = $('#gallery').width();
     var nextButtonWidth = $('#gallery .next').width();
