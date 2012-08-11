@@ -5,8 +5,8 @@ $(function() {
     <div id="gallery" style="display: none;">\
       <ul class="images">\
       </ul>\
-      <i class="prev icon-large icon-caret-left"></i>\
-      <i class="next icon-large icon-caret-right"></i>\
+      <i class="prev icon-large enabled icon-caret-left"></i>\
+      <i class="next icon-large enabled icon-caret-right"></i>\
     </div>\
     <div id="myContentEditor" style="display: none;">\
       <textarea id="code" style="width: 100%; height: 300px;">\
@@ -108,6 +108,8 @@ $(function() {
               contentDecorator.makeDroppable('#gallery img', function(element, positionClass) {
                 return $("<img src='" + element.src + "' class='" + positionClass + "' />");
               });
+              
+              $('#gallery').trigger('refresh');
             });
           } else {
             var errorMessage = "";
@@ -199,6 +201,11 @@ $(function() {
     if(!initDone) {
       wrapContent();
       addEditor();
+      $('#gallery').trigger('refresh');
+      setTimeout(function() { $('#gallery').trigger('refresh'); },300);
+      setTimeout(function() { $('#gallery').trigger('refresh'); },600);
+      setTimeout(function() { $('#gallery').trigger('refresh'); },1200);
+      setTimeout(function() { $('#gallery').trigger('refresh'); },5000);
       initDone = true;
     }
   }
@@ -210,6 +217,10 @@ $(function() {
       
       $.adminDock.toggle();
     }
+  });
+  
+  $(window).resize(function() {
+    $('#gallery').trigger('refresh');
   });
   
 });

@@ -1,6 +1,4 @@
 
-  - Fix flashing in Chrome
-    - This means changing so that we do all maping of images before updating the html
   - Fix scroll for the images
   - Fix so that we have upload order for the files/images
   - Add double click to add image/file to editor
