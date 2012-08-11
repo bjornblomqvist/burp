@@ -1,18 +1,10 @@
+/*global
+    snippets CodeMirror ContentDecorator qq
+*/
+
 $(function() {
   
-
-  var elements = $('<div style="display: none;">\
-    <div id="gallery" style="display: none;">\
-      <ul class="images">\
-      </ul>\
-      <i class="prev icon-large enabled icon-caret-left"></i>\
-      <i class="next icon-large enabled icon-caret-right"></i>\
-    </div>\
-    <div id="myContentEditor" style="display: none;">\
-      <textarea id="code" style="width: 100%; height: 300px;">\
-      </textarea>\
-    </div>\
-  </div>');
+  var elements = $('<div style="display: none;"><div id="gallery" style="display: none;"><ul class="images"></ul><i class="prev icon-large enabled icon-caret-left"></i><i class="next icon-large enabled icon-caret-right"></i></div><div id="myContentEditor" style="display: none;"><textarea id="code" style="width: 100%; height: 300px;"></textarea></div></div>');
   
   function wrapContent() {
     console.debug('init');
@@ -33,32 +25,39 @@ $(function() {
     $('#code').val(originalValue);
     var lastValue = "";
   
+    var contentDecorator = new ContentDecorator('.snippet-'+snippetName);
+  
     var editor = CodeMirror.fromTextArea($('#code')[0], {
       mode: 'markdown',
       lineNumbers: true,
       matchBrackets: true,
       theme: "default",
-      onUpdate:function() {
-        if(editor.getValue() != lastValue) {
+      onChange:function(editor,changes) {
+        if(editor.getValue() !== lastValue) {
           lastValue = editor.getValue();
           contentDecorator.setMarkdown(lastValue);
           // Cleanup
           $('.snippet-'+snippetName).find("p > img").each(function(index,img) {
-            if($(img).parent().children().length == 1) {
+            if($(img).parent().children().length === 1) {
               $(img).unwrap();
             }
           });
         }
       }
     });
-  
-    var contentDecorator = new ContentDecorator('.snippet-'+snippetName);
+    
+    $(document).on('dblclick','#gallery li img',function() {
+      var url = $(this).attr('src');
+      $('.admin-dock .icon-edit').click();
+      editor.focus();
+      editor.replaceRange('<img src="'+url+'">',editor.getCursor(true),editor.getCursor(false));
+    });
     
     lastValue = editor.getValue();
     contentDecorator.setMarkdown(lastValue);
     // Cleanup
     $('.snippet-'+snippetName).find("p > img").each(function(index,img) {
-      if($(img).parent().children().length == 1) {
+      if($(img).parent().children().length === 1) {
         $(img).unwrap();
       }
     });
@@ -120,7 +119,7 @@ $(function() {
             });
             alert(errorMessage);
           }
-        },
+        }
     });
   
     $.adminDock.footer.addButton({ icon: 'upload', text: 'Upload', secondary: true, click:function() {
@@ -133,9 +132,9 @@ $(function() {
     }});
     $.adminDock.footer.addButton({ icon: 'save', text: 'Save', secondary: true, click:function() {
       
-      path = window.location.pathname;
-      if(path == "/") {
-        path = "/$root"
+      var path = window.location.pathname;
+      if(path === "/") {
+        path = "/$root";
       }
       
       $.ajax("/burp/pages/"+path,{
@@ -155,7 +154,7 @@ $(function() {
               
               originalValue = contentDecorator.getHtml();
               
-              alert("The page was saved!")
+              alert("The page was saved!");
             }
           });
         }
@@ -166,9 +165,9 @@ $(function() {
   
     $.adminDock.show('#gallery', false);
     
-    path = window.location.pathname;
-    if(path == "/") {
-      path = "/$root"
+    var path = window.location.pathname;
+    if(path === "/") {
+      path = "/$root";
     }
     
     $.ajax("/burp/pages/"+path,{
@@ -182,12 +181,13 @@ $(function() {
           value = data.snippets[snippetName];
         }
         editor.setValue(value);
+        editor.clearHistory();
         
         lastValue = editor.getValue();
         contentDecorator.setMarkdown(lastValue);
         // Cleanup
         $('.snippet-'+snippetName).find("p > img").each(function(index,img) {
-          if($(img).parent().children().length == 1) {
+          if($(img).parent().children().length === 1) {
             $(img).unwrap();
           }
         });
@@ -211,7 +211,7 @@ $(function() {
   }
   
   $(window).keydown(function(event) {
-    if (event.altKey == true && event.keyCode == 27) {
+    if (event.altKey === true && event.keyCode === 27) {
 
       init();
       

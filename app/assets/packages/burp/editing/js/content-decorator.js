@@ -70,6 +70,7 @@
         revert: true,
         revertDuration: 0,
         opacity: 0.6,
+        distance: 5,
         zIndex: 900,
         appendTo: "body",
         helper: 'clone',
@@ -142,7 +143,7 @@
           });
           
           // Show remove zone
-          if($(this).parents("#gallery").length == 0) {
+          if($(this).parents("#gallery").length === 0) {
             $("#gallery").addClass('delete-active');
           }
         },
@@ -191,8 +192,14 @@
       }
     },
     updateContent: function() {
+      var html = this.converter.makeHtml(this.markdown).replace(/\s+/g,' ');
+      if(this.lastHtml === html) {
+        return;
+      }
+      this.lastHtml = html;
+      
       var tempElement = $('<div></div>');
-      tempElement.html(this.converter.makeHtml(this.markdown));
+      tempElement.html(html);
       tempElement.children().addClass('markdown').each(calculateHash);
       
       var _this = this;
