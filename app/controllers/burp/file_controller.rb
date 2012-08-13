@@ -41,6 +41,7 @@ module Burp
         else
           FileUtils.mkdir_p(Burp.upload_directory)
           FileUtils.mv(file.path,Burp.upload_directory+File.basename(file.path))
+          `cd #{Burp.upload_directory}; git add .; git commit -a -m "cms autocommit file upload"`
           render :json => {:success => true}
         end
       end

@@ -60,6 +60,9 @@ module Burp
       save_metadata
       save_snippets
       
+      
+      
+      `cd #{Rails.root.join('app/cms').to_s}; git add .; git commit -a -m "cms autocommit"`
     end
   
     def remove
