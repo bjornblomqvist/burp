@@ -1,5 +1,14 @@
 
   - Fix multiple sections 
+    - Add cleanup to the contentDecorator
+    - Add the selector showing all the section names
+    
+    - On selector change
+      - Cleanup old
+      - New Content decorator
+      - Set the editor value
+      
+    - Fix so that we can create switch contentDecorator
   
   - Let Christer write stuff for it.
     

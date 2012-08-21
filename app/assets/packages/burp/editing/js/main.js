@@ -5,27 +5,71 @@
 $(function() {
   
   var elements = $('<div style="display: none;"><div id="gallery" style="display: none;"><ul class="images"></ul><i class="prev icon-large enabled icon-caret-left"></i><i class="next icon-large enabled icon-caret-right"></i></div><div id="myContentEditor" style="display: none;"><textarea id="code" style="width: 100%; height: 300px;"></textarea></div></div>');
+  var lastValue;
+  var snippetName;
   
   function wrapContent() {
-    console.debug('init');
-    
     $.each(snippets().snippets,function(name,snippet) {
       console.debug(name,snippet);
       snippet.update($('<div data-snippet-name="'+name+'" class="snippet-'+name+'"></div>').append($(snippet.elements())));
     });
   }
+  
+  function cleanup(container) {
+    container.find("p > img").each(function(index,img) {
+      if($(img).parent().children().length === 1) {
+        $(img).unwrap();
+      }
+    });
+  }
+  
+  function update(value,contentDecorator) {
+    if(value !== lastValue) {
+      lastValue = value;
+      contentDecorator.setMarkdown(value);
+      cleanup($('.snippet-'+snippetName));
+    }
+  }
+  
+  function loadFiles(contentDecorator) {
+    
+    $.getJSON('/burp/files/',function(data) {
+      
+      $('#gallery img').remove();
+      
+      $.each(data.paths,function(index,path) {
+        $('#gallery .images').append('<li><img src="'+path+'"></li>');
+      });
+
+      contentDecorator.makeDroppable('#gallery img', function(element, positionClass) {
+        return $("<img src='" + element.src + "' class='" + positionClass + "' />");
+      });
+      
+      $('#gallery').trigger('reset');
+    });
+  }
+  
+  function showJSONErrors(responseJSON) {
+    var errorMessage = "";
+    $.each(responseJSON.errors,function(index,error) {
+      $.each(error,function(key,value) {
+        errorMessage += value;
+      });
+    });
+    alert(errorMessage);
+  }
     
   function addEditor() {
     
-    var snippetName = snippets().names[0];
+    snippetName = snippets().names[0];
         
     elements.appendTo('body');
     
     var originalValue = $('.snippet-'+snippetName).html();
     $('#code').val(originalValue);
-    var lastValue = "";
   
     var contentDecorator = new ContentDecorator('.snippet-'+snippetName);
+    window.contentDecorator = contentDecorator;
   
     var editor = CodeMirror.fromTextArea($('#code')[0], {
       mode: 'markdown',
@@ -33,16 +77,7 @@ $(function() {
       matchBrackets: true,
       theme: "default",
       onChange:function(editor,changes) {
-        if(editor.getValue() !== lastValue) {
-          lastValue = editor.getValue();
-          contentDecorator.setMarkdown(lastValue);
-          // Cleanup
-          $('.snippet-'+snippetName).find("p > img").each(function(index,img) {
-            if($(img).parent().children().length === 1) {
-              $(img).unwrap();
-            }
-          });
-        }
+        update(editor.getValue(),contentDecorator);
       }
     });
     
@@ -53,25 +88,8 @@ $(function() {
       editor.replaceRange('<img src="'+url+'">',editor.getCursor(true),editor.getCursor(false));
     });
     
-    lastValue = editor.getValue();
-    contentDecorator.setMarkdown(lastValue);
-    // Cleanup
-    $('.snippet-'+snippetName).find("p > img").each(function(index,img) {
-      if($(img).parent().children().length === 1) {
-        $(img).unwrap();
-      }
-    });
-    
-    $.getJSON('/burp/files/',function(data) {
-      $.each(data.paths,function(index,path) {
-        $('#gallery .images').append('<li><img src="'+path+'"></li>');
-      });
-      
-      contentDecorator.makeDroppable('#gallery img', function(element, positionClass) {
-        return $("<img src='" + element.src + "' class='" + positionClass + "' />");
-      });
-    });
-  
+    update(editor.getValue(),contentDecorator);
+    loadFiles(contentDecorator);
 
     contentDecorator.addRemoveZone('#gallery');
   
@@ -80,15 +98,22 @@ $(function() {
     $.adminDock.footer.addButton({ icon: 'edit', showModule: $('#myContentEditor'), show: function() {
       editor.refresh();
     } });
-    // $.adminDock.footer.addSelector({
-    //   options: ['main', 'sidebar', 'footer'],
-    //   default: 'sidebar',
-    //   change: function(option) {
-    //     alert("Switching to " + option);
-    //   }
-    // });
+
+    var snippet_names = [];
+    $.each(snippets().snippets,function(name,snippet) {
+      snippet_names.push(name);
+    });
     
+    $.adminDock.footer.addSelector({
+      options: snippet_names,
+      default: snippet_names[0],
+      change: function(option) {
+        
+        alert("Switching to " + option);
+      }
+    });
     
+
     $('<div id="file-uploader" style="overflow: hidden; width: 0px; height: 0px; position: absolute;"></div>').appendTo('body');
 
     var uploader = new qq.FileUploader({
@@ -96,28 +121,9 @@ $(function() {
         action: '/burp/files',
         onComplete: function(id, fileName, responseJSON){
           if(responseJSON.success) {
-            $.getJSON('/burp/files/',function(data) {
-              
-              $('#gallery img').remove();
-              
-              $.each(data.paths,function(index,path) {
-                $('#gallery .images').append('<li><img src="'+path+'"></li>');
-              });
-
-              contentDecorator.makeDroppable('#gallery img', function(element, positionClass) {
-                return $("<img src='" + element.src + "' class='" + positionClass + "' />");
-              });
-              
-              $('#gallery').trigger('reset');
-            });
+            loadFiles(contentDecorator);
           } else {
-            var errorMessage = "";
-            $.each(responseJSON.errors,function(index,error) {
-              $.each(error,function(key,value) {
-                errorMessage += value;
-              });
-            });
-            alert(errorMessage);
+            showJSONErrors(responseJSON);
           }
         }
     });
@@ -190,14 +196,7 @@ $(function() {
         editor.setValue(value);
         editor.clearHistory();
         
-        lastValue = editor.getValue();
-        contentDecorator.setMarkdown(lastValue);
-        // Cleanup
-        $('.snippet-'+snippetName).find("p > img").each(function(index,img) {
-          if($(img).parent().children().length === 1) {
-            $(img).unwrap();
-          }
-        });
+        update(editor.getValue(),contentDecorator);
       }
     });
   }
@@ -206,14 +205,16 @@ $(function() {
   
   function init() {
     if(!initDone) {
+      initDone = true;
+      
       wrapContent();
       addEditor();
+      
       $('#gallery').trigger('refresh');
       setTimeout(function() { $('#gallery').trigger('refresh'); },300);
       setTimeout(function() { $('#gallery').trigger('refresh'); },600);
       setTimeout(function() { $('#gallery').trigger('refresh'); },1200);
       setTimeout(function() { $('#gallery').trigger('refresh'); },5000);
-      initDone = true;
     }
   }
   
