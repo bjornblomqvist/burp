@@ -8,7 +8,7 @@
   function ContentDecorator(element, options) {
     this.element = $(element);
     this.converter = new Showdown.converter();
-    this.parking = $('<div style="display: none;"></div>').appendTo('body');
+    this.parking = $('<div style="display: none;"></div>');
 
     if (typeof(options) === 'object') {
       this.onUpdate = options['update'];
