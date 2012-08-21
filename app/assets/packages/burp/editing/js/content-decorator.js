@@ -3,8 +3,6 @@
 */
 (function($) {
   
-  var instanceCounter = 0;
-
   function ContentDecorator(element, options) {
     this.element = $(element);
     this.converter = new Showdown.converter();
@@ -13,12 +11,6 @@
     if (typeof(options) === 'object') {
       this.onUpdate = options['update'];
     }
-
-    if (typeof(this.element.attr('id')) === 'undefined') {
-      this.element.attr('id', '_ce_aid_' + (instanceCounter += 1));
-    }
-
-    this.id = this.element.attr('id');
     
     this.initImages();
   }
