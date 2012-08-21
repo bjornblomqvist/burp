@@ -57,10 +57,10 @@ module Burp
       
       @page = PageModel.find(("/"+params[:id]).gsub("/$root","/"))
   
-      @page.title = params[:page][:title]
-      @page.path = params[:page][:path]
-      @page.misc = params[:page][:misc]
-      @page.link_label = params[:page][:link_label]
+      @page.title = params[:page][:title] if params[:page][:title]
+      @page.path = params[:page][:path] if params[:page][:path]
+      @page.misc = params[:page][:misc] if params[:page][:misc]
+      @page.link_label = params[:page][:link_label] if params[:page][:link_label]
       @page.snippets = {}
       (params[:page][:snippets] || {}).each do |name,value|
         @page.snippets[name] = value
