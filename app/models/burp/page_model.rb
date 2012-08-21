@@ -68,6 +68,7 @@ module Burp
     def remove
       raise "Path must start with a slash '/'" unless path.start_with?("/")
       remove_dir
+      `cd #{Rails.root.join('app/cms').to_s}; git add .; git commit -a -m "cms autocommit"`
     end
 
     private
