@@ -75,7 +75,7 @@ module Burp
     def save_metadata
     
       File.open("#{on_disk_path}/page.json","w:utf-8") do |file|
-        file.write({:title => title, :linkLabel => link_label,:misc => misc}.to_json)
+        file.write(JSON.pretty_generate({:title => title, :linkLabel => link_label,:misc => misc}))
       end
     
     end
