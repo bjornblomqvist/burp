@@ -7,6 +7,10 @@ $(function() {
   var elements = $('<div style="display: none;"><div id="gallery" style="display: none;"><ul class="images"></ul><i class="prev icon-large enabled icon-caret-left"></i><i class="next icon-large enabled icon-caret-right"></i></div><div id="myContentEditor" style="display: none;"><textarea id="code" style="width: 100%; height: 300px;"></textarea></div></div>');
   var lastValue;
   var snippetName;
+  var originalHtml;
+  var originalValue;
+  var contentDecorator;
+  var editor;
   
   function wrapContent() {
     $.each(snippets().snippets,function(name,snippet) {
@@ -23,7 +27,7 @@ $(function() {
     });
   }
   
-  function update(value,contentDecorator) {
+  function update(value) {
     if(value !== lastValue) {
       lastValue = value;
       contentDecorator.setMarkdown(value);
@@ -31,7 +35,7 @@ $(function() {
     }
   }
   
-  function loadFiles(contentDecorator) {
+  function loadFiles() {
     
     $.getJSON('/burp/files/',function(data) {
       
@@ -58,40 +62,48 @@ $(function() {
     });
     alert(errorMessage);
   }
+  
+  function selectSnippet(_snippetName) {
+    
+    if(contentDecorator) {
+      contentDecorator.cleanup();
+      contentDecorator.removeDroppable($('#gallery img'));
+    }
+    
+    snippetName = _snippetName;
+    originalHtml = $('.snippet-'+snippetName).html();
+    contentDecorator = new ContentDecorator('.snippet-'+snippetName);
+    contentDecorator.addRemoveZone('#gallery');
+    $('#code').val(originalHtml);
+    
+  }
     
   function addEditor() {
     
-    snippetName = snippets().names[0];
-        
     elements.appendTo('body');
-    
-    var originalValue = $('.snippet-'+snippetName).html();
-    $('#code').val(originalValue);
+    $('#code').val(originalHtml);
   
-    var contentDecorator = new ContentDecorator('.snippet-'+snippetName);
-    window.contentDecorator = contentDecorator;
-  
-    var editor = CodeMirror.fromTextArea($('#code')[0], {
+    editor = CodeMirror.fromTextArea($('#code')[0], {
       mode: 'markdown',
       lineNumbers: true,
       matchBrackets: true,
       theme: "default",
       onChange:function(editor,changes) {
-        update(editor.getValue(),contentDecorator);
+        update(editor.getValue());
       }
     });
     
-    $(document).on('dblclick','#gallery li img',function() {
+    $(document).on('dblclick.burp','#gallery li img',function() {
       var url = $(this).attr('src');
       $('.admin-dock .icon-edit').click();
       editor.focus();
       editor.replaceRange('<img src="'+url+'">',editor.getCursor(true),editor.getCursor(false));
     });
-    
-    update(editor.getValue(),contentDecorator);
-    loadFiles(contentDecorator);
 
     contentDecorator.addRemoveZone('#gallery');
+    
+    update(editor.getValue());
+    loadFiles();
   
     $.adminDock.title('');
     $.adminDock.footer.addButton({ icon: 'picture', showModule: $('#gallery') });
@@ -109,7 +121,16 @@ $(function() {
       default: snippet_names[0],
       change: function(option) {
         
-        alert("Switching to " + option);
+        
+        selectSnippet(option);
+        loadSnippet();
+        
+        $('#gallery img').removeClass('movable');
+        contentDecorator.makeDroppable('#gallery img', function(element, positionClass) {
+          return $("<img src='" + element.src + "' class='" + positionClass + "' />");
+        });
+        
+        console.debug("Switching to " + option);
       }
     });
     
@@ -121,7 +142,7 @@ $(function() {
         action: '/burp/files',
         onComplete: function(id, fileName, responseJSON){
           if(responseJSON.success) {
-            loadFiles(contentDecorator);
+            loadFiles();
           } else {
             showJSONErrors(responseJSON);
           }
@@ -131,11 +152,14 @@ $(function() {
     $.adminDock.footer.addButton({ icon: 'upload', text: 'Upload', secondary: true, click:function() {
       $('#file-uploader input').click();
     }});
+    
     $.adminDock.footer.addButton({ icon: 'undo', text: 'Discard', secondary: true, click:function() {
-      $('.snippet-'+snippetName).html(originalValue);
-      contentDecorator.initImages();
-      editor.setValue(lastValue);
+      // We set this as it holds all the images as when we started
+      $('.snippet-'+snippetName).html(originalHtml);
+      contentDecorator.init();
+      editor.setValue(originalValue);
     }});
+    
     $.adminDock.footer.addButton({ icon: 'save', text: 'Save', secondary: true, click:function() {
       
       var path = window.location.pathname;
@@ -160,7 +184,8 @@ $(function() {
             dataType:'json',
             success:function() {
               
-              originalValue = contentDecorator.getHtml();
+              originalValue = contentDecorator.getMarkdown();
+              originalHtml = contentDecorator.getHtml();
               
               alert("The page was saved!");
             }
@@ -172,7 +197,9 @@ $(function() {
     }});
   
     $.adminDock.show('#gallery', false);
-    
+  }
+  
+  function loadSnippet() {
     var path = window.location.pathname;
     if(path === "/") {
       path = "/$root";
@@ -186,17 +213,19 @@ $(function() {
           return; // There is no page yet
         }
         
-        var value = "";
+        // We default to the html
+        var value = originalHtml;
         if(data.misc && data.misc.markdown && data.misc.markdown[snippetName]) {
           value = data.misc.markdown[snippetName];
-        } else {
+        } else if(data.snippets[snippetName]) {
           value = data.snippets[snippetName];
         }
         
+        originalValue = value;
         editor.setValue(value);
         editor.clearHistory();
         
-        update(editor.getValue(),contentDecorator);
+        update(editor.getValue());
       }
     });
   }
@@ -208,7 +237,9 @@ $(function() {
       initDone = true;
       
       wrapContent();
+      selectSnippet(snippets().names[0]);
       addEditor();
+      loadSnippet();
       
       $('#gallery').trigger('refresh');
       setTimeout(function() { $('#gallery').trigger('refresh'); },300);
