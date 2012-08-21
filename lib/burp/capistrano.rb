@@ -12,7 +12,7 @@ Capistrano::Configuration.instance.load do
     task :link_cms_dir do
       run "rmdir #{latest_release}/app/cms; ln -s #{shared_path}/cms #{latest_release}/app/cms"
     end
-    after 'deploy:update', 'deploy:link_cms_dir'
+    after 'deploy:update', 'burp:link_cms_dir'
 
     desc "Merges the live CMS with the local"
     task :pull, :roles => :web, :once => true do
