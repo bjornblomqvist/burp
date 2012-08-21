@@ -213,7 +213,8 @@
       });
       
       this.parkImages();
-      this.element.children().remove().end().append(tempElement.children());
+      this.element.html("");
+      this.element.append(tempElement.children());
       this.unparkImages();
     },
     parkImages: function() {
