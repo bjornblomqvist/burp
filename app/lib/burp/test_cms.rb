@@ -33,11 +33,12 @@ module Burp
         
           groups[section_name] ||= Group.new(section_name)
           groups[section_name].children << Link.new(page_data["linkLabel"] => path)
+          groups[section_name].children.sort! {|a,b| a.name <=> b.name }
         
         end
       end
     
-      Group.new("root",:children => groups.values)
+      Group.new("root",:children => groups.values.sort {|a,b| a.name <=> b.name })
    
     end
   
