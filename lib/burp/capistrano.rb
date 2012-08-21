@@ -29,7 +29,7 @@ Capistrano::Configuration.instance.load do
       user = ssh_options[:user]+"@" || ""
   
       `cd app/cms; git push #{user}#{server}:#{shared_path}/cms/ master:local_master`
-      run 'cd #{shared_path}/cms; git merge local_master'
+      run "cd #{shared_path}/cms; git merge local_master" 
     end
 
   end
