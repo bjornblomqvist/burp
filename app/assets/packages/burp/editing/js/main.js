@@ -15,7 +15,7 @@ $(function() {
   function wrapContent() {
     $.each(snippets().snippets,function(name,snippet) {
       console.debug(name,snippet);
-      snippet.update($('<div data-snippet-name="'+name+'" class="snippet-'+name+'"></div>').append($(snippet.elements())));
+      snippet.update($('<div data-snippet-name="'+name+'" class="snippet-wrapper snippet-'+name+'"></div>').append($(snippet.elements())));
     });
   }
   
