@@ -55,7 +55,7 @@ module Burp
     
     def update
       
-      @page = PageModel.find(("/"+params[:id]).gsub("/$root","/"))
+      @page = PageModel.find(("/"+params[:id]).gsub("/$root","/")) || PageModel.new(:path => ("/"+params[:id]).gsub("/$root","/"))
   
       @page.title = params[:page][:title] if params[:page][:title]
       @page.path = params[:page][:path] if params[:page][:path]

@@ -142,6 +142,8 @@ $(function() {
         dataType:'json',
         success:function(data) {
           
+          data = data || {snippets:{}};
+          
           data.snippets[snippetName] = contentDecorator.getHtml();
           data.misc = data.misc || {markdown:{}};
           data.misc.markdown[snippetName] = contentDecorator.getMarkdown();
@@ -174,12 +176,17 @@ $(function() {
       cache:false,
       dataType:'json',
       success:function(data) {
+        if(data == null) {
+          return; // There is no page yet
+        }
+        
         var value = "";
         if(data.misc && data.misc.markdown && data.misc.markdown[snippetName]) {
           value = data.misc.markdown[snippetName];
         } else {
           value = data.snippets[snippetName];
         }
+        
         editor.setValue(value);
         editor.clearHistory();
         
