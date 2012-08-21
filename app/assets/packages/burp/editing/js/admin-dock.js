@@ -54,8 +54,12 @@ $(function($) {
 
       footer: {
         addButton: function(options) {
-          var element = $('<li><a href="javascript: void 0;"></a></li>');
+          var element = $('<li><a></a></li>');
           var button = element.find('a');
+          
+          button.click(function(event) {
+            event.preventDefault();
+          });
 
           if (options['icon']) {
             button.append('<i class="icon-' + options['icon'] + '"></i>');
