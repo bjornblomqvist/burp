@@ -75,7 +75,7 @@ $(function() {
 
     contentDecorator.addRemoveZone('#gallery');
   
-    $.adminDock.title('This is the new title');
+    $.adminDock.title('');
     $.adminDock.footer.addButton({ icon: 'picture', showModule: $('#gallery') });
     $.adminDock.footer.addButton({ icon: 'edit', showModule: $('#myContentEditor'), show: function() {
       editor.refresh();
