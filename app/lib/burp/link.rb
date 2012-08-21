@@ -19,7 +19,7 @@ module Burp
     end
 
     def current_class(request = nil)
-      current?(request) ? "current-link" : ""
+      current?(request) ? "current-url" : ""
     end
 
     def to_html(request = nil,name = nil)
