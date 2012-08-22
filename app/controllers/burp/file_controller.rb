@@ -4,6 +4,8 @@ require 'fileutils'
 module Burp
   class FileController < Burp::ApplicationController
     
+    skip_before_filter :authenticate, :only => [:show]
+    
     def index
       
       @file_paths = Dir.glob("#{Burp.upload_directory}**/*")

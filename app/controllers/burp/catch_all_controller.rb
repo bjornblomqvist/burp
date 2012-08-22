@@ -2,6 +2,8 @@
 module Burp
   
   class CatchAllController < Burp::ApplicationController
+    
+    skip_before_filter :authenticate, :only => [:show]
   
     def show
       @cms_page = Burp::TestCMS.cms_page(request.path)
