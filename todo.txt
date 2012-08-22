@@ -1,15 +1,7 @@
-
-  - Fix multiple sections 
-    - Add cleanup to the contentDecorator
-    - Add the selector showing all the section names
-    - On selector change
-      - Cleanup old
-      - New Content decorator
-      - Set the editor value
     
-    - Fix so that we keep the state for all the sections we have edited.
-    - Fix so that we save all the sections and not just the current one
-    - Undo should undo all sections
+  - Fix so that we keep the state for all the sections we have edited.
+  - Fix so that we save all the sections and not just the current one
+  - Undo should undo all sections
   
   - Let Christer write stuff for it.
   
