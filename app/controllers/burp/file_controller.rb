@@ -2,7 +2,7 @@
 require 'fileutils'
 
 module Burp
-  class FileController < ApplicationController
+  class FileController < Burp::ApplicationController
     
     def index
       

@@ -1,7 +1,7 @@
 
 module Burp
   
-  class CatchAllController < ApplicationController
+  class CatchAllController < Burp::ApplicationController
   
     def show
       @cms_page = Burp::TestCMS.cms_page(request.path)

@@ -1,5 +1,5 @@
 module Burp
-  class StaticController < ApplicationController
+  class StaticController < Burp::ApplicationController
     def index
     end 
   end

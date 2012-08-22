@@ -1,6 +1,6 @@
 module Burp
   
-  class PageController < ApplicationController
+  class PageController < Burp::ApplicationController
     def index
       @pages = PageModel.all.sort {|a,b| a.path <=> b.path}
     end
