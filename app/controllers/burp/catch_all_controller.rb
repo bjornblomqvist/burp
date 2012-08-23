@@ -7,6 +7,7 @@ module Burp
   
     def show
       @cms_page = Burp::TestCMS.cms_page(request.path)
+      Burp.access.may_view_page!(@cms_page)
       
       render :text => @cms_page[:main], :layout => 'application'
     end
