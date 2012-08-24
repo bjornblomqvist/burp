@@ -51,8 +51,8 @@ module Burp
       
       unless(groups[group_path])
         group_name = ""
-        if path.match(/\/([\w-]+(\/$|$))/)
-          group_name = path.match(/\/([\w-]+(\/$|$))/)[1]
+        if ("/"+group_path).match(/\/([\w-]+(\/$|$))/)
+          group_name = ("/"+group_path).match(/\/([\w-]+(\/$|$))/)[1]
         end
       
         groups[group_path] = Group.new(group_name)
