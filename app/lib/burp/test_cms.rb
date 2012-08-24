@@ -21,27 +21,46 @@ module Burp
     def self.link_tree
 
       groups = {}
+      groups[""] = Group.new("root")
 
       Dir.glob(Rails.root + 'app/cms/' + "**/page.json").each do |page_data_path|
         page_data = JSON.parse(File.read(page_data_path))
-        if page_data["linkLabel"]
+        unless page_data["linkLabel"].blank?
         
           path = File.dirname(page_data_path).gsub(Rails.root.to_s+"/app/cms",'')
-          section_name = File.dirname(path).gsub('/','')
-        
           path = "/" if path == "/#root"
-        
-          groups[section_name] ||= Group.new(section_name)
-          groups[section_name].children << Link.new(page_data["linkLabel"] => path)
-          groups[section_name].children.sort! {|a,b| a.name <=> b.name }
+          
+          group = get_group(path,groups)
+          group.children << Link.new(page_data["linkLabel"] => path)
+          group.children.sort! {|a,b| a.name <=> b.name }
         
         end
       end
     
-      Group.new("root",:children => groups.values.sort {|a,b| a.name <=> b.name })
+      groups['']
    
     end
   
+    private
+    
+    def self.get_group(path,groups)
+      group_path = ""
+      if path.match(/\/(.*?)\/([\w-]+)(\/$|$)/)
+        group_path = path.match(/\/(.*?)\/([\w-]+)(\/$|$)/)[1]
+      end
+      
+      unless(groups[group_path])
+        group_name = ""
+        if path.match(/\/([\w-]+(\/$|$))/)
+          group_name = path.match(/\/([\w-]+(\/$|$))/)[1]
+        end
+      
+        groups[group_path] = Group.new(group_name)
+        get_group("/"+group_path,groups).children << groups[group_path]
+      end
+      
+      groups[group_path]
+    end
   
   end
 end
