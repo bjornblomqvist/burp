@@ -41,6 +41,10 @@ module Burp
       true
     end
     
+    def may_view_page(page)
+      true
+    end
+    
     
     # CMS files
     def may_view_file_list
