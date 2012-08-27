@@ -46,7 +46,7 @@ $(function() {
       });
 
       contentDecorator.makeDroppable('#gallery img', function(element, positionClass) {
-        return $("<img src='" + element.src + "' class='" + positionClass + "' />");
+        return $("<img src='" + $(element).attr('src') + "' class='" + positionClass + "' />");
       });
       
       $('#gallery').trigger('reset');
@@ -127,7 +127,7 @@ $(function() {
         
         $('#gallery img').removeClass('movable');
         contentDecorator.makeDroppable('#gallery img', function(element, positionClass) {
-          return $("<img src='" + element.src + "' class='" + positionClass + "' />");
+          return $("<img src='" + $(element).attr('src') + "' class='" + positionClass + "' />");
         });
         
         console.debug("Switching to " + option);
