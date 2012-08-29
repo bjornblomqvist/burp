@@ -1,11 +1,3 @@
-  
-  - Add access check
-    - Get username/password from config
-    
-    - TestCMS.current_request = request
-    - TestCMS.access_class = Blueohlueo
-    - TestCMS.access.use_http_auth?
-    - TestCMS.access.use_http_auth?
     
   - Fix so that we keep the state for all the sections we have edited.
   - Fix so that we save all the sections and not just the current one
