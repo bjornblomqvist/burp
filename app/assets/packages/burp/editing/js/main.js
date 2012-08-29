@@ -137,8 +137,12 @@ $(function() {
 
     $('<div id="file-uploader" style="overflow: hidden; width: 0px; height: 0px; position: absolute;"></div>').appendTo('body');
 
+    var upload_data = {};
+    upload_data[$('meta[name=csrf-param]').attr('content')] = $('meta[name=csrf-token]').attr('content');
+
     var uploader = new qq.FileUploader({
         element: document.getElementById('file-uploader'),
+        params: upload_data,
         action: '/burp/files',
         onComplete: function(id, fileName, responseJSON){
           if(responseJSON.success) {

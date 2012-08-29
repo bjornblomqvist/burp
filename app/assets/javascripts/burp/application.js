@@ -13,3 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+(function() {
+  var csrf_token = $('meta[name=csrf-token]').attr('content');
+  $.ajaxSetup({ headers: { "X-CSRF-Token": csrf_token } });
+});
