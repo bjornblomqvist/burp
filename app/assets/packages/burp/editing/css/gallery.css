@@ -51,12 +51,16 @@
 #gallery .prev {
   position: absolute; left: 0px; top: 2px; width: 45px; text-align: center;
   background: -moz-linear-gradient(to right, #FFFFFF 70%, rgba(255, 255, 255, 0.85) 80%, rgba(255, 255, 255, 0) 100%) repeat scroll 0 0 transparent;
+  background: -webkit-linear-gradient(left, #FFFFFF 70%, rgba(255, 255, 255, 0.85) 80%, rgba(255, 255, 255, 0) 100%) repeat scroll 0 0 transparent;
   background: -webkit-linear-gradient(to right, #FFFFFF 70%, rgba(255, 255, 255, 0.85) 80%, rgba(255, 255, 255, 0) 100%) repeat scroll 0 0 transparent;
+  background: linear-gradient(to right, #FFFFFF 70%, rgba(255, 255, 255, 0.85) 80%, rgba(255, 255, 255, 0) 100%) repeat scroll 0 0 transparent;
 }
 #gallery .next {
   position: absolute; right: 0px; top: 2px; width: 45px; text-align: center;
   background: -moz-linear-gradient(to left, #FFFFFF 70%, rgba(255, 255, 255, 0.85) 80%, rgba(255, 255, 255, 0) 100%) repeat scroll 0 0 transparent;
+  background: -webkit-linear-gradient(right, #FFFFFF 70%, rgba(255, 255, 255, 0.85) 80%, rgba(255, 255, 255, 0) 100%) repeat scroll 0 0 transparent;
   background: -webkit-linear-gradient(to left, #FFFFFF 70%, rgba(255, 255, 255, 0.85) 80%, rgba(255, 255, 255, 0) 100%) repeat scroll 0 0 transparent;
+  background: linear-gradient(to left, #FFFFFF 70%, rgba(255, 255, 255, 0.85) 80%, rgba(255, 255, 255, 0) 100%) repeat scroll 0 0 transparent;
 }
 
 #gallery.delete-active:before {
