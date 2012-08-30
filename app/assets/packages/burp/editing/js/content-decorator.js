@@ -37,7 +37,11 @@
       if ($('#' + movable.data('before')).length > 0) {
         $('#' + movable.data('before')).before(movable);
       } else if ($('#' + $(movable).data('after')).length > 0) {
-        $('#' + movable.data('after')).after(movable);
+        if($('#' + movable.data('after')).next('.movable').length > 0) {
+          $('#' + movable.data('after')).nextAll('.movable').last().after(movable);
+        } else {
+          $('#' + movable.data('after')).after(movable);
+        }
       } else {
         console.debug("Cannot find home for image", movable);
       }
@@ -231,7 +235,7 @@
     parkImages: function() {
       var parking = this.parking;
       this.element.find('.movable').each(function() {
-        parking.prepend(this);
+        parking.append(this);
       });
     },
     
