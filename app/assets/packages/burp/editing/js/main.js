@@ -253,7 +253,7 @@ $(function() {
     }
   }
   
-  $(window).keydown(function(event) {
+  $(window).keyup(function(event) {
     if (event.altKey === true && event.keyCode === 27) {
 
       init();
