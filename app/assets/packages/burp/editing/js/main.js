@@ -254,7 +254,7 @@ $(function() {
   }
   
   $(window).keyup(function(event) {
-    if (event.altKey === true && event.keyCode === 27) {
+    if ((event.altKey === true || event.ctrlKey === true ) && event.keyCode === 27) {
 
       init();
       
