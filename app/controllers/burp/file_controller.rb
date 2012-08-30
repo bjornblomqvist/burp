@@ -28,6 +28,12 @@ module Burp
         render :text => "403, Forbiden!", :status => 403, :content_type => "text/plain"
       elsif File.exist?(file_path)
         Burp.access.may_view_file!(file_path) do
+          
+          headers["Cache-Control"] = "Public"
+          headers["Last-Modified"] = File.mtime(file_path).utc.rfc2822
+          
+          request.session_options[:skip] = true
+          
           send_file(file_path,:disposition => file_path.match(/png|jpeg|gif|jpg|pdf/) ? 'inline' : 'attachment')
         end
       else  
