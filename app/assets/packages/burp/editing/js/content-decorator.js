@@ -87,7 +87,11 @@
       
             var position = $(this).offset();
             var size = {width:$(this).outerWidth(),height:$(this).outerHeight()};
-            position.left -= $(this).offsetParent().offset().left;
+            if(navigator.userAgent.match(/Firefox|Safari/)) {
+              position.left = $(this)[0].offsetLeft;
+            } else {
+              position.left -= $(this).offsetParent().offset().left;
+            }
             
             var element = $('<div class="dropbox"></div>');
             wrappers.push(element[0]);
