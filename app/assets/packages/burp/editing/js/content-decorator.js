@@ -77,13 +77,13 @@
           
           var wrappers = [];
           
-          var headerPosition = $('body > header').offset();
+          
           
           contentEditor.element.find('.markdown').each(function() {
       
             var position = $(this).offset();
             var size = {width:$(this).outerWidth(),height:$(this).outerHeight()};
-            position.left -= headerPosition.left;
+            position.left -= $(this).offsetParent().offset().left;
             
             var element = $('<div class="dropbox"></div>');
             wrappers.push(element[0]);
