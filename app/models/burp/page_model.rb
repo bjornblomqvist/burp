@@ -56,6 +56,7 @@ module Burp
       raise "Path already taken" if @original_path != path && File.exist?(on_disk_path)
 
       remove_dir
+      remove_dir(@original_path)
       create_target_dir
       save_metadata
       save_snippets
