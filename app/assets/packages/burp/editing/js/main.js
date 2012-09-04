@@ -102,7 +102,7 @@ $(function() {
 
     contentDecorator.addRemoveZone('#gallery');
     
-    update(editor.getValue());
+    // update(editor.getValue());
     loadFiles();
   
     $.adminDock.title('');
@@ -212,7 +212,8 @@ $(function() {
       dataType:'json',
       success:function(data) {
         if(data == null) {
-          return; // There is no page yet
+          // No page yet so our code needs a bit help
+          data = {};
         }
         
         // We default to the html

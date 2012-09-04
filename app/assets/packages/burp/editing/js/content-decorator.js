@@ -16,41 +16,6 @@
   }
   
   window.ContentDecorator = ContentDecorator;
-
-  function fixate(movable) {
-    movable = $(movable);
-    var before = movable.nextAll('.markdown')[0];
-    if (before) {
-      movable.data('before', before.id);
-    }
-    
-    var after = movable.prevAll('.markdown')[0];
-    if (after) {
-      movable.data('after', after.id);
-    }
-  }
-
-  function insertMovable(movable, before) {
-    movable = $(movable);
-
-    if (typeof(before) === 'undefined') {
-      if ($('#' + movable.data('before')).length > 0) {
-        $('#' + movable.data('before')).before(movable);
-      } else if ($('#' + $(movable).data('after')).length > 0) {
-        if($('#' + movable.data('after')).next('.movable').length > 0) {
-          $('#' + movable.data('after')).nextAll('.movable').last().after(movable);
-        } else {
-          $('#' + movable.data('after')).after(movable);
-        }
-      } else {
-        console.debug("Cannot find home for image", movable);
-      }
-    } else {
-      $(before).before(movable);
-    }
-
-    fixate(movable);
-  }
   
   function clearDropBoxes() {
     $('body > .dropbox').remove();
@@ -134,7 +99,7 @@
 
                 var markdown = $(this).parent().data("target-element");
               
-                insertMovable(img, markdown);
+                $(img).insertBefore(markdown)
                 clearDropBoxes();
               }
               
@@ -164,10 +129,6 @@
   function removeRemoveZone() {
     $('.remove-zone').removeClass('remove-zone').droppable( "destroy" );
   }
-
-  function calculateHash() {
-    $(this).attr('id', "hashed-" + MD5($(this)[0].outerHTML.toLowerCase().replace(/\W+/, '')));
-  }
   
   $.extend(ContentDecorator.prototype, {
     
@@ -180,7 +141,6 @@
           $(element).addClass(positionClass);
           return element;
         });
-        fixate(this);
       });
     },
     
@@ -218,7 +178,7 @@
       
       var tempElement = $('<div></div>');
       tempElement.html(html);
-      tempElement.children().addClass('markdown').each(calculateHash);
+      tempElement.children().addClass('markdown');
       
       var _this = this;
       tempElement.find('img').each(function() {
@@ -230,23 +190,10 @@
         }
       });
       
-      this.parkImages();
+      $(this.element).park('.movable');
       this.element.html("");
       this.element.append(tempElement.children());
-      this.unparkImages();
-    },
-    
-    parkImages: function() {
-      var parking = this.parking;
-      this.element.find('.movable').each(function() {
-        parking.append(this);
-      });
-    },
-    
-    unparkImages: function() {
-      this.parking.find('.movable').each(function() {
-        insertMovable(this);
-      });
+      $(this.element).unpark();
     },
     
     makeDroppable: function(elements, createCallback) {

@@ -1,3 +1,29 @@
+  
+  
+
+  
+  
+  
+  - Fix the menu
+  
+    - Erik's drag and drop menu tree
+    - New section
+    - New page
+    - Edit section
+    - Edit page
+    - New link
+    
+  
+    
+  # Current problems
+  
+  - Images are to big
+  - Images move around to much
+  - Cant create new pages or set the order of the menu
+  
+  
+    
+    
     
   - Fix so that we keep the state for all the sections we have edited.
   - Fix so that we save all the sections and not just the current one
