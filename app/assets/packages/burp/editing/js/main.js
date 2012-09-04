@@ -140,7 +140,7 @@ $(function() {
 
     var uploader = new qq.FileUploader({
         element: document.getElementById('file-uploader'),
-        params: {authenticity_token : encodeURIComponent($('meta[name=csrf-token]').attr('content'))},
+        params: {authenticity_token : $('meta[name=csrf-token]').attr('content')},
         action: '/burp/files',
         onComplete: function(id, fileName, responseJSON){
           if(responseJSON.success) {
