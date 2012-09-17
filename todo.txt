@@ -1,4 +1,10 @@
   
+  # Version 1
+  
+    - Html 2 markdown
+    - New menu
+    - Twitter bootstrap in admin
+  
   
 
   
@@ -17,8 +23,7 @@
     
   # Current problems
   
-  - Images are to big
-  - Images move around to much
+  - Images are way to big
   - Cant create new pages or set the order of the menu
   
   
