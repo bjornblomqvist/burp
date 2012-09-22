@@ -3,3 +3,17 @@
   Now go edit!
 </p>
 <blockquote>Urp burp!<blockquote>
+  
+  <%= semantic_form_for :blabla do |f| %>
+      <%= f.inputs "Something" do %>
+        <%= f.input :title, :hint => "blabla" %>
+        <%= f.input :body %>
+        <%= f.input :section, :as => :radio %>
+        <%= f.input :categories %>
+        <%= f.input :created_at, :as => :string %>
+      <% end %>
+      <%= f.actions do %>
+        <%= f.action :submit, :as => :button %>
+        <%= f.action :cancel, :as => :link %>
+      <% end %>
+    <% end %>

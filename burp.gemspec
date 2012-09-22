@@ -5,19 +5,18 @@
 
 Gem::Specification.new do |s|
   s.name = "burp"
-  s.version = "1.0.0"
+  s.version = "1.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Darwin"]
-  s.date = "2012-08-23"
+  s.date = "2012-09-22"
   s.description = " A CMS that tryes hard to not get in your way! "
   s.email = "darwin@bits2life.com"
   s.extra_rdoc_files = [
     "LICENSE.txt",
-    "README.rdoc"
+    "README.markdown"
   ]
   s.files = [
-    "README.rdoc",
     "Rakefile",
     "app/assets/javascripts/burp/application.js",
     "app/assets/javascripts/burp/cms_helper.js",
@@ -308,6 +307,7 @@ Gem::Specification.new do |s|
     "app/assets/packages/burp/editing/js/main.js",
     "app/assets/packages/burp/editing/js/md5.js",
     "app/assets/packages/burp/editing/js/showdown.js",
+    "app/assets/packages/burp/editing/js/stay.js",
     "app/assets/stylesheets/burp/application.less",
     "app/assets/stylesheets/burp/fileupload.less",
     "app/controllers/burp/application_controller.rb",
@@ -322,6 +322,7 @@ Gem::Specification.new do |s|
     "app/lib/burp/page.rb",
     "app/lib/burp/test_cms.rb",
     "app/lib/burp/util/upload_handler.rb",
+    "app/models/burp/menu.rb",
     "app/models/burp/page_model.rb",
     "app/views/burp/file/index.html.erb",
     "app/views/burp/page/edit.html.erb",
@@ -350,7 +351,17 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<less-rails>, [">= 0"])
       s.add_runtime_dependency(%q<mayi>, [">= 0"])
       s.add_runtime_dependency(%q<therubyracer>, [">= 0"])
+      s.add_runtime_dependency(%q<formtastic>, [">= 0"])
+      s.add_runtime_dependency(%q<formtastic-bootstrap>, [">= 0"])
       s.add_development_dependency(%q<sqlite3>, [">= 0"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
+      s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_development_dependency(%q<bundler>, [">= 0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
+      s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_development_dependency(%q<bundler>, [">= 0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
       s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
@@ -374,7 +385,17 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<less-rails>, [">= 0"])
       s.add_dependency(%q<mayi>, [">= 0"])
       s.add_dependency(%q<therubyracer>, [">= 0"])
+      s.add_dependency(%q<formtastic>, [">= 0"])
+      s.add_dependency(%q<formtastic-bootstrap>, [">= 0"])
       s.add_dependency(%q<sqlite3>, [">= 0"])
+      s.add_dependency(%q<rspec>, ["~> 2.8.0"])
+      s.add_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_dependency(%q<bundler>, [">= 0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_dependency(%q<rspec>, ["~> 2.8.0"])
+      s.add_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_dependency(%q<bundler>, [">= 0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
       s.add_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, [">= 0"])
@@ -399,7 +420,17 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<less-rails>, [">= 0"])
     s.add_dependency(%q<mayi>, [">= 0"])
     s.add_dependency(%q<therubyracer>, [">= 0"])
+    s.add_dependency(%q<formtastic>, [">= 0"])
+    s.add_dependency(%q<formtastic-bootstrap>, [">= 0"])
     s.add_dependency(%q<sqlite3>, [">= 0"])
+    s.add_dependency(%q<rspec>, ["~> 2.8.0"])
+    s.add_dependency(%q<rdoc>, ["~> 3.12"])
+    s.add_dependency(%q<bundler>, [">= 0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+    s.add_dependency(%q<rspec>, ["~> 2.8.0"])
+    s.add_dependency(%q<rdoc>, ["~> 3.12"])
+    s.add_dependency(%q<bundler>, [">= 0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
     s.add_dependency(%q<rspec>, ["~> 2.8.0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, [">= 0"])
