@@ -3,7 +3,7 @@ module Burp
   class Group
   
     attr_accessor :children
-    attr_reader :name
+    attr_accessor :name
   
     def initialize(name,options = {})
       @name = name
@@ -49,7 +49,7 @@ module Burp
     
     def self.from_hash(hash)
       group = Group.new(hash[:name],hash)
-      group.children.map{|child| child[:url] ? Link.from_hash(child) : Group.from_hash(child)}
+      group.children.map!{|child| child[:url] ? Link.from_hash(child) : Group.from_hash(child)}
       
       group
     end
@@ -60,6 +60,14 @@ module Burp
     
     def to_yaml
       to_hash.to_yaml
+    end
+    
+    def to_menu(file_name)
+      menu = Menu.new(file_name)
+      menu.name = self.name
+      menu.children = Group.from_yaml(self.to_yaml).children
+      
+      menu
     end
   end
 end

@@ -13,12 +13,14 @@ module Burp
     end
     
     def self.cms_page(request_path)
-      @cached_cms_page = Burp::TestCMS.find_by_path(request_path)
-      @cached_cms_page
+      find_by_path(request_path)
     end
   
-  
     def self.link_tree
+      Menu.find("menu.yaml") || default_link_tree
+    end
+  
+    def self.default_link_tree
 
       groups = {}
       groups[""] = Group.new("root")
@@ -39,6 +41,10 @@ module Burp
     
       groups['']
    
+    end
+    
+    def self.commit
+      `cd #{Rails.root.join('app/cms').to_s}; git add .; git commit -a -m "cms autocommit"`
     end
   
     private

@@ -63,7 +63,7 @@ module Burp
       
       
       
-      `cd #{Rails.root.join('app/cms').to_s}; git add .; git commit -a -m "cms autocommit"`
+      Burp::TestCMS.commit
     end
   
     def remove
