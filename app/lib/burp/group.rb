@@ -42,6 +42,24 @@ module Burp
     def first_link
       children.select {|v| v.is_a? Link}.first
     end
-  
+    
+    def self.from_yaml(yaml)
+      from_hash(YAML.load(yaml))
+    end
+    
+    def self.from_hash(hash)
+      group = Group.new(hash[:name],hash)
+      group.children.map{|child| child[:url] ? Link.from_hash(child) : Group.from_hash(child)}
+      
+      group
+    end
+    
+    def to_hash
+      {:name => name, :children => children.map{|child| child.to_hash}}
+    end
+    
+    def to_yaml
+      to_hash.to_yaml
+    end
   end
 end

@@ -25,6 +25,21 @@ module Burp
     def to_html(request = nil,name = nil)
       %{<a class="#{current_class(request)}" href="#{url}">#{name || self.name}</a>}.html_safe
     end
+    
+    def self.from_yaml(yaml)
+      from_hash(YAML::load(yaml))
+    end
 
+    def self.from_hash(hash)
+      Link.new(hash[:name] => hash[:url])
+    end
+    
+    def to_hash
+      {:name => name, :url => url}
+    end
+
+    def to_yaml
+      to_hash.to_yaml
+    end
   end
 end
