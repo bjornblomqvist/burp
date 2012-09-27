@@ -9,59 +9,22 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require formtastic-bootstrap
  *= require_tree .
  */
  
- html {
-   background: #ccc;
-   font-family: Arial;
- }
- 
- div.content {
-   margin: 40px;
-   margin-top: 20px;
- }
- 
- nav {
-   margin: 10px 20px;
-   border-bottom: solid 1px black;
-   padding-bottom: 5px;
-   text-indent: 10px;
-   word-spacing: 10px;
-  
-   a {
-     font-size: 18px;
-     line-height: 30px;
-     color: blue;
-     text-decoration: none;
-   }
- }
- 
- input,textarea {
-   display: block;
-   margin-bottom: 20px;
- }
- 
- textarea {
-   width: 800px;
- }
- 
- div.main {
-   overflow: hidden;
-   width: 960px;
-   margin: 40px auto;
-   background: white;
-   min-height: 500px;
- }
- 
- section.page:last-of-type {
-   border: none;
- }
- 
- section.page {
-   margin: 20px 0px;
-   padding: 0px 20px;
-   border-bottom: solid 1px #ccc;
-   padding-bottom: 20px;
- }
+.nav-collapse.collapse {
+  height: auto !important;
+  overflow: visible !important;
+}
+
+body > .container {
+  padding: 60px 0px 100px;
+}
+
+.controls > .input > textarea {
+  width: 500px;
+}
+
+body .navbar .brand {
+  color: #fff; 
+}

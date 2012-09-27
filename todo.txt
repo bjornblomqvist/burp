@@ -3,23 +3,18 @@
   
   # Version 1
   
-    - Html 2 markdown
-    - New menu
     - Twitter bootstrap in admin
+    - New menu admin
+      - Erik's drag and drop menu tree
+      
+      - New section, Edit section
+      - New page, Edit page
+      - New link, Edit link
+      
+    - Html 2 markdown
   
   
 
-  
-  
-  
-  - Fix the menu
-  
-    - Erik's drag and drop menu tree
-    - New section
-    - New page
-    - Edit section
-    - Edit page
-    - New link
 
   - We can still have a method that gives us the current basic auto menu.    
   
@@ -40,7 +35,6 @@
   - Let Christer write stuff for it.
   
   - Move drag and drop into its own library
-  - Move position thingi to its own library (Stay little element)
     
   - Fix so that we don't need a container.
   

@@ -1,26 +1,39 @@
 
-<%= form_for :page, :url => (params[:action] == "edit" ? "./update" : "./create"),:html => {:id => "edit-page-form"} do |f| %>
 
-  <%= f.label :path %>
-  <%= f.text_field :path %>
+<%= twitter_bootstrap_form_for :page, :url => (params[:action] == "edit" ? "./update" : "./create"),:html => {:id => "edit-page-form",:class => 'form-horizontal'} do |f| %>
 
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-  
-  <%= f.label :link_label %>
-  <%= f.text_field :link_label %>
-  
-  <% @page.snippets.each_entry do |name,value| %>
-  <div class="snippet">
-    <%= f.label name %> <a class="remove-snippet-link" href="">Remove snippet</a>
-    <%= f.text_area :snippet,:value => value, :name => "page[snippets][#{name}]" %>
-  </div>
+  <%= f.fieldset "Page" do %>
+    <%= f.text_field :title, "Title" %>
+    <%= f.text_field :path %>
+    <%= f.text_field :link_label %>
   <% end %>
   
-  <%= f.submit %>
+  <%= f.fieldset "Snippets", :id => "snippet-set" do %>
+    <% @page.snippets.each_entry do |name,value| %>
+      <%= f.text_area :snippet,name.capitalize,:value => value, :name => "page[snippets][#{name}]" do %>
+        <span class="help-block">
+          <a class="remove-snippet-link" href="">Remove snippet</a>
+        </span>
+      <% end %>
+    <% end %>
+    
+    <div class="control-group">
+      <label for="page_snippet" class="control-label">Snippet name</label>
+      <div class="controls">
+        <span class="input">
+          <input type="text" value="" size="30" name="snippet_name" id="snippet_name_input">
+          <a id="add-snippet-link" style="margin-left: 10px;" href="">Add snippet</a>
+        </span>
+      </div>
+    </div>
+    
+  <% end %>
+
+  
+  <%= f.actions do %>
+    <%= f.submit 'Save' %>
+    <%= button_tag  'Cancel', :onclick => "document.location = '/burp/pages';", :class => 'btn' %>
+  <% end %>
 <% end %>
 
-<label>Snippet name:</label>
-<input id="snippet_name_input" name="snippet_name" >
-<a id="add-snippet-link" href="">Add snippet</a>
 

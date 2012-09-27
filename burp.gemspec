@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "burp"
-  s.version = "1.0.3"
+  s.version = "1.0.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Darwin"]
-  s.date = "2012-09-22"
+  s.date = "2012-09-26"
   s.description = " A CMS that tryes hard to not get in your way! "
   s.email = "darwin@bits2life.com"
   s.extra_rdoc_files = [
@@ -18,7 +18,10 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     "Rakefile",
+    "app/assets/images/burp/img/glyphicons-halflings-white.png",
+    "app/assets/images/burp/img/glyphicons-halflings.png",
     "app/assets/javascripts/burp/application.js",
+    "app/assets/javascripts/burp/bootstrap.min.js",
     "app/assets/javascripts/burp/cms_helper.js",
     "app/assets/javascripts/burp/edit-page.js",
     "app/assets/javascripts/burp/fileupload.js",
@@ -309,6 +312,7 @@ Gem::Specification.new do |s|
     "app/assets/packages/burp/editing/js/showdown.js",
     "app/assets/packages/burp/editing/js/stay.js",
     "app/assets/stylesheets/burp/application.less",
+    "app/assets/stylesheets/burp/bootstrap.css",
     "app/assets/stylesheets/burp/fileupload.less",
     "app/controllers/burp/application_controller.rb",
     "app/controllers/burp/catch_all_controller.rb",
@@ -329,6 +333,7 @@ Gem::Specification.new do |s|
     "app/views/burp/page/index.html.erb",
     "app/views/burp/static/index.html.erb",
     "app/views/layouts/burp/application.html.erb",
+    "config/initializers/bootstrap_form.rb",
     "config/routes.rb",
     "lib/burp.rb",
     "lib/burp/capistrano.rb",
@@ -351,9 +356,36 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<less-rails>, [">= 0"])
       s.add_runtime_dependency(%q<mayi>, [">= 0"])
       s.add_runtime_dependency(%q<therubyracer>, [">= 0"])
-      s.add_runtime_dependency(%q<formtastic>, [">= 0"])
-      s.add_runtime_dependency(%q<formtastic-bootstrap>, [">= 0"])
+      s.add_runtime_dependency(%q<twitter_bootstrap_form_for>, ["~> 2.0.1.0.rc1"])
       s.add_development_dependency(%q<sqlite3>, [">= 0"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
+      s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_development_dependency(%q<bundler>, [">= 0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
+      s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_development_dependency(%q<bundler>, [">= 0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
+      s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_development_dependency(%q<bundler>, [">= 0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
+      s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_development_dependency(%q<bundler>, [">= 0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
+      s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_development_dependency(%q<bundler>, [">= 0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
+      s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_development_dependency(%q<bundler>, [">= 0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
+      s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_development_dependency(%q<bundler>, [">= 0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
       s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
@@ -385,9 +417,36 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<less-rails>, [">= 0"])
       s.add_dependency(%q<mayi>, [">= 0"])
       s.add_dependency(%q<therubyracer>, [">= 0"])
-      s.add_dependency(%q<formtastic>, [">= 0"])
-      s.add_dependency(%q<formtastic-bootstrap>, [">= 0"])
+      s.add_dependency(%q<twitter_bootstrap_form_for>, ["~> 2.0.1.0.rc1"])
       s.add_dependency(%q<sqlite3>, [">= 0"])
+      s.add_dependency(%q<rspec>, ["~> 2.8.0"])
+      s.add_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_dependency(%q<bundler>, [">= 0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_dependency(%q<rspec>, ["~> 2.8.0"])
+      s.add_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_dependency(%q<bundler>, [">= 0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_dependency(%q<rspec>, ["~> 2.8.0"])
+      s.add_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_dependency(%q<bundler>, [">= 0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_dependency(%q<rspec>, ["~> 2.8.0"])
+      s.add_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_dependency(%q<bundler>, [">= 0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_dependency(%q<rspec>, ["~> 2.8.0"])
+      s.add_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_dependency(%q<bundler>, [">= 0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_dependency(%q<rspec>, ["~> 2.8.0"])
+      s.add_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_dependency(%q<bundler>, [">= 0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_dependency(%q<rspec>, ["~> 2.8.0"])
+      s.add_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_dependency(%q<bundler>, [">= 0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
       s.add_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, [">= 0"])
@@ -420,9 +479,36 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<less-rails>, [">= 0"])
     s.add_dependency(%q<mayi>, [">= 0"])
     s.add_dependency(%q<therubyracer>, [">= 0"])
-    s.add_dependency(%q<formtastic>, [">= 0"])
-    s.add_dependency(%q<formtastic-bootstrap>, [">= 0"])
+    s.add_dependency(%q<twitter_bootstrap_form_for>, ["~> 2.0.1.0.rc1"])
     s.add_dependency(%q<sqlite3>, [">= 0"])
+    s.add_dependency(%q<rspec>, ["~> 2.8.0"])
+    s.add_dependency(%q<rdoc>, ["~> 3.12"])
+    s.add_dependency(%q<bundler>, [">= 0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+    s.add_dependency(%q<rspec>, ["~> 2.8.0"])
+    s.add_dependency(%q<rdoc>, ["~> 3.12"])
+    s.add_dependency(%q<bundler>, [">= 0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+    s.add_dependency(%q<rspec>, ["~> 2.8.0"])
+    s.add_dependency(%q<rdoc>, ["~> 3.12"])
+    s.add_dependency(%q<bundler>, [">= 0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+    s.add_dependency(%q<rspec>, ["~> 2.8.0"])
+    s.add_dependency(%q<rdoc>, ["~> 3.12"])
+    s.add_dependency(%q<bundler>, [">= 0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+    s.add_dependency(%q<rspec>, ["~> 2.8.0"])
+    s.add_dependency(%q<rdoc>, ["~> 3.12"])
+    s.add_dependency(%q<bundler>, [">= 0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+    s.add_dependency(%q<rspec>, ["~> 2.8.0"])
+    s.add_dependency(%q<rdoc>, ["~> 3.12"])
+    s.add_dependency(%q<bundler>, [">= 0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+    s.add_dependency(%q<rspec>, ["~> 2.8.0"])
+    s.add_dependency(%q<rdoc>, ["~> 3.12"])
+    s.add_dependency(%q<bundler>, [">= 0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
     s.add_dependency(%q<rspec>, ["~> 2.8.0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, [">= 0"])
