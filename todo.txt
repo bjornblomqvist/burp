@@ -3,7 +3,6 @@
   
   # Version 1
   
-    - Twitter bootstrap in admin
     - New menu admin
       - Erik's drag and drop menu tree
       
