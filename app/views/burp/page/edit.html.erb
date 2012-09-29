@@ -33,6 +33,8 @@
   <%= f.actions do %>
     <%= f.submit 'Save' %>
     <%= button_tag  'Cancel', :onclick => "document.location = '/burp/pages';", :class => 'btn' %>
+    <%= button_tag  'Destroy', :onclick => "$('#destroy-link').click(); return false;", :class => 'btn' %>
+    <%= link_to 'Destroy', "/burp/pages/#{ @page.path.gsub(/^\/$/,"/$root")}",:confirm => 'Are you sure?',:id => 'destroy-link', :method => :delete, :style => "display: none;" %>
   <% end %>
 <% end %>
 
