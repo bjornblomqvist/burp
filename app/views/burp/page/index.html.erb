@@ -15,14 +15,3 @@
 
 <%= @menu.to_html %>
 
-<hr>
-
-<% @pages.each do |page| %>
-<section class="page">
-  <h1><a href="<%= page.path %>"><%= page.path %></a></h1>
-  <a href="/burp/pages/<%= page.path.gsub(/^\/$/,"/$root") %>/edit">Edit</a>
-  <%= link_to 'Destroy', "/burp/pages/#{ page.path.gsub(/^\/$/,"/$root")}",:confirm => 'Are you sure?', :method => :delete %>
-</section>
-<% end %>
-
-  <a href="/burp/pages/new">Add page</a>

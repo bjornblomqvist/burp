@@ -19,7 +19,7 @@ module Burp
           <h2 class="group-name">#{name}</h2>
           <h2 class="first-link-in-group #{first_link ? first_link.current_class(request) : ""}">#{first_link ? first_link.to_html(request) : ""}</h2>
           <ul class="children">
-          #{children.inject("") do |x,link|  x += "<li class=\"child #{link.current_class(request)}\">#{link.to_html(request)}</li>" end}
+          #{children.inject("") do |x,link|  x += "<li class=\"child #{link.is_a?(Group) ? "group" : "link" } #{link.current_class(request)}\">#{link.to_html(request)}</li>" end}
           </ul>
         </section>
         }.html_safe      

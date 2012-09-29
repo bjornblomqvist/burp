@@ -6,6 +6,9 @@
     - New menu admin
       - Render a nice menu tree, use the design from Residenc
       - Use the drag and drop from Ceyebr CMS.
+        - Implement the drag and drop
+        - Make the drag and drop update the menu
+        - Add a list of pages not in the menu
         
         - Must be able to have pages that are not part of the menu.
         - New pages can be added to some part of the menu tree (dropdown).
