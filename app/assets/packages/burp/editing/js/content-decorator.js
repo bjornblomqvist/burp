@@ -180,6 +180,7 @@
       tempElement.html(html);
       tempElement.children().addClass('markdown');
       
+      // Fixes so that we don't reload images on each update
       var _this = this;
       tempElement.find('img').each(function() {
         var element = _this.element.find('img[src="'+$(this).attr('src')+'"]');
