@@ -4,6 +4,18 @@ module Burp
     protect_from_forgery
     before_filter :refresh_access
     before_filter :authenticate
+    before_filter :init_body_classes
+    
+    def init_body_classes 
+
+      module_name = self.class.parent.class == Module ? self.class.parent.name+"-" : ""
+
+      @body_classes ||= ""
+      @body_classes += " #{module_name}#{controller_name} ".downcase
+      @body_classes += " #{module_name}#{controller_name}-#{action_name} ".downcase
+
+      @body_classes += " #{(request.user_agent || '').match(/(lion)/i) ? "noscrollbars" : "scrollbars"} "
+    end
     
     private
     
