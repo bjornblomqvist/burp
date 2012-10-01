@@ -11,9 +11,6 @@ module Burp
       raise ArgumentError.new("Missing a name") unless name
     end
 
-
-
-
     def current?(request = nil)
       request && request.path == url
     end

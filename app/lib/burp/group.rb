@@ -9,9 +9,7 @@ module Burp
       @name = name
       @children = options[:children] || []
     end
-  
-  
-  
+
     def to_html(request = nil)
       if children.length > 0
         %{
