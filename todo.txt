@@ -2,12 +2,26 @@
 
   
   # Version 1
-  
+    
+    - Start with cucumber
+    
     - New menu admin
       - Render a nice menu tree, use the design from Residenc
       - Use the drag and drop from Ceyebr CMS.
         - Implement the drag and drop
+        - Add hash_id to links and groups
+          - The hash is calculated from data + array position + parent_hash
+          
+          group.find_by_position_id("ueoaueoauaeo")
+          group.position_id_for(a_child,parent_id = "") || nil
+          
         - Make the drag and drop update the menu
+          - Write menu to json
+          - Fix a menu controller
+            /burp/menus/#menu_name#/child-number.child-number.child-number..../edit
+            ceyebr.com.dev/burp/menus/default/section/43/edit
+            ceyebr.com.dev/burp/menus/default/link/43/edit
+            
         - Add a list of pages not in the menu
         
         - Must be able to have pages that are not part of the menu.
