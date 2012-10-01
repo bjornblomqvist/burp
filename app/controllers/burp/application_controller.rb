@@ -32,6 +32,7 @@ module Burp
       
         unless Rails.env == 'development'
           authenticate_or_request_with_http_basic do |username, password|
+            # Rails.logger.debug "in authenticate_or_request_with_http_basic, #{request.headers['Authorization']}"
             username == Rails.application.config.burp_username && password == Rails.application.config.burp_password
           end
         end
