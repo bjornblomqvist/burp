@@ -118,7 +118,7 @@ $(function() {
     
     $.adminDock.footer.addSelector({
       options: snippet_names,
-      default: snippet_names[0],
+      'default': snippet_names[0],
       change: function(option) {
         
         
@@ -211,7 +211,7 @@ $(function() {
       cache:false,
       dataType:'json',
       success:function(data) {
-        if(data == null) {
+        if(data === null) {
           // No page yet so our code needs a bit help
           data = {};
         }
@@ -252,15 +252,25 @@ $(function() {
     }
   }
   
+  function trigger_http_basic_auth(callback) {
+    $.get("/burp/",callback);
+  }
+  
+  var start_time;
+  
   $(window).keyup(function(event) {
     if (
       ((event.altKey === true || event.ctrlKey === true ) && event.keyCode === 27) ||
       (event.altKey === true && event.ctrlKey === true && event.keyCode === 32)
       ) {
-
-      init();
-      
-      $.adminDock.toggle();
+        
+      if(!start_time || start_time.getTime() + 1000 < new Date().getTime()) {
+        trigger_http_basic_auth(function() {
+          init();
+          $.adminDock.toggle();
+          start_time = null;
+        });
+      }
     }
   });
   
