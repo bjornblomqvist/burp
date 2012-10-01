@@ -67,7 +67,6 @@ $(function() {
     handle: 'h2, a',
     opacity: 0.5,
     helper: 'clone',
-    revert: 250,
     distance: 10,
     start: function(event, ui) {
       $(event.target).addClass("draging");
@@ -80,25 +79,17 @@ $(function() {
     drag: function(event, ui) {
       var rect = currentRect(event);
       
-      // $.debug("drag",rect,event,ui);
-      
       if(rect) {
         if(rect.element === event.target) {
-          // $.debug("above self");
         } else if(rect.element === ui.helper[0]) {
-          // $.debug("above helper");
         } else if($(event.target).has(rect.element).length > 0) {
-           // $.debug("cant put parent into child");
         } else {
           if(rect.withinTopHalf(event)) {
-            
             $(event.target).closest("li.child").insertBefore($(rect.element).closest("li.child"));
             rects = getRects($("body.burp-page-index .container > section.group"),"section.group, li.link");
-            // $.debug(rect.element,"top half");
           } else if(rect.withinBottomHalf(event)) {
             $(event.target).closest("li.child").insertAfter($(rect.element).closest("li.child"));
             rects = getRects($("body.burp-page-index .container > section.group"),"section.group, li.link");
-            // $.debug(rect.element,"bottom half");
           }
         }
       }
