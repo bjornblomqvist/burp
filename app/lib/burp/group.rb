@@ -7,7 +7,7 @@ module Burp
   
     def initialize(name,options = {})
       @name = name
-      @children = options[:children] || []
+      @children = (options[:children] || options['children']) || []
     end
 
     def to_html(request = nil)
@@ -46,8 +46,8 @@ module Burp
     end
     
     def self.from_hash(hash)
-      group = Group.new(hash[:name],hash)
-      group.children.map!{|child| child[:url] ? Link.from_hash(child) : Group.from_hash(child)}
+      group = Group.new((hash[:name] || hash['name']),hash)
+      group.children.map!{|child| (child[:url] || child['url']) ? Link.from_hash(child) : Group.from_hash(child)}
       
       group
     end

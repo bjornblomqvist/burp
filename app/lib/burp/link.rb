@@ -28,7 +28,7 @@ module Burp
     end
 
     def self.from_hash(hash)
-      Link.new(hash[:name] => hash[:url])
+      Link.new((hash[:name] || hash['name']) => (hash[:url] || hash['url']))
     end
     
     def to_hash

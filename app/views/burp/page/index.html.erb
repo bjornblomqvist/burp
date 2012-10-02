@@ -15,3 +15,20 @@
 
 <%= @menu.to_html %>
 
+<script type="text/javascript" charset="utf-8">
+  
+  l8r(function() {
+    $(function() {
+
+        // Fix so that clicks send the persion to the edit page
+      $('section.group li.link a').click(function() {
+        var orginial_url = $(this).attr('href');
+        $(this).attr('href',"/burp/pages/"+orginial_url+"/edit");
+        setTimeout(function() {
+          $(this).attr('href',orginial_url);
+        },10);
+      });
+    });
+  });
+    
+</script>

@@ -2,24 +2,7 @@ module Burp
   class PageController < Burp::ApplicationController
     def index
       Burp.access.may_view_page_list! do
-        
         @menu = Burp::Menu.find("menu.yaml")
-        
-        change_urls = Proc.new do |group|
-          if group.is_a? Group
-            group.children.each do |child|
-              if child.is_a? Group
-                change_urls.call(child)
-              else
-                child.url = "/burp/pages/#{child.url}/edit"
-              end
-            end
-          end
-        end
-        
-        change_urls.call(@menu)
-        
-        @pages = PageModel.all.sort {|a,b| a.path <=> b.path}
       end
     end
     

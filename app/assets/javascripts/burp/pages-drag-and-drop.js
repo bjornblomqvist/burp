@@ -1,3 +1,7 @@
+/*global
+  burp
+*/
+
 $(function() {
   
   var rects = [];
@@ -75,14 +79,22 @@ $(function() {
     stop: function(event, ui) {
       rects = [];
       $(event.target).removeClass("draging");
+
+      // Need to wait a bit as the ui-helper is still in the dom
+      setTimeout(function() {
+        burp.saveMenu($("body.burp-page-index .container > section.group").serializeGroup());
+      },10)
     },
     drag: function(event, ui) {
       var rect = currentRect(event);
       
       if(rect) {
         if(rect.element === event.target) {
+          // Cant drop on self
         } else if(rect.element === ui.helper[0]) {
+          // Cant drop ui helper
         } else if($(event.target).has(rect.element).length > 0) {
+          // Cant drop on a child of self
         } else {
           if(rect.withinTopHalf(event)) {
             $(event.target).closest("li.child").insertBefore($(rect.element).closest("li.child"));
