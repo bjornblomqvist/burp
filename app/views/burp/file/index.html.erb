@@ -14,25 +14,28 @@
   </div>
   
   <script type="text/javascript" charset="utf-8">
-    var uploader = new qq.FileUploader({
-        element: document.getElementById('file-uploader'),
-        action: '/burp/files',
-        onComplete: function(id, fileName, responseJSON){
-          if(responseJSON.success) {
-            document.location.reload(true);
-          } else {
-            var errorMessage = "";
-            $.each(responseJSON.errors,function(index,error) {
-              $.each(error,function(key,value) {
-                errorMessage += value;
+  
+    l8r(function() {
+      
+      var uploader = new qq.FileUploader({
+          element: document.getElementById('file-uploader'),
+          action: '/burp/files',
+          onComplete: function(id, fileName, responseJSON){
+            if(responseJSON.success) {
+              document.location.reload(true);
+            } else {
+              var errorMessage = "";
+              $.each(responseJSON.errors,function(index,error) {
+                $.each(error,function(key,value) {
+                  errorMessage += value;
+                });
               });
-            });
-            alert(errorMessage);
-          }
-        },
+              alert(errorMessage);
+            }
+          },
+      });
+      
     });
-    
-    
     
   </script>
   
