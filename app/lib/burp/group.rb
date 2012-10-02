@@ -67,5 +67,9 @@ module Burp
       
       menu
     end
+    
+    def links
+      children.map {|child| child.is_a?(Group) ? child.links : child}.flatten
+    end
   end
 end

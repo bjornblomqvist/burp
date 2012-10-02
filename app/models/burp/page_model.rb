@@ -71,6 +71,10 @@ module Burp
       remove_dir
       `cd #{Rails.root.join('app/cms').to_s}; git add .; git commit -a -m "cms autocommit"`
     end
+    
+    def root_fixed_path(path = self.path)
+      path == '/' ? '/#root' : path
+    end
 
     private
   
@@ -108,10 +112,6 @@ module Burp
         FileUtils.rmdir(directory_path)
         directory_path = File.dirname(directory_path)
       end
-    end
-  
-    def root_fixed_path(path = self.path)
-      path == '/' ? '/#root' : path
     end
   
     def cms_root

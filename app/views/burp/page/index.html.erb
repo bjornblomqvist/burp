@@ -13,7 +13,16 @@
 
 <hr>
 
+<h3>Main menu</h3>
 <%= @menu.to_html %>
+
+<hr>
+
+
+<h3>Not in menu</h3>
+<%= @other_pages.to_html %>
+
+<%= link_to "» New page","/burp/pages/new" %>
 
 <script type="text/javascript" charset="utf-8">
   

@@ -82,7 +82,7 @@ $(function() {
 
       // Need to wait a bit as the ui-helper is still in the dom
       setTimeout(function() {
-        burp.saveMenu($("body.burp-page-index .container > section.group").serializeGroup());
+        burp.saveMenu($("body.burp-page-index .container > section.group").first().serializeGroup());
       },10)
     },
     drag: function(event, ui) {
