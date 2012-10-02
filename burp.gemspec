@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "burp"
-  s.version = "1.0.4"
+  s.version = "1.0.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Darwin"]
-  s.date = "2012-09-26"
+  s.date = "2012-10-02"
   s.description = " A CMS that tryes hard to not get in your way! "
   s.email = "darwin@bits2life.com"
   s.extra_rdoc_files = [
@@ -21,10 +21,15 @@ Gem::Specification.new do |s|
     "app/assets/images/burp/img/glyphicons-halflings-white.png",
     "app/assets/images/burp/img/glyphicons-halflings.png",
     "app/assets/javascripts/burp/application.js",
-    "app/assets/javascripts/burp/bootstrap.min.js",
+    "app/assets/javascripts/burp/burp.js",
     "app/assets/javascripts/burp/cms_helper.js",
     "app/assets/javascripts/burp/edit-page.js",
-    "app/assets/javascripts/burp/fileupload.js",
+    "app/assets/javascripts/burp/lib/bootstrap.min.js",
+    "app/assets/javascripts/burp/lib/debug.js",
+    "app/assets/javascripts/burp/lib/fileupload.js",
+    "app/assets/javascripts/burp/lib/missing-restful-verbs.js",
+    "app/assets/javascripts/burp/menu-functions.js",
+    "app/assets/javascripts/burp/pages-drag-and-drop.js",
     "app/assets/packages/burp/editing.js",
     "app/assets/packages/burp/editing.less",
     "app/assets/packages/burp/editing/css/dropzone.css",
@@ -314,9 +319,12 @@ Gem::Specification.new do |s|
     "app/assets/stylesheets/burp/application.less",
     "app/assets/stylesheets/burp/bootstrap.css",
     "app/assets/stylesheets/burp/fileupload.less",
+    "app/assets/stylesheets/burp/views/page-index.less",
     "app/controllers/burp/application_controller.rb",
     "app/controllers/burp/catch_all_controller.rb",
+    "app/controllers/burp/error_controller.rb",
     "app/controllers/burp/file_controller.rb",
+    "app/controllers/burp/menu_controller.rb",
     "app/controllers/burp/page_controller.rb",
     "app/controllers/burp/static_controller.rb",
     "app/helpers/burp/application_helper.rb",
@@ -358,6 +366,10 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<therubyracer>, [">= 0"])
       s.add_runtime_dependency(%q<twitter_bootstrap_form_for>, ["~> 2.0.1.0.rc1"])
       s.add_development_dependency(%q<sqlite3>, [">= 0"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
+      s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_development_dependency(%q<bundler>, [">= 0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
       s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
@@ -471,6 +483,10 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, [">= 0"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_dependency(%q<rspec>, ["~> 2.8.0"])
+      s.add_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_dependency(%q<bundler>, [">= 0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
     end
   else
     s.add_dependency(%q<burp>, [">= 0"])
@@ -481,6 +497,10 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<therubyracer>, [">= 0"])
     s.add_dependency(%q<twitter_bootstrap_form_for>, ["~> 2.0.1.0.rc1"])
     s.add_dependency(%q<sqlite3>, [">= 0"])
+    s.add_dependency(%q<rspec>, ["~> 2.8.0"])
+    s.add_dependency(%q<rdoc>, ["~> 3.12"])
+    s.add_dependency(%q<bundler>, [">= 0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
     s.add_dependency(%q<rspec>, ["~> 2.8.0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, [">= 0"])
