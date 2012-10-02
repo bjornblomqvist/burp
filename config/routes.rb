@@ -14,5 +14,9 @@ Burp::Engine.routes.draw do
   
   get "/files/*id" => "file#show"
   
+  post "/menus/*id" => "menu#update"
+  
+  # Catch all to 404 error
+  match "/*path" => "error#no_such_page"
 
 end
