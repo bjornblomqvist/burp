@@ -63,13 +63,13 @@ module Burp
       
       
       
-      Burp::TestCMS.commit
+      Burp::TestCMS.commit("Saved #{self.path}")
     end
   
     def remove
       raise "Path must start with a slash '/'" unless path.start_with?("/")
       remove_dir
-      `cd #{Rails.root.join('app/cms').to_s}; git add .; git commit -a -m "cms autocommit"`
+      TestCMS.commit("Removed #{self.path}")
     end
     
     def root_fixed_path(path = self.path)

@@ -43,8 +43,8 @@ module Burp
    
     end
     
-    def self.commit
-      `cd #{Rails.root.join('app/cms').to_s}; git add .; git commit -a -m "cms autocommit"`
+    def self.commit(message = "auto commit")
+      `cd #{Rails.root.join('app/cms').to_s}; git add .; git commit -a -m "Burp: #{message}"`
     end
   
     private

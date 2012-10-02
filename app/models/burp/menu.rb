@@ -37,7 +37,7 @@ module Burp
        file.write(self.to_yaml)
      end
 
-     Burp::TestCMS.commit
+     Burp::TestCMS.commit("Saved #{self.file_name}")
     end
     
     private
