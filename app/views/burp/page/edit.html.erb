@@ -8,6 +8,7 @@
     <%= f.text_field :link_label %>
   <% end %>
   
+  <!--
   <%= f.fieldset "Snippets", :id => "snippet-set" do %>
     <% @page.snippets.each_entry do |name,value| %>
       <%= f.text_area :snippet,name.capitalize,:value => value, :name => "page[snippets][#{name}]" do %>
@@ -28,11 +29,12 @@
     </div>
     
   <% end %>
+  -->
 
   
   <%= f.actions do %>
     <%= f.submit 'Save' %>
-    <%= button_tag  'Cancel', :onclick => "document.location = '/burp/pages';", :class => 'btn' %>
+    <%= button_tag  'Cancel', :onclick => "document.location = '/burp/pages'; return false;", :class => 'btn' %>
     <%= button_tag  'Destroy', :onclick => "$('#destroy-link').click(); return false;", :class => 'btn' %>
     <%= link_to 'Destroy', "/burp/pages/#{ @page.path.gsub(/^\/$/,"/$root")}",:confirm => 'Are you sure?',:id => 'destroy-link', :method => :delete, :style => "display: none;" %>
   <% end %>
