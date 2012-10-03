@@ -20,21 +20,17 @@ module Burp
     def self.find(path)
     
       fixed_path = path == '/' ? '/#root' : path
-      on_disk_path = Rails.root.join('app/cms',".#{fixed_path}")
-    
-      puts "#{on_disk_path}"
+      on_disk_path =  Burp.content_directory + fixed_path
     
       if File.directory?(on_disk_path)
       
         data = {}
-        Dir.glob(on_disk_path+"*.html").each do |snippet_path|
+        Dir.glob(on_disk_path+"/*.html").each do |snippet_path|
           name = File.basename(snippet_path).split('.').first
           data[name.to_sym] = File.read(snippet_path).html_safe
         end
       
-      
         page_data = File.exist?("#{on_disk_path}/page.json") ? JSON.parse(File.read("#{on_disk_path}/page.json")) : {}
-      
       
         PageModel.new(:snippets => data,:title => page_data['title'],:link_label => page_data['linkLabel'],:misc => page_data['misc'],:path => path)
       else
@@ -43,7 +39,7 @@ module Burp
     end
   
     def self.all_paths
-      ((Dir.glob("#{Rails.root.to_s}/app/cms/**/*.html") + Dir.glob("#{Rails.root.to_s}/app/cms/**/*.json")).map {|path| File.dirname(path.gsub("#{Rails.root.to_s}/app/cms/","/")).gsub("/#root",'/') }).uniq
+      ((Dir.glob("#{Burp.content_directory}**/*.html") + Dir.glob("#{Burp.content_directory}**/*.json")).map {|path| File.dirname(path.gsub(Burp.content_directory,"/")).gsub("/#root",'/') }).uniq
     end
   
     def self.all
@@ -54,7 +50,7 @@ module Burp
       raise "Path must start with a slash '/'" unless path.start_with?("/")
       raise "No path given" if path.blank?
       raise "Path already taken" if @original_path != path && File.exist?(on_disk_path)
-
+      
       remove_dir
       remove_dir(@original_path)
       create_target_dir
@@ -115,7 +111,7 @@ module Burp
     end
   
     def cms_root
-      Rails.root.join('app/cms').to_s
+      Burp.content_directory
     end
   
     def on_disk_path(path = self.path)

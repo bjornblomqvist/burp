@@ -43,7 +43,7 @@ module Burp
     private
     
     def path
-      Rails.root.join('app/cms/',file_name)
+      Burp.content_directory + file_name
     end
   end
 end
