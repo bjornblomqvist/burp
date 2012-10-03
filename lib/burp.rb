@@ -30,7 +30,7 @@ module Burp
   # Can be overiden on a thread basis by setting  Thread.current[ :burp_content_directory ]
   #
   def self.content_directory
-    Thread.current[:burp_content_directory] || @@content_directory || Rails.root.join('app/cms/').to_s
+    Thread.current[:burp_content_directory] || @@content_directory || Rails.root.join('app/cms/default/').to_s
   end
   
   def self.content_directory=(path)
