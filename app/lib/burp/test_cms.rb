@@ -25,11 +25,11 @@ module Burp
       groups = {}
       groups[""] = Group.new("root")
 
-      Dir.glob(Burp.content_directory + "**/page.json").each do |page_data_path|
+      Dir.glob(Burp.current_site.content_directory + "**/page.json").each do |page_data_path|
         page_data = JSON.parse(File.read(page_data_path))
         unless page_data["linkLabel"].blank?
         
-          path = File.dirname(page_data_path).gsub(Burp.content_directory,'/')
+          path = File.dirname(page_data_path).gsub(Burp.current_site.content_directory,'/')
           path = "/" if path == "/#root"
           
           group = get_group(path,groups)
@@ -44,7 +44,7 @@ module Burp
     end
     
     def self.commit(message = "auto commit")
-      `cd #{Burp.content_directory}; git add .; git commit -a -m "Burp: #{message}"`
+      `cd #{Burp.current_site.content_directory}; git add .; git commit -a -m "Burp: #{message}"`
     end
   
     private

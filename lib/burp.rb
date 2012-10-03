@@ -10,31 +10,28 @@ module Burp
   
   @@content_directory = nil
   @@upload_directory = nil
-  
-  ##
-  # Returns the upload directory to use.
-  #
-  # Can be overiden on a thread basis by setting Thread.current[ :burp_upload_directory ]
-  #
-  def self.upload_directory
-    Thread.current[:burp_upload_directory] || @@upload_directory || Burp.content_directory+"uploads/".to_s
-  end
-  
-  def self.upload_directory=(path)
-    @@upload_directory = path
-  end
-  
+
   ##
   # Returns the content directory to use.
   #
-  # Can be overiden on a thread basis by setting  Thread.current[ :burp_content_directory ]
-  #
   def self.content_directory
-    Thread.current[:burp_content_directory] || @@content_directory || Rails.root.join('app/cms/default/').to_s
+    @@content_directory || Rails.root.join('app/cms/').to_s
   end
   
   def self.content_directory=(path)
      @@content_directory = path
+  end
+  
+  def self.default_site
+    @@default_site_cache ||= Site.new
+  end
+  
+  def self.current_site
+    Thread.current[:burp_current_site] || default_site
+  end
+  
+  def self.current_site=(site)
+    Thread.current[:burp_current_site] = site
   end
   
   def self.access

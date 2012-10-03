@@ -3,6 +3,7 @@ module Burp
     
     protect_from_forgery
     before_filter :refresh_access
+    before_filter :set_site
     before_filter :authenticate
     before_filter :init_body_classes
     
@@ -21,6 +22,10 @@ module Burp
     
     def refresh_access
       Burp.access.refresh
+    end
+    
+    def set_site
+      Burp.current_site = Site.new(request.host)
     end
     
     def authenticate
