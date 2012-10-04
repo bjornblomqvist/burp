@@ -1,18 +1,8 @@
-
-
   
   # Version 1
-  
-  
-  
-    - Multable sites
-      - Change so that CMS content directory is configurable
-      
-      - Move all CMS stuff into default and fix so that it works
-      - Add a site model and change test_cms to use it
     
     - New menu admin
-      - Render a nice menu tree, use the design from Residenc
+      - Render a nice menu tree, use the design from Residence
       - Fix drag and drop for sorting
       - Must be able to have pages that are not part of the menu.
       - Can drag in pages that are not in the tree.
