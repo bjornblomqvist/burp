@@ -104,14 +104,14 @@ module Burp
       end
   
       directory_path = on_disk_path(path)
-      while(directory_path.start_with?(Burp.content_directory) && Dir.glob("#{directory_path}/*").length == 0)
+      while(directory_path.start_with?(Burp.current_site.content_directory) && Dir.glob("#{directory_path}/*").length == 0)
         FileUtils.rmdir(directory_path)
         directory_path = File.dirname(directory_path)
       end
     end
   
     def on_disk_path(path = self.path)
-      on_disk_path = "#{Burp.content_directory}#{root_fixed_path(path)}"
+      on_disk_path = "#{Burp.current_site.content_directory}#{root_fixed_path(path)}"
     end
 
   end
