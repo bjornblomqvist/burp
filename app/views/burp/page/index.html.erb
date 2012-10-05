@@ -32,7 +32,11 @@
         // Fix so that clicks send the persion to the edit page
       $('section.group li.link a').click(function() {
         var orginial_url = $(this).attr('href');
-        $(this).attr('href',"/burp/pages/"+orginial_url+"/edit");
+        if(orginial_url == "/") {
+          $(this).attr('href',"/burp/pages//$root/edit");
+        } else {
+          $(this).attr('href',"/burp/pages/"+orginial_url+"/edit");
+        }
         setTimeout(function() {
           $(this).attr('href',orginial_url);
         },10);
