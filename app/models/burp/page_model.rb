@@ -58,7 +58,7 @@ module Burp
       save_metadata
       save_snippets
       
-      
+      update_link_tree
       
       Burp::TestCMS.commit("Saved #{self.path}")
     end
@@ -66,6 +66,7 @@ module Burp
     def remove
       raise "Path must start with a slash '/'" unless path.start_with?("/")
       remove_dir
+      remove_from_link_tree
       TestCMS.commit("Removed #{self.path}")
     end
     
@@ -74,6 +75,33 @@ module Burp
     end
 
     private
+    
+    def update_link_tree(group = TestCMS.link_tree)
+      group.children.clone.each do |child|
+        if child.is_a?(Link)
+          if child.url == @original_path
+            child.url = path
+            child.name = link_label
+          end
+        else
+          update_link_tree(child)
+        end
+      end
+      
+      group.save if group.is_a?(Menu)
+    end
+    
+    def remove_from_link_tree(group = TestCMS.link_tree)
+      group.children.clone.each do |child|
+        if child.is_a?(Link)
+          group.children.delete(child) if child.url == @original_path
+        else
+          remove_from_link_tree(child)
+        end
+      end
+      
+      group.save if group.is_a?(Menu)
+    end
   
     def save_metadata
     

@@ -11,7 +11,10 @@
       - Can add new pages
       - Add a list of pages not in the menu
       
-      - Removing a page should remove it from the menu  
+      - Removing a page should remove it from the menu
+      - Changing link title should change it in the menu
+      - Changing path should change it in the menu
+      
       - Edit section
       - New section
       - Must be able to have links in the menu.
