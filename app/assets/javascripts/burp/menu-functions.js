@@ -12,6 +12,14 @@
   
   $.fn.serializeGroup = function() {
     if($(this).is("section.group")) {
+      // Link clanup
+      $(this).find('a').each(function() {
+        if($(this).attr('orginial-url')) {
+          $(this).attr('href',$(this).attr('orginial-url'));
+          $(this).removeAttr('orginial-url');
+        }
+      });
+      
       return {
         name:($(this).find("> .group-name").text()),
         children:$(this).find("> ul.children > li").map(function() {

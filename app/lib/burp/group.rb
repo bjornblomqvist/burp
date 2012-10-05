@@ -11,19 +11,18 @@ module Burp
     end
 
     def to_html(request = nil)
-      if children.length > 0
-        %{
-        <section class="group">
-          <h2 class="group-name">#{name}</h2>
-          <h2 class="first-link-in-group #{first_link ? first_link.current_class(request) : ""}">#{first_link ? first_link.to_html(request) : ""}</h2>
-          <ul class="children">
+      
+      first_link_in_group = %{<h2 class="first-link-in-group #{first_link ? first_link.current_class(request) : ""}">#{first_link ? first_link.to_html(request) : ""}</h2>}
+      
+      %{
+      <section class="group">
+        <h2 class="group-name">#{name}</h2>
+        #{first_link ? first_link_in_group : ""}
+        <ul class="children">
           #{children.inject("") do |x,link|  x += "<li class=\"child #{link.is_a?(Group) ? "group" : "link" } #{link.current_class(request)}\">#{link.to_html(request)}</li>" end}
-          </ul>
-        </section>
-        }.html_safe      
-      else
-        ""
-      end
+        </ul>
+      </section>
+      }.html_safe      
     end
   
     def current?(request = nil)

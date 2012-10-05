@@ -67,8 +67,8 @@ $(function() {
     return rect;
   }
  
-  $('body.burp-page-index .container > section.group li.link, body.burp-page-index .container > section.group section.group').draggable({
-    handle: 'h2, a',
+  $('body.burp-page-index .container > section.group li.link, body.burp-page-index .container > section.group li.group').draggable({
+    handle: '> h2, > a',
     opacity: 0.5,
     helper: 'clone',
     distance: 10,
@@ -89,20 +89,43 @@ $(function() {
       var rect = currentRect(event);
       
       if(rect) {
-        $.debug(rect.element);
-      }
-      
-      if(rect) {
         if(rect.element === event.target) {
           // Cant drop on self
+          
         } else if(rect.element === ui.helper[0]) {
           // Cant drop ui helper
+          
         } else if($(event.target).has(rect.element).length > 0) {
           // Cant drop on a child of self
+          
         } else if($(rect.element).is("ul.children")) {
+          // Can drop on an empty list
+          
           $(event.target).closest("li.child").appendTo(rect.element);
           rects = getRects($("body.burp-page-index .container > section.group"),"li.child, ul.children");
+        } else if($(rect.element).is("li.group")) {
+          // Can drop on an empty list of a group
+          
+          var x = event.pageX;
+          var y = event.pageY;
+          
+          if(rect.left + 100 < x) {
+            // Add as child
+            $(event.target).closest("li.child").appendTo($(rect.element).find('> section.group > ul.children'));
+            rects = getRects($("body.burp-page-index .container > section.group"),"li.child, ul.children");
+          } else {
+            if(rect.withinTopHalf(event)) {
+              $(event.target).closest("li.child").insertBefore($(rect.element).closest("li.child"));
+              rects = getRects($("body.burp-page-index .container > section.group"),"li.child, ul.children");
+            } else if(rect.withinBottomHalf(event)) {
+              $(event.target).closest("li.child").insertAfter($(rect.element).closest("li.child"));
+              rects = getRects($("body.burp-page-index .container > section.group"),"li.child, ul.children");
+            }
+          }
+        
         } else {
+          $.debug('li.link',rect.element);
+          
           if(rect.withinTopHalf(event)) {
             $(event.target).closest("li.child").insertBefore($(rect.element).closest("li.child"));
             rects = getRects($("body.burp-page-index .container > section.group"),"li.child, ul.children");

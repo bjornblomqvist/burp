@@ -15,24 +15,12 @@
 
 <h3>Main menu</h3>
 <%= @menu.to_html %>
-<% if @menu.children.length == 0 %>
-  <section class="group">
-    <ul class="children">
-    </ul>
-  </section>
-<% end %>
 
 <hr>
 
 
-<h3>Not in menu</h3>
+<h3>Pages not in menu</h3>
 <%= @other_pages.to_html %>
-<% if @other_pages.children.length == 0 %>
-  <section class="group">
-    <ul class="children">
-    </ul>
-  </section>
-<% end %>
 
 <%= link_to "» New page","/burp/pages/new" %>
 
@@ -44,13 +32,19 @@
         // Fix so that clicks send the persion to the edit page
       $('section.group li.link a').click(function() {
         var orginial_url = $(this).attr('href');
+        $(this).attr('orginial-url',orginial_url);
+        
         if(orginial_url == "/") {
           $(this).attr('href',"/burp/pages//$root/edit");
         } else {
           $(this).attr('href',"/burp/pages/"+orginial_url+"/edit");
         }
+        s
         setTimeout(function() {
-          $(this).attr('href',orginial_url);
+          if($(this).attr('orginial-url')) {
+            $(this).attr('href',$(this).attr('orginial-url'));
+            $(this).removeAttr('orginial-url');
+          }
         },10);
       });
     });
