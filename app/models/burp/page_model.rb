@@ -8,7 +8,7 @@ module Burp
   
   
   
-    def initialize(values = {:path => '/', :snippets => {}})
+    def initialize(values = {:path => '', :snippets => {}})
       values.each_entry do |key,value|
         self.respond_to?("#{key}=".to_sym)
         self.send("#{key}=".to_sym,value)
@@ -50,7 +50,7 @@ module Burp
       raise "Path must start with a slash '/'" unless path.start_with?("/")
       raise "No path given" if path.blank?
       raise "Path already taken" if @original_path != path && File.exist?(on_disk_path)
-      
+
       remove_dir
       remove_dir(@original_path)
       create_target_dir

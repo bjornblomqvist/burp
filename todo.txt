@@ -1,5 +1,7 @@
   
   # Version 1
+  
+    - Fix bugs
     
     - New menu admin
       - Render a nice menu tree, use the design from Residence
@@ -8,19 +10,14 @@
       - Can drag in pages that are not in the tree.
       - Can add new pages
       - Add a list of pages not in the menu
-        
+      
+      - Removing a page should remove it from the menu  
       - Edit section
       - New section
       - Must be able to have links in the menu.
       - Have changes to the page show up in the menu. (URL,link_label)
       
     - Html 2 markdown
-  
-  
-
-
-  - We can still have a method that gives us the current basic auto menu.    
-  
     
   # Current problems
   
