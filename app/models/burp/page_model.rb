@@ -47,12 +47,13 @@ module Burp
     end
   
     def save
+      raise "Invalid path" unless path.match(/^[a-zA-Z0-9\-\.\/]+$/)
       raise "Path must start with a slash '/'" unless path.start_with?("/")
       raise "No path given" if path.blank?
       raise "Path already taken" if @original_path != path && File.exist?(on_disk_path)
 
       remove_dir
-      remove_dir(@original_path)
+      remove_dir(@original_path) unless @original_path.blank?
       create_target_dir
       save_metadata
       save_snippets
