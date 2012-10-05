@@ -74,7 +74,7 @@ $(function() {
     distance: 10,
     start: function(event, ui) {
       $(event.target).addClass("draging");
-      rects = getRects($("body.burp-page-index .container > section.group"),"section.group, li.link");
+      rects = getRects($("body.burp-page-index .container > section.group"),"li.child, ul.children");
     },
     stop: function(event, ui) {
       rects = [];
@@ -89,19 +89,26 @@ $(function() {
       var rect = currentRect(event);
       
       if(rect) {
+        $.debug(rect.element);
+      }
+      
+      if(rect) {
         if(rect.element === event.target) {
           // Cant drop on self
         } else if(rect.element === ui.helper[0]) {
           // Cant drop ui helper
         } else if($(event.target).has(rect.element).length > 0) {
           // Cant drop on a child of self
+        } else if($(rect.element).is("ul.children")) {
+          $(event.target).closest("li.child").appendTo(rect.element);
+          rects = getRects($("body.burp-page-index .container > section.group"),"li.child, ul.children");
         } else {
           if(rect.withinTopHalf(event)) {
             $(event.target).closest("li.child").insertBefore($(rect.element).closest("li.child"));
-            rects = getRects($("body.burp-page-index .container > section.group"),"section.group, li.link");
+            rects = getRects($("body.burp-page-index .container > section.group"),"li.child, ul.children");
           } else if(rect.withinBottomHalf(event)) {
             $(event.target).closest("li.child").insertAfter($(rect.element).closest("li.child"));
-            rects = getRects($("body.burp-page-index .container > section.group"),"section.group, li.link");
+            rects = getRects($("body.burp-page-index .container > section.group"),"li.child, ul.children");
           }
         }
       }
