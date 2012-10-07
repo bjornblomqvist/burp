@@ -54,6 +54,9 @@
       }
     
       li > a, .group > h2 {
+        
+        line-height: 27px;
+        
         &:before {
           content: "Drag";
           background-color: #468847;
@@ -65,11 +68,14 @@
           text-transform: uppercase;
           cursor: move;
           margin-right: 5px;
+          position: relative;
+          line-height: 14px;
+          top: 0px;
+          left: 0px;
         }
       }
       
       .group > h2 {
-        line-height: 27px;
 
         &:before {
           background: #F89406;
