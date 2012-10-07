@@ -111,7 +111,7 @@ $(function() {
           
           if(rect.left + 100 < x) {
             // Add as child
-            $(event.target).closest("li.child").appendTo($(rect.element).find('> section.group > ul.children'));
+            $(event.target).closest("li.child").prependTo($(rect.element).find('> section.group > ul.children'));
             rects = getRects($("body.burp-page-index .container > section.group"),"li.child, ul.children");
           } else {
             if(rect.withinTopHalf(event)) {
