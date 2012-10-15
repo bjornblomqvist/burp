@@ -1,7 +1,5 @@
   
   # Version 1
-  
-    - Fix bugs
     
     - New menu admin
       - Render a nice menu tree, use the design from Residence
@@ -20,7 +18,18 @@
       - Must be able to have links in the menu.
       - Have changes to the page show up in the menu. (URL,link_label)
       
+    - Fix the multi site thing
+      - Site.find('ceyebr.com') 
+        returns nil if there is no directory with that name
+      - Have directory named *.ceyebr.com be found with Site.find("www.ceyebr.com")
+      - Have Site.default that returns Site.find('default')
+      
     - Html 2 markdown
+    
+    - Global snippet
+      - Have a directory called $global
+      - Change page model so that it saves to global if a snippet name is the same as a file in it.
+      
     
   # Current problems
   

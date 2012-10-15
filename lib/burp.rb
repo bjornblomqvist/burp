@@ -9,7 +9,6 @@ require "mayi"
 module Burp
   
   @@content_directory = nil
-  @@upload_directory = nil
 
   ##
   # Returns the content directory to use.
@@ -22,20 +21,22 @@ module Burp
      @@content_directory = path
   end
   
-  def self.default_site
-    @@default_site_cache ||= Site.new
-  end
-  
-  def self.current_site
-    Thread.current[:burp_current_site] || default_site
-  end
-  
-  def self.current_site=(site)
-    Thread.current[:burp_current_site] = site
+  def self.current_content_directory
+    Thread.current[:burp_current_content_directory] || @@content_directory
   end
   
   def self.access
     @@access ||= MayI::Access.new("Burp::Access")
+  end
+  
+  def self.with_content_directory(content_directory,&block)
+    
+    Thread.current[:burp_current_content_directory] = content_directory
+    
+    block.call
+  
+  ensure  
+    Thread.current[:burp_current_content_directory] = nil
   end
   
 end

@@ -37,13 +37,13 @@ module Burp
        file.write(self.to_yaml)
      end
 
-     Burp::TestCMS.commit("Saved #{self.file_name}")
+     Burp::Util.commit("Saved #{self.file_name}")
     end
     
     private
     
     def path
-      Burp.current_site.content_directory + file_name
+      Burp.current_content_directory + file_name
     end
   end
 end

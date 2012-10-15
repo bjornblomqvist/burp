@@ -3,8 +3,8 @@ module Burp
     
     protect_from_forgery
     before_filter :refresh_access
-    before_filter :set_site
     before_filter :authenticate
+    before_filter :set_site
     before_filter :init_body_classes
     
     def init_body_classes 
@@ -25,7 +25,11 @@ module Burp
     end
     
     def set_site
-      Burp.current_site = Site.new(request.host)
+      Thread.current[:burp_current_content_directory] = current_site.site_content_directory
+    end
+    
+    def current_site
+      @current_site_cache ||= Site.new(request.host)
     end
     
     def authenticate
