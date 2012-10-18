@@ -6,7 +6,14 @@
     
     var snippets = {names:[],snippets:{}};
     
-    var snippetComments = $("*").contents().filter(function(){ return this.nodeType == 8 && this.data.match(/snippet data-type=\"start\"/);});
+    var snippetComments = $("*").contents().filter(function() {
+      try {
+        return this.nodeType == 8 && this.data.match(/snippet data-type=\"start\"/);
+      } catch (e) {
+        // Yay for not being allow to look at dom elements with external content, aka iframes
+        return false;
+      }
+    });
     snippetComments.map(function() {
       
       var name = this.data.match(/snippet data-type=\"start\" data-name=\"(.*?)\"/)[1];

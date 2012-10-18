@@ -58,6 +58,8 @@
               position.left -= $(this).offsetParent().offset().left;
             }
             
+            position.top -= $('body').offset().top;
+            
             var element = $('<div class="dropbox"></div>');
             wrappers.push(element[0]);
       
