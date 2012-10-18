@@ -17,8 +17,9 @@ module Burp
     @@content_directory || Rails.root.join('app/cms/').to_s
   end
   
-  def self.content_directory=(path)
-     @@content_directory = path
+  def self.content_directory=(new_content_directory)
+    raise "Directories must end with '/'" unless new_content_directory.end_with?('/')
+    @@content_directory = path
   end
   
   def self.current_content_directory
@@ -30,6 +31,8 @@ module Burp
   end
   
   def self.with_content_directory(content_directory,&block)
+    
+    raise "Directories must end with '/'" unless content_directory.end_with?('/')
     
     Thread.current[:burp_current_content_directory] = content_directory
     

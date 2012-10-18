@@ -6,15 +6,24 @@ module Burp
     def self.find(domain_name) 
       
       if File.exist?("#{Burp.content_directory}#{domain_name}/")
-        Site.new(domain_name)
+        Site.new(domain_name,"#{Burp.content_directory}#{domain_name}/")
       else
+        Dir["#{Burp.content_directory}*"].each do |file|
+          
+          if file.match(/\*/)
+            base_name = File.basename(file)
+            domain_regexp = Regexp.new("^"+(base_name.gsub('.','\.').gsub('*','.*'))+"$")
+            return Site.new(domain_name,file+"/") if domain_regexp.match(domain_name)
+          end
+        end
+        
         nil
       end
       
     end
     
     def site_content_directory
-      "#{Burp.content_directory}#{domain_name}/"
+      @content_directory
     end
     
     def site_upload_directory
@@ -72,10 +81,17 @@ module Burp
       groups['']
     end
     
+    def self.default
+      Site.new('default')
+    end
+    
     private
     
-    def initialize(domain_name)
+    def initialize(domain_name,content_directory)
+      raise "Directories must end with '/'" unless content_directory.end_with?('/')
+      
       @domain_name = domain_name
+      @content_directory = content_directory
     end
     
     def self.get_group(path,groups)

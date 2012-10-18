@@ -29,7 +29,7 @@ module Burp
     end
     
     def current_site
-      @current_site_cache ||= Site.new(request.host)
+      @current_site_cache ||= Site.find(request.host)
     end
     
     def authenticate
