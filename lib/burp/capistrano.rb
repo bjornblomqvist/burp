@@ -4,9 +4,10 @@ Capistrano::Configuration.instance.load do
 
     desc 'Creates the CMS dir in the shared directory'
     task :setup do
-      run "mkdir #{shared_path}/cms"
+      run "mkdir -p #{shared_path}/cms"
       run "git init #{shared_path}/cms"
     end
+    after 'deploy:setup', 'burp:setup'
 
     desc 'Links the shared CMS dir'  
     task :link_cms_dir do

@@ -82,7 +82,7 @@ module Burp
     end
     
     def self.default
-      Site.new('default')
+      Site.new('default',"#{Burp.content_directory}default/")
     end
     
     private
