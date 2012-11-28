@@ -1,4 +1,78 @@
   
+- Add cucumber testing
+  - Add one editor test
+  
+- Move menus to there own api
+
+
+
+
+
+  
+  
+- Fix the menu editing  
+  
+  - Keep pages not in menu
+  - Menus is no longer part of the page
+  - Menus, default only one
+    - A site can create multable menus by
+    - menu = Menu("ueaeuo") in static area
+    
+      - A menu is a selection of links and groups, (its a tree)
+      - All menus found in the CMS root can be edited
+      - If no menu exist we add a default menu 
+
+    - You edit links
+      - Set title
+      - Set link
+      - When editing you can chose a page to link to
+      - Remove
+      
+    - You can edit groups
+      - Set title
+      - remove
+      
+  - Change directory structure, /pages, /menus /globals
+      
+  - Burp creates the app/cms directory on load
+    - Add default.yaml
+    - Add #root default page
+
+
+  - Menu actions
+    - action = Menu.link("Log out",:show => true) in a static area
+    - action.id = "ueouoe"
+    - action.href = "ueouoe"
+    - action.hide
+    ....
+    
+  - Page content
+  - Global values
+  - Files
+  - A way to add more pages to the CMS, maybe a meta cms
+  
+  - Widgets
+  
+  
+  
+  page = Burp.get_page("/thsuao/htnueo") || Burp.default_page
+  menu = Burp.get_menu("menu-name") || Burp.default_menu
+  globals = Burp.get_globals
+  
+  
+  globals[:header]
+  page[:section_name]
+  globals[:side_bar]
+  page[:side_bar_content].strip.blank? ? globals[:side_bar_1] || page[:side_bar_content]
+  globals[:side_bar_1]
+  globals[:side_bar_2]
+  globals[:footer]
+  Burp:MenuHelper.as_bootstrap_top_menu(menu)
+  
+  
+  
+  
+  
   # Version 1
     
     - New menu admin

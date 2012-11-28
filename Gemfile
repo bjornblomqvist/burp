@@ -6,6 +6,7 @@ source "http://rubygems.org"
 gemspec
 
 # jquery-rails is used by the dummy application
+gem "rails", "~> 3.2"
 gem "jquery-rails"
 gem 'jquery-ui-rails'
 gem 'less-rails'
@@ -26,4 +27,12 @@ group :development do
   gem "rdoc", "~> 3.12"
   gem "bundler"
   gem "jeweler", "~> 1.8.4"
+end
+
+group :test do
+  gem "spork"
+  gem "cucumber-rails"
+  gem 'database_cleaner'
+	gem 'rspec'
+	gem 'rspec-rails'
 end

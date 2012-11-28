@@ -19,7 +19,7 @@ module Burp
   
   def self.content_directory=(new_content_directory)
     raise "Directories must end with '/'" unless new_content_directory.end_with?('/')
-    @@content_directory = path
+    @@content_directory = new_content_directory
   end
   
   def self.current_content_directory

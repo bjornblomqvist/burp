@@ -6,6 +6,7 @@ module Burp
     def initialize(file_name)
       raise "Name cant be blank" if file_name.blank?
       self.file_name = file_name
+      super
       load
     end
     

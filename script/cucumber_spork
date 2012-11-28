@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+
+`bundle exec spork cucumber --port 4012`
