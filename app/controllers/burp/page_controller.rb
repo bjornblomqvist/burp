@@ -3,7 +3,7 @@ module Burp
     def index
       Burp.access.may_view_page_list! do
         
-        @menu = Burp::Menu.find("menu.yaml") || Site.default_link_tree.to_menu("menu.yaml")
+        @menu = Burp::Menu.find("menu.yaml")
         
         urls = @menu.links.map {|link| link.url }
         @other_pages = Burp::Group.new("root",:children => PageModel.all.delete_if {|page| urls.include?(page.path) }.map{|page| Link.new((page.link_label || page.title || "No label") => page.path)})

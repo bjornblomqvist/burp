@@ -44,7 +44,7 @@ module Burp
     private
     
     def path
-      Burp.current_content_directory + file_name
+      Burp.content_directory + file_name
     end
   end
 end

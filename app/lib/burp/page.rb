@@ -3,12 +3,11 @@ module Burp
 
   class Page 
 
-    attr_accessor :snippets,:title,:link_tree
+    attr_accessor :snippets,:title
 
-    def initialize(snippets = {},title = "",link_tree)
-      @snippets = snippets
-      @title = title
-      @link_tree  = link_tree || Group.new("root")
+    def initialize(options)
+      @snippets = options[:snippets] || {}
+      @title = options[:title] || ""
     end
 
     def [](location_name)

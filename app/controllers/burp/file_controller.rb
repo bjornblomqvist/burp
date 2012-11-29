@@ -10,9 +10,9 @@ module Burp
       
       Burp.access.may_view_file_list! do
       
-        @file_paths = Dir.glob("#{current_site.site_upload_directory}**/*")
+        @file_paths = Dir.glob("#{upload_directory_path}**/*")
         @file_paths = @file_paths.sort {|p1,p2| File.mtime(p2) <=> File.mtime(p1)}
-        @file_paths = @file_paths.map {|path| path.gsub("#{current_site.site_upload_directory}","/burp/files/") }
+        @file_paths = @file_paths.map {|path| path.gsub("#{upload_directory_path}","/burp/files/") }
       
         respond_to do |format|
           format.html {}
@@ -22,7 +22,7 @@ module Burp
     end
     
     def show
-      file_path = "#{current_site.site_upload_directory}#{params[:id]}#{params[:format].blank? ? "" : ".#{params[:format]}"}"
+      file_path = "#{upload_directory_path}#{params[:id]}#{params[:format].blank? ? "" : ".#{params[:format]}"}"
       
       if File.expand_path(file_path) != file_path
         render :text => "403, Forbiden!", :status => 403, :content_type => "text/plain"
@@ -52,14 +52,20 @@ module Burp
           if errors.length > 0
             render :json => {:errors => errors}
           else
-            FileUtils.mkdir_p(current_site.site_upload_directory)
-            FileUtils.mv(file.path,current_site.site_upload_directory+File.basename(file.path))
-            `cd #{current_site.site_upload_directory}; git add .; git commit -a -m "Burp: file upload"`
+            FileUtils.mkdir_p(upload_directory_path)
+            FileUtils.mv(file.path,upload_directory_path+File.basename(file.path))
+            `cd #{upload_directory_path}; git add .; git commit -a -m "Burp: file upload"`
             render :json => {:success => true}
           end
         end
       end
       
+    end
+    
+    private
+    
+    def upload_directory_path
+      "#{Burp.content_directory}uploads/"
     end
     
   end

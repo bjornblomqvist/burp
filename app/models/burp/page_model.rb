@@ -20,9 +20,9 @@ module Burp
     def self.find(path)
     
       fixed_path = path == '/' ? '/#root' : path
-      on_disk_path =  Burp.current_content_directory + fixed_path
+      on_disk_path =  Burp.content_directory + fixed_path
       on_disk_path = on_disk_path.gsub('//','/')
-      
+
       if File.directory?(on_disk_path)
       
         data = {}
@@ -40,7 +40,7 @@ module Burp
     end
   
     def self.all_paths
-      ((Dir.glob("#{Burp.current_content_directory}**/*.html") + Dir.glob("#{Burp.current_content_directory}**/*.json")).map {|path| File.dirname(path.gsub(Burp.current_content_directory,"/")).gsub("/#root",'/') }).uniq
+      ((Dir.glob("#{Burp.content_directory}**/*.html") + Dir.glob("#{Burp.content_directory}**/*.json")).map {|path| File.dirname(path.gsub(Burp.content_directory,"/")).gsub("/#root",'/') }).uniq
     end
   
     def self.all
@@ -59,15 +59,12 @@ module Burp
       save_metadata
       save_snippets
       
-      update_link_tree
-      
       Burp::Util.commit("Saved #{self.path}")
     end
   
     def remove
       raise "Path must start with a slash '/'" unless path.start_with?("/")
       remove_dir
-      remove_from_link_tree
       Burp::Util.commit("Removed #{self.path}")
     end
     
@@ -76,33 +73,6 @@ module Burp
     end
 
     private
-    
-    def update_link_tree(group = Site.link_tree)
-      group.children.clone.each do |child|
-        if child.is_a?(Link)
-          if child.url == @original_path
-            child.url = path
-            child.name = link_label
-          end
-        else
-          update_link_tree(child)
-        end
-      end
-      
-      group.save if group.is_a?(Menu)
-    end
-    
-    def remove_from_link_tree(group = Site.link_tree)
-      group.children.clone.each do |child|
-        if child.is_a?(Link)
-          group.children.delete(child) if child.url == @original_path
-        else
-          remove_from_link_tree(child)
-        end
-      end
-      
-      group.save if group.is_a?(Menu)
-    end
   
     def save_metadata
     
@@ -134,14 +104,14 @@ module Burp
       end
   
       directory_path = on_disk_path(path)
-      while(directory_path.start_with?(Burp.current_content_directory) && Dir.glob("#{directory_path}/*").length == 0)
+      while(directory_path.start_with?(Burp.content_directory) && Dir.glob("#{directory_path}/*").length == 0)
         FileUtils.rmdir(directory_path)
         directory_path = File.dirname(directory_path)
       end
     end
   
     def on_disk_path(path = self.path)
-      on_disk_path = "#{Burp.current_content_directory}#{root_fixed_path(path)}"
+      on_disk_path = "#{Burp.content_directory}#{root_fixed_path(path)}"
     end
 
   end

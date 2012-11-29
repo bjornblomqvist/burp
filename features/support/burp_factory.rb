@@ -6,7 +6,7 @@ class BurpFactory
     
     raise "Cant create dummy site as #{Burp.content_directory} is not empty!" if File.exist?(Burp.content_directory)
     
-    path_to_burp_files_directory = Burp.content_directory+"/default/"
+    path_to_burp_files_directory = Burp.content_directory+"/"
     FileUtils.mkdir_p(path_to_burp_files_directory)
     
     `cd #{path_to_burp_files_directory}; git init` if File.exist?(path_to_burp_files_directory) && File.directory?(path_to_burp_files_directory)
