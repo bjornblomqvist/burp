@@ -4,22 +4,35 @@ Given /^I am on a cms page$/ do
 end
 
 When /^I change a section and reload the page$/ do
-  sleep 2
-  page.driver.browser.action.key_down(:control).send_keys(:escape).perform
-  sleep 1
-  page.find(".dock-toolbar .icon-edit").click
-  sleep 1
+  
+  while(page.evaluate_script("document.readyState") != "complete")
+    sleep 0.2
+  end
+  
+  Capybara.default_wait_time = 0.5
+  begin
+    page.driver.browser.action.key_down(:control).send_keys(:escape).perform
+    sleep 0.2
+    page.find(".dock-toolbar .icon-edit").click
+  rescue => e
+    page.driver.browser.action.key_down(:control).send_keys(:escape).perform
+    sleep 0.2
+    page.find(".dock-toolbar .icon-edit").click
+  end
+  Capybara.default_wait_time = 2
+  
+  sleep 0.2
   page.execute_script('$(".CodeMirror")[0].CodeMirror.focus()')
   page.execute_script('$(".CodeMirror")[0].CodeMirror.setValue('+'"# Hello my name is Mr Tedy Bear"'+')')
-  sleep 1
+  sleep 0.2
   page.find(".dock-toolbar .icon-save").click
-  sleep 1
+  sleep 0.2
   page.driver.browser.switch_to.alert.tap do |alert|
     alert.text.should include("The page was saved!")
     alert.accept
   end
   page.driver.browser.switch_to.default_content
-  sleep 0.5
+  sleep 0.2
   page.execute_script('window.location.reload(true);')
   
   @changes = ["Hello my name is Mr Tedy Bear"]
