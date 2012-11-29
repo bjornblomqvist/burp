@@ -11,21 +11,6 @@ require 'spork'
 
 Spork.prefork do
   
-  require 'rails/application'
-
-  # Use of https://github.com/sporkrb/spork/wiki/Spork.trap_method-Jujutsu
-  Spork.trap_method(Rails::Application, :reload_routes!)
-  Spork.trap_method(Rails::Application::RoutesReloader, :reload!)
-
-  # Prevent main application to eager_load in the prefork block (do not load files in autoload_paths)
-  Spork.trap_method(Rails::Application, :eager_load!)
-  
-  # Below this line it is too late...
-  require "#{ENV["RAILS_ROOT"]}/config/environment.rb"
-  # Load all railties files
-  Rails.application.railties.all { |r| r.eager_load! }
-
-  require 'cucumber/rails'
   require 'capybara'
   require 'capybara/dsl'
 
@@ -61,7 +46,7 @@ Spork.prefork do
     profile['extensions.firebug.defaultPanelName'] = 'console'
     profile['extensions.firebug.previousPlacement'] = 3
     
-    profile.add_extension File.join(Rails.root,"../../features/support/firebug-1.10.4-fx.xpi")
+    profile.add_extension "#{File.dirname(__FILE__)}/firebug-1.10.4-fx.xpi"
     
     Capybara::Selenium::Driver.new(app, :profile => profile)
   end
@@ -69,12 +54,31 @@ Spork.prefork do
   
   # Fix so that we can manualy start the server, and so that we can controll when the state is reset
   class Capybara::Selenium::Driver < Capybara::Driver::Base
-    def start_server
+    def start_server(app)
+      @rack_server.app = app
       @rack_server.boot
     end
     
     alias_method :real_reset!, :reset!
     def reset!
+    end
+  end
+  
+  class Capybara::Server
+    def app=(app)
+      @app = app
+    end
+  end
+  
+  class Capybara::Session
+    def app=(app)
+      @app = app
+    end
+  end
+  
+  module Capybara
+    def self.current_session=(session)
+      session_pool["#{current_driver}:#{session_name}:#{app.object_id}"] = session
     end
   end
 
@@ -85,15 +89,22 @@ Spork.prefork do
   Capybara.run_server = false
   Capybara.current_session.visit('/')
   Capybara.run_server = true
+  
 end
 
 Spork.each_run do
   
-  Burp.content_directory = "/tmp/burp-test-cms/"
+  old_session = Capybara.current_session
   
+  require 'cucumber/rails'
+  
+  old_session.app = Capybara.app
+  Capybara.current_session = old_session
+  
+  Burp.global_content_directory = "/tmp/burp-test-cms/"
   require_relative "./burp_factory"
   
-  Capybara.current_session.driver.start_server
+  Capybara.current_session.driver.start_server(old_session.app)
   
   # By default, any exception happening in your Rails application will bubble up
   # to Cucumber so that your scenario will fail. This is a different from how 
