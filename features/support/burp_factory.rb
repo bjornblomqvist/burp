@@ -4,9 +4,10 @@ class BurpFactory
   
   def self.create type
     
-    path_to_burp_files_directory = ENV["RAILS_ROOT"]+"/app/cms/default/"
+    raise "Cant create dummy site as #{Burp.content_directory} is not empty!" if File.exist?(Burp.content_directory)
+    
+    path_to_burp_files_directory = Burp.content_directory+"/default/"
     FileUtils.mkdir_p(path_to_burp_files_directory)
-    Burp.content_directory = path_to_burp_files_directory
     
     `cd #{path_to_burp_files_directory}; git init` if File.exist?(path_to_burp_files_directory) && File.directory?(path_to_burp_files_directory)
     
@@ -21,7 +22,7 @@ class BurpFactory
   end
   
   def self.clear
-    path_to_burp_files_directory = ENV["RAILS_ROOT"]+"/app/cms/"
+    path_to_burp_files_directory = Burp.content_directory
     `rm -rf #{path_to_burp_files_directory}` if File.exist?(path_to_burp_files_directory) && File.directory?(path_to_burp_files_directory)
   end
   

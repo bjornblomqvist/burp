@@ -78,7 +78,6 @@ Spork.prefork do
     end
   end
 
-  Capybara.default_wait_time = 6
   Capybara.server_port = 7012
   Capybara.default_selector = :css
   Capybara.default_driver = :with_fire_bug
@@ -89,7 +88,9 @@ Spork.prefork do
 end
 
 Spork.each_run do
-
+  
+  Burp.content_directory = "/tmp/burp-test-cms/"
+  
   require_relative "./burp_factory"
   
   Capybara.current_session.driver.start_server
