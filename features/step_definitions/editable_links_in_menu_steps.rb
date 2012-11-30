@@ -6,7 +6,7 @@ When /^I add a new link$/ do
 end
 
 Then /^I should see this new link$/ do
-  page.find(".container a").should have_content("A new link")
+  page.should have_content("A new link")
 end
 
 Given /^I am editing a menu that has a link$/ do

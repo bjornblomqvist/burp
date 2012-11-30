@@ -1,11 +1,11 @@
 ---
 :name: main
 :children:
-- :name: "So what is this ?"
-  :url: /
+- :name: Google
+  :url: ./links/1030926792812766974/edit
+- :name: So what is this ?
+  :url: ./links/-3773587879847462676/edit
 - :name: The menus
   :children:
-  - :name: "DN"
-    :url: http://www.dn.se/
-  - :name: Google
-    :url: http://www.google.se/
+  - :name: DN
+    :url: ./links/-3410957175471508815/edit

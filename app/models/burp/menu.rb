@@ -10,6 +10,12 @@ module Burp
       load
     end
     
+    def self.all
+      Dir.glob(Burp.content_directory + "menus/*.yaml").map do |menu_path|
+        Menu.find(menu_path.match(/\/(\w*?)\.yaml$/)[1])
+      end
+    end
+    
     def self.find(name)
       menu = Menu.new(name)
       if(menu.load)

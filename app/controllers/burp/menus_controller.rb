@@ -1,6 +1,10 @@
 module Burp
   class MenusController < Burp::ApplicationController
     
+    def index
+      @menus = Menu.all
+    end
+    
     def edit
       @menu = Menu.find(params[:id])
       @menu.update_id("")

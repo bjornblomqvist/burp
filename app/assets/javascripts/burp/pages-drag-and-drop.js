@@ -74,7 +74,7 @@ $(function() {
     distance: 10,
     start: function(event, ui) {
       $(event.target).addClass("draging");
-      rects = getRects($("body.burp-page-index .container > section.group"),"li.child, ul.children");
+      rects = getRects($(".dnd-editable-menu > section.group"),"li.child, ul.children");
     },
     stop: function(event, ui) {
       rects = [];
@@ -82,7 +82,7 @@ $(function() {
 
       // Need to wait a bit as the ui-helper is still in the dom
       setTimeout(function() {
-        burp.saveMenu($("body.burp-page-index .container > section.group").first().serializeGroup());
+        burp.saveMenu($(".dnd-editable-menu > section.group").first().serializeGroup());
       },10);
     },
     drag: function(event, ui) {
@@ -98,7 +98,7 @@ $(function() {
         } else if($(rect.element).is("ul.children")) {
           // Can drop on an empty list
           $(event.target).closest("li.child").appendTo(rect.element);
-          rects = getRects($("body.burp-page-index .container > section.group"),"li.child, ul.children");
+          rects = getRects($(".dnd-editable-menu > section.group"),"li.child, ul.children");
         } else if($(rect.element).is("li.group")) {
           // Can drop on an empty list of a group
           
@@ -108,14 +108,14 @@ $(function() {
           if(rect.left + 100 < x) {
             // Add as child
             $(event.target).closest("li.child").prependTo($(rect.element).find('> section.group > ul.children'));
-            rects = getRects($("body.burp-page-index .container > section.group"),"li.child, ul.children");
+            rects = getRects($(".dnd-editable-menu > section.group"),"li.child, ul.children");
           } else {
             if(rect.withinTopHalf(event)) {
               $(event.target).closest("li.child").insertBefore($(rect.element).closest("li.child"));
-              rects = getRects($("body.burp-page-index .container > section.group"),"li.child, ul.children");
+              rects = getRects($(".dnd-editable-menu > section.group"),"li.child, ul.children");
             } else if(rect.withinBottomHalf(event)) {
               $(event.target).closest("li.child").insertAfter($(rect.element).closest("li.child"));
-              rects = getRects($("body.burp-page-index .container > section.group"),"li.child, ul.children");
+              rects = getRects($(".dnd-editable-menu > section.group"),"li.child, ul.children");
             }
           }
         
@@ -124,10 +124,10 @@ $(function() {
           
           if(rect.withinTopHalf(event)) {
             $(event.target).closest("li.child").insertBefore($(rect.element).closest("li.child"));
-            rects = getRects($("body.burp-page-index .container > section.group"),"li.child, ul.children");
+            rects = getRects($(".dnd-editable-menu > section.group"),"li.child, ul.children");
           } else if(rect.withinBottomHalf(event)) {
             $(event.target).closest("li.child").insertAfter($(rect.element).closest("li.child"));
-            rects = getRects($("body.burp-page-index .container > section.group"),"li.child, ul.children");
+            rects = getRects($(".dnd-editable-menu > section.group"),"li.child, ul.children");
           }
         }
       }
