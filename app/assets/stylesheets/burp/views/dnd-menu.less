@@ -1,0 +1,84 @@
+
+
+.dnd-editable-menu {
+  
+  > .group {
+
+    .group-name {
+      color: #0088CC;
+      cursor: pointer;
+      font-size: inherit;
+      line-height: inherit;
+      font-weight: inherit;
+      display: inline;
+      margin: 0px;
+  
+      &:hover {
+        color: #005580;
+      }
+    }
+    
+    > ul.children {
+      min-height: 27px;
+    }
+    
+    .draging {
+      opacity: 0.5;
+    }
+
+    ul {
+      list-style: none;
+      margin-left: 32px;
+    }
+
+    a:hover {
+      text-decoration: none;
+    }
+
+    .first-link-in-group  {
+      display: none;
+    }
+
+    > .group-name {
+      display: none;
+    }
+  
+    > .group {
+      font-size: 15px;
+    }
+  
+    li {
+      min-height: 27px;
+    }
+  
+    li > a, .group > h2 {
+      
+      line-height: 27px;
+      
+      &:before {
+        content: "Drag";
+        background-color: #468847;
+        border-radius: 3px 3px 3px 3px;
+        color: #FFFFFF;
+        font-size: 9.75px;
+        font-weight: bold;
+        padding: 1px 3px 2px;
+        text-transform: uppercase;
+        cursor: move;
+        margin-right: 5px;
+        position: relative;
+        line-height: 14px;
+        top: 0px;
+        left: 0px;
+      }
+    }
+    
+    .group > h2 {
+
+      &:before {
+        background: #F89406;
+      }
+    }
+  }
+  
+}

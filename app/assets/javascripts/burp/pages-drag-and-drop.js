@@ -67,7 +67,7 @@ $(function() {
     return rect;
   }
  
-  $('body.burp-page-index .container > section.group li.link, body.burp-page-index .container > section.group li.group').draggable({
+  $('.dnd-editable-menu > section.group li.link, .dnd-editable-menu > section.group li.group').draggable({
     handle: '> h2, > a',
     opacity: 0.5,
     helper: 'clone',
@@ -83,24 +83,20 @@ $(function() {
       // Need to wait a bit as the ui-helper is still in the dom
       setTimeout(function() {
         burp.saveMenu($("body.burp-page-index .container > section.group").first().serializeGroup());
-      },10)
+      },10);
     },
     drag: function(event, ui) {
       var rect = currentRect(event);
       
       if(rect) {
         if(rect.element === event.target) {
-          // Cant drop on self
-          
+          // Cant drop on self          
         } else if(rect.element === ui.helper[0]) {
           // Cant drop ui helper
-          
         } else if($(event.target).has(rect.element).length > 0) {
           // Cant drop on a child of self
-          
         } else if($(rect.element).is("ul.children")) {
           // Can drop on an empty list
-          
           $(event.target).closest("li.child").appendTo(rect.element);
           rects = getRects($("body.burp-page-index .container > section.group"),"li.child, ul.children");
         } else if($(rect.element).is("li.group")) {
