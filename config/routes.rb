@@ -15,9 +15,6 @@ Burp::Engine.routes.draw do
   get "/files/*id" => "file#show"
   
   resources :menus do
-    get :new_group, :on => :member
-    post :create_group, :on => :member
-    
     resources :groups
     resources :links
   end
