@@ -2,6 +2,7 @@
 module Burp
   class Group
   
+    attr_reader :id
     attr_accessor :children
     attr_accessor :name
   
@@ -24,7 +25,7 @@ module Burp
       </section>
       }.html_safe      
     end
-  
+    
     def current?(request = nil)
       children.each do |child|
         return true if child.current?(request)
@@ -70,5 +71,35 @@ module Burp
     def links
       children.map {|child| child.is_a?(Group) ? child.links : child}.flatten
     end
+    
+    
+    
+    def update_id(parent_id)
+      @id = {:parent_id => parent_id, :hash => self.hash}.hash
+      children.each_with_index do |child,index|
+        child.update_id("#{self.id}#{index}")
+      end
+    end
+    
+    def all_children
+      children+children.map do |child|
+        child.is_a?(Group) ? child.all_children : nil
+      end.flatten.compact
+    end
+    
+    
+    
+    def <=>(other)
+      other.is_a?(Group) || other.is_a?(Link) ? name <=> other.name : 0
+    end
+
+    def eql?(other)
+      self.class == other.class && self.hash == other.hash
+    end
+
+    def hash
+      to_hash.hash
+    end
+    
   end
 end

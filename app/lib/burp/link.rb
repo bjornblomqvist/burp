@@ -1,6 +1,7 @@
 module Burp
   class Link
-
+    
+    attr_reader :id
     attr_accessor :url,:name
 
     def initialize(options)
@@ -38,5 +39,24 @@ module Burp
     def to_yaml
       to_hash.to_yaml
     end
+    
+    
+    def update_id(parent_id)
+      @id = {:parent_id => parent_id, :hash => self.hash}.hash
+    end
+    
+    
+    def <=>(other)
+      other.is_a?(Group) || other.is_a?(Link) ? name <=> other.name : 0
+    end
+
+    def eql?(other)
+      self.class == other.class && self.hash == other.hash
+    end
+
+    def hash
+      to_hash.hash
+    end
+    
   end
 end
