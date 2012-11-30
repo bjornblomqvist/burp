@@ -61,8 +61,7 @@ module Burp
     end
     
     def to_menu
-      menu = Menu.new
-      menu.name = self.name
+      menu = Menu.new(self.name)
       menu.children = Group.from_yaml(self.to_yaml).children
       
       menu

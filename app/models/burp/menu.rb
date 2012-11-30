@@ -1,13 +1,10 @@
 module Burp
   class Menu < Group
    
-    attr_accessor :name
-    
-    def initialize(name)
+    def initialize(name,options = {})
       raise "Name cant be blank" if name.blank?
       self.name = name
-      super
-      load
+      super(name,options)
     end
     
     def self.all
