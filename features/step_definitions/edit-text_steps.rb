@@ -23,7 +23,7 @@ When /^I change a section and reload the page$/ do
   
   sleep 0.2
   page.execute_script('$(".CodeMirror")[0].CodeMirror.focus()')
-  page.execute_script('$(".CodeMirror")[0].CodeMirror.setValue('+'"# Hello my name is Mr Tedy Bear"'+')')
+  page.execute_script('$(".CodeMirror")[0].CodeMirror.setValue('+'"# Hello my name is Mr Teddy Bear"'+')')
   sleep 0.2
   page.find(".dock-toolbar .icon-save").click
   sleep 0.2
@@ -35,7 +35,7 @@ When /^I change a section and reload the page$/ do
   sleep 0.2
   page.execute_script('window.location.reload(true);')
   
-  @changes = ["Hello my name is Mr Tedy Bear"]
+  @changes = ["Hello my name is Mr Teddy Bear"]
 end
 
 Then /^I should see my changes$/ do
