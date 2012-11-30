@@ -1,7 +1,7 @@
 module Burp
   class MenusController < Burp::ApplicationController
     
-    def show
+    def edit
       @menu = Menu.find(params[:id])
       @menu.update_id("")
     end
@@ -24,7 +24,7 @@ module Burp
       @menu.children << Group.new(params[:group][:name])
       @menu.save
       
-      redirect_to menu_path(@menu)
+      redirect_to edit_menu_path(@menu)
     end
     
   end

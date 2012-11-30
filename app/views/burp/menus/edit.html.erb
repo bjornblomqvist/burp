@@ -23,13 +23,13 @@
     // Fix menu urls so that they go to the edit pages
     $('section.group li.link a').each(function() {
       var id = $(this).attr('id');
-      $(this).attr('href',window.location.pathname+"/links/"+id+"/edit");
+      $(this).attr('href',"./links/"+id+"/edit");
     });
     
     $('section.group').each(function() {
       var id = $(this).attr('id');
       var groupName = $(this).find(".group-name").first();
-      groupName.html('<a href="'+window.location.pathname+'/groups/'+id+'/edit">'+groupName.text()+'</a>')
+      groupName.html('<a href="./groups/'+id+'/edit">'+groupName.text()+'</a>')
     });
 
   });

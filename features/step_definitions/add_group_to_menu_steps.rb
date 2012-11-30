@@ -1,6 +1,6 @@
 Given /^I am on the edit menu page$/ do
   BurpFactory.create :basic_site
-  visit "/burp/menus/main"
+  visit "/burp/menus/main/edit"
 end
 
 When /^I add a new group$/ do

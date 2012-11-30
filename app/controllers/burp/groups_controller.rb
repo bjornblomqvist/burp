@@ -13,7 +13,7 @@ class Burp::GroupsController < Burp::ApplicationController
     @group.name = params[:group][:name]
     @menu.save
     
-    redirect_to menu_path(@menu)
+    redirect_to edit_menu_path(@menu)
   end
   
 end

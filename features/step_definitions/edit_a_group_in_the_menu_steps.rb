@@ -5,7 +5,7 @@ Given /^I am editing a menu that has a group$/ do
   menu.children << Burp::Group.new("About bits2life")
   menu.save
   
-  visit "/burp/menus/main"
+  visit "/burp/menus/main/edit"
 end
 
 When /^I change the name of the group$/ do
