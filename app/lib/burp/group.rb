@@ -60,8 +60,8 @@ module Burp
       to_hash.to_yaml
     end
     
-    def to_menu(file_name)
-      menu = Menu.new(file_name)
+    def to_menu
+      menu = Menu.new
       menu.name = self.name
       menu.children = Group.from_yaml(self.to_yaml).children
       

@@ -11,7 +11,7 @@ module Burp
     end
     
     def update
-      menu = Group.from_hash(JSON.parse(params[:menu])).to_menu(params[:id]+".yaml")
+      menu = Group.from_hash(JSON.parse(params[:menu])).to_menu
       menu.save
       
       render :json => {:success => true}

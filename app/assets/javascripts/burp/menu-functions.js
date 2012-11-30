@@ -5,7 +5,7 @@
 (function() {
   
   burp.saveMenu = function saveMenu(menu) {
-    $.put("/burp/menus/menu/",{menu:JSON.stringify(menu)},function() {
+    $.put("./",{menu:JSON.stringify(menu)},function() {
       $.debug("Menu changes saved!");
     });
   };
