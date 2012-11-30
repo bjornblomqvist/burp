@@ -9,5 +9,5 @@
   :children:
   - :name: DN
     :url: ./links/2828281009863966885/edit
-- :name: Just a test =)
-  :children: []
+  - :name: Just a test =)
+    :children: []
