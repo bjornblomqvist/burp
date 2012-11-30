@@ -1,5 +1,0 @@
----
-:name: default.yaml
-:children:
-- :name: :url
-  :url: /
