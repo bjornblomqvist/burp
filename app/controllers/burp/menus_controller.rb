@@ -13,19 +13,5 @@ module Burp
       render :json => {:success => true}
     end 
     
-    
-    def new_group
-      @menu = Menu.find(params[:id])
-      @group = nil
-    end
-    
-    def create_group
-      @menu = Menu.find(params[:id])
-      @menu.children << Group.new(params[:group][:name])
-      @menu.save
-      
-      redirect_to edit_menu_path(@menu)
-    end
-    
   end
 end
