@@ -6,8 +6,8 @@
 - :name: So what is this ?
   :url: ./links/-2348030296838378073/edit
 - :name: Just a test =)
-  :children: []
-- :name: The menus
   :children:
-  - :name: DN
-    :url: ./links/2828281009863966885/edit
+  - :name: The menus
+    :children:
+    - :name: DN
+      :url: ./links/2828281009863966885/edit
