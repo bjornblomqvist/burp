@@ -44,7 +44,9 @@
     </div>
     
     <%= javascript_include_tag "burp/application" %>
-    <%= yield :inline_javascript %>
+    <script type="text/javascript" charset="utf-8">
+      <%= raw yield :inline_javascript %>
+    </script>
   </body>
 </html>
 

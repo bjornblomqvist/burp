@@ -21,7 +21,11 @@ module Burp
     end
 
     def to_html(request = nil,name = nil)
-      %{<a class="#{current_class(request)}" href="#{url}">#{name || self.name}</a>}.html_safe
+      %{<a class="#{current_class(request)}" #{id ? "id='#{id}'" : ""} href="#{url}">#{name || self.name}</a>}.html_safe
+    end
+    
+    def to_param
+      id
     end
     
     def self.from_yaml(yaml)

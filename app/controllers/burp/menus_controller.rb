@@ -3,6 +3,7 @@ module Burp
     
     def show
       @menu = Menu.find(params[:id])
+      @menu.update_id("")
     end
     
     def update

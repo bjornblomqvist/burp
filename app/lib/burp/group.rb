@@ -16,7 +16,7 @@ module Burp
       first_link_in_group = %{<h2 class="first-link-in-group #{first_link ? first_link.current_class(request) : ""}">#{first_link ? first_link.to_html(request) : ""}</h2>}
       
       %{
-      <section class="group">
+      <section #{id ? "id='#{id}'" : ""} class="group">
         <h2 class="group-name">#{name}</h2>
         #{first_link ? first_link_in_group : ""}
         <ul class="children">
@@ -72,7 +72,9 @@ module Burp
       children.map {|child| child.is_a?(Group) ? child.links : child}.flatten
     end
     
-    
+    def to_param
+      id
+    end
     
     def update_id(parent_id)
       @id = {:parent_id => parent_id, :hash => self.hash}.hash

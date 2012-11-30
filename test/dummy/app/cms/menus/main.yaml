@@ -1,5 +1,11 @@
 ---
 :name: main
 :children:
-- :name: :url
+- :name: "So what is this ?"
   :url: /
+- :name: The menus
+  :children:
+  - :name: "DN"
+    :url: http://www.dn.se/
+  - :name: Google
+    :url: http://www.google.se/
