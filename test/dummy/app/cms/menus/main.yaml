@@ -3,10 +3,10 @@
 :children:
 - :name: Google
   :url: ./links/-2398024895829173412/edit
-- :name: So what is this ?
-  :url: ./links/-2348030296838378073/edit
 - :name: Just a test =)
   :children:
+  - :name: So what is this ?
+    :url: ./links/-2348030296838378073/edit
   - :name: The menus
     :children:
     - :name: DN
