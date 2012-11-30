@@ -14,9 +14,10 @@ Burp::Engine.routes.draw do
   
   get "/files/*id" => "file#show"
   
-  put "/menus/*id" => "menu#update"
-  
-  
+  resources :menus do
+    get :new_group, :on => :member
+    post :create_group, :on => :member
+  end
   
   # Catch all to 404 error
   match "/*path" => "error#no_such_page"

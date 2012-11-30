@@ -1,0 +1,20 @@
+
+
+<%= twitter_bootstrap_form_for :group, :url => (@group ? "./update_group" : "./create_group"),:html => {:id => "edit-group-form",:class => 'form-horizontal'} do |f| %>
+
+  <%= f.fieldset "Group" do %>
+    <%= f.text_field :name, "Name" %>
+  <% end %>
+  
+  
+  <%= f.actions do %>
+    <%= f.submit @group ? 'Save' : "Create" %>
+    <%= button_tag  'Cancel', :onclick => "document.location = './'; return false;", :class => 'btn' %>
+    <% if @group %>
+      <%= button_tag  'Remove', :onclick => "$('#remove-link').click(); return false;", :class => 'btn' %>
+      <%= link_to 'Destroy', remove_group_menus_path(@menu), :confirm => 'Are you sure?', :id => 'remove-link', :method => :delete, :style => "display: none;" %>
+    <% end %>
+  <% end %>
+<% end %>
+
+
