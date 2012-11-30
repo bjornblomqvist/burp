@@ -1,24 +1,28 @@
 module Burp
   class Menu < Group
    
-    attr_accessor :file_name
+    attr_accessor :name
     
-    def initialize(file_name)
-      raise "Name cant be blank" if file_name.blank?
-      self.file_name = file_name
+    def initialize(name)
+      raise "Name cant be blank" if name.blank?
+      self.name = name
       super
       load
     end
     
-    def self.find(file_name)
-      menu = Menu.new(file_name)
+    def self.find(name)
+      menu = Menu.new(name)
       if(menu.load)
         menu
       else
         nil
       end
     end
-   
+    
+    def to_param
+      name
+    end
+
     def load
       if File.exist?(path)
         group = Group.from_yaml(File.read(path))
@@ -32,19 +36,19 @@ module Burp
     end
    
     def save
-     raise "Name cant be blank" if file_name.blank?
+     raise "Name cant be blank" if name.blank?
 
      File.open(path,'w') do |file|
        file.write(self.to_yaml)
      end
 
-     Burp::Util.commit("Saved #{self.file_name}")
+     Burp::Util.commit("Saved #{self.name}")
     end
     
     private
     
     def path
-      Burp.content_directory + file_name
+      Burp.content_directory + "menus/" +  name + ".yaml"
     end
   end
 end

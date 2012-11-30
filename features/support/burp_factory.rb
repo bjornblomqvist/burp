@@ -8,6 +8,7 @@ class BurpFactory
     
     path_to_burp_files_directory = Burp.content_directory+"/"
     FileUtils.mkdir_p(path_to_burp_files_directory)
+    FileUtils.mkdir_p(path_to_burp_files_directory+"menus/")
     
     `cd #{path_to_burp_files_directory}; git init` if File.exist?(path_to_burp_files_directory) && File.directory?(path_to_burp_files_directory)
     
@@ -15,7 +16,7 @@ class BurpFactory
       page = Burp::PageModel.new(:path => "/", :snippets => {:main => ""})
       page.save
       
-      default_menu = Burp::Menu.new("default.yaml")
+      default_menu = Burp::Menu.new("main")
       default_menu.children << Burp::Link.new(:url => "/", :name => "Start page")
       default_menu.save
     end
