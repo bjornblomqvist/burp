@@ -11,7 +11,7 @@
   <%= f.actions do %>
     <%= f.submit @link ? 'Save' : "Create" %>
     <%= button_tag  'Cancel', :onclick => "document.location = '#{menu_path(@menu)}'; return false;", :class => 'btn' %>
-    <% if @group %>
+    <% if @link %>
       <%= button_tag  'Remove', :onclick => "$('#remove-link').click(); return false;", :class => 'btn' %>
       <%= link_to 'Destroy', menu_link_path(@menu,@link), :confirm => 'Are you sure?', :id => 'remove-link', :method => :delete, :style => "display: none;" %>
     <% end %>

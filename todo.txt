@@ -1,0 +1,15 @@
+
+  - Add test to remove a group
+  
+  - Add editing of page test (title,path)
+  - Add adding of page test
+  - Add removing of page test
+  
+  - Add test to upload a file
+  - Add test to remove a file
+  
+  - Write drag and drop tests
+  
+  - Add documentation
+    - Basic markdown howto
+    - Burp api

@@ -30,3 +30,20 @@ Then /^the links name should have changed to the new name$/ do
   page.should have_content("Google now with www")
 end
 
+When /^I remove the link$/ do
+  click_link("Google")
+  click_button("Remove")
+  page.driver.browser.switch_to.alert.tap do |alert|
+    alert.text.should include("Are you sure?")
+    alert.accept
+  end
+  page.driver.browser.switch_to.default_content
+end
+
+Then /^I should not any longer see the link in the menu$/ do
+  page.find(".dnd-editable-menu").should_not have_content("Google")
+end
+
+
+
+

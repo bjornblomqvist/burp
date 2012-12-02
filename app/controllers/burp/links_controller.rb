@@ -25,6 +25,17 @@ module Burp
       redirect_to edit_menu_path(@menu)
     end
     
+    def destroy
+      @menu = Menu.find(params[:menu_id])
+      @menu.update_id("")
+      @link = @menu.all_children().select {|child| child.id.to_s == params[:id].to_s}.first
+      @group = (@menu.all_children+[@menu]).select {|child| child.is_a?(Group) && child.children.include?(@link)}.first
+      @group.children.delete(@link)
+      @menu.save
+    
+      redirect_to edit_menu_path(@menu)
+    end
+    
     def create
       @menu = Menu.find(params[:menu_id])
       @menu.children << Link.new(params[:link][:name] => params[:link][:url])
