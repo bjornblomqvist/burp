@@ -18,5 +18,18 @@ Then /^the groups name should have changed to the new name$/ do
   page.find(".container .group").should have_content("A new group name")
 end
 
+When /^I remove the group$/ do
+  click_link("About bits2life")
+  click_button("Remove")
+  page.driver.browser.switch_to.alert.tap do |alert|
+    alert.text.should include("Are you sure?")
+    alert.accept
+  end
+  page.driver.browser.switch_to.default_content
+end
+
+Then /^I should not any longer see the group in the menu$/ do
+  page.find(".dnd-editable-menu").should_not have_content("About bits2life")
+end
 
 

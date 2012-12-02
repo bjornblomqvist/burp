@@ -12,7 +12,7 @@ Feature: editable links in menu
     Given I am editing a menu that has a link
     When I change the name of the link
     Then the links name should have changed to the new name
-  @wip
+
   Scenario: i remove a link
     Given I am editing a menu that has a link
     When I remove the link

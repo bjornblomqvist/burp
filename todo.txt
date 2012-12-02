@@ -1,5 +1,5 @@
 
-  - Add test to remove a group
+  - Test cancel buttons
   
   - Add editing of page test (title,path)
   - Add adding of page test
