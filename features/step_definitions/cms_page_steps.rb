@@ -50,5 +50,23 @@ Then /^I there should be a page$/ do
   page.find("title").should have_content("New page title")
 end
 
+When /^I remove the page$/ do
+  visit "/burp/"
+  click_link "Pages"
+  click_link "Start page"
+  click_button "Remove"
+  page.driver.browser.switch_to.alert.tap do |alert|
+    alert.text.should include("Are you sure?")
+    alert.accept
+  end
+  page.driver.browser.switch_to.default_content
+end
+
+Then /^there should be no pages$/ do
+  page.should_not have_content("Start page")
+end
+
+
+
 
 

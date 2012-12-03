@@ -13,7 +13,7 @@ class BurpFactory
     `cd #{path_to_burp_files_directory}; git init` if File.exist?(path_to_burp_files_directory) && File.directory?(path_to_burp_files_directory)
     
     if type == :basic_site
-      page = Burp::PageModel.new(:path => "/", :snippets => {:main => ""})
+      page = Burp::PageModel.new(:path => "/", :snippets => {:main => ""}, :title => "Start page")
       page.save
       
       default_menu = Burp::Menu.new("main")
