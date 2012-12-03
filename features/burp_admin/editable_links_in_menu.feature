@@ -17,3 +17,9 @@ Feature: editable links in menu
     Given I am editing a menu that has a link
     When I remove the link
     Then I should not any longer see the link in the menu
+  
+  @wip
+  Scenario: i edit a link and change my mind
+    Given I am editing a menu that has a link
+    When I enter a new name for the link but i dont save the changes
+    Then the links name should not have changed

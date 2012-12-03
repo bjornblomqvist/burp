@@ -27,7 +27,7 @@ When /^I change the name of the link$/ do
 end
 
 Then /^the links name should have changed to the new name$/ do
-  page.should have_content("Google now with www")
+  page.find(".dnd-editable-menu").should have_content("Google now with www")
 end
 
 When /^I remove the link$/ do
@@ -43,6 +43,18 @@ end
 Then /^I should not any longer see the link in the menu$/ do
   page.find(".dnd-editable-menu").should_not have_content("Google")
 end
+
+When /^I enter a new name for the link but i dont save the changes$/ do
+  click_link("Google")
+  fill_in "Name", :with => "Google now with www"
+  fill_in "Url", :with => "http://www.google.com/"
+  click_button("Cancel")
+end
+
+Then /^the links name should not have changed$/ do
+  page.find(".dnd-editable-menu").should have_content("Google")
+end
+
 
 
 
