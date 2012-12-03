@@ -1,5 +1,4 @@
   
-  - Add adding of page test
   - Add removing of page test
   
   - Add test to upload a file

@@ -33,7 +33,6 @@ module Burp
     end
     
     def new
-      @page = PageModel.new
       Burp.access.may_create_new_page! do
         render :action => :edit
       end
@@ -47,7 +46,6 @@ module Burp
   
         @page.title = params[:page][:title]
         @page.path = params[:page][:path]
-        @page.link_label = params[:page][:link_label]
         (params[:page][:snippets] || {}).each do |name,value|
           @page.snippets[name] = value
         end
@@ -70,7 +68,6 @@ module Burp
         @page.title = params[:page][:title] if params[:page][:title]
         @page.path = params[:page][:path] if params[:page][:path]
         @page.misc = params[:page][:misc] if params[:page][:misc]
-        @page.link_label = params[:page][:link_label] if params[:page][:link_label]
         
         if params[:page][:snippets]
           @page.snippets = {}

@@ -29,3 +29,26 @@ Then /^that page should be found on the new path$/ do
   page.find("title").should have_content("A test title")
 end
 
+Given /^there are no pages$/ do
+  BurpFactory.create :basic_site
+  Burp::PageModel.all.each do |page|
+    page.remove
+  end
+end
+
+When /^I go and add a page$/ do
+  visit "/burp/"
+  click_link "Pages"
+  click_link "New page"
+  fill_in "Title", :with => "New page title"
+  fill_in "Path", :with => "/the-new-page"
+  click_button "Save"
+end
+
+Then /^I there should be a page$/ do
+  visit "/the-new-page"
+  page.find("title").should have_content("New page title")
+end
+
+
+
