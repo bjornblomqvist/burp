@@ -35,6 +35,38 @@ $(function() {
     }
   }
   
+  function loadSnippet() {
+     var path = window.location.pathname;
+     if(path === "/") {
+       path = "/$root";
+     }
+
+     $.ajax("/burp/pages/"+path,{
+       cache:false,
+       dataType:'json',
+       success:function(data) {
+         if(data === null) {
+           // No page yet so our code needs a bit help
+           data = {};
+         }
+
+         // We default to the html
+         var value = originalHtml;
+         if(data.misc && data.misc.markdown && data.misc.markdown[snippetName]) {
+           value = data.misc.markdown[snippetName];
+         } else if(data.snippets[snippetName]) {
+           value = data.snippets[snippetName];
+         }
+
+         originalValue = value;
+         editor.setValue(value);
+         editor.clearHistory();
+
+         update(editor.getValue());
+       }
+     });
+   }
+  
   function loadFiles() {
     
     $.getJSON('/burp/files/',function(data) {
@@ -180,9 +212,9 @@ $(function() {
           data.misc = data.misc || {markdown:{}};
           data.misc.markdown[snippetName] = contentDecorator.getMarkdown();
 
-          $.ajax("/burp/pages/"+path+"/update",{
+          $.ajax("/burp/pages/"+path,{
             type:"post",
-            data:{page:data},
+            data:{page:data,'_method':"put"},
             dataType:'json',
             success:function() {
               
@@ -199,38 +231,6 @@ $(function() {
     }});
   
     $.adminDock.show('#gallery', false);
-  }
-  
-  function loadSnippet() {
-    var path = window.location.pathname;
-    if(path === "/") {
-      path = "/$root";
-    }
-    
-    $.ajax("/burp/pages/"+path,{
-      cache:false,
-      dataType:'json',
-      success:function(data) {
-        if(data === null) {
-          // No page yet so our code needs a bit help
-          data = {};
-        }
-        
-        // We default to the html
-        var value = originalHtml;
-        if(data.misc && data.misc.markdown && data.misc.markdown[snippetName]) {
-          value = data.misc.markdown[snippetName];
-        } else if(data.snippets[snippetName]) {
-          value = data.snippets[snippetName];
-        }
-        
-        originalValue = value;
-        editor.setValue(value);
-        editor.clearHistory();
-        
-        update(editor.getValue());
-      }
-    });
   }
   
   var initDone = false;
