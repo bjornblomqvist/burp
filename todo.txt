@@ -1,5 +1,3 @@
-
-  - Test cancel buttons
   
   - Add editing of page test (title,path)
   - Add adding of page test

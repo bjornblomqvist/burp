@@ -32,4 +32,15 @@ Then /^I should not any longer see the group in the menu$/ do
   page.find(".dnd-editable-menu").should_not have_content("About bits2life")
 end
 
+When /^I change the name of the group but deside not to keep the changes$/ do
+  click_link "About bits2life"
+  fill_in "Name", :with => "A new group name"
+  click_button("Cancel")
+end
+
+Then /^the groups name should not have changed$/ do
+  page.find(".dnd-editable-menu").should have_content("About bits2life")
+end
+
+
 
