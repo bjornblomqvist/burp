@@ -1,0 +1,20 @@
+
+
+<%= twitter_bootstrap_form_for :page, :url => "./", :method => (@page ? :put : :post),:html => {:id => "edit-page-form",:class => 'form-horizontal'} do |f| %>
+
+  <%= f.fieldset "Page" do %>
+    <%= f.text_field :title, "Title" %>
+    <%= f.text_field :path, :placeholder => "/enter/a/path" %>
+  <% end %>
+  
+  <%= f.actions do %>
+    <%= f.submit 'Save' %>
+    <%= button_tag  'Cancel', :onclick => "document.location = '#{pages_path}'; return false;", :class => 'btn' %>
+    <% if @page %>
+      <%= button_tag  'Remove', :onclick => "$('#destroy-link').click(); return false;", :class => 'btn' %>
+      <%= link_to 'Destroy', page_path(@page), :confirm => 'Are you sure?',:id => 'destroy-link', :method => :delete, :style => "display: none;" %>
+    <% end %>
+  <% end %>
+<% end %>
+
+
