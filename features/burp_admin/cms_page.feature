@@ -7,3 +7,8 @@ Feature: cms page
     Given there is a page
     When I go and change the title of that page
     Then that page should show the new title when viewed
+  @wip
+  Scenario: i change the page path
+    Given there is a page
+    When I go and change the path of that page
+    Then that page should be found on the new path

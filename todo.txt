@@ -1,5 +1,4 @@
   
-  - Add editing of page test (title,path)
   - Add adding of page test
   - Add removing of page test
   
