@@ -125,7 +125,9 @@ $(function() {
       }
     });
     
-    $(document).on('dblclick.burp','#gallery li img',function() {
+    $(document).on('dblclick.burp','#gallery li img',function(event) {
+      event.preventDefault();
+      
       var url = $(this).attr('src');
       $('.admin-dock .icon-edit').click();
       editor.focus();

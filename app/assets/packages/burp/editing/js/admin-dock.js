@@ -11,7 +11,10 @@ $(function($) {
   dockElement.append(footerElement);
 
   dockElement.hide();
-  headerElement.find('.close').click(function() {
+  headerElement.find('.close').click(function(event) {
+    
+    event.preventDefault();
+    
     $.adminDock.hide();
   });
 
@@ -74,7 +77,9 @@ $(function($) {
             moduleElement.append(options['showModule']);
             $(options['showModule']).data('dock-button', button);
 
-            button.click(function() {
+            button.click(function(event) {
+              event.preventDefault();
+              
               footerElement.find('a').removeClass('active');
               $(this).addClass('active');
               showModule(options['showModule'])
@@ -102,7 +107,10 @@ $(function($) {
           button.css('width', '' + width + 'px');
           button.append("<i class='icon-sort'></i>");
           button.append("<label>" + options['default'] + "</label>");
-          button.click(function() {
+          button.click(function(event) {
+            
+            event.preventDefault();
+            
             if ($(this).closest('li').find('ul').length > 0) {
               $(this).closest('li').find('ul').remove();
             } else {
@@ -111,6 +119,8 @@ $(function($) {
                 selector.append("<li style='width: " + width + "px;'>" + this + "</li>");
               });
               selector.delegate('li', 'click', function(event) {
+                event.preventDefault();
+                
                 var value = $(this).html();
                 options['change'](value);
                 button.find('label').html(value);
@@ -222,7 +232,10 @@ $(function($) {
     updateButtonStates(toLeft);
   });
   
-  $(document).on("click","#gallery .prev.enabled",function() {
+  $(document).on("click","#gallery .prev.enabled",function(event) {
+    
+    event.preventDefault();
+    
     var galleryWidth = $('#gallery').width();
     var nextButtonWidth = $('#gallery .next').width();
     var prevButtonWidth = $('#gallery .prev').width();
@@ -243,7 +256,10 @@ $(function($) {
     updateButtonStates(scrollBy);
   });
   
-  $(document).on("click","#gallery .next.enabled",function() {
+  $(document).on("click","#gallery .next.enabled",function(event) {
+    
+    event.preventDefault();
+    
     var galleryWidth = $('#gallery').width();
     var nextButtonWidth = $('#gallery .next').width();
     var prevButtonWidth = $('#gallery .prev').width();

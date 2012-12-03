@@ -17,7 +17,7 @@ Feature: cms page
     Given there are no pages
     When I go and add a page
     Then I there should be a page
-  @wip  
+  
   Scenario: i remove a page
     Given there is a page
     When I remove the page

@@ -1,10 +1,9 @@
   
-  - Add removing of page test
-  
   - Add test to upload a file
   - Add test to remove a file
   
-  - Write drag and drop tests
+  - Write menu edit drag and drop tests
+  - Write image drag and drop tests
   
   - Add documentation
     - Basic markdown howto
