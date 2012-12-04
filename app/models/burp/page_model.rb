@@ -20,7 +20,7 @@ module Burp
     def self.find(path)
     
       fixed_path = path == '/' ? '/#root' : path
-      on_disk_path =  Burp.content_directory + fixed_path
+      on_disk_path =  Burp.content_directory+"pages/" + fixed_path
       on_disk_path = on_disk_path.gsub('//','/')
 
       if File.directory?(on_disk_path)
@@ -44,7 +44,7 @@ module Burp
     end
   
     def self.all_paths
-      ((Dir.glob("#{Burp.content_directory}**/*.html") + Dir.glob("#{Burp.content_directory}**/*.json")).map {|path| File.dirname(path.gsub(Burp.content_directory,"/")).gsub("/#root",'/') }).uniq
+      ((Dir.glob("#{Burp.content_directory}pages/**/*.html") + Dir.glob("#{Burp.content_directory}pages/**/*.json")).map {|path| File.dirname(path.gsub(Burp.content_directory+"pages/","/")).gsub("/#root",'/') }).uniq
     end
   
     def self.all
@@ -108,14 +108,14 @@ module Burp
       end
   
       directory_path = on_disk_path(path)
-      while(directory_path.start_with?(Burp.content_directory) && Dir.glob("#{directory_path}/*").length == 0)
+      while(directory_path.start_with?(Burp.content_directory+"pages/") && Dir.glob("#{directory_path}/*").length == 0)
         FileUtils.rmdir(directory_path)
         directory_path = File.dirname(directory_path)
       end
     end
   
     def on_disk_path(path = self.path)
-      on_disk_path = "#{Burp.content_directory}#{root_fixed_path(path)}"
+      on_disk_path = "#{Burp.content_directory}pages/#{root_fixed_path(path)}"
     end
 
   end
