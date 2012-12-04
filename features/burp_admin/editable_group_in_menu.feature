@@ -17,7 +17,7 @@ Feature: editable group in menu
     Given I am editing a menu that has a group
     When I remove the group
     Then I should not any longer see the group in the menu
-  @wip  
+    
   Scenario: i change a groups name but i deside not to save the change
     Given I am editing a menu that has a group
     When I change the name of the group but deside not to keep the changes

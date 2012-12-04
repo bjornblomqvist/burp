@@ -7,7 +7,7 @@ Feature: file managment
     Given there are no files
     When I go and upload a file
     Then there should be one file that i can link to
-  @wip  
+    
   Scenario: i remove a file
     Given there is a file
     When I go and remove it

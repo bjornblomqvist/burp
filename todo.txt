@@ -1,5 +1,4 @@
   
-  - Add test to remove a file
   - Add a file download test
   
   - Write menu edit drag and drop tests
