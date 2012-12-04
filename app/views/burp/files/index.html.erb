@@ -1,7 +1,9 @@
 
-  <% @file_paths.each do |file_path| %>
+  <% @files.each do |file| %>
   
-    <a href="<%= file_path %>"><%= file_path %></a><br>
+    <a href="<%= file_path(file) %>"><%= file_path(file) %></a>
+    <%= link_to 'Remove', file_path(file), :confirm => 'Are you sure?', :id => 'remove-link', :method => :delete %>
+    <br>
   
   <% end %>
   

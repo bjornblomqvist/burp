@@ -2,7 +2,7 @@
 require 'fileutils'
 
 module Burp
-  class FileController < Burp::ApplicationController
+  class FilesController < Burp::ApplicationController
     
     skip_before_filter :authenticate, :only => [:show]
     
@@ -10,15 +10,27 @@ module Burp
       
       Burp.access.may_view_file_list! do
       
-        @file_paths = Dir.glob("#{upload_directory_path}**/*")
-        @file_paths = @file_paths.sort {|p1,p2| File.mtime(p2) <=> File.mtime(p1)}
-        @file_paths = @file_paths.map {|path| path.gsub("#{upload_directory_path}","/burp/files/") }
+        @files = FileModel.all
       
         respond_to do |format|
           format.html {}
-          format.json { render :json =>  {:paths => @file_paths} }
+          format.json { render :json =>  {:paths => @files.map {|file| file.public_path }} }
         end
       end
+    end
+    
+    def destroy
+      file_path = "#{upload_directory_path}#{params[:id].gsub("burp/files/","")}#{params[:format].blank? ? "" : ".#{params[:format]}"}"
+      
+      if File.expand_path(file_path) != file_path
+        render :text => "403, Forbiden!", :status => 403, :content_type => "text/plain"
+      else
+        File.unlink(file_path)
+      end
+      
+      Util.commit("Burp: removed a file")
+      
+      redirect_to files_path
     end
     
     def show
@@ -54,7 +66,7 @@ module Burp
           else
             FileUtils.mkdir_p(upload_directory_path)
             FileUtils.mv(file.path,upload_directory_path+File.basename(file.path))
-            `cd #{upload_directory_path}; git add .; git commit -a -m "Burp: file upload"`
+            Util.commit("Burp: file upload")
             render :json => {:success => true}
           end
         end

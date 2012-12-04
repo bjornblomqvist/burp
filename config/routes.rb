@@ -1,9 +1,11 @@
 Burp::Engine.routes.draw do
   get "/" => "static#index"
-
-  get "/files/" => "file#index"
-  post "/files/" => "file#create"
-  get "/files/*id" => "file#show"
+  
+  resources :files
+  get "/files/" => "files#index"
+  post "/files/" => "files#create"
+  get "/files/*id" => "files#show"
+  delete "/files/*id" => "files#destroy"
   
   resources :pages
   get "/pages/*id/edit" => "pages#edit"
