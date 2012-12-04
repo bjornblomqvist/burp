@@ -1,8 +1,11 @@
   
-  - Add a file download test
+  - Move pages into the pages subdirectory, then we have (pages,menus,files and maybe later globals)
+  
+  - Add globals, just named snippets, first version you can only edit from within the burp admin
   
   - Write menu edit drag and drop tests
   - Write image drag and drop tests
+  
   
   - Add documentation
     - Basic markdown howto

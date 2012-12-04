@@ -46,7 +46,7 @@ module Burp
           
           request.session_options[:skip] = true
           
-          send_file(file_path,:disposition => file_path.match(/png|jpeg|gif|jpg|pdf/) ? 'inline' : 'attachment')
+          send_file(file_path,:disposition => file_path.match(/\.(png|jpeg|gif|jpg|pdf|txt)$/) ? 'inline' : 'attachment')
         end
       else  
         render :text => "404, No such file", :status => 404, :content_type => "text/plain"

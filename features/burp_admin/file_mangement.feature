@@ -13,3 +13,8 @@ Feature: file managment
     When I go and remove it
     Then there should be no files
   
+  Scenario: i view a file
+    Given there is a text file
+    When I go to the text file
+    Then I should see its content
+    

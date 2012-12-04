@@ -33,3 +33,18 @@ Then /^there should be no files$/ do
   page.should_not have_content("dummy_text.txt")
 end
 
+Given /^there is a text file$/ do
+  BurpFactory.create :basic_site
+  FileUtils.mkdir_p("#{Burp.content_directory}uploads/")
+  `cp #{File.expand_path("./features/test_files/dummy_text.txt")} #{Burp.content_directory}uploads/`
+end
+
+When /^I go to the text file$/ do
+  visit "/burp/files/dummy_text.txt"
+end
+
+Then /^I should see its content$/ do
+  page.should have_content("Hi this is a dummy text, so dont expect much of it.")
+end
+
+
