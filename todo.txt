@@ -1,10 +1,13 @@
   
+  - Add page not in menu list of pages, for easy adding of pages
+  
   - Add globals, just named snippets, first version you can only edit from within the burp admin
+    - Must be a markdown editor
   
   - Write menu edit drag and drop tests
   - Write image drag and drop tests
   
-  
   - Add documentation
+    - Write inline on each page below the form. Just a short basic help
     - Basic markdown howto
     - Burp api

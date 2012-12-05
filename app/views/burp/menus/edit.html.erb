@@ -23,6 +23,7 @@
 
     // Fix menu urls so that they go to the edit pages
     $('section.group li.link a').each(function() {
+      $(this).attr("orginial-url",$(this).attr("href"))
       var id = $(this).attr('id');
       $(this).attr('href',"./links/"+id+"/edit");
     });
