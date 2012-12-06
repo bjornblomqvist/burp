@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "burp"
-  s.version = "1.1.4"
+  s.version = "1.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Darwin"]
-  s.date = "2012-10-18"
+  s.date = "2012-12-06"
   s.description = " A CMS that tryes hard to not get in your way! "
   s.email = "darwin@bits2life.com"
   s.extra_rdoc_files = [
@@ -319,13 +319,15 @@ Gem::Specification.new do |s|
     "app/assets/stylesheets/burp/application.less",
     "app/assets/stylesheets/burp/bootstrap.css",
     "app/assets/stylesheets/burp/fileupload.less",
-    "app/assets/stylesheets/burp/views/page-index.less",
+    "app/assets/stylesheets/burp/views/dnd-menu.less",
     "app/controllers/burp/application_controller.rb",
     "app/controllers/burp/catch_all_controller.rb",
     "app/controllers/burp/error_controller.rb",
-    "app/controllers/burp/file_controller.rb",
-    "app/controllers/burp/menu_controller.rb",
-    "app/controllers/burp/page_controller.rb",
+    "app/controllers/burp/files_controller.rb",
+    "app/controllers/burp/groups_controller.rb",
+    "app/controllers/burp/links_controller.rb",
+    "app/controllers/burp/menus_controller.rb",
+    "app/controllers/burp/pages_controller.rb",
     "app/controllers/burp/static_controller.rb",
     "app/helpers/burp/application_helper.rb",
     "app/lib/burp/Util.rb",
@@ -333,22 +335,28 @@ Gem::Specification.new do |s|
     "app/lib/burp/group.rb",
     "app/lib/burp/link.rb",
     "app/lib/burp/page.rb",
-    "app/lib/burp/site.rb",
     "app/lib/burp/util/upload_handler.rb",
+    "app/models/burp/file_model.rb",
     "app/models/burp/menu.rb",
     "app/models/burp/page_model.rb",
-    "app/views/burp/file/index.html.erb",
-    "app/views/burp/page/edit.html.erb",
-    "app/views/burp/page/index.html.erb",
+    "app/views/burp/files/index.html.erb",
+    "app/views/burp/groups/edit.html.erb",
+    "app/views/burp/links/edit.html.erb",
+    "app/views/burp/menus/edit.html.erb",
+    "app/views/burp/menus/index.html.erb",
+    "app/views/burp/pages/edit.html.erb",
+    "app/views/burp/pages/index.html.erb",
     "app/views/burp/static/index.html.erb",
     "app/views/layouts/burp/application.html.erb",
+    "config/cucumber.yml",
     "config/initializers/bootstrap_form.rb",
     "config/routes.rb",
     "lib/burp.rb",
     "lib/burp/capistrano.rb",
     "lib/burp/engine.rb",
     "lib/burp/version.rb",
-    "lib/tasks/burp_tasks.rake"
+    "lib/tasks/burp_tasks.rake",
+    "lib/tasks/cucumber.rake"
   ]
   s.licenses = ["LGPL3"]
   s.require_paths = ["lib"]
@@ -360,6 +368,7 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<burp>, [">= 0"])
+      s.add_runtime_dependency(%q<rails>, ["~> 3.2"])
       s.add_runtime_dependency(%q<jquery-rails>, [">= 0"])
       s.add_runtime_dependency(%q<jquery-ui-rails>, [">= 0"])
       s.add_runtime_dependency(%q<less-rails>, [">= 0"])
@@ -367,71 +376,57 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<therubyracer>, [">= 0"])
       s.add_runtime_dependency(%q<twitter_bootstrap_form_for>, ["~> 2.0.1.0.rc1"])
       s.add_development_dependency(%q<sqlite3>, [">= 0"])
-      s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
+      s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_development_dependency(%q<bundler>, [">= 0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
@@ -441,6 +436,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
     else
       s.add_dependency(%q<burp>, [">= 0"])
+      s.add_dependency(%q<rails>, ["~> 3.2"])
       s.add_dependency(%q<jquery-rails>, [">= 0"])
       s.add_dependency(%q<jquery-ui-rails>, [">= 0"])
       s.add_dependency(%q<less-rails>, [">= 0"])
@@ -448,71 +444,57 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<therubyracer>, [">= 0"])
       s.add_dependency(%q<twitter_bootstrap_form_for>, ["~> 2.0.1.0.rc1"])
       s.add_dependency(%q<sqlite3>, [">= 0"])
-      s.add_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, [">= 0"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, [">= 0"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, [">= 0"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, [">= 0"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, [">= 0"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, [">= 0"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, [">= 0"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, [">= 0"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, [">= 0"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, [">= 0"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, [">= 0"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, [">= 0"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, [">= 0"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, [">= 0"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, [">= 0"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, [">= 0"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_dependency(%q<rspec>, ["~> 2.8.0"])
+      s.add_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_dependency(%q<bundler>, [">= 0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, [">= 0"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
@@ -523,6 +505,7 @@ Gem::Specification.new do |s|
     end
   else
     s.add_dependency(%q<burp>, [">= 0"])
+    s.add_dependency(%q<rails>, ["~> 3.2"])
     s.add_dependency(%q<jquery-rails>, [">= 0"])
     s.add_dependency(%q<jquery-ui-rails>, [">= 0"])
     s.add_dependency(%q<less-rails>, [">= 0"])
@@ -530,71 +513,57 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<therubyracer>, [">= 0"])
     s.add_dependency(%q<twitter_bootstrap_form_for>, ["~> 2.0.1.0.rc1"])
     s.add_dependency(%q<sqlite3>, [">= 0"])
-    s.add_dependency(%q<rspec>, ["~> 2.8.0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, [">= 0"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-    s.add_dependency(%q<rspec>, ["~> 2.8.0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, [">= 0"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-    s.add_dependency(%q<rspec>, ["~> 2.8.0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, [">= 0"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-    s.add_dependency(%q<rspec>, ["~> 2.8.0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, [">= 0"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-    s.add_dependency(%q<rspec>, ["~> 2.8.0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, [">= 0"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-    s.add_dependency(%q<rspec>, ["~> 2.8.0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, [">= 0"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-    s.add_dependency(%q<rspec>, ["~> 2.8.0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, [">= 0"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-    s.add_dependency(%q<rspec>, ["~> 2.8.0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, [">= 0"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-    s.add_dependency(%q<rspec>, ["~> 2.8.0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, [">= 0"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-    s.add_dependency(%q<rspec>, ["~> 2.8.0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, [">= 0"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-    s.add_dependency(%q<rspec>, ["~> 2.8.0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, [">= 0"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-    s.add_dependency(%q<rspec>, ["~> 2.8.0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, [">= 0"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-    s.add_dependency(%q<rspec>, ["~> 2.8.0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, [">= 0"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-    s.add_dependency(%q<rspec>, ["~> 2.8.0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, [">= 0"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-    s.add_dependency(%q<rspec>, ["~> 2.8.0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, [">= 0"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-    s.add_dependency(%q<rspec>, ["~> 2.8.0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, [">= 0"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-    s.add_dependency(%q<rspec>, ["~> 2.8.0"])
+    s.add_dependency(%q<rdoc>, ["~> 3.12"])
+    s.add_dependency(%q<bundler>, [">= 0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, [">= 0"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
