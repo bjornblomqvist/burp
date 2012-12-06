@@ -11,7 +11,7 @@
     <%= f.submit @group ? 'Save' : "Create" %>
     <%= button_tag  'Cancel', :onclick => "document.location = '#{edit_menu_path(@menu)}'; return false;", :class => 'btn' %>
     <% if @group %>
-      <%= button_tag  'Remove', :onclick => "$('#remove-link').click(); return false;", :class => 'btn' %>
+      <%= button_tag  'Remove', :onclick => "$('#remove-link').click(); return false;", :class => 'btn btn-warning' %>
       <%= link_to 'Destroy', menu_group_path(@menu,@group), :confirm => 'Are you sure?', :id => 'remove-link', :method => :delete, :style => "display: none;" %>
     <% end %>
   <% end %>

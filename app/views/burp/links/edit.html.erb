@@ -12,7 +12,7 @@
     <%= f.submit @link ? 'Save' : "Create" %>
     <%= button_tag  'Cancel', :onclick => "document.location = '#{edit_menu_path(@menu)}'; return false;", :class => 'btn' %>
     <% if @link %>
-      <%= button_tag  'Remove', :onclick => "$('#remove-link').click(); return false;", :class => 'btn' %>
+      <%= button_tag  'Remove', :onclick => "$('#remove-link').click(); return false;", :class => 'btn btn-warning' %>
       <%= link_to 'Destroy', menu_link_path(@menu,@link), :confirm => 'Are you sure?', :id => 'remove-link', :method => :delete, :style => "display: none;" %>
     <% end %>
   <% end %>
