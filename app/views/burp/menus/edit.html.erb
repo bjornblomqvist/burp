@@ -6,10 +6,8 @@
 <%= @menu.to_html %>
 </span>
 
-<span class="buttons">
-  <%= button_to "Add link", new_menu_link_path(@menu), :method => :get, :class => "btn" %>
-  <%= button_to "Add group", new_menu_group_path(@menu), :method => :get, :class => "btn" %>
-</span>
+<%= link_to "» New link", new_menu_link_path(@menu) %><br>
+<%= link_to "» New group", new_menu_group_path(@menu) %>
 
 <hr>
 <h3>Pages not in the above menu</h3>
