@@ -104,7 +104,6 @@
                 var img = createCallback(ui.draggable[0], className);
 
                 initializeMovable(contentEditor, img, function(element, positionClass) { 
-                  console.debug(element, positionClass);
                   $(element).removeClass('left center right');
                   $(element).addClass(positionClass);
                   return element;
@@ -223,8 +222,6 @@
         
         javascript_warning_has_been_shown = true;
       }
-      
-      console.debug(tempElement.html());
       
       // Fixes so that we don't reload images on each update
       var _this = this;

@@ -15,6 +15,18 @@ $(function() {
   function wrapContent() {
     $.each(snippets().snippets,function(name,snippet) {
       console.debug(name,snippet);
+      
+      // Fix so that we dont run javascript again
+      $(snippet.elements()).each(function() {
+        if($(this).is("script")) {
+          $(this).attr("type",'text/dont-run-javascript');
+        } else {
+          $(this).find("script").each(function() {
+            $(this).attr("type",'text/dont-run-javascript');
+          });
+        }
+      });
+      
       snippet.update($('<div data-snippet-name="'+name+'" class="snippet-wrapper snippet-'+name+'"></div>').append($(snippet.elements())));
     });
   }
