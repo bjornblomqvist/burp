@@ -2,9 +2,10 @@
 //= require jquery
 //= require jquery.ui.draggable
 //= require jquery.ui.droppable
+//= require ../gritter/gritter.js
 //= require ../../javascripts/burp/lib/fileupload.js
 //= require ./editing/js/md5.js
-//= require ./editing/js/showdown.js
+//= require ./editing/js/marked.js
 //= require ./editing/js/stay.js
 //= require ./editing/js/admin-dock.js
 //= require ./editing/js/content-decorator.js

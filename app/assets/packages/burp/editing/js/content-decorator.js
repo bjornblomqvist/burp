@@ -1,11 +1,22 @@
 /*global
-  Showdown MD5
+  marked MD5
 */
 (function($) {
   
+  var javascript_warning_has_been_shown = false;
+  
+  marked.setOptions({
+    gfm: true,
+    pedantic: false,
+    sanitize: false
+  });
+  
+  function unescapeJavascript(script) {
+    return script.replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/&lt;/g,"<").replace(/&gt;/g,"<");
+  }
+  
   function ContentDecorator(element, options) {
     this.element = $(element);
-    this.converter = new Showdown.converter();
     this.parking = $('<div style="display: none;"></div>');
 
     if (typeof(options) === 'object') {
@@ -101,7 +112,7 @@
 
                 var markdown = $(this).parent().data("target-element");
               
-                $(img).insertBefore(markdown)
+                $(img).insertBefore(markdown);
                 clearDropBoxes();
               }
               
@@ -153,7 +164,13 @@
     },
     
     getHtml: function() {
-      return this.element.clone().find('.movable').removeClass('ui-draggable ui-droppable').end().html();
+      
+      var html = this.element.clone();
+      html.find('script[type="text/dont-run-javascript"]').each(function() {
+        $(this).attr("type",'text/javascript');
+      });
+      
+      return html.find('.movable').removeClass('ui-draggable ui-droppable').end().html();
     },
     
     getMarkdown: function() {
@@ -172,15 +189,42 @@
     },
     
     updateContent: function() {
-      var html = this.converter.makeHtml(this.markdown).replace(/\s+/g,' ');
+      var html = marked(this.markdown).replace(/\s+/g,' ');
       if(this.lastHtml === html) {
         return;
       }
       this.lastHtml = html;
       
+      var children = $(html);
+      
+      // Fix script escaping of text in script elements
+      children.each(function() {
+        if($(this).is("script")) {
+          $(this).text(unescapeJavascript($(this).text()));
+          $(this).attr('type','text/dont-run-javascript');
+        } else {
+          $(this).find('script').each(function() {
+            $(this).text(unescapeJavascript($(this).text()));
+            $(this).attr('type','text/dont-run-javascript');
+          });
+        }
+      });
+      
       var tempElement = $('<div></div>');
-      tempElement.html(html);
+      tempElement.append(children);
       tempElement.children().addClass('markdown');
+      
+      if(tempElement.find("script").length > 0 && !javascript_warning_has_been_shown) {
+        $.gritter.add({
+          title: 'WARNING!',
+          text: ' Javascript found! The javascript will not be previewed but it will be saved.<br><br>Save and reload to test the javascript.',
+          time: 20000
+        });
+        
+        javascript_warning_has_been_shown = true;
+      }
+      
+      console.debug(tempElement.html());
       
       // Fixes so that we don't reload images on each update
       var _this = this;
