@@ -9,6 +9,7 @@ Burp::Engine.routes.draw do
   
   resources :pages
   get "/pages/*id/edit" => "pages#edit"
+  get "/pages/*id" => "pages#show"
   put "/pages/*id" => "pages#update"
   
   resources :menus do

@@ -13,12 +13,17 @@ module Burp
 
     def to_html(request = nil)
       
-      first_link_in_group = %{<h2 class="first-link-in-group #{first_link ? first_link.current_class(request) : ""}">#{first_link ? first_link.to_html(request) : ""}</h2>}
+      if first_link
+        first_link_in_group = %{<span class="first-link-in-group #{first_link.current_class(request)}">#{first_link.to_html(request,name)}</span>}
+      else
+        first_link_in_group = ""
+      end
+      
       
       %{
       <section #{id ? "id='#{id}'" : ""} class="group">
-        <h2 class="group-name">#{name}</h2>
-        #{first_link ? first_link_in_group : ""}
+        <span class="group-name">#{name}</span>
+        #{first_link_in_group}
         <ul class="children">
           #{children.inject("") do |x,link|  x += "<li class=\"child #{link.is_a?(Group) ? "group" : "link" } #{link.current_class(request)}\">#{link.to_html(request)}</li>" end}
         </ul>

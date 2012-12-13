@@ -103,14 +103,21 @@ module Burp
     end
   
     def remove_dir(path = self.path)
-      Dir.glob("#{on_disk_path(path)}/*").each do |path|
+      Dir.glob("#{on_disk_path(path)}/*.html").each do |path|
         File.unlink(path)
       end
-  
-      directory_path = on_disk_path(path)
-      while(directory_path.start_with?(Burp.content_directory+"pages/") && Dir.glob("#{directory_path}/*").length == 0)
-        FileUtils.rmdir(directory_path)
-        directory_path = File.dirname(directory_path)
+      
+      Dir.glob("#{on_disk_path(path)}/*.json").each do |path|
+        File.unlink(path)
+      end
+
+      # We only remove the dir if its actualy empyt
+      if(Dir.glob("#{on_disk_path(path)}/*").length == 0)
+        directory_path = on_disk_path(path)
+        while(directory_path.start_with?(Burp.content_directory+"pages/") && Dir.glob("#{directory_path}/*").length == 0)
+          FileUtils.rmdir(directory_path)
+          directory_path = File.dirname(directory_path)
+        end
       end
     end
   
