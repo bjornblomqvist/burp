@@ -5,7 +5,7 @@
 
 <table>
   <tbody>
-  <% @pages.each do |page| %>
+  <% @pages.sort{|a,b| a.path <=> b.path}.each do |page| %>
   <tr>
     <td><%= link_to "#{page.title}", edit_page_path(page), :title => "Click to edit" %></td>
     <td><%= link_to "#{page.path}", edit_page_path(page), :title => "Click to edit" %></td>
