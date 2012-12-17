@@ -1,13 +1,20 @@
+<h1>Files</h1>
 
-  <% @files.each do |file| %>
-  
-    <a href="<%= file_path(file) %>"><%= file_path(file) %></a>
-    <%= link_to 'Remove', file_path(file), :confirm => 'Are you sure?', :id => 'remove-link', :method => :delete %>
-    <br>
-  
+<hr>
+
+<table>
+  <tbody>
+  <% @files.each do |file| %>  
+    <tr>
+      <td><%= link_to file.public_path, file.public_path, :title => "Click to open" %></a></td>
+      <td><%= link_to file.mtime.strftime("%Y-%m-%d %H:%M"), file.public_path, :title => "Click to open" %></a></td>
+      <td><%= link_to number_to_human_size(file.size, :precision => 2), file.public_path, :title => "Click to open" %></a></td>
+      <td><%= link_to 'Remove', file_path(file), :confirm => 'Are you sure?', :id => 'remove-link', :title => "Click to remove file.", :method => :delete %></td>
+    </tr>
   <% end %>
+  </tbody>
+</table>
   
-  <br><br>
   <div id="file-uploader">
       <noscript>
           <p>Please enable JavaScript to use file uploader.</p>
@@ -35,6 +42,38 @@
               alert(errorMessage);
             }
           },
+          template: '<div class="qq-uploader">' + 
+                  '<div class="file-upload-drop-area" style="display: block;"><span>Drop files here to upload</span></div>' +
+                  '<div class="file-upload-button btn btn-large">Click here to upload</div>' +
+                  '<ul class="qq-upload-list"></ul>' + 
+               '</div>',
+
+          // template for one item in file list
+          fileTemplate: '<li>' +
+                  '<span class="qq-upload-file"></span>' +
+                  '<span class="qq-upload-spinner"></span>' +
+                  '<span class="qq-upload-size"></span>' +
+                  '<a class="qq-upload-cancel" href="#">Cancel</a>' +
+                  '<span class="qq-upload-failed-text">Failed</span>' +
+              '</li>',        
+
+          classes: {
+              // used to get elements from templates
+              button: 'file-upload-button',
+              drop: 'file-upload-drop-area',
+              dropActive: 'file-upload-drop-area-active',
+              list: 'qq-upload-list',
+
+              file: 'qq-upload-file',
+              spinner: 'qq-upload-spinner',
+              size: 'qq-upload-size',
+              cancel: 'qq-upload-cancel',
+
+              // added to list item when upload completes
+              // used in css to hide progress spinner
+              success: 'qq-upload-success',
+              fail: 'qq-upload-fail'
+          }
       });
       
     <% end %>

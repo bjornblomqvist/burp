@@ -24,6 +24,10 @@ module Burp
     def mtime
       @mtime_cache ||= File.mtime(on_disk_path)
     end
+    
+    def size
+      @size_cache ||= File.size(on_disk_path)
+    end
   
     def <=>(other)
       other.is_a?(File) ? self.mtime <=> other.mtime : 0

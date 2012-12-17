@@ -1,11 +1,5 @@
-  
-  - Fix group icon on the page menu page
-  
+
   - Move documentationt to a box on the right.
-  
-  - Files title
-  - Change file remove link to a read remove button a bit like the link/group drag handel
-  - Nicer file upload button, drop area with button in the middle
   
   
   - Add go to burp link the editor
