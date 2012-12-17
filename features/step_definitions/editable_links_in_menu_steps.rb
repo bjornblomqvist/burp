@@ -32,6 +32,7 @@ end
 
 When /^I remove the link$/ do
   click_link("Google")
+  sleep 0.5
   click_button("Remove")
   page.driver.browser.switch_to.alert.tap do |alert|
     alert.text.should include("Are you sure?")

@@ -37,25 +37,84 @@
 <%= @pages_not_in_menu.to_html %>
 </span>
 
+
+
+
+<div class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Modal header</h3>
+  </div>
+  <div class="modal-body">
+  </div>
+  <div class="modal-footer">
+  </div>
+</div>
+
 <script type="text/javascript" charset="utf-8">
   
   <% content_for :inline_javascript do %>
     
+  // $(function() {
+  // 
+  //     // Fix menu urls so that they go to the edit pages
+  //     $('section.group li.link a').each(function() {
+  //       $(this).attr("orginial-url",$(this).attr("href"))
+  //       var id = $(this).attr('id');
+  //       $(this).attr('href',"./links/"+id+"/edit");
+  //     });
+  //     
+  //     $('section.group').each(function() {
+  //       var id = $(this).attr('id');
+  //       var groupName = $(this).find(".group-name").first();
+  //       groupName.html('<a href="./groups/'+id+'/edit">'+groupName.text()+'</a>')
+  //     });
+  // 
+  //   });
+  
   $(function() {
+    $('.dnd-editable-menu').on('click',"a, .group-name",function(event) {
+      event.preventDefault();
+      
+      var target = $(event.target);
+      
+      if(target.is(".group-name")) {
+        target = target.closest("section.group");
+      }
+      
+      var id = $(target).attr('id');
+      
+      var path = $(target).is("a") ? "./links/"+id : "./groups/"+id;
+      
+      $.get(path+"/edit",function(data) {
+        
+        var the_form = $(data).find("form");
+        the_form.attr("action",path);
 
-    // Fix menu urls so that they go to the edit pages
-    $('section.group li.link a').each(function() {
-      $(this).attr("orginial-url",$(this).attr("href"))
-      var id = $(this).attr('id');
-      $(this).attr('href',"./links/"+id+"/edit");
+        $("#my-pop-over").remove();
+        $('.modal').clone().attr("id",'my-pop-over').appendTo("body");
+        $("#my-pop-over .modal-body").append(the_form);
+        
+        $("#my-pop-over .modal-header h3").text(the_form.find(" > fieldset > legend").text());
+        the_form.find(" > fieldset > legend").remove();
+        
+        the_form.find(".form-actions").hide();
+        the_form.find(".form-actions button").each(function() {
+          var _this = this;
+          var new_button = $(this).clone().attr("onclick",'');
+          new_button.appendTo("#my-pop-over .modal-footer");
+          new_button.click(function() {
+            if($(this).text() === "Cancel") {
+              $("#my-pop-over").modal("hide");
+            } else {
+              $(_this).click();
+            }
+          });
+        });
+        
+        $("#my-pop-over").modal('show');
+      });
     });
-    
-    $('section.group').each(function() {
-      var id = $(this).attr('id');
-      var groupName = $(this).find(".group-name").first();
-      groupName.html('<a href="./groups/'+id+'/edit">'+groupName.text()+'</a>')
-    });
-
   });
   
   <% end %>
