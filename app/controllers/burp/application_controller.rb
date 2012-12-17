@@ -24,7 +24,7 @@ module Burp
     end
     
     def authenticate
-      unless Burp.access.may_skip_http_auth? || Rails.env = "test"
+      if !Burp.access.may_skip_http_auth? || Rails.env == "test"
       
         if !Rails.application.config.respond_to?(:burp_password) or !Rails.application.config.respond_to?(:burp_username)
           raise "config.burp_username and config.burp_password are not set.\n\nYou can fix this by adding them to application.rb."
