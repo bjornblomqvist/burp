@@ -201,6 +201,10 @@ $(function() {
       $('#file-uploader input').click();
     }});
     
+    $.adminDock.footer.addButton({ icon: 'signin', text: 'Go to Burp', click:function() {
+      window.location = "/burp/pages/"
+    }});
+    
     $.adminDock.footer.addButton({ icon: 'undo', text: 'Discard', secondary: true, click:function() {
       // We set this as it holds all the images as when we started
       $('.snippet-'+snippetName).html(originalHtml);

@@ -1,10 +1,6 @@
 
   - Move documentationt to a box on the right.
   
-  
-  - Add go to burp link the editor
-  
-  
   - Fix page edit popup
   - Link/Group edit popup
   
