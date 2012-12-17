@@ -1,17 +1,6 @@
 
-  - Move documentationt to a box on the right.
-  
   - Fix page edit popup
-  - Link/Group edit popup
-  
-  
-  
-  - Master - merges in the CMS branch in i sub directory
-  - CMS branch - tracks the remote git repo
-  
-  
-  
-  
+  - Link/Group edit popup  
   
   - Write a test for the pages not in menu feature
   

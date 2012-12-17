@@ -1,7 +1,29 @@
 
+<div class="well well-large on-page-documentation">
+  <h2>Howto</h2>
+  
+  <h4>Change menu order</h4>
+  <p>You can change the order of the menu by draging around the <strong style="color: green;">links</strong> and <strong style="color: orange;">groups</strong>.</p>
+
+  <h4>Change link title</h4>
+  <p>Click on any <strong style="color: green;">link</strong> to edit its title and url.</p>
+
+  <h4>Change group title</h4>
+  <p>Click on any <strong style="color: orange;">group</strong> to edit its title.</p>
+
+  <h4>Remove a group or link</h4>
+  <p>Click on any <strong style="color: orange;">group</strong> or <strong style="color: green;">link</strong> to edit it and then click the remove button.</p>
+
+  <h4>Add a group or link</h4>
+  <p>Click on "New link" or "New group" bellow the menu to add a new <strong style="color: green;">link</strong> or <strong style="color: orange;">group</strong>.</p>
+
+  <h4>Quikly add a cms page</h4>
+  <p>Drag and drop a <strong style="color: green;">link</strong> from the <strong>"Pages not in the above menu"</strong> list.<p>
+  <p>NOTE! <strong>"Pages not in the above menu"</strong> is a generated list of pages, any <strong style="color: green;">links</strong> or <strong style="color: orange;">groups</strong> draged to it will be removed from the menu and lost when this page is reloaded.</p>
+</div>
 
 <h1><%= @menu.name.capitalize %></h1>
-
+<hr>
 <span class="dnd-editable-menu">
 <%= @menu.to_html %>
 </span>
@@ -14,28 +36,6 @@
 <span class="dnd-editable-menu">
 <%= @pages_not_in_menu.to_html %>
 </span>
-<hr>
-
-<h3>Howto</h3>
-
-<h4>Change menu order</h4>
-<p>You can change the order of the menu by draging around the <strong style="color: green;">links</strong> and <strong style="color: orange;">groups</strong>.</p>
-
-<h4>Change link title</h4>
-<p>Click on any <strong style="color: green;">link</strong> to edit its title and url.</p>
-
-<h4>Change group title</h4>
-<p>Click on any <strong style="color: orange;">group</strong> to edit its title.</p>
-
-<h4>Remove a group or link</h4>
-<p>Click on any <strong style="color: orange;">group</strong> or <strong style="color: green;">link</strong> to edit it and then click the remove button.</p>
-
-<h4>Add a group or link</h4>
-<p>Use the <strong style="color: green;">links</strong> bellow the menu to add a new <strong style="color: green;">link</strong> or <strong style="color: orange;">group</strong>.</p>
-
-<h4>Quikly add a cms page</h4>
-<p>Drag and drop a <strong style="color: green;">link</strong> from the <strong>"Pages not in the above menu"</strong> list.<p>
-<p>NOTE! this is a generated list of pages, any <strong style="color: green;">links</strong> or <strong style="color: orange;">groups</strong> draged to it will be removed from the menu and lost when this page is reloaded.</p>
 
 <script type="text/javascript" charset="utf-8">
   
