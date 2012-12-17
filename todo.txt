@@ -1,6 +1,5 @@
 
   - Fix page edit popup
-  - Link/Group edit popup  
   
   - Write a test for the pages not in menu feature
   
