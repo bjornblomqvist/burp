@@ -1,4 +1,30 @@
   
+  - Pages, byt ordning och lägg till "go to page"
+
+  - Fix group icon on the page menu page
+  
+  - Move documentationt to a box on the right.
+  
+  - Files title
+  - Change file remove link to a read remove button a bit like the link/group drag handel
+  - Nicer file upload button, drop area with button in the middle
+  
+  
+  - Add go to burp link the editor
+  
+  
+  - Fix page edit popup
+  - Link/Group edit popup
+  
+  
+  
+  - Master - merges in the CMS branch in i sub directory
+  - CMS branch - tracks the remote git repo
+  
+  
+  
+  
+  
   - Write a test for the pages not in menu feature
   
   - Add globals, just named snippets, first version you can only edit from within the burp admin

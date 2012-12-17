@@ -13,6 +13,10 @@ module Burp
       end
     end
     
+    def self.count
+      Dir.glob(Burp.content_directory + "menus/*.yaml").length
+    end
+    
     def self.find(name)
       menu = Menu.new(name)
       if(menu.load)
@@ -29,7 +33,6 @@ module Burp
     def load
       if File.exist?(path)
         group = Group.from_yaml(File.read(path))
-        self.name = group.name
         self.children = group.children
         
         true
