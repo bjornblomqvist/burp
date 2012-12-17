@@ -1,6 +1,4 @@
   
-  - Pages, byt ordning och lägg till "go to page"
-
   - Fix group icon on the page menu page
   
   - Move documentationt to a box on the right.

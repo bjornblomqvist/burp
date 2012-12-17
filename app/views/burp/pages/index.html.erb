@@ -3,11 +3,17 @@
 
 <hr>
 
-<% @pages.each do |page| %>
-
-  <%= link_to "#{page.path}", edit_page_path(page), :class => "page-path-part" %> <%= link_to "#{page.title}", edit_page_path(page) %><br>
-
-<% end %>
+<table>
+  <tbody>
+  <% @pages.each do |page| %>
+  <tr>
+    <td><%= link_to "#{page.title}", edit_page_path(page), :title => "Click to edit" %></td>
+    <td><%= link_to "#{page.path}", edit_page_path(page), :title => "Click to edit" %></td>
+    <td><%= link_to "Go to page", page.path %></td>
+  </tr>
+  <% end %>
+  </tbody>
+</table>
 <br>
 
 <%= link_to "» New page", new_page_path %>
