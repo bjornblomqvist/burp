@@ -5,7 +5,7 @@ module Burp
 
     attr_accessor :snippets,:title
 
-    def initialize(options)
+    def initialize(options = {})
       @snippets = options[:snippets] || {}
       @title = options[:title] || ""
     end

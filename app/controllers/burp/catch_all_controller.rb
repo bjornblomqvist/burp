@@ -3,6 +3,8 @@ module Burp
     
   class CatchAllController < ApplicationController
 
+    skip_before_filter :authenticate
+
     def show
       @menu = Burp::Menu.find("main")
       @cms_page = Burp.find_page(request.path)

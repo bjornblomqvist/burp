@@ -1,7 +1,8 @@
 
   - Fix page edit popup
-  
   - Write a test for the pages not in menu feature
+  
+  
   
   - Add globals, just named snippets, first version you can only edit from within the burp admin
     - Must be a markdown editor
