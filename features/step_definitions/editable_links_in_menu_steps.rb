@@ -48,6 +48,7 @@ end
 
 When /^I enter a new name for the link but i dont save the changes$/ do
   click_link("Google")
+  has_css?("#my-pop-over", :wait => 5, :visible => true) # Wait for the form to appear
   fill_in "Name", :with => "Google now with www"
   fill_in "Url", :with => "http://www.google.com/"
   click_button("Cancel")
