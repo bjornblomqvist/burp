@@ -1,6 +1,5 @@
   
   - Fix popup for new group,link,page
-  - Change upload page to use ajax to refresh the list
   - Write a test for the pages not in menu feature
   
   - Add globals, just named snippets, first version you can only edit from within the burp admin

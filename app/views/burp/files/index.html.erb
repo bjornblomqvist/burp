@@ -31,7 +31,9 @@
           action: '/burp/files',
           onComplete: function(id, fileName, responseJSON){
             if(responseJSON.success) {
-              document.location.reload(true);
+              $.get(document.location,function(data) {
+                $('table').replaceWith($(data).find('table'));
+              });
             } else {
               var errorMessage = "";
               $.each(responseJSON.errors,function(index,error) {
