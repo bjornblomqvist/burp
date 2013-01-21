@@ -20,6 +20,7 @@ When /^I go and change the path of that page$/ do
   visit "/burp/"
   click_link "Pages"
   click_link "A test title"
+  has_css?("#my-pop-over", :wait => 5, :visible => true) # Wait for the form to appear
   fill_in "Path", :with => "/a-better-path"
   click_button "Save"
 end
