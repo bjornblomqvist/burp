@@ -54,23 +54,6 @@
 <script type="text/javascript" charset="utf-8">
   
   <% content_for :inline_javascript do %>
-    
-  // $(function() {
-  // 
-  //     // Fix menu urls so that they go to the edit pages
-  //     $('section.group li.link a').each(function() {
-  //       $(this).attr("orginial-url",$(this).attr("href"))
-  //       var id = $(this).attr('id');
-  //       $(this).attr('href',"./links/"+id+"/edit");
-  //     });
-  //     
-  //     $('section.group').each(function() {
-  //       var id = $(this).attr('id');
-  //       var groupName = $(this).find(".group-name").first();
-  //       groupName.html('<a href="./groups/'+id+'/edit">'+groupName.text()+'</a>')
-  //     });
-  // 
-  //   });
   
   $(function() {
     $('.dnd-editable-menu').on('click',"a, .group-name",function(event) {

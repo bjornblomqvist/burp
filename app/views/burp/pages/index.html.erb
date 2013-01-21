@@ -34,8 +34,8 @@
   <tbody>
   <% @pages.sort{|a,b| a.path <=> b.path}.each do |page| %>
   <tr>
-    <td><%= link_to "#{page.title}", edit_page_path(page), :title => "Click to edit" %></td>
-    <td><%= link_to "#{page.path}", edit_page_path(page), :title => "Click to edit" %></td>
+    <td><%= link_to "#{page.title}", edit_page_path(page), :title => "Click to edit", :class => "edit-page-link" %></td>
+    <td><%= link_to "#{page.path}", edit_page_path(page), :title => "Click to edit", :class => "edit-page-link" %></td>
     <td><%= link_to "Go to page", page.path %></td>
   </tr>
   <% end %>
@@ -44,3 +44,67 @@
 <br>
 
 <%= link_to "» New page", new_page_path %>
+
+
+
+
+
+
+<div class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Modal header</h3>
+  </div>
+  <div class="modal-body">
+  </div>
+  <div class="modal-footer">
+  </div>
+</div>
+
+
+<script type="text/javascript" charset="utf-8">
+  
+  <% content_for :inline_javascript do %>
+  
+  $(function() {
+    $('.burp-pages-index').on('click',"a.edit-page-link",function(event) {
+      event.preventDefault();
+      
+      var target = $(event.target);
+      
+      var path = target.attr('href');
+      
+      $.get(path,function(data) {
+        
+        var the_form = $(data).find("form");
+        the_form.attr("action",path.replace(/\/edit$/,''));
+
+        $("#my-pop-over").remove();
+        $('.modal').clone().attr("id",'my-pop-over').appendTo("body");
+        $("#my-pop-over .modal-body").append(the_form);
+        
+        $("#my-pop-over .modal-header h3").text(the_form.find(" > fieldset > legend").text());
+        the_form.find(" > fieldset > legend").remove();
+        
+        the_form.find(".form-actions").hide();
+        the_form.find(".form-actions button").each(function() {
+          var _this = this;
+          var new_button = $(this).clone().attr("onclick",'');
+          new_button.appendTo("#my-pop-over .modal-footer");
+          new_button.click(function() {
+            if($(this).text() === "Cancel") {
+              $("#my-pop-over").modal("hide");
+            } else {
+              $(_this).click();
+            }
+          });
+        });
+        
+        $("#my-pop-over").modal('show');
+      });
+    });
+  });
+  
+  <% end %>
+    
+</script>
