@@ -18,8 +18,8 @@ Feature: editable group in menu
     When I remove the group
     Then I should not any longer see the group in the menu
     
-  Scenario: i change a groups name but i deside not to save the change
+  Scenario: i change a groups name but i decide not to save the change
     Given I am editing a menu that has a group
-    When I change the name of the group but deside not to keep the changes
+    When I change the name of the group but decide not to keep the changes
     Then the groups name should not have changed
     

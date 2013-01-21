@@ -10,6 +10,7 @@ end
 
 When /^I change the name of the group$/ do
   find(".group-name:contains('About bits2life')").click 
+  has_css?("#my-pop-over", :wait => 5, :visible => true) # Wait for the form to appear
   fill_in "Name", :with => "A new group name"
   click_button("Save")
 end
@@ -33,8 +34,9 @@ Then /^I should not any longer see the group in the menu$/ do
   page.find(".dnd-editable-menu").should_not have_content("About bits2life")
 end
 
-When /^I change the name of the group but deside not to keep the changes$/ do
+When /^I change the name of the group but decide not to keep the changes$/ do
   find(".group-name:contains('About bits2life')").click 
+  has_css?("#my-pop-over", :wait => 5, :visible => true) # Wait for the form to appear
   fill_in "Name", :with => "A new group name"
   click_button("Cancel")
 end

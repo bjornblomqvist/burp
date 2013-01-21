@@ -21,6 +21,7 @@ end
 
 When /^I change the name of the link$/ do
   click_link("Google")
+  has_css?("#my-pop-over", :wait => 5, :visible => true) # Wait for the form to appear
   fill_in "Name", :with => "Google now with www"
   fill_in "Url", :with => "http://www.google.com/"
   click_button("Save")
@@ -32,7 +33,7 @@ end
 
 When /^I remove the link$/ do
   click_link("Google")
-  sleep 0.5
+  has_css?("#my-pop-over", :wait => 5, :visible => true) # Wait for the form to appear
   click_button("Remove")
   page.driver.browser.switch_to.alert.tap do |alert|
     alert.text.should include("Are you sure?")

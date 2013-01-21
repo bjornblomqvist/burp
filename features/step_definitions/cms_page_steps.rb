@@ -54,6 +54,7 @@ When /^I remove the page$/ do
   visit "/burp/"
   click_link "Pages"
   click_link "Start page"
+  has_css?("#my-pop-over", :wait => 5, :visible => true) # Wait for the form to appear
   click_button "Remove"
   page.driver.browser.switch_to.alert.tap do |alert|
     alert.text.should include("Are you sure?")
