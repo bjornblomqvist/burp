@@ -95,7 +95,9 @@
           });
         });
         
-        $("#my-pop-over").modal('show');
+        $("#my-pop-over").modal('show').one('shown',function() {
+          $(this).find('input').not("input[type=button],input[type=hidden],input[type=submit]").first().focus();
+        });
       });
     });
   });

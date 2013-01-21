@@ -43,7 +43,7 @@
 </table>
 <br>
 
-<%= link_to "» New page", new_page_path %>
+<%= link_to "» New page", new_page_path, :class => 'new-page-link' %>
 
 
 
@@ -67,7 +67,9 @@
   <% content_for :inline_javascript do %>
   
   $(function() {
-    $('.burp-pages-index').on('click',"a.edit-page-link",function(event) {
+    
+    // Popup for edit and new page
+    $('.burp-pages-index').on('click',"a.edit-page-link, a.new-page-link",function(event) {
       event.preventDefault();
       
       var target = $(event.target);
@@ -77,7 +79,7 @@
       $.get(path,function(data) {
         
         var the_form = $(data).find("form");
-        the_form.attr("action",path.replace(/\/edit$/,''));
+        the_form.attr("action",path.replace(/\/(edit|new)$/,''));
 
         $("#my-pop-over").remove();
         $('.modal').clone().attr("id",'my-pop-over').appendTo("body");
@@ -100,7 +102,9 @@
           });
         });
         
-        $("#my-pop-over").modal('show');
+        $("#my-pop-over").modal('show').one('shown',function() {
+          $(this).find('input').not("input[type=button],input[type=hidden],input[type=submit]").first().focus();
+        });
       });
     });
   });
