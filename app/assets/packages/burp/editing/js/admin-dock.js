@@ -2,7 +2,7 @@ $(function($) {
 
   var originalBodyPadding = parseInt($('body').css('padding-bottom'));
 
-  var dockElement = $('<div class="admin-dock"><div class="modules"></div></div>');
+  var dockElement = $('<div id="admin-dock" class="admin-dock"><div class="modules"></div></div>');
   var moduleElement = dockElement.find('.modules');
   var headerElement = $('<header class="dock-toolbar"><ul class="primary"><li class="title" html="Admin">Admin</li></ul><ul class="secondary"><li><a class="close"><i class="icon-remove close"></i></a></li></ul><div class="clearfix"></div></header>');
   var footerElement = $('<footer class="dock-toolbar"><ul class="primary"></ul><ul class="secondary"></ul><div class="clearfix"></div></footer>');
