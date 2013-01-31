@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "burp"
-  s.version = "1.2.0"
+  s.version = "1.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Darwin"]
-  s.date = "2012-12-06"
+  s.date = "2013-01-31"
   s.description = " A CMS that tryes hard to not get in your way! "
   s.email = "darwin@bits2life.com"
   s.extra_rdoc_files = [
@@ -313,13 +313,27 @@ Gem::Specification.new do |s|
     "app/assets/packages/burp/editing/js/admin-dock.js",
     "app/assets/packages/burp/editing/js/content-decorator.js",
     "app/assets/packages/burp/editing/js/main.js",
+    "app/assets/packages/burp/editing/js/marked.js",
     "app/assets/packages/burp/editing/js/md5.js",
-    "app/assets/packages/burp/editing/js/showdown.js",
     "app/assets/packages/burp/editing/js/stay.js",
+    "app/assets/packages/gritter/README.markdown",
+    "app/assets/packages/gritter/css/jquery.gritter.less",
+    "app/assets/packages/gritter/gritter.js",
+    "app/assets/packages/gritter/gritter.less",
+    "app/assets/packages/gritter/images/gritter-light.png",
+    "app/assets/packages/gritter/images/gritter-long.png",
+    "app/assets/packages/gritter/images/gritter.png",
+    "app/assets/packages/gritter/images/ie-spacer.gif",
+    "app/assets/packages/gritter/images/trees.jpg",
+    "app/assets/packages/gritter/index.html",
+    "app/assets/packages/gritter/js/jquery.gritter.js",
+    "app/assets/packages/gritter/js/jquery.gritter.min.js",
     "app/assets/stylesheets/burp/application.less",
     "app/assets/stylesheets/burp/bootstrap.css",
     "app/assets/stylesheets/burp/fileupload.less",
     "app/assets/stylesheets/burp/views/dnd-menu.less",
+    "app/assets/stylesheets/burp/views/files/index.less",
+    "app/assets/stylesheets/burp/views/pages/index.less",
     "app/controllers/burp/application_controller.rb",
     "app/controllers/burp/catch_all_controller.rb",
     "app/controllers/burp/error_controller.rb",
@@ -376,6 +390,9 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<therubyracer>, [">= 0"])
       s.add_runtime_dependency(%q<twitter_bootstrap_form_for>, ["~> 2.0.1.0.rc1"])
       s.add_development_dependency(%q<sqlite3>, [">= 0"])
+      s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_development_dependency(%q<bundler>, [">= 0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
@@ -498,6 +515,9 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, [">= 0"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_dependency(%q<bundler>, [">= 0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
       s.add_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, [">= 0"])
@@ -513,6 +533,9 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<therubyracer>, [">= 0"])
     s.add_dependency(%q<twitter_bootstrap_form_for>, ["~> 2.0.1.0.rc1"])
     s.add_dependency(%q<sqlite3>, [">= 0"])
+    s.add_dependency(%q<rdoc>, ["~> 3.12"])
+    s.add_dependency(%q<bundler>, [">= 0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, [">= 0"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
