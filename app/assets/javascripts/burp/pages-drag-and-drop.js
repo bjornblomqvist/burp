@@ -4,6 +4,11 @@
 
 $(function() {
   
+  
+  
+  $('section.group li.link, section.group section.group').prepend('<span class="drag-handel">Drag</span>');
+  
+  
   var rects = [];
   
   function within(event) {
@@ -68,7 +73,7 @@ $(function() {
   }
  
   $('.dnd-editable-menu > section.group li.link, .dnd-editable-menu > section.group li.group').draggable({
-    handle: '> h2, > a',
+    handle: '.drag-handel',
     opacity: 0.5,
     helper: 'clone',
     distance: 10,
@@ -90,11 +95,14 @@ $(function() {
       
       if(rect) {
         if(rect.element === event.target) {
-          // Cant drop on self          
+          // Cant drop on self      
+          return;    
         } else if(rect.element === ui.helper[0]) {
           // Cant drop ui helper
+          return;
         } else if($(event.target).has(rect.element).length > 0) {
           // Cant drop on a child of self
+          return;
         } else if($(rect.element).is("ul.children")) {
           // Can drop on an empty list
           $(event.target).closest("li.child").appendTo(rect.element);
@@ -103,7 +111,6 @@ $(function() {
           // Can drop on an empty list of a group
           
           var x = event.pageX;
-          var y = event.pageY;
           
           if(rect.left + 100 < x) {
             // Add as child

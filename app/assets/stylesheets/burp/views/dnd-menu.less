@@ -49,39 +49,34 @@
   
     li {
       min-height: 27px;
+      line-height: 27px;
     }
   
   
     /*
       Drag buttons
     */
-    li > a, .group > .group-name {
-      
-      line-height: 27px;
-      
-      &:before {
-        content: "Drag";
-        background-color: #468847;
-        border-radius: 3px 3px 3px 3px;
-        color: #FFFFFF;
-        font-size: 9.75px;
-        font-weight: bold;
-        padding: 1px 3px 2px;
-        text-transform: uppercase;
-        cursor: move;
-        margin-right: 5px;
-        position: relative;
-        line-height: 14px;
-        top: 0px;
-        left: 0px;
-      }
+    .drag-handel {
+      background-color: #468847;
+      border-radius: 3px 3px 3px 3px;
+      color: #FFFFFF;
+      cursor: move;
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 1px;
+      font-weight: normal;
+      letter-spacing: 0.5px;
+      line-height: 14px;
+      margin-right: 5px;
+      padding: 2px 4px;
+      position: relative;
+      text-transform: uppercase;
+      top: 0;
+      vertical-align: middle;
     }
     
-    .group > .group-name {
-
-      &:before {
+    .group > .drag-handel {
         background: #F89406;
-      }
     }
   }
   
