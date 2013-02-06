@@ -83,12 +83,16 @@ $(function() {
     
     $.getJSON('/burp/files/',function(data) {
       
-      $('#gallery img').remove();
+      $('#gallery .images li').remove();
       
       $.each(data.paths,function(index,path) {
         var pathParts = path.split("/");
         var fileName = pathParts[pathParts.length-1];
-        $('#gallery .images').append('<li title="'+fileName+'"><img src="'+path+'"><label>'+fileName+'</label></li>');
+        if(fileName.match(/\.(png|jpeg|jpg|gif)$/)) {
+          $('#gallery .images').append('<li title="'+fileName+'"><img src="'+path+'"><span  class="position-helper"><label>'+fileName+'</label><span></li>');
+        } else {
+          $('#gallery .images').append('<li title="'+fileName+'"><span path="'+path+'" class="click-area">Double click to add file</span><span class="position-helper"><label>'+fileName+'</label><span></li>');
+        }
       });
 
       contentDecorator.makeDroppable('#gallery img', function(element, positionClass) {
@@ -139,13 +143,14 @@ $(function() {
       }
     });
     
-    $(document).on('dblclick.burp','#gallery li img',function(event) {
+    $(document).on('dblclick.burp','#gallery li img, #gallery li .click-area',function(event) {
       event.preventDefault();
       
-      var url = $(this).attr('src');
+      var url = $(this).attr('src') || $(this).attr('path');
       $('.admin-dock .icon-edit').click();
       editor.focus();
-      editor.replaceRange('<img src="'+url+'">',editor.getCursor(true),editor.getCursor(false));
+      var content = url.match(/\.(png|jpeg|jpg|gif)$/) ? '<img src="'+url+'">' : '<a href="'+url+'">'+url+'</a>';
+      editor.replaceRange(content,editor.getCursor(true),editor.getCursor(false));
     });
 
     contentDecorator.addRemoveZone('#gallery');
