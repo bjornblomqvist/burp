@@ -86,7 +86,9 @@ $(function() {
       $('#gallery img').remove();
       
       $.each(data.paths,function(index,path) {
-        $('#gallery .images').append('<li><img src="'+path+'"></li>');
+        var pathParts = path.split("/");
+        var fileName = pathParts[pathParts.length-1];
+        $('#gallery .images').append('<li title="'+fileName+'"><img src="'+path+'"><label>'+fileName+'</label></li>');
       });
 
       contentDecorator.makeDroppable('#gallery img', function(element, positionClass) {
@@ -202,7 +204,7 @@ $(function() {
     }});
     
     $.adminDock.footer.addButton({ icon: 'signin', text: 'Go to Burp', click:function() {
-      window.location = "/burp/pages/"
+      window.location = "/burp/pages/";
     }});
     
     $.adminDock.footer.addButton({ icon: 'undo', text: 'Discard', secondary: true, click:function() {

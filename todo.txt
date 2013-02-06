@@ -1,5 +1,4 @@
   
-  - Show file names in burp list
   - Change file names in burp
   
   - Fix so that links draged from the "Pages not in the above menu" are editable after the drag. 
