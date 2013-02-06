@@ -12,7 +12,7 @@ When /^I go and add a link to the first menu$/ do
   click_button "Create"
 end
 
-Then /^I should the new link in the menu$/ do
+Then /^I should see the new link in the menu$/ do
   find('a:contains("A new link")')
 end
 
