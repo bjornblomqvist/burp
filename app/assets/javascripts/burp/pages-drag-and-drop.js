@@ -94,9 +94,19 @@ $(function() {
       var rect = currentRect(event);
       
       if(rect) {
+        
+        var x = event.pageX;
+        
         if(rect.element === event.target) {
-          // Cant drop on self      
-          return;    
+          
+          // Add to above group if enough to the right
+          if($(rect.element).is('.link') && $(rect.element).prev('.group') && rect.left + 100 < x) {
+            $(event.target).closest("li.child").prependTo($(rect.element).prev().find('> section.group > ul.children'));
+            rects = getRects($(".dnd-editable-menu > section.group"),"li.child, ul.children");
+          } else {
+            return;
+            // Cant drop on self
+          }  
         } else if(rect.element === ui.helper[0]) {
           // Cant drop ui helper
           return;
@@ -109,9 +119,6 @@ $(function() {
           rects = getRects($(".dnd-editable-menu > section.group"),"li.child, ul.children");
         } else if($(rect.element).is("li.group")) {
           // Can drop on an empty list of a group
-          
-          var x = event.pageX;
-          
           if(rect.left + 100 < x) {
             // Add as child
             $(event.target).closest("li.child").prependTo($(rect.element).find('> section.group > ul.children'));
