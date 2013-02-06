@@ -134,8 +134,6 @@ $(function() {
           }
         
         } else {
-          $.debug('li.link',rect.element);
-          
           if(rect.withinTopHalf(event)) {
             $(event.target).closest("li.child").insertBefore($(rect.element).closest("li.child"));
             rects = getRects($(".dnd-editable-menu > section.group"),"li.child, ul.children");
