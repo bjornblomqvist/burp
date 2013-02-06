@@ -1,5 +1,9 @@
   
-  - Fix popup for new group,link
+  - Show file names in burp list
+  - Change file names in burp
+  
+  - Fix so that links draged from the "Pages not in the above menu" are editable after the drag. 
+    - The problem is that they have no id. Could be solved by doing a ajax update of the tree
   
   - Fix handeling of all form errors
   
