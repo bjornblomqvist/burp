@@ -21,8 +21,7 @@ module Burp
       
       
       %{
-      <section #{id ? "id='#{id}'" : ""} class="group">
-        <span class="group-name">#{name}</span>
+      <section #{id ? "id='#{id}'" : ""} class="group"><span class="group-name">#{name}</span>
         #{first_link_in_group}
         <ul class="children">
           #{children.inject("") do |x,link|  x += "<li class=\"child #{link.is_a?(Group) ? "group" : "link" } #{link.current_class(request)}\">#{link.to_html(request)}</li>" end}
