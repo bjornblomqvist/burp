@@ -149,7 +149,11 @@ $(function() {
       var url = $(this).attr('src') || $(this).attr('path');
       $('.admin-dock .icon-edit').click();
       editor.focus();
-      var content = url.match(/\.(png|jpeg|jpg|gif)$/) ? '<img src="'+url+'">' : '<a href="'+url+'">'+url+'</a>';
+      var textToLink = editor.getRange(editor.getCursor(true),editor.getCursor(false));
+      if(textToLink === "") {
+        textToLink = url;
+      }
+      var content = url.match(/\.(png|jpeg|jpg|gif)$/) ? '<img src="'+url+'">' : '<a href="'+url+'">'+textToLink+'</a>';
       editor.replaceRange(content,editor.getCursor(true),editor.getCursor(false));
     });
 
