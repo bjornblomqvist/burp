@@ -1,5 +1,6 @@
 require "burp/engine"
 require "mayi"
+require "version"
 
 ##
 # All paths to directories are expected to end with a slash.
@@ -58,5 +59,6 @@ module Burp
     raise "#{path} does not end with '/'" unless path.end_with?('/')
     Thread.current[:thread_local_content_directory] = path
   end
+  
   
 end
