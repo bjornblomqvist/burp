@@ -2,7 +2,7 @@
 .dropzone {
   position: absolute; top: 0px; height: 100%;
   border: 1px solid white; background: rgba(0,0,0,0.5); opacity: 0.5;
-  visibility: hidden;
+  visibility: visible;
   z-index: 2;
 }
 .dropzone.left { left: 0; width: 25%; }

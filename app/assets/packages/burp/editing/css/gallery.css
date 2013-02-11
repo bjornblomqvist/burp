@@ -37,7 +37,7 @@
 }
 
 #gallery .position-helper {
-  color: #888888;
+  color: #ccc;
   display: inline-block;
   font-family: arial;
   font-size: 11px;
@@ -46,6 +46,10 @@
   height: 20px;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+#gallery li:hover .position-helper {
+  color: #888;
 }
 
 #gallery li label {

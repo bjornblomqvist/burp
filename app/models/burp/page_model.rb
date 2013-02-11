@@ -23,7 +23,7 @@ module Burp
       on_disk_path =  Burp.content_directory+"pages/" + fixed_path
       on_disk_path = on_disk_path.gsub('//','/')
 
-      if File.directory?(on_disk_path)
+      if File.directory?(on_disk_path) && File.exist?("#{on_disk_path}/page.json")
       
         data = {}
         Dir.glob(on_disk_path+"/*.html").each do |snippet_path|
