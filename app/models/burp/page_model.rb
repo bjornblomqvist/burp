@@ -11,8 +11,7 @@ module Burp
     def initialize(values = {:path => '', :snippets => {}})
       
       values.each_entry do |key,value|
-        self.respond_to?("#{key}=".to_sym)
-        self.send("#{key}=".to_sym,value)
+        self.send("#{key}=".to_sym,value) if self.respond_to?("#{key}=".to_sym)
       end
     
       @original_path = values[:original_path]
