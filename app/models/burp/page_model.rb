@@ -52,9 +52,9 @@ module Burp
     end
   
     def save
-      raise "Invalid path" unless path.match(/^[a-zA-Z0-9\-\.\/]+$/)
-      raise "Path must start with a slash '/'" unless path.start_with?("/")
       raise "No path given" if path.blank?
+      raise "Path must start with a slash '/'" unless path.start_with?("/")
+      raise "Invalid path" unless path.match(/^[a-zA-Z0-9\-\.\/]+$/)
       raise "Path already taken" if File.exist?("#{on_disk_path}/page.json") && @original_path != path
 
       remove_dir
