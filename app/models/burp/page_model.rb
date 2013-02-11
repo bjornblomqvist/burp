@@ -9,12 +9,13 @@ module Burp
   
   
     def initialize(values = {:path => '', :snippets => {}})
+      
       values.each_entry do |key,value|
         self.respond_to?("#{key}=".to_sym)
         self.send("#{key}=".to_sym,value)
       end
     
-      @original_path = path
+      @original_path = values[:original_path]
     end
 
     def self.find(path)
@@ -33,7 +34,7 @@ module Burp
       
         page_data = File.exist?("#{on_disk_path}/page.json") ? JSON.parse(File.read("#{on_disk_path}/page.json")) : {}
       
-        PageModel.new(:snippets => data,:title => page_data['title'],:misc => page_data['misc'],:path => path)
+        PageModel.new(:snippets => data,:title => page_data['title'],:misc => page_data['misc'],:path => path, :original_path => path)
       else
         nil
       end
@@ -55,7 +56,7 @@ module Burp
       raise "Invalid path" unless path.match(/^[a-zA-Z0-9\-\.\/]+$/)
       raise "Path must start with a slash '/'" unless path.start_with?("/")
       raise "No path given" if path.blank?
-      raise "Path already taken" if @original_path != path && File.exist?(on_disk_path)
+      raise "Path already taken" if File.exist?("#{on_disk_path}/page.json") && @original_path != path
 
       remove_dir
       remove_dir(@original_path) unless @original_path.blank?
@@ -64,6 +65,8 @@ module Burp
       save_snippets
       
       Burp::Util.commit("Saved #{self.path}")
+      
+      true
     end
   
     def remove
