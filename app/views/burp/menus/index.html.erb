@@ -1,8 +1,9 @@
 
 <h1>Menus</h1>
 
+<hr>
 <% @menus.each do |menu| %>
   
-  <%= link_to menu.name, edit_menu_path(menu) %><br>
+  <%= link_to menu.name.capitalize, edit_menu_path(menu) %><br>
   
 <% end %>
