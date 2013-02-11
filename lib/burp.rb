@@ -1,6 +1,6 @@
 require "burp/engine"
 require "mayi"
-require "version"
+require "burp/version"
 
 ##
 # All paths to directories are expected to end with a slash.
