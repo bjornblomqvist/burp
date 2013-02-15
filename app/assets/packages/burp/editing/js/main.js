@@ -48,7 +48,7 @@ $(function() {
   }
   
   function loadSnippet() {
-     var path = window.location.pathname;
+     var path = window.burp_path || window.location.pathname;
      if(path === "/") {
        path = "/$root";
      }
@@ -225,7 +225,7 @@ $(function() {
     
     $.adminDock.footer.addButton({ icon: 'save', text: 'Save', secondary: true, click:function() {
       
-      var path = window.location.pathname;
+      var path = window.burp_path || window.location.pathname;
       if(path === "/") {
         path = "/$root";
       }
