@@ -55,7 +55,7 @@ module Burp
       raise "No path given" if path.blank?
       raise "Path must start with a slash '/'" unless path.start_with?("/")
       raise "Invalid path" unless path.match(/^[a-zA-Z0-9\-\.\/]+$/)
-      raise "Path already taken" if File.exist?("#{on_disk_path}/page.json") && @original_path != path
+      raise "Path already taken, #{path}" if File.exist?("#{on_disk_path}/page.json") && @original_path != path
 
       remove_dir
       remove_dir(@original_path) unless @original_path.blank?
