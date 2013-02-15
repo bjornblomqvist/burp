@@ -8,9 +8,9 @@ Burp::Engine.routes.draw do
   delete "/files/*id" => "files#destroy"
   
   resources :pages
-  get "/pages/*id/edit" => "pages#edit"
-  get "/pages/*id" => "pages#show"
-  put "/pages/*id" => "pages#update"
+  get "/pages/*id/edit" => "pages#edit", :id => /.+/
+  get "/pages/*id" => "pages#show", :id => /.+/
+  put "/pages/*id" => "pages#update", :id => /.+/
   
   resources :menus do
     resources :groups
