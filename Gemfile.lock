@@ -8,6 +8,7 @@ PATH
       less-rails
       mayi
       rails (~> 3.2)
+      term-ansicolor
       therubyracer
       twitter_bootstrap_form_for (~> 2.0.1.0.rc1)
 
