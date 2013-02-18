@@ -89,7 +89,7 @@ $(function() {
         var pathParts = path.split("/");
         var fileName = pathParts[pathParts.length-1];
         if(fileName.match(/\.(png|jpeg|jpg|gif)$/)) {
-          $('#gallery .images').append('<li title="'+fileName+'"><img src="'+path+'"><span  class="position-helper"><label>'+fileName+'</label><span></li>');
+          $('#gallery .images').append('<li title="'+fileName+'"><img src="'+path.replace(/(\/files\/)/,'/files/small/')+'"><span  class="position-helper"><label>'+fileName+'</label><span></li>');
         } else {
           $('#gallery .images').append('<li title="'+fileName+'"><span path="'+path+'" class="click-area">Double click to add file</span><span class="position-helper"><label>'+fileName+'</label><span></li>');
         }

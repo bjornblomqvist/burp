@@ -1,24 +1,6 @@
+  
+  - Add rake task to recrate resized images
 
-  - Fix so that commit fails unless app/cms includes a git repo
-
-  - Image reszie
-    - fix auto rsize
-    - add rake task to resize all current images
-
-  
-  /burp/files/help.jpg
-  /burp/files/small/help.jpg
-  /burp/files/medium/help.jpg
-  /burp/files/large/help.jpg
-  
-  - Resize images
-    - Resize on upload to 3 default sizes
-      - 100x200
-      - 600x900
-      - 1000x1500
-    - Rake task to generate smaller images
-  
-  
   - Write menu edit drag and drop tests
   - Write image drag and drop tests
   

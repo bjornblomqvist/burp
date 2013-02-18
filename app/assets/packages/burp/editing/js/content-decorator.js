@@ -111,6 +111,10 @@
 
                 var markdown = $(this).parent().data("target-element");
               
+                var src = $(img).attr('src');
+                if(src.match(/\/files\/small\//)) {
+                  $(img).attr('src',src.replace(/\/files\/small\//,'/files/large/'));
+                }
                 $(img).insertBefore(markdown);
                 clearDropBoxes();
               }

@@ -8,7 +8,7 @@ module Burp
     end
   
     def self.all
-      @file_paths = Dir.glob("#{Burp.content_directory}uploads/**/*")
+      @file_paths = Dir.glob("#{Burp.content_directory}uploads/*").select{|path| File.file?(path) }
       @file_paths = @file_paths.map {|path| path.gsub("#{Burp.content_directory}uploads/","/burp/files/") }
       @file_paths.map {|path| FileModel.new(path)}.sort
     end
