@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "burp"
-  s.version = "1.2.6"
+  s.version = "1.2.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Darwin"]
-  s.date = "2013-02-11"
+  s.date = "2013-02-18"
   s.description = " A CMS that tryes hard to not get in your way! "
   s.email = "darwin@bits2life.com"
   s.extra_rdoc_files = [
@@ -369,8 +369,7 @@ Gem::Specification.new do |s|
     "lib/burp/capistrano.rb",
     "lib/burp/engine.rb",
     "lib/burp/version.rb",
-    "lib/tasks/burp_tasks.rake",
-    "lib/tasks/cucumber.rake"
+    "lib/tasks/burp_tasks.rake"
   ]
   s.licenses = ["LGPL3"]
   s.require_paths = ["lib"]
@@ -389,6 +388,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<mayi>, [">= 0"])
       s.add_runtime_dependency(%q<therubyracer>, [">= 0"])
       s.add_runtime_dependency(%q<twitter_bootstrap_form_for>, ["~> 2.0.1.0.rc1"])
+      s.add_runtime_dependency(%q<term-ansicolor>, [">= 0"])
       s.add_development_dependency(%q<sqlite3>, [">= 0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
@@ -471,6 +471,17 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_development_dependency(%q<bundler>, [">= 0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_development_dependency(%q<bundler>, [">= 0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_development_dependency(%q<term-ansicolor>, [">= 0"])
+      s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_development_dependency(%q<bundler>, [">= 0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_development_dependency(%q<term-ansicolor>, [">= 0"])
       s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
@@ -484,6 +495,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<mayi>, [">= 0"])
       s.add_dependency(%q<therubyracer>, [">= 0"])
       s.add_dependency(%q<twitter_bootstrap_form_for>, ["~> 2.0.1.0.rc1"])
+      s.add_dependency(%q<term-ansicolor>, [">= 0"])
       s.add_dependency(%q<sqlite3>, [">= 0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, [">= 0"])
@@ -566,6 +578,17 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, [">= 0"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_dependency(%q<bundler>, [">= 0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_dependency(%q<bundler>, [">= 0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_dependency(%q<term-ansicolor>, [">= 0"])
+      s.add_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_dependency(%q<bundler>, [">= 0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_dependency(%q<term-ansicolor>, [">= 0"])
       s.add_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, [">= 0"])
@@ -580,6 +603,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<mayi>, [">= 0"])
     s.add_dependency(%q<therubyracer>, [">= 0"])
     s.add_dependency(%q<twitter_bootstrap_form_for>, ["~> 2.0.1.0.rc1"])
+    s.add_dependency(%q<term-ansicolor>, [">= 0"])
     s.add_dependency(%q<sqlite3>, [">= 0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, [">= 0"])
@@ -662,6 +686,17 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, [">= 0"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+    s.add_dependency(%q<rdoc>, ["~> 3.12"])
+    s.add_dependency(%q<bundler>, [">= 0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+    s.add_dependency(%q<rdoc>, ["~> 3.12"])
+    s.add_dependency(%q<bundler>, [">= 0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+    s.add_dependency(%q<term-ansicolor>, [">= 0"])
+    s.add_dependency(%q<rdoc>, ["~> 3.12"])
+    s.add_dependency(%q<bundler>, [">= 0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+    s.add_dependency(%q<term-ansicolor>, [">= 0"])
     s.add_dependency(%q<rspec>, ["~> 2.8.0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, [">= 0"])

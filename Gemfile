@@ -13,6 +13,7 @@ gem 'less-rails'
 gem 'mayi'
 gem 'therubyracer'
 gem "twitter_bootstrap_form_for", "~> 2.0.1.0.rc1"
+gem 'term-ansicolor'
 
 # Declare any dependencies that are still in development here instead of in
 # your gemspec. These might include edge Rails or gems from your path or
