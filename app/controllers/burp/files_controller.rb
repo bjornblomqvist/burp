@@ -1,6 +1,5 @@
 
 require 'fileutils'
-require 'RMagick'
 
 module Burp
   class FilesController < Burp::ApplicationController
@@ -68,7 +67,7 @@ module Burp
             FileUtils.mkdir_p(upload_directory_path)
             FileUtils.mv(file.path,upload_directory_path+File.basename(file.path))
             
-            create_smaller_images(upload_directory_path+File.basename(file.path)) if file.path.match(/(jpg|jpeg|gif|png)$/i)
+            Burp::Util.create_smaller_images(upload_directory_path+File.basename(file.path)) if file.path.match(/(jpg|jpeg|gif|png)$/i)
             
             Util.commit("Burp: file upload")
             render :json => {:success => true}
@@ -79,20 +78,6 @@ module Burp
     end
     
     private
-    
-    def create_smaller_images(file_path)
-      sizes = {:small => [200,300],:medium => [600,900], :large => [1000,1500]}
-      image = Magick::ImageList.new(file_path).first
-      sizes.each_pair do |key,value|
-        FileUtils.mkdir_p("#{upload_directory_path}#{key.to_s}")
-        if value[0] < image.columns # We only downscale
-          image.resize_to_fit(value[0],value[1]).write("#{upload_directory_path}#{key.to_s}/#{File.basename(file_path)}")
-        else
-          image.write("#{upload_directory_path}#{key.to_s}/#{File.basename(file_path)}")
-        end
-      end
-      image.destroy!
-    end
     
     def upload_directory_path
       "#{Burp.content_directory}uploads/"

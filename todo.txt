@@ -1,6 +1,4 @@
   
-  - Add rake task to recrate resized images
-
   - Write menu edit drag and drop tests
   - Write image drag and drop tests
   
