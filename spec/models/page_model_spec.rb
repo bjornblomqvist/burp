@@ -17,7 +17,7 @@ describe Burp::PageModel do
       page.stub(:save_snippets)
       Burp::Util.stub(:commit)
       
-      lambda {page.save}.should raise_error(RuntimeError ,"Path already taken")
+      lambda {page.save}.should raise_error(RuntimeError ,"Path already taken, /tmp/test/page1/")
     end
     
     it 'should raise no error when saving to the same path' do
