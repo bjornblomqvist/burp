@@ -1,13 +1,14 @@
 PATH
   remote: .
   specs:
-    burp (1.2.7)
+    burp (1.2.8)
       burp
       jquery-rails
       jquery-ui-rails
       less-rails
       mayi
       rails (~> 3.2)
+      rmagick
       term-ansicolor
       therubyracer
       twitter_bootstrap_form_for (~> 2.0.1.0.rc1)
