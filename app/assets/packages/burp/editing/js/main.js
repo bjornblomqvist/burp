@@ -153,6 +153,12 @@ $(function() {
       if(textToLink === "") {
         textToLink = url;
       }
+      
+      // Use link to large image
+      if(url.match(/(png|jpeg|gif|jpg)/)) {
+        url = url.replace(/\/files\/small\//,'/files/large/')
+      }
+      
       var content = url.match(/\.(png|jpeg|jpg|gif)$/) ? '<img src="'+url+'">' : '<a href="'+url+'">'+textToLink+'</a>';
       editor.replaceRange(content,editor.getCursor(true),editor.getCursor(false));
     });
