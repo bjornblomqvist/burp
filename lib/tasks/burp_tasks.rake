@@ -78,5 +78,6 @@ Rails.application.config.burp_password = "#{('a'..'z').to_a.shuffle[0,6].join}"
     Burp::FileModel.all.each do |file|
       Burp::Util.create_smaller_images(file.on_disk_path) if file.on_disk_path.match(/(jpg|jpeg|gif|png)/)
     end
+    Burp::Util.commit("Burp: create_smaller_images")
   end
 end
