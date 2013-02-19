@@ -44,7 +44,11 @@ module Burp
           headers["Cache-Control"] = "Public"
           headers["Last-Modified"] = File.mtime(file_path).utc.rfc2822
           
-          request.session_options[:skip] = true
+          # Stop session cookie form being set
+          request.session_options[:skip] = true 
+          
+          # WTF, send_file does not set content-length on HEAD request
+          headers["X-Burp-Length"] = File.size(file_path).to_s
           
           send_file(file_path,:disposition => file_path.match(/\.(png|jpeg|gif|jpg|pdf|txt)$/) ? 'inline' : 'attachment')
         end
