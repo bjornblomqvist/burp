@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    burp (1.2.11)
+    burp (1.2.12)
       burp
       jquery-rails
       jquery-ui-rails
