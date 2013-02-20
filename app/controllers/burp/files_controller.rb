@@ -48,9 +48,14 @@ module Burp
           request.session_options[:skip] = true 
           
           # WTF, send_file does not set content-length on HEAD request
-          headers["X-Burp-Length"] = File.size(file_path).to_s
+          headers["X-Burp-file-size"] = File.size(file_path).to_s
           
-          send_file(file_path,:disposition => file_path.match(/\.(png|jpeg|gif|jpg|pdf|txt)$/) ? 'inline' : 'attachment')
+          # Send image size
+          if request.method == 'HEAD' && file_path.match(/\.(png|jpeg|gif|jpg)$/)
+            headers["X-Burp-image-size"] = Burp::Util.image_size(file_path)
+          end
+          
+          send_file(file_path, :disposition => disposition(file_path))
         end
       else  
         render :text => "404, No such file", :status => 404, :content_type => "text/plain"
@@ -82,6 +87,10 @@ module Burp
     end
     
     private
+    
+    def disposition(file_path)
+      file_path.match(/\.(png|jpeg|gif|jpg|pdf|txt)$/) && !params.has_key?(:download) ? 'inline' : 'attachment'
+    end
     
     def upload_directory_path
       "#{Burp.content_directory}uploads/"

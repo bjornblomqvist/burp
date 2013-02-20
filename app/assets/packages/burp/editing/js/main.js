@@ -29,6 +29,10 @@ $(function() {
       
       snippet.update($('<div data-snippet-name="'+name+'" class="snippet-wrapper snippet-'+name+'"></div>').append($(snippet.elements())));
     });
+    
+    // Remove unwanted stuff
+    $('.burp-remove').remove();
+    $('.burp-unwrap').each(function() {$(this).replaceWith(this.children)});
   }
   
   function cleanup(container) {
