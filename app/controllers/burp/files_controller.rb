@@ -51,7 +51,7 @@ module Burp
           headers["X-Burp-file-size"] = File.size(file_path).to_s
           
           # Send image size
-          if request.method == 'HEAD' && file_path.match(/\.(png|jpeg|gif|jpg)$/)
+          if file_path.match(/\.(png|jpeg|gif|jpg)$/)
             headers["X-Burp-image-size"] = Burp::Util.image_size(file_path)
           end
           
