@@ -82,6 +82,20 @@
             element.appendTo('body');
           });
           
+          // Add bottom dropbox
+          if(wrappers.length > 0) {
+            var lastElement = $(wrappers[wrappers.length-1]);
+            var element = lastElement.clone();
+            var newTop = 20 + parseInt(element.css("top").replace("px",''),10) + parseInt(element.css("height").replace("px",''),10);
+            
+            element.addClass("bottom-dropbox");
+            
+            element.css("top",newTop);
+            element.css("height",50);
+            wrappers.push(element[0]);
+            element.appendTo('body');
+          }
+          
           wrappers = $(wrappers);
           wrappers.append('<div class="dropzone left" /><div class="dropzone center" /><div class="dropzone right" />');
 
@@ -110,12 +124,17 @@
                 });
 
                 var markdown = $(this).parent().data("target-element");
-              
+                
                 var src = $(img).attr('src');
                 if(src.match(/\/files\/small\//)) {
                   $(img).attr('src',src.replace(/\/files\/small\//,'/files/large/'));
                 }
-                $(img).insertBefore(markdown);
+                
+                if($(this).parent().is(".bottom-dropbox")) {
+                  $(contentEditor.element).append(img);
+                } else {
+                  $(img).insertBefore(markdown);
+                }
                 clearDropBoxes();
               }
               
