@@ -34,6 +34,18 @@ namespace :burp do
       print_green " OK"
     end
     
+    menu_path = "#{Rails.root}/app/cms/menus/main.yaml"
+    print "\t#{menu_path}"
+    if File.exist?(menu_path) 
+      print_yellow " Skipping"
+    else
+      FileUtils.mkdir_p(File.dirname(menu_path))
+      File.open(menu_path,"w") do |file|
+        file.write("---\n:name: root\n:children:\n")
+      end
+      print_green " OK"
+    end
+    
     js_path = "#{Rails.root}/app/assets/javascripts/burp.js"
     print "\t#{js_path}"
     if File.exist?(js_path) 
