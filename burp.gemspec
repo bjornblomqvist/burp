@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "burp"
-  s.version = "1.2.12"
+  s.version = "1.2.13"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Darwin"]
-  s.date = "2013-02-19"
+  s.date = "2013-02-21"
   s.description = " A CMS that tryes hard to not get in your way! "
   s.email = "darwin@bits2life.com"
   s.extra_rdoc_files = [
@@ -344,11 +344,11 @@ Gem::Specification.new do |s|
     "app/controllers/burp/pages_controller.rb",
     "app/controllers/burp/static_controller.rb",
     "app/helpers/burp/application_helper.rb",
-    "app/lib/burp/Util.rb",
     "app/lib/burp/access.rb",
     "app/lib/burp/group.rb",
     "app/lib/burp/link.rb",
     "app/lib/burp/page.rb",
+    "app/lib/burp/util.rb",
     "app/lib/burp/util/upload_handler.rb",
     "app/models/burp/file_model.rb",
     "app/models/burp/menu.rb",
@@ -360,6 +360,7 @@ Gem::Specification.new do |s|
     "app/views/burp/menus/index.html.erb",
     "app/views/burp/pages/edit.html.erb",
     "app/views/burp/pages/index.html.erb",
+    "app/views/burp/static/basic.html.erb",
     "app/views/burp/static/index.html.erb",
     "app/views/layouts/burp/application.html.erb",
     "config/cucumber.yml",
@@ -391,9 +392,6 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<term-ansicolor>, [">= 0"])
       s.add_runtime_dependency(%q<rmagick>, [">= 0"])
       s.add_development_dependency(%q<sqlite3>, [">= 0"])
-      s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
-      s.add_development_dependency(%q<bundler>, [">= 0"])
-      s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
       s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
@@ -410,9 +408,6 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<term-ansicolor>, [">= 0"])
       s.add_dependency(%q<rmagick>, [">= 0"])
       s.add_dependency(%q<sqlite3>, [">= 0"])
-      s.add_dependency(%q<rdoc>, ["~> 3.12"])
-      s.add_dependency(%q<bundler>, [">= 0"])
-      s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
       s.add_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, [">= 0"])
@@ -430,9 +425,6 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<term-ansicolor>, [">= 0"])
     s.add_dependency(%q<rmagick>, [">= 0"])
     s.add_dependency(%q<sqlite3>, [">= 0"])
-    s.add_dependency(%q<rdoc>, ["~> 3.12"])
-    s.add_dependency(%q<bundler>, [">= 0"])
-    s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
     s.add_dependency(%q<rspec>, ["~> 2.8.0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, [">= 0"])
