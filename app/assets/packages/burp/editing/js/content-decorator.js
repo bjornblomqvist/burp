@@ -59,7 +59,7 @@
           
           
           
-          contentEditor.element.find('.markdown').each(function() {
+          contentEditor.element.find('> h1,> h2,> h3,> h4,> h5,> p,> img,> blockquote,> ul,> ol').each(function() {
       
             var position = $(this).offset();
             var size = {width:$(this).outerWidth(),height:$(this).outerHeight()};
