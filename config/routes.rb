@@ -1,5 +1,6 @@
 Burp::Engine.routes.draw do
   get "/" => "static#index"
+  get "/markdown" => "static#basic"
   
   resources :files
   get "/files/" => "files#index"

@@ -3,5 +3,9 @@ module Burp
     def index
       Burp.access.may_view_static_page!(params[:action])
     end 
+    
+    def basic
+      
+    end
   end
 end
