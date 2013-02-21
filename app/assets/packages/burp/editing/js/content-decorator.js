@@ -96,6 +96,35 @@
             element.appendTo('body');
           }
           
+          // Add empty area dropbox
+          if(wrappers.length === 0) {
+            var position = $(contentEditor.element).offset();
+            var size = {width:$(contentEditor.element).outerWidth(),height:$(contentEditor.element).outerHeight()};
+            if(navigator.userAgent.match(/Firefox|Safari/)) {
+              position.left = $(contentEditor.element)[0].offsetLeft;
+            } else {
+              position.left -= $(contentEditor.element).offsetParent().offset().left;
+            }
+            
+            if(size.height < 20) {
+              size.height = 50;
+            }
+            
+            if(size.width < 10) {
+              size.width = 100;
+            }
+            
+            var element = $('<div class="dropbox"></div>');
+            wrappers.push(element[0]);
+      
+            element.addClass("bottom-dropbox");
+      
+            element.css(size);
+            element.css(position);
+            element.css({'position':'absolute'});
+            element.appendTo('body');
+          }
+          
           wrappers = $(wrappers);
           wrappers.append('<div class="dropzone left" /><div class="dropzone center" /><div class="dropzone right" />');
 
