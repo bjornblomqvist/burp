@@ -1,18 +1,18 @@
 
-  - Write menu edit drag and drop tests
-  - Write image drag and drop tests
-  
   - Fix so that links draged from the "Pages not in the above menu" are editable after the drag. 
     - The problem is that they have no id. Could be solved by doing a ajax update of the tree
   
   - Fix handeling of all form errors
   
+  - Fix so that style elment content dont get escaped by the markdown parser
+
+  - Write menu edit drag and drop tests
+  - Write image drag and drop tests
+  
   - Write a test for the pages not in menu feature
   
   - Add globals, just named snippets, first version you can only edit from within the burp admin
     - Must be a markdown editor
-  
-  - Fix so that style elment content dont get escaped by the markdown parser
   
   - Add documentation
     - Write inline on each page below the form. Just a short basic help
