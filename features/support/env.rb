@@ -53,58 +53,58 @@ Spork.prefork do
   
   
   # Fix so that we can manualy start the server, and so that we can controll when the state is reset
-  class Capybara::Selenium::Driver < Capybara::Driver::Base
-    def start_server(app)
-      @rack_server.app = app
-      @rack_server.boot
-    end
-    
-    alias_method :real_reset!, :reset!
-    def reset!
-    end
-  end
-  
-  class Capybara::Server
-    def app=(app)
-      @app = app
-    end
-  end
-  
-  class Capybara::Session
-    def app=(app)
-      @app = app
-    end
-  end
-  
-  module Capybara
-    def self.current_session=(session)
-      session_pool["#{current_driver}:#{session_name}:#{app.object_id}"] = session
-    end
-  end
+  # class Capybara::Selenium::Driver < Capybara::Driver::Base
+  #   def start_server(app)
+  #     @rack_server.app = app
+  #     @rack_server.boot
+  #   end
+  #   
+  #   alias_method :real_reset!, :reset!
+  #   def reset!
+  #   end
+  # end
+  # 
+  # class Capybara::Server
+  #   def app=(app)
+  #     @app = app
+  #   end
+  # end
+  # 
+  # class Capybara::Session
+  #   def app=(app)
+  #     @app = app
+  #   end
+  # end
+  # 
+  # module Capybara
+  #   def self.current_session=(session)
+  #     session_pool["#{current_driver}:#{session_name}:#{app.object_id}"] = session
+  #   end
+  # end
 
   Capybara.server_port = 7012
   Capybara.default_selector = :css
   Capybara.default_driver = :with_fire_bug
 
-  Capybara.run_server = false
-  Capybara.current_session.visit('/')
-  Capybara.run_server = true
+  # Capybara.run_server = false
+  # Capybara.current_session.visit('/')
+  # Capybara.run_server = true
   
 end
 
 Spork.each_run do
-  
-  old_session = Capybara.current_session
+  # 
+  # old_session = Capybara.current_session
   
   require 'cucumber/rails'
   
-  old_session.app = Capybara.app
-  Capybara.current_session = old_session
+  # old_session.app = Capybara.app
+  # Capybara.current_session = old_session
   
   Burp.global_content_directory = "/tmp/burp-test-cms/"
   require_relative "./burp_factory"
   
-  Capybara.current_session.driver.start_server(old_session.app)
+  # Capybara.current_session.driver.start_server(old_session.app)
   
   # By default, any exception happening in your Rails application will bubble up
   # to Cucumber so that your scenario will fail. This is a different from how 
@@ -147,7 +147,7 @@ Spork.each_run do
   #
 
   Before do
-    Capybara.current_session.driver.real_reset!
+    # Capybara.current_session.driver.real_reset!
     BurpFactory.clear
   end
 

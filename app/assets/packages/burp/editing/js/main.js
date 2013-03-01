@@ -92,7 +92,7 @@ $(function() {
       $.each(data.paths,function(index,path) {
         var pathParts = path.split("/");
         var fileName = pathParts[pathParts.length-1];
-        if(fileName.match(/\.(png|jpeg|jpg|gif)$/)) {
+        if(fileName.match(/\.(png|jpeg|jpg|gif)$/i)) {
           $('#gallery .images').append('<li title="'+fileName+'"><img src="'+path.replace(/(\/files\/)/,'/files/small/')+'"><span  class="position-helper"><label>'+fileName+'</label><span></li>');
         } else {
           $('#gallery .images').append('<li title="'+fileName+'"><span path="'+path+'" class="click-area">Double click to add file</span><span class="position-helper"><label>'+fileName+'</label><span></li>');
@@ -159,11 +159,11 @@ $(function() {
       }
       
       // Use link to large image
-      if(url.match(/(png|jpeg|gif|jpg)/)) {
+      if(url.match(/(png|jpeg|gif|jpg)/i)) {
         url = url.replace(/\/files\/small\//,'/files/large/')
       }
       
-      var content = url.match(/\.(png|jpeg|jpg|gif)$/) ? '<img src="'+url+'">' : '<a href="'+url+'">'+textToLink+'</a>';
+      var content = url.match(/\.(png|jpeg|jpg|gif)$/i) ? '<img src="'+url+'">' : '<a href="'+url+'">'+textToLink+'</a>';
       editor.replaceRange(content,editor.getCursor(true),editor.getCursor(false));
     });
 
