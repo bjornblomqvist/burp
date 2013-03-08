@@ -32,7 +32,7 @@ $(function() {
     
     // Remove unwanted stuff
     $('.burp-remove').remove();
-    $('.burp-unwrap').each(function() {$(this).replaceWith(this.children)});
+    $('.burp-unwrap').each(function() {$(this).replaceWith(this.children);});
   }
   
   function cleanup(container) {
@@ -141,6 +141,7 @@ $(function() {
       mode: 'markdown',
       lineNumbers: true,
       matchBrackets: true,
+      lineWrapping: true,
       theme: "default",
       onChange:function(editor,changes) {
         update(editor.getValue());
@@ -160,7 +161,7 @@ $(function() {
       
       // Use link to large image
       if(url.match(/(png|jpeg|gif|jpg)/i)) {
-        url = url.replace(/\/files\/small\//,'/files/large/')
+        url = url.replace(/\/files\/small\//,'/files/large/');
       }
       
       var content = url.match(/\.(png|jpeg|jpg|gif)$/i) ? '<img src="'+url+'">' : '<a href="'+url+'">'+textToLink+'</a>';
