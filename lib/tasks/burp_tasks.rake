@@ -2,7 +2,8 @@ require 'fileutils'
 require 'term/ansicolor'
 
 class MyPrinter
-  include Term::ANSIColor
+  extend Term::ANSIColor
+  
   def self.print_yellow text
     print yellow, text, reset, "\n"
   end
