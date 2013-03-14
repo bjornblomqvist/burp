@@ -48,7 +48,7 @@ end
 
 Then /^I there should be a page$/ do
   visit "/the-new-page"
-  page.find("title").should have_content("New page title")
+  page.find("title", :visible => false).should have_content("New page title")
 end
 
 When /^I remove the page$/ do
