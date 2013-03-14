@@ -31,7 +31,7 @@ When /^I remove the group$/ do
 end
 
 Then /^I should not any longer see the group in the menu$/ do
-  page.find(".dnd-editable-menu").should_not have_content("About bits2life")
+  page.all(".dnd-editable-menu").first.should_not have_content("About bits2life")
 end
 
 When /^I change the name of the group but decide not to keep the changes$/ do
