@@ -78,6 +78,7 @@ Spork.each_run do
   end
 
   Before do
+    BurpFactory.clear
     Capybara.reset_sessions!
     DatabaseCleaner.clean
     Dir.glob("/tmp/cqr-tests/webdriver-downloads/*") do |path|
