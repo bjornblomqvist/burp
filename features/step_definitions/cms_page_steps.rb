@@ -13,7 +13,7 @@ end
 
 Then /^that page should show the new title when viewed$/ do
   visit "/test/a-page"
-  page.find("title").should have_content("The new title")
+  page.find("title", :visible => false).should have_content("The new title")
 end
 
 When /^I go and change the path of that page$/ do
@@ -73,9 +73,7 @@ When /^I go and add a page without a page path$/ do
   click_link "Pages"
   click_link "New page"
   fill_in "Title", :with => "New page title"
-  within("#my-pop-over .modal-footer") do
-    click_button "Save"
-  end
+  click_button "Save"
 end
 
 Then /^I should be told that i must enter a page path$/ do

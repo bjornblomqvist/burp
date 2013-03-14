@@ -58,6 +58,10 @@ module Burp
     def to_param
       path == "/" ? "/$root" : path
     end
+    
+    def id
+      to_param
+    end
   
     def self.all_paths
       ((Dir.glob("#{Burp.content_directory}pages/**/*.html") + Dir.glob("#{Burp.content_directory}pages/**/*.json")).map {|path| File.dirname(path.gsub(Burp.content_directory+"pages/","/")).gsub("/#root",'/') }).uniq
