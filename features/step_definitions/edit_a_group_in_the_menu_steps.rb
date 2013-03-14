@@ -16,7 +16,7 @@ When /^I change the name of the group$/ do
 end
 
 Then /^the groups name should have changed to the new name$/ do
-  page.find(".container .group").should have_content("A new group name")
+  page.find('.group-name').should have_content("A new group name")
 end
 
 When /^I remove the group$/ do
