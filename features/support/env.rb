@@ -57,6 +57,7 @@ Spork.prefork do
   Capybara.default_selector = :css
   Capybara.app_host = "http://localhost:7003"
   Capybara.default_driver = :selenium
+  Capybara.ignore_hidden_elements = true
   
 end
 
