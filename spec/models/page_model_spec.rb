@@ -25,7 +25,7 @@ describe Burp::PageModel do
       
       page = Burp::PageModel.new(:path => "",:snippets => {})
       page.save.should be_false
-      page.errors[:path].first.should == "You must enter a path."
+      page.errors[:path].first.should == "You must enter a path"
       
     end
     

@@ -28,7 +28,7 @@ When /^I change the name of the link$/ do
 end
 
 Then /^the links name should have changed to the new name$/ do
-  page.find(".dnd-editable-menu").should have_content("Google now with www")
+  page.all(".dnd-editable-menu").first.should have_content("Google now with www")
 end
 
 When /^I remove the link$/ do
@@ -43,7 +43,7 @@ When /^I remove the link$/ do
 end
 
 Then /^I should not any longer see the link in the menu$/ do
-  page.find(".dnd-editable-menu").should_not have_content("Google")
+  page.all(".dnd-editable-menu").first.should_not have_content("Google")
 end
 
 When /^I enter a new name for the link but i dont save the changes$/ do
@@ -55,7 +55,7 @@ When /^I enter a new name for the link but i dont save the changes$/ do
 end
 
 Then /^the links name should not have changed$/ do
-  page.find(".dnd-editable-menu").should have_content("Google")
+  page.all(".dnd-editable-menu").first.should have_content("Google")
 end
 
 

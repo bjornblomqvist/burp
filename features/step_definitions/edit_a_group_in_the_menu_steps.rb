@@ -42,7 +42,7 @@ When /^I change the name of the group but decide not to keep the changes$/ do
 end
 
 Then /^the groups name should not have changed$/ do
-  page.find(".dnd-editable-menu").should have_content("About bits2life")
+  page.all(".dnd-editable-menu").first.should have_content("About bits2life")
 end
 
 
