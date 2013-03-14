@@ -68,6 +68,22 @@ Then /^there should be no pages$/ do
   page.should_not have_content("Start page")
 end
 
+When /^I go and add a page without a page path$/ do
+  visit "/burp/"
+  click_link "Pages"
+  click_link "New page"
+  fill_in "Title", :with => "New page title"
+  within("#my-pop-over .modal-footer") do
+    click_button "Save"
+  end
+end
+
+Then /^I should be told that i must enter a page path$/ do
+  page.should have_content('You must enter a path')
+end
+
+
+
 
 
 

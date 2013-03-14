@@ -22,4 +22,5 @@ Feature: editable group in menu
     Given I am editing a menu that has a group
     When I change the name of the group but decide not to keep the changes
     Then the groups name should not have changed
+  
     

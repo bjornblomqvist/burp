@@ -1,6 +1,6 @@
 
 
-<%= twitter_bootstrap_form_for :page, :url => "./", :method => (@page ? :put : :post),:html => {:id => "edit-page-form",:class => 'form-horizontal'} do |f| %>
+<%= twitter_bootstrap_form_for @page, :url => "./",:html => {:id => "edit-page-form",:class => 'form-horizontal'} do |f| %>
 
   <%= f.fieldset "Page" do %>
     <%= f.text_field :title, "Title" %>

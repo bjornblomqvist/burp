@@ -3,10 +3,26 @@ require 'fileutils'
 
 module Burp
   class PageModel
+    
+    include ActiveModel::Validations
+    include ActiveModel::Conversion
+    extend ActiveModel::Naming
 
     attr_accessor :path, :title, :snippets, :misc
   
-  
+    validates_presence_of :path, :message => "You must enter a path"
+    validates :path, :format => { :with => /^\//, :message => "Must start with a slash" }
+    validates :path, :format => { :with => /^[a-zA-Z0-9\-\.\/]+$/, :message => "Invalid path" }
+    validate do 
+      if File.exist?("#{on_disk_path}/page.json") && @original_path != path
+        errors.add(:path, "Path already taken, #{path}")
+        false
+      else
+        true
+      end
+    end
+    
+    
   
     def initialize(values = {:path => '', :snippets => {}})
       
@@ -52,20 +68,19 @@ module Burp
     end
   
     def save
-      raise "No path given" if path.blank?
-      raise "Path must start with a slash '/'" unless path.start_with?("/")
-      raise "Invalid path" unless path.match(/^[a-zA-Z0-9\-\.\/]+$/)
-      raise "Path already taken, #{path}" if File.exist?("#{on_disk_path}/page.json") && @original_path != path
-
-      remove_dir
-      remove_dir(@original_path) unless @original_path.blank?
-      create_target_dir
-      save_metadata
-      save_snippets
+      if valid?
+        remove_dir
+        remove_dir(@original_path) unless @original_path.blank?
+        create_target_dir
+        save_metadata
+        save_snippets
       
-      Burp::Util.commit("Saved #{self.path}")
-      
-      true
+        Burp::Util.commit("Saved #{self.path}")
+        
+        true
+      else
+        false
+      end
     end
   
     def remove
@@ -76,6 +91,14 @@ module Burp
     
     def root_fixed_path(path = self.path)
       path == '/' ? '/#root' : path
+    end
+    
+    def persisted?
+      !!@original_path
+    end
+    
+    def self.model_name
+      ActiveModel::Name.new(PageModel,nil,"Page")
     end
 
     private

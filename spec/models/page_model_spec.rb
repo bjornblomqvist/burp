@@ -17,7 +17,32 @@ describe Burp::PageModel do
       page.stub(:save_snippets)
       Burp::Util.stub(:commit)
       
-      lambda {page.save}.should raise_error(RuntimeError ,"Path already taken, /tmp/test/page1/")
+      page.save.should be_false
+      page.errors[:path].first.should == "Path already taken, /tmp/test/page1/"
+    end
+    
+    it 'should complain about empty path' do
+      
+      page = Burp::PageModel.new(:path => "",:snippets => {})
+      page.save.should be_false
+      page.errors[:path].first.should == "You must enter a path."
+      
+    end
+    
+    it 'should complain about invalid format' do
+      
+      page = Burp::PageModel.new(:path => "/hueothanh s   hueotns ueouoe/ueo",:snippets => {})
+      page.save.should be_false
+      page.errors[:path].first.should == "Invalid path"
+      
+    end
+    
+    it 'should complain about paths that does not start with a /' do
+      
+      page = Burp::PageModel.new(:path => "hipp",:snippets => {})
+      page.save.should be_false
+      page.errors[:path].first.should == "Must start with a slash"
+      
     end
     
     it 'should raise no error when saving to the same path' do

@@ -33,6 +33,7 @@ module Burp
     end
     
     def new
+      @page = PageModel.new
       Burp.access.may_create_new_page! do
         render :action => :edit
       end
@@ -43,19 +44,28 @@ module Burp
       Burp.access.may_create_new_page! do
         
         @page = PageModel.new
-  
+        
         @page.title = params[:page][:title]
         @page.path = params[:page][:path]
         (params[:page][:snippets] || {}).each do |name,value|
           @page.snippets[name] = value
         end
-        @page.save
+        
+        if @page.save
       
-        respond_to do |format|
-          format.html {
-            redirect_to "/burp/pages/"
-          }
-          format.json { render :json =>  {:success => true} }
+          respond_to do |format|
+            format.html {
+              redirect_to pages_path
+            }
+            format.json { render :json =>  {:success => true} }
+          end
+        else
+          respond_to do |format|
+            format.html {
+              render :edit
+            }
+            format.json { render :json =>  {:errors => @page.errors} }
+          end
         end
       end
     end
@@ -77,7 +87,7 @@ module Burp
         end
         
         @page.save
-      
+          
         respond_to do |format|
           format.html {
             redirect_to pages_path
@@ -85,7 +95,6 @@ module Burp
           format.json { render :json =>  {:success => true} }
         end
       end
-      
     end
     
     def destroy

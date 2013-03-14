@@ -22,3 +22,7 @@ Feature: cms page
     Given there is a page
     When I remove the page
     Then there should be no pages
+
+  Scenario: i forget to enter a page path
+    When I go and add a page without a page path
+    Then I should be told that i must enter a page path
