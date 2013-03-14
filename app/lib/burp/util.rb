@@ -30,12 +30,7 @@ module Burp
       image.destroy!
     end
     
-    def self.image_size(file_path)
-      image = Magick::ImageList.new(file_path).first
-      "#{image.columns}x#{image.rows}"
-    ensure
-      image.destroy!
-    end
+    
     
   end
 end

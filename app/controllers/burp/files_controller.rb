@@ -47,14 +47,6 @@ module Burp
           # Stop session cookie form being set
           request.session_options[:skip] = true 
           
-          # WTF, send_file does not set content-length on HEAD request
-          headers["X-Burp-file-size"] = File.size(file_path).to_s
-          
-          # Send image size
-          if file_path.match(/\.(png|jpeg|gif|jpg)$/)
-            headers["X-Burp-image-size"] = Burp::Util.image_size(file_path)
-          end
-          
           send_file(file_path, :disposition => disposition(file_path))
         end
       else  
