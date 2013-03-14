@@ -1,313 +1,126 @@
 
-<p style="text-align: center;">
-  <em>NOTE! This has been taken verbatim from
-  <a href="http://daringfireball.net/projects/markdown/basics">http://daringfireball.net/projects/markdown/basics</a>.<br> 
-  We really should get permission to use it or raplace it with some other documentation.
-  </em>
-</p>
+<h1>Markdown Basics</h1>
 
+            <p><em>Markdown</em> is a way to format your text to add <strong>bold</strong> and <em>italic</em> text, images, headings and a few other things, without having to use HTML. </p>
 
-<h1>Markdown: Basics</h1>
+<h2>Bold and italic text</h2>
 
-<h2>Getting the Gist of Markdown’s Formatting Syntax</h2>
+<p>To create <em>italic text</em>, surround one or a few words with stars:</p>
 
-<p>This page offers a brief overview of what it’s like to use Markdown.
-The <a title="Markdown Syntax" href="http://daringfireball.net/projects/markdown/syntax">syntax page</a> provides complete, detailed documentation for
-every feature, but Markdown should be very easy to pick up simply by
-looking at a few examples of it in action. The examples on this page
-are written in a before/after style, showing example syntax and the
-HTML output produced by Markdown.</p>
+<pre>This is how you create *italic text*.</pre>
 
-<p>It’s also helpful to simply try Markdown out; the <a title="Markdown Dingus" href="http://daringfireball.net/projects/markdown/dingus">Dingus</a> is a
-web application that allows you type your own Markdown-formatted text
-and translate it to XHTML.</p>
+<p>To create <strong>bold text</strong>, surround one or a few words with double stars:</p>
 
-<h2>Paragraphs, Headers, Blockquotes</h2>
+<pre>This is how you create **bold text**.</pre>
 
-<p>A paragraph is simply one or more consecutive lines of text, separated
-by one or more blank lines. (A blank line is any line that looks like
-a blank line &mdash; a line containing nothing but spaces or tabs is
-considered blank.) Normal paragraphs should not be indented with
-spaces or tabs.</p>
+<p>If you have to, you can make your text <strong><em>both bold and italic</em></strong>:</p>
 
-<p>Markdown offers two styles of headers: <em>Setext</em> and <em>atx</em>.
-Setext-style headers for <code>&lt;h1&gt;</code> and <code>&lt;h2&gt;</code> are created by
-“underlining” with equal signs (<code>=</code>) and hyphens (<code>-</code>), respectively.
-To create an atx-style header, you put 1-6 hash marks (<code>#</code>) at the
-beginning of the line &mdash; the number of hashes equals the resulting
-HTML header level.</p>
+<pre>This is how you create ***bold and italic text***.</pre>
 
-<p>Blockquotes are indicated using email-style ‘<code>&gt;</code>’ angle brackets.</p>
+<h2>A bullet list</h2>
 
-<p>Markdown:</p>
+<p>Create bullet lists using stars:</p>
 
-<pre><code>A First Level Header
-====================
+<pre>* Item 1  
+* Item 2  
+* Item 3</pre>
 
-A Second Level Header
----------------------
+<p>Will look like this:</p>
 
-Now is the time for all good men to come to
-the aid of their country. This is just a
-regular paragraph.
+<ul>
+<li>Item 1</li>
+<li>Item 2</li>
+<li>Item 3</li>
+</ul>
 
-The quick brown fox jumped over the lazy
-dog's back.
+<p>You can also use plus (+) or minus (-) instead of a star.</p>
 
-### Header 3
+<h2>A numbered list</h2>
 
-&gt; This is a blockquote.
-&gt; 
-&gt; This is the second paragraph in the blockquote.
-&gt;
-&gt; ## This is an H2 in a blockquote
-</code></pre>
+<p>Create a numbered lists using number and dot:</p>
 
-<p>Output:</p>
+<pre>1. Item 1  
+2. Item 2  
+3. Item 3</pre>
 
-<pre><code>&lt;h1&gt;A First Level Header&lt;/h1&gt;
+<p>Will look like this:</p>
 
-&lt;h2&gt;A Second Level Header&lt;/h2&gt;
+<ol>
+<li>Item 1</li>
+<li>Item 2</li>
+<li>Item 3</li>
+</ol>
 
-&lt;p&gt;Now is the time for all good men to come to
-the aid of their country. This is just a
-regular paragraph.&lt;/p&gt;
 
-&lt;p&gt;The quick brown fox jumped over the lazy
-dog's back.&lt;/p&gt;
+<p>You can also use plus (+) or minus (-) instead of a star.</p>
 
-&lt;h3&gt;Header 3&lt;/h3&gt;
+<h2>Creating links</h2>
 
-&lt;blockquote&gt;
-    &lt;p&gt;This is a blockquote.&lt;/p&gt;
+<p>Combine brackets and parenthesis to create links in the text. It's quite simple:</p>
 
-    &lt;p&gt;This is the second paragraph in the blockquote.&lt;/p&gt;
+<pre>Here's [a great search engine](http://www.google.com). It'll float your boat.</pre>
 
-    &lt;h2&gt;This is an H2 in a blockquote&lt;/h2&gt;
-&lt;/blockquote&gt;
-</code></pre>
+<p>Will look like this:</p>
 
-<h3>Phrase Emphasis</h3>
+<blockquote>
+  <p>Here's <a href="http://www.google.com">a great search engine</a>. It'll float your boat.</p>
+</blockquote>
 
-<p>Markdown uses asterisks and underscores to indicate spans of emphasis.</p>
+<h2>Headers</h2>
 
-<p>Markdown:</p>
+<p>Markdown has support for different levels of headers using the hash sign (#):</p>
 
-<pre><code>Some of these words *are emphasized*.
-Some of these words _are emphasized also_.
+<pre># This is the title
+Here's some very good boiler plate text. I don't even know what a boiler is, even less a plate.
 
-Use two asterisks for **strong emphasis**.
-Or, if you prefer, __use two underscores instead__.
-</code></pre>
+## This is the subheader
+Subheaders are awesome. Even better than you think.
 
-<p>Output:</p>
+### This is the third level header.
+And so on.</pre>
 
-<pre><code>&lt;p&gt;Some of these words &lt;em&gt;are emphasized&lt;/em&gt;.
-Some of these words &lt;em&gt;are emphasized also&lt;/em&gt;.&lt;/p&gt;
+<p>Will look like this:</p>
 
-&lt;p&gt;Use two asterisks for &lt;strong&gt;strong emphasis&lt;/strong&gt;.
-Or, if you prefer, &lt;strong&gt;use two underscores instead&lt;/strong&gt;.&lt;/p&gt;
-</code></pre>
+<blockquote>
+  <h1>This is the title</h1>
+  
+  <p>Here's some very good boiler plate text. I don't even know what a boiler is, even less a plate.</p>
+  
+  <h2>This is the subheader</h2>
+  
+  <p>Subheaders are awesome. Even better than you think.</p>
+  
+  <h3>This is the third level header.</h3>
+  
+  <p>And so on.</p>
+</blockquote>
 
-<h2>Lists</h2>
+<p>When converted to HTML, the first level header will be a <code class="prettyprint"><span class="tag">&lt;h1&gt;</span></code> element, a third level header will be a <code class="prettyprint"><span class="tag">&lt;h3&gt;</span></code>, etc. At SimpleEditions there's only one first level header per page, namely the title (in this case, it's "Markdown: An introduction", a bit further up). Therefore, you typically always begin with a second level header (## Like this) when you write your tutorial text.</p>
 
-<p>Unordered (bulleted) lists use asterisks, pluses, and hyphens (<code>*</code>,
-<code>+</code>, and <code>-</code>) as list markers. These three markers are
-interchangable; this:</p>
+<h2>Quotes</h2>
 
-<pre><code>*   Candy.
-*   Gum.
-*   Booze.
-</code></pre>
+<p>Add a greater-than sign (&gt;) in front of anything you are quoting, and the text will be moved slightly towards the middle.</p>
 
-<p>this:</p>
+<pre>&gt; "Never increase, beyond what is necessary,   
+&gt; the number of entities required to explain anything."  
+&gt; &ndash; *William Ockham*</pre>
 
-<pre><code>+   Candy.
-+   Gum.
-+   Booze.
-</code></pre>
+<p>Will look like this:</p>
 
-<p>and this:</p>
+<blockquote>
+  <p>"Never increase, beyond what is necessary, <br>
+  the number of entities required to explain anything." <br>
+  &ndash; <em>William Ockham</em></p>
+</blockquote>
 
-<pre><code>-   Candy.
--   Gum.
--   Booze.
-</code></pre>
+<p>Note how the name, William Ockham, is surrounded by stars to make it render in italic text.</p>
 
-<p>all produce the same output:</p>
+<h2>Further reading</h2>
 
-<pre><code>&lt;ul&gt;
-&lt;li&gt;Candy.&lt;/li&gt;
-&lt;li&gt;Gum.&lt;/li&gt;
-&lt;li&gt;Booze.&lt;/li&gt;
-&lt;/ul&gt;
-</code></pre>
+<p>This tutorial only cover the basics of Markdown, but there are a few more tricks available.</p>
 
-<p>Ordered (numbered) lists use regular numbers, followed by periods, as
-list markers:</p>
-
-<pre><code>1.  Red
-2.  Green
-3.  Blue
-</code></pre>
-
-<p>Output:</p>
-
-<pre><code>&lt;ol&gt;
-&lt;li&gt;Red&lt;/li&gt;
-&lt;li&gt;Green&lt;/li&gt;
-&lt;li&gt;Blue&lt;/li&gt;
-&lt;/ol&gt;
-</code></pre>
-
-<p>If you put blank lines between items, you’ll get <code>&lt;p&gt;</code> tags for the
-list item text. You can create multi-paragraph list items by indenting
-the paragraphs by 4 spaces or 1 tab:</p>
-
-<pre><code>*   A list item.
-
-    With multiple paragraphs.
-
-*   Another item in the list.
-</code></pre>
-
-<p>Output:</p>
-
-<pre><code>&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;A list item.&lt;/p&gt;
-&lt;p&gt;With multiple paragraphs.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Another item in the list.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</code></pre>
-
-<h3>Links</h3>
-
-<p>Markdown supports two styles for creating links: <em>inline</em> and
-<em>reference</em>. With both styles, you use square brackets to delimit the
-text you want to turn into a link.</p>
-
-<p>Inline-style links use parentheses immediately after the link text.
-For example:</p>
-
-<pre><code>This is an [example link](http://example.com/).
-</code></pre>
-
-<p>Output:</p>
-
-<pre><code>&lt;p&gt;This is an &lt;a href="http://example.com/"&gt;
-example link&lt;/a&gt;.&lt;/p&gt;
-</code></pre>
-
-<p>Optionally, you may include a title attribute in the parentheses:</p>
-
-<pre><code>This is an [example link](http://example.com/ "With a Title").
-</code></pre>
-
-<p>Output:</p>
-
-<pre><code>&lt;p&gt;This is an &lt;a href="http://example.com/" title="With a Title"&gt;
-example link&lt;/a&gt;.&lt;/p&gt;
-</code></pre>
-
-<p>Reference-style links allow you to refer to your links by names, which
-you define elsewhere in your document:</p>
-
-<pre><code>I get 10 times more traffic from [Google][1] than from
-[Yahoo][2] or [MSN][3].
-
-[1]: http://google.com/        "Google"
-[2]: http://search.yahoo.com/  "Yahoo Search"
-[3]: http://search.msn.com/    "MSN Search"
-</code></pre>
-
-<p>Output:</p>
-
-<pre><code>&lt;p&gt;I get 10 times more traffic from &lt;a href="http://google.com/"
-title="Google"&gt;Google&lt;/a&gt; than from &lt;a href="http://search.yahoo.com/"
-title="Yahoo Search"&gt;Yahoo&lt;/a&gt; or &lt;a href="http://search.msn.com/"
-title="MSN Search"&gt;MSN&lt;/a&gt;.&lt;/p&gt;
-</code></pre>
-
-<p>The title attribute is optional. Link names may contain letters,
-numbers and spaces, but are <em>not</em> case sensitive:</p>
-
-<pre><code>I start my morning with a cup of coffee and
-[The New York Times][NY Times].
-
-[ny times]: http://www.nytimes.com/
-</code></pre>
-
-<p>Output:</p>
-
-<pre><code>&lt;p&gt;I start my morning with a cup of coffee and
-&lt;a href="http://www.nytimes.com/"&gt;The New York Times&lt;/a&gt;.&lt;/p&gt;
-</code></pre>
-
-<h3>Images</h3>
-
-<p>Image syntax is very much like link syntax.</p>
-
-<p>Inline (titles are optional):</p>
-
-<pre><code>![alt text](/path/to/img.jpg "Title")
-</code></pre>
-
-<p>Reference-style:</p>
-
-<pre><code>![alt text][id]
-
-[id]: /path/to/img.jpg "Title"
-</code></pre>
-
-<p>Both of the above examples produce the same output:</p>
-
-<pre><code>&lt;img src="/path/to/img.jpg" alt="alt text" title="Title" /&gt;
-</code></pre>
-
-<h3>Code</h3>
-
-<p>In a regular paragraph, you can create code span by wrapping text in
-backtick quotes. Any ampersands (<code>&amp;</code>) and angle brackets (<code>&lt;</code> or
-<code>&gt;</code>) will automatically be translated into HTML entities. This makes
-it easy to use Markdown to write about HTML example code:</p>
-
-<pre><code>I strongly recommend against using any `&lt;blink&gt;` tags.
-
-I wish SmartyPants used named entities like `&amp;mdash;`
-instead of decimal-encoded entites like `&amp;#8212;`.
-</code></pre>
-
-<p>Output:</p>
-
-<pre><code>&lt;p&gt;I strongly recommend against using any
-&lt;code&gt;&amp;lt;blink&amp;gt;&lt;/code&gt; tags.&lt;/p&gt;
-
-&lt;p&gt;I wish SmartyPants used named entities like
-&lt;code&gt;&amp;amp;mdash;&lt;/code&gt; instead of decimal-encoded
-entites like &lt;code&gt;&amp;amp;#8212;&lt;/code&gt;.&lt;/p&gt;
-</code></pre>
-
-<p>To specify an entire block of pre-formatted code, indent every line of
-the block by 4 spaces or 1 tab. Just like with code spans, <code>&amp;</code>, <code>&lt;</code>,
-and <code>&gt;</code> characters will be escaped automatically.</p>
-
-<p>Markdown:</p>
-
-<pre><code>If you want your page to validate under XHTML 1.0 Strict,
-you've got to put paragraph tags in your blockquotes:
-
-    &lt;blockquote&gt;
-        &lt;p&gt;For example.&lt;/p&gt;
-    &lt;/blockquote&gt;
-</code></pre>
-
-<p>Output:</p>
-
-<pre><code>&lt;p&gt;If you want your page to validate under XHTML 1.0 Strict,
-you've got to put paragraph tags in your blockquotes:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;blockquote&amp;gt;
-    &amp;lt;p&amp;gt;For example.&amp;lt;/p&amp;gt;
-&amp;lt;/blockquote&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-</code></pre>
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Markdown">Markdown - Wikipedia</a></li>
+<li><a href="http://daringfireball.net/projects/markdown/">Official markdown documentation</a></li>
+<li><a href="http://markdown.pioul.fr/">Minimalist Online Markdown Editor</a> (<strong>very handy!</strong>)</li>
+</ul>
