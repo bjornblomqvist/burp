@@ -10,7 +10,7 @@ end
 
 When /^I change the name of the group$/ do
   find(".group-name:contains('About bits2life')").click 
-  has_css?("#my-pop-over", :wait => 5, :visible => true) # Wait for the form to appear
+  has_css?("#my-pop-over", :visible => true) # Wait for the form to appear
   fill_in "Name", :with => "A new group name"
   click_button("Save")
 end
@@ -36,7 +36,7 @@ end
 
 When /^I change the name of the group but decide not to keep the changes$/ do
   find(".group-name:contains('About bits2life')").click 
-  has_css?("#my-pop-over", :wait => 5, :visible => true) # Wait for the form to appear
+  has_css?("#my-pop-over",  :visible => true) # Wait for the form to appear
   fill_in "Name", :with => "A new group name"
   click_button("Cancel")
 end

@@ -20,14 +20,14 @@ When /^I go and change the path of that page$/ do
   visit "/burp/"
   click_link "Pages"
   click_link "A test title"
-  has_css?("#my-pop-over", :wait => 5, :visible => true) # Wait for the form to appear
+  has_css?("#my-pop-over", :visible => true) # Wait for the form to appear
   fill_in "Path", :with => "/a-better-path"
   click_button "Save"
 end
 
 Then /^that page should be found on the new path$/ do
   visit "/a-better-path"
-  page.find("title").should have_content("A test title")
+  page.find("title", :visible => false).should have_content("A test title")
 end
 
 Given /^there are no pages$/ do
@@ -55,7 +55,7 @@ When /^I remove the page$/ do
   visit "/burp/"
   click_link "Pages"
   click_link "Start page"
-  has_css?("#my-pop-over", :wait => 5, :visible => true) # Wait for the form to appear
+  has_css?("#my-pop-over", :visible => true) # Wait for the form to appear
   click_button "Remove"
   page.driver.browser.switch_to.alert.tap do |alert|
     alert.text.should include("Are you sure?")

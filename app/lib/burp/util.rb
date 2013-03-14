@@ -1,6 +1,5 @@
 
 require 'fileutils'
-require 'RMagick'
 
 module Burp
   module Util
