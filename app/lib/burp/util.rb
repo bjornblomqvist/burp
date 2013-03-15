@@ -17,14 +17,17 @@ module Burp
       sizes = {:small => [200,300],:medium => [600,900], :large => [1000,1500]}
       image = Magick::ImageList.new(file_path).first
       image.auto_orient!
+      
       sizes.each_pair do |key,value|
+        
         FileUtils.mkdir_p("#{upload_directory_path}#{key.to_s}")
         target_path = "#{upload_directory_path}#{key.to_s}/#{File.basename(file_path)}"
+        
         if value[0] < image.columns # We only downscale
           image.resize_to_fit(value[0],value[1]).write(target_path)
         else
           File.unlink(target_path) if File.exist?(target_path)
-          File.symlink(file_path,target_path)
+          File.symlink("../#{File.basename(file_path)}",target_path)
         end
       end
       image.destroy!
