@@ -5,7 +5,7 @@ class Burp::CatchAllController < ApplicationController
 
   def show
     @menu = Burp::Menu.find("main")
-    @cms_page = Burp.find_page(request.path)
+    @cms_page = Burp.find_page(params[:burp_page_path] || request.path)
     Burp.access.refresh
     Burp.access.may_view_page!(@cms_page)
 
