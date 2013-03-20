@@ -1,6 +1,6 @@
 Burp::Engine.routes.draw do
   get "/" => "static#index"
-  get "/markdown" => "static#basic"
+  get "/help" => "static#help"
   
   resources :files
   get "/files/" => "files#index"
@@ -12,6 +12,7 @@ Burp::Engine.routes.draw do
   get "/pages/*id/edit" => "pages#edit", :id => /.+/
   get "/pages/*id" => "pages#show", :id => /.+/
   put "/pages/*id" => "pages#update", :id => /.+/
+  delete "/pages/*id" => "pages#update", :id => /.+/
   
   resources :menus do
     resources :groups

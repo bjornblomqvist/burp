@@ -4,7 +4,7 @@ module Burp
       Burp.access.may_view_static_page!(params[:action])
     end 
     
-    def basic
+    def help
       
     end
   end

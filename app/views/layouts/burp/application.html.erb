@@ -10,7 +10,7 @@
     <![endif]-->
 
   </head>
-  <body class="<%= @body_classes %>">
+  <body data-spy="scroll" data-target=".docs-sidebar" class="<%= @body_classes %>">
 
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
@@ -26,7 +26,7 @@
               <li><%= link_to "Pages", "/burp/pages"  %></li>
               <li><%= Burp::Menu.count == 1 ? (link_to "Menu", edit_menu_path(Burp::Menu.all.first)) : (link_to "Menus", "/burp/menus")  %></li>
               <li><%= link_to "Files", "/burp/files"  %></li>
-              <li class="markdown"><%= link_to "Markdown Basics", "/burp/markdown" %></li>
+              <li class="markdown"><%= link_to "Help", "/burp/help" %></li>
             </ul>
           </div>
         </div>
@@ -35,7 +35,9 @@
 
     <div class="container">
       
-      <%= yield %>
+      <div class="row">
+        <%= yield %>
+      </div>
 
       
 
