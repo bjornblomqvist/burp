@@ -12,7 +12,7 @@ Burp::Engine.routes.draw do
   get "/pages/*id/edit" => "pages#edit", :id => /.+/
   get "/pages/*id" => "pages#show", :id => /.+/
   put "/pages/*id" => "pages#update", :id => /.+/
-  delete "/pages/*id" => "pages#update", :id => /.+/
+  delete "/pages/*id" => "pages#destroy", :id => /.+/
   
   resources :menus do
     resources :groups
