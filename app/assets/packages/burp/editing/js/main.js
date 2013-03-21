@@ -174,8 +174,8 @@ $(function() {
     loadFiles();
   
     $.adminDock.title('');
-    $.adminDock.footer.addButton({ icon: 'picture', showModule: $('#gallery') });
-    $.adminDock.footer.addButton({ icon: 'edit', showModule: $('#myContentEditor'), show: function() {
+    $.adminDock.footer.addButton({ icon: 'picture', text: "Pictures", showModule: $('#gallery') });
+    $.adminDock.footer.addButton({ icon: 'edit', text: "Edit text", showModule: $('#myContentEditor'), show: function() {
       editor.refresh();
     } });
 
