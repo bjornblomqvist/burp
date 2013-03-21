@@ -57,19 +57,14 @@
           
           var wrappers = [];
           
-          
+          var bodyOffset =  $('body').offset();
           
           contentEditor.element.find('> h1,> h2,> h3,> h4,> h5,> p,> img,> blockquote,> ul,> ol').each(function() {
       
             var position = $(this).offset();
             var size = {width:$(this).outerWidth(),height:$(this).outerHeight()};
-            if(navigator.userAgent.match(/Firefox|Safari/)) {
-              position.left = $(this)[0].offsetLeft;
-            } else {
-              position.left -= $(this).offsetParent().offset().left;
-            }
-            
-            position.top -= $('body').offset().top;
+            position.left -= bodyOffset.left;      
+            position.top -= bodyOffset.top;
             
             var element = $('<div class="dropbox"></div>');
             wrappers.push(element[0]);
@@ -114,15 +109,15 @@
               size.width = 100;
             }
             
-            var element = $('<div class="dropbox"></div>');
-            wrappers.push(element[0]);
+            var element2 = $('<div class="dropbox"></div>');
+            wrappers.push(element2[0]);
       
-            element.addClass("bottom-dropbox");
+            element2.addClass("bottom-dropbox");
       
-            element.css(size);
-            element.css(position);
-            element.css({'position':'absolute'});
-            element.appendTo('body');
+            element2.css(size);
+            element2.css(position);
+            element2.css({'position':'absolute'});
+            element2.appendTo('body');
           }
           
           wrappers = $(wrappers);
@@ -161,7 +156,7 @@
                 
                 if($(this).parent().is(".bottom-dropbox")) {
                   $(contentEditor.element).append(img);
-                } else {
+                } else if(img !== markdown) {
                   $(img).insertBefore(markdown);
                 }
                 clearDropBoxes();
