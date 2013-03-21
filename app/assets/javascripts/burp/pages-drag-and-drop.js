@@ -100,7 +100,7 @@ $(function() {
         if(rect.element === event.target) {
           
           // Add to above group if enough to the right
-          if($(rect.element).is('.link') && $(rect.element).prev('.group') && rect.left + 100 < x) {
+          if($(rect.element).is('.link') && $(rect.element).prev('.group') && rect.left + 50 < x) {
             $(event.target).closest("li.child").prependTo($(rect.element).prev().find('> section.group > ul.children'));
             rects = getRects($(".dnd-editable-menu > section.group"),"li.child, ul.children");
           } else {
@@ -119,7 +119,7 @@ $(function() {
           rects = getRects($(".dnd-editable-menu > section.group"),"li.child, ul.children");
         } else if($(rect.element).is("li.group")) {
           // Can drop on an empty list of a group
-          if(rect.left + 100 < x) {
+          if(rect.left + 50 < x) {
             // Add as child
             $(event.target).closest("li.child").prependTo($(rect.element).find('> section.group > ul.children'));
             rects = getRects($(".dnd-editable-menu > section.group"),"li.child, ul.children");
