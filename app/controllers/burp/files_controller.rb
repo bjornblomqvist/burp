@@ -60,7 +60,7 @@ module Burp
         Util::UploadHandler.handle(params[:qqfile],request) do |file|
         
           errors = []
-          errors << {:size => "File to big, max size is 15meg"} if file.size > 15.megabyte
+          errors << {:size => "File to big, max size is 40 meg"} if file.size > 40.megabyte
         
           if errors.length > 0
             render :json => {:errors => errors}
