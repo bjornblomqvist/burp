@@ -29,6 +29,7 @@
       var uploader = new qq.FileUploader({
           element: document.getElementById('file-uploader'),
           action: '/burp/files',
+          sizeLimit: 1024 * 1024 * 40,
           onComplete: function(id, fileName, responseJSON){
             if(responseJSON.success) {
               $.get(document.location,function(data) {
