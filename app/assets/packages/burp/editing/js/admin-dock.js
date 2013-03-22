@@ -39,10 +39,10 @@ $(function($) {
       }
     }
 
-    setBodyPadding();
-    
     if (typeof(unhide) === 'undefined' || unhide === true) {
-      dockElement.slideDown('fast');
+      dockElement.slideDown('fast',function() {
+        setBodyPadding();
+      });
     }
   }
 
@@ -59,8 +59,9 @@ $(function($) {
       },
 
       hide: function() {
-        dockElement.slideUp('fast');
-        setBodyPadding();
+        dockElement.slideUp('fast',function() {
+          setBodyPadding();
+        });
       },
 
       toggle: function() {
