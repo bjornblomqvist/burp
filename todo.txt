@@ -1,4 +1,19 @@
 
+  
+  - Document steps to do things
+    - Upload an image
+      - Go to the files page
+      - Click the upload button
+      - Select files
+      - Wait for upload to finish
+      
+    - Remove an image
+      - Go to the files page
+      - Click on remove file for the file to remove
+    
+
+
+
   - Fix handeling of all form errors
 
   - Fix so that links draged from the "Pages not in the above menu" are editable after the drag. 
