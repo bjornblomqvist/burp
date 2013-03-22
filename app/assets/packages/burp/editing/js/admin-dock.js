@@ -25,10 +25,6 @@ $(function($) {
   
   var activeModuleButton = null;
   function showModule(module, unhide) {
-    if (typeof(unhide) === 'undefined' || unhide === true) {
-      dockElement.show();
-    }
-
     if (typeof(module) !== 'undefined') {
       if (activeModuleButton) {
         activeModuleButton.removeClass('active');
@@ -44,6 +40,10 @@ $(function($) {
     }
 
     setBodyPadding();
+    
+    if (typeof(unhide) === 'undefined' || unhide === true) {
+      dockElement.slideDown('fast');
+    }
   }
 
   $('body').append(dockElement);
@@ -59,7 +59,7 @@ $(function($) {
       },
 
       hide: function() {
-        dockElement.hide();
+        dockElement.slideUp('fast');
         setBodyPadding();
       },
 
