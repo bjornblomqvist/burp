@@ -299,7 +299,11 @@ $(function() {
   }
   
   function trigger_http_basic_auth(callback) {
-    $.get("/burp/",callback);
+    if(initDone) {
+      callback();
+    } else {
+      $.get("/burp/",callback);
+    }
   }
   
   var start_time;
