@@ -1,6 +1,6 @@
 $(function($) {
 
-  var originalBodyPadding = parseInt($('body').css('padding-bottom'));
+  var originalBodyPadding = parseInt($('body').css('padding-bottom'),10);
 
   var dockElement = $('<div id="admin-dock" class="admin-dock"><div class="modules"></div></div>');
   var moduleElement = dockElement.find('.modules');
@@ -17,6 +17,34 @@ $(function($) {
     
     $.adminDock.hide();
   });
+  
+  function setBodyPadding() {
+    var height = $.adminDock.visible() ? dockElement.height() : 0;
+    $('body').css('padding-bottom', (originalBodyPadding + height) + 'px');
+  }
+  
+  var activeModuleButton = null;
+  function showModule(module, unhide) {
+    if (typeof(unhide) === 'undefined' || unhide === true) {
+      dockElement.show();
+    }
+
+    if (typeof(module) !== 'undefined') {
+      if (activeModuleButton) {
+        activeModuleButton.removeClass('active');
+        activeModuleButton = null;
+      }
+
+      dockElement.find('.modules>*').hide();
+      $(module).show();
+      if ($(module).data('dock-button')) {
+        $(module).data('dock-button').addClass('active');
+        activeModuleButton = $(module).data('dock-button');
+      }
+    }
+
+    setBodyPadding();
+  }
 
   $('body').append(dockElement);
 
@@ -44,7 +72,7 @@ $(function($) {
       },
 
       visible: function() {
-        return dockElement.css('display') != 'none';
+        return dockElement.css('display') !== 'none';
       },
 
       resize: function() {
@@ -82,7 +110,7 @@ $(function($) {
               
               footerElement.find('a').removeClass('active');
               $(this).addClass('active');
-              showModule(options['showModule'])
+              showModule(options['showModule']);
 
               if (options['show']) {
                 options['show']();
@@ -145,7 +173,7 @@ $(function($) {
             console.debug("Adding to secondary");
             footerElement.find('.secondary').append(element);
           } else {
-            console.debug("Adding to primary")
+            console.debug("Adding to primary");
             footerElement.find('.primary').append(element);
           }
         }
@@ -156,34 +184,6 @@ $(function($) {
 
   function addModule(module) {
     moduleElement.append(module);
-  }
-
-  var activeModuleButton = null;
-  function showModule(module, unhide) {
-    if (typeof(unhide) == 'undefined' || unhide == true) {
-      dockElement.show();
-    }
-
-    if (typeof(module) != 'undefined') {
-      if (activeModuleButton) {
-        activeModuleButton.removeClass('active');
-        activeModuleButton = null;
-      }
-
-      dockElement.find('.modules>*').hide();
-      $(module).show();
-      if ($(module).data('dock-button')) {
-        $(module).data('dock-button').addClass('active');
-        activeModuleButton = $(module).data('dock-button')
-      }
-    }
-
-    setBodyPadding();
-  }
-
-  function setBodyPadding() {
-    var height = $.adminDock.visible() ? dockElement.height() : 0;
-    $('body').css('padding-bottom', (originalBodyPadding + height) + 'px');
   }
 
 });
