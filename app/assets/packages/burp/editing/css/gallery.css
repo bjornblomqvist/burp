@@ -89,6 +89,7 @@
 #gallery .prev, #gallery .next {
   cursor: pointer;
   height: 100px;
+  line-height: 100px;
 }
 
 #gallery .prev:active:before , #gallery .next:active:before {
