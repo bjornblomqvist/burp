@@ -184,23 +184,29 @@ $(function() {
       snippet_names.push(name);
     });
     
-    $.adminDock.footer.addSelector({
-      options: snippet_names,
-      'default': snippet_names[0],
-      change: function(option) {
+    snippet_names.sort(function(a, b) { return a.toLowerCase() > b.toLowerCase(); });
+    
+    
+    // Why show snippet selection when there is only one
+    if(snippet_names.length > 1) {
+      $.adminDock.footer.addSelector({
+        options: snippet_names,
+        'default': snippet_names[0],
+        change: function(option) {
         
         
-        selectSnippet(option);
-        loadSnippet();
+          selectSnippet(option);
+          loadSnippet();
         
-        $('#gallery img').removeClass('movable');
-        contentDecorator.makeDroppable('#gallery img', function(element, positionClass) {
-          return $("<img src='" + $(element).attr('src') + "' class='" + positionClass + "' />");
-        });
+          $('#gallery img').removeClass('movable');
+          contentDecorator.makeDroppable('#gallery img', function(element, positionClass) {
+            return $("<img src='" + $(element).attr('src') + "' class='" + positionClass + "' />");
+          });
         
-        console.debug("Switching to " + option);
-      }
-    });
+          console.debug("Switching to " + option);
+        }
+      });
+    }
     
 
     $('<div id="file-uploader" style="overflow: hidden; width: 0px; height: 0px; position: absolute;"></div>').appendTo('body');
