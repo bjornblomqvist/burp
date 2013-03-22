@@ -304,7 +304,7 @@ $(function() {
   
   var start_time;
   
-  $(window).keyup(function(event) {
+  $(window).keydown(function(event) {
     if (
       ((event.altKey === true || event.ctrlKey === true ) && event.keyCode === 27) ||
       (event.altKey === true && event.ctrlKey === true && event.keyCode === 32)
