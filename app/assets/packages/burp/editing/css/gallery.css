@@ -13,7 +13,11 @@
 }
 
 #gallery .click-area {
-  box-shadow: 0 0 3px #999999;
+  
+  -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  
   color: #888;
   display: block;
   font-size: 12px;
@@ -77,11 +81,14 @@
 #gallery .images li:first-child { margin-left: 10px; }
 #gallery li { display: inline-block; }
 #gallery img {
-  height: 60px;
+  max-height: 60px;
+  max-width: 400px;
   margin: 10px auto;
   margin-bottom: 5px;
   display: block;
-  box-shadow: 0 0 3px #999999;
+  -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   cursor: move;
 }
 
@@ -143,9 +150,13 @@
 }
   
 body > img.movable {
-  box-shadow: 0 0 3px #999999;
+  -webkit-box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
   display: block;
-  height: 60px;
+  max-height: 60px;
+  max-width: 400px;
+  opacity: 0.9 !important;
   position: fixed !important;
 }
 
