@@ -58,13 +58,16 @@
           var wrappers = [];
           
           var bodyOffset =  $('body').offset();
+          var bodyPosition = $('body').css('position');
           
           contentEditor.element.find('> h1,> h2,> h3,> h4,> h5,> p,> img,> blockquote,> ul,> ol').each(function() {
       
             var position = $(this).offset();
             var size = {width:$(this).outerWidth(),height:$(this).outerHeight()};
-            position.left -= bodyOffset.left;      
-            position.top -= bodyOffset.top;
+            if(bodyPosition !== 'static') {
+              position.left -= bodyOffset.left;      
+              position.top -= bodyOffset.top;
+            }
             
             var element = $('<div class="dropbox"></div>');
             wrappers.push(element[0]);
