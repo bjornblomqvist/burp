@@ -261,7 +261,6 @@
       
       var tempElement = $('<div></div>');
       tempElement.append(children);
-      tempElement.children().addClass('markdown');
       
       if(tempElement.find("script").length > 0 && !javascript_warning_has_been_shown) {
         $.gritter.add({
