@@ -30,7 +30,7 @@ module Burp
     end
   
     def <=>(other)
-      other.is_a?(File) ? self.mtime <=> other.mtime : 0
+      other.is_a?(FileModel) ? self.public_path <=> other.public_path : 0
     end
 
     def eql?(other)
