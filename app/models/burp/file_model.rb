@@ -10,7 +10,7 @@ module Burp
     def self.all
       @file_paths = Dir.glob("#{Burp.content_directory}uploads/*").select{|path| File.file?(path) }
       @file_paths = @file_paths.map {|path| path.gsub("#{Burp.content_directory}uploads/","/burp/files/") }
-      @file_paths.map {|path| FileModel.new(path)}.sort
+      @file_paths.map {|path| FileModel.new(path)}.sort.reverse
     end
   
     def to_param
@@ -30,7 +30,7 @@ module Burp
     end
   
     def <=>(other)
-      other.is_a?(FileModel) ? self.public_path <=> other.public_path : 0
+      other.is_a?(FileModel) ? self.mtime <=> other.mtime : 0
     end
 
     def eql?(other)
