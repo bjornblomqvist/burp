@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = "burp_cms"
-  s.version = "1.3.0"
+  s.version = "1.3.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Darwin"]
@@ -441,12 +441,15 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<jquery-rails>, [">= 0"])
       s.add_runtime_dependency(%q<jquery-ui-rails>, [">= 0"])
       s.add_runtime_dependency(%q<less-rails>, [">= 0"])
-      s.add_runtime_dependency(%q<mayi>, [">= 0"])
+      s.add_runtime_dependency(%q<mayi>, ["~> 1.0.0"])
       s.add_runtime_dependency(%q<therubyracer>, [">= 0"])
       s.add_runtime_dependency(%q<twitter_bootstrap_form_for>, ["~> 2.0.1.0.rc1"])
       s.add_runtime_dependency(%q<term-ansicolor>, [">= 0"])
       s.add_runtime_dependency(%q<rmagick>, [">= 0"])
       s.add_development_dependency(%q<sqlite3>, [">= 0"])
+      s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_development_dependency(%q<bundler>, [">= 0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
@@ -466,12 +469,15 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<jquery-rails>, [">= 0"])
       s.add_dependency(%q<jquery-ui-rails>, [">= 0"])
       s.add_dependency(%q<less-rails>, [">= 0"])
-      s.add_dependency(%q<mayi>, [">= 0"])
+      s.add_dependency(%q<mayi>, ["~> 1.0.0"])
       s.add_dependency(%q<therubyracer>, [">= 0"])
       s.add_dependency(%q<twitter_bootstrap_form_for>, ["~> 2.0.1.0.rc1"])
       s.add_dependency(%q<term-ansicolor>, [">= 0"])
       s.add_dependency(%q<rmagick>, [">= 0"])
       s.add_dependency(%q<sqlite3>, [">= 0"])
+      s.add_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_dependency(%q<bundler>, [">= 0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, [">= 0"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
@@ -492,12 +498,15 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<jquery-rails>, [">= 0"])
     s.add_dependency(%q<jquery-ui-rails>, [">= 0"])
     s.add_dependency(%q<less-rails>, [">= 0"])
-    s.add_dependency(%q<mayi>, [">= 0"])
+    s.add_dependency(%q<mayi>, ["~> 1.0.0"])
     s.add_dependency(%q<therubyracer>, [">= 0"])
     s.add_dependency(%q<twitter_bootstrap_form_for>, ["~> 2.0.1.0.rc1"])
     s.add_dependency(%q<term-ansicolor>, [">= 0"])
     s.add_dependency(%q<rmagick>, [">= 0"])
     s.add_dependency(%q<sqlite3>, [">= 0"])
+    s.add_dependency(%q<rdoc>, ["~> 3.12"])
+    s.add_dependency(%q<bundler>, [">= 0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, [">= 0"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
