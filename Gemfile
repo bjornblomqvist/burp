@@ -10,7 +10,7 @@ gem "rails", "~> 3.2"
 gem "jquery-rails"
 gem 'jquery-ui-rails'
 gem 'less-rails'
-gem 'mayi'
+gem 'mayi', "~> 1.0.0"
 gem 'therubyracer'
 gem "twitter_bootstrap_form_for", "~> 2.0.1.0.rc1"
 gem 'term-ansicolor'
