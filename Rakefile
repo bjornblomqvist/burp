@@ -18,7 +18,7 @@ require 'burp/version'
 
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "burp"
+  gem.name = "burp_cms"
   # gem.homepage = "http://github.com/bjornblomqvist/burp"
   gem.license = "LGPL3"
   gem.summary = %Q{ A CMS that tryes hard to not get in your way! }
