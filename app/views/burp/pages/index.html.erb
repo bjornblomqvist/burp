@@ -30,7 +30,15 @@
 
 <hr>
 
-<table>
+<table class="table table-striped">
+  <thead>
+    <th>
+      Title
+    </th>
+    <th>
+      Path
+    </th>
+  </thead>
   <tbody>
   <% @pages.sort{|a,b| a.path <=> b.path}.each do |page| %>
   <tr>
