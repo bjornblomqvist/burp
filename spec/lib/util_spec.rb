@@ -6,7 +6,7 @@ describe Burp::Util do
     
     it 'should raise an exception' do
       
-      File.should_receive(:exist?).with("#{Burp.content_directory}/.git").and_return(false)
+      Burp.should_receive(:content_directory).and_return("/tmp/")
       lambda { Burp::Util.commit }.should raise_error
       
     end
