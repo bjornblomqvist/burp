@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "burp"
-  s.version = "1.2.14"
+  s.version = "1.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Darwin"]
-  s.date = "2013-03-01"
+  s.date = "2013-05-16"
   s.description = " A CMS that tryes hard to not get in your way! "
   s.email = "darwin@bits2life.com"
   s.extra_rdoc_files = [
@@ -18,8 +18,61 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     "Rakefile",
+    "app/assets/images/burp/add-group-to-menu-1.png",
+    "app/assets/images/burp/add-group-to-menu-2.png",
+    "app/assets/images/burp/add-group-to-menu-3.png",
+    "app/assets/images/burp/add-group-to-menu-4.png",
+    "app/assets/images/burp/add-image-1.png",
+    "app/assets/images/burp/add-image-2.png",
+    "app/assets/images/burp/add-image-3.png",
+    "app/assets/images/burp/add-image-4.png",
+    "app/assets/images/burp/add-image-5.png",
+    "app/assets/images/burp/add-link-to-group-1.png",
+    "app/assets/images/burp/add-link-to-group-2.png",
+    "app/assets/images/burp/add-link-to-group-3.png",
+    "app/assets/images/burp/add-link-to-menu-1.png",
+    "app/assets/images/burp/add-link-to-menu-2.png",
+    "app/assets/images/burp/add-link-to-menu-3.png",
+    "app/assets/images/burp/add-link-to-menu-4.png",
+    "app/assets/images/burp/add-page-to-menu-1.png",
+    "app/assets/images/burp/add-page-to-menu-2.png",
+    "app/assets/images/burp/add-page-to-menu-3.png",
+    "app/assets/images/burp/add-page-to-menu-4.png",
+    "app/assets/images/burp/add-page-to-menu-5.png",
+    "app/assets/images/burp/adding-a-page-1.png",
+    "app/assets/images/burp/adding-a-page-2.png",
+    "app/assets/images/burp/adding-a-page-3.png",
+    "app/assets/images/burp/adding-a-page-4.png",
+    "app/assets/images/burp/change-page-title-1.png",
+    "app/assets/images/burp/change-page-title-2.png",
+    "app/assets/images/burp/change-page-title-3.png",
+    "app/assets/images/burp/change-page-title-4.png",
+    "app/assets/images/burp/change-the-text-1.png",
+    "app/assets/images/burp/change-the-text-2.png",
+    "app/assets/images/burp/change-the-text-3.png",
+    "app/assets/images/burp/enter-page-edit-mode-1.png",
+    "app/assets/images/burp/enter-page-edit-mode-2.png",
+    "app/assets/images/burp/enter-page-edit-mode-3.png",
+    "app/assets/images/burp/enter-page-edit-mode-4.jpg",
+    "app/assets/images/burp/enter-page-edit-mode-4.png",
     "app/assets/images/burp/img/glyphicons-halflings-white.png",
     "app/assets/images/burp/img/glyphicons-halflings.png",
+    "app/assets/images/burp/move-link-to-bottom-of-menu-1.png",
+    "app/assets/images/burp/move-link-to-bottom-of-menu-2.png",
+    "app/assets/images/burp/move-link-to-bottom-of-menu-3.png",
+    "app/assets/images/burp/remove-a-page-1.png",
+    "app/assets/images/burp/remove-a-page-2.png",
+    "app/assets/images/burp/remove-a-page-3.png",
+    "app/assets/images/burp/remove-a-page-4.png",
+    "app/assets/images/burp/remove-image-1.png",
+    "app/assets/images/burp/remove-image-2.png",
+    "app/assets/images/burp/remove-image-3.png",
+    "app/assets/images/burp/remove-image-4.png",
+    "app/assets/images/burp/remove-image-5.png",
+    "app/assets/images/burp/remove-page-from-menu-1.png",
+    "app/assets/images/burp/remove-page-from-menu-2.png",
+    "app/assets/images/burp/remove-page-from-menu-3.png",
+    "app/assets/images/burp/remove-page-from-menu-4.png",
     "app/assets/javascripts/burp/application.js",
     "app/assets/javascripts/burp/burp.js",
     "app/assets/javascripts/burp/cms_helper.js",
@@ -329,11 +382,13 @@ Gem::Specification.new do |s|
     "app/assets/packages/gritter/js/jquery.gritter.js",
     "app/assets/packages/gritter/js/jquery.gritter.min.js",
     "app/assets/stylesheets/burp/application.less",
-    "app/assets/stylesheets/burp/bootstrap.css",
+    "app/assets/stylesheets/burp/bootstrap.less",
+    "app/assets/stylesheets/burp/docs.less",
     "app/assets/stylesheets/burp/fileupload.less",
     "app/assets/stylesheets/burp/views/dnd-menu.less",
     "app/assets/stylesheets/burp/views/files/index.less",
     "app/assets/stylesheets/burp/views/pages/index.less",
+    "app/assets/stylesheets/burp/views/static/help.less",
     "app/controllers/burp/application_controller.rb",
     "app/controllers/burp/catch_all_controller.rb",
     "app/controllers/burp/error_controller.rb",
@@ -360,7 +415,7 @@ Gem::Specification.new do |s|
     "app/views/burp/menus/index.html.erb",
     "app/views/burp/pages/edit.html.erb",
     "app/views/burp/pages/index.html.erb",
-    "app/views/burp/static/basic.html.erb",
+    "app/views/burp/static/help.html.erb",
     "app/views/burp/static/index.html.erb",
     "app/views/layouts/burp/application.html.erb",
     "config/cucumber.yml",
@@ -395,6 +450,9 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_development_dependency(%q<bundler>, [">= 0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
       s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
@@ -411,6 +469,9 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<term-ansicolor>, [">= 0"])
       s.add_dependency(%q<rmagick>, [">= 0"])
       s.add_dependency(%q<sqlite3>, [">= 0"])
+      s.add_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_dependency(%q<bundler>, [">= 0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, [">= 0"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
@@ -431,6 +492,9 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<term-ansicolor>, [">= 0"])
     s.add_dependency(%q<rmagick>, [">= 0"])
     s.add_dependency(%q<sqlite3>, [">= 0"])
+    s.add_dependency(%q<rdoc>, ["~> 3.12"])
+    s.add_dependency(%q<bundler>, [">= 0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, [">= 0"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
