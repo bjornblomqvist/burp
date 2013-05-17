@@ -70,7 +70,7 @@ module Burp
             
             Burp::Util.create_smaller_images(upload_directory_path+File.basename(file.path)) if file.path.match(/(jpg|jpeg|gif|png)$/i)
             
-            Util.commit("Burp: file upload")
+            Util.commit("Burp: file upload",:path => upload_directory_path)
             render :json => {:success => true}
           end
         end

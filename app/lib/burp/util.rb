@@ -5,9 +5,10 @@ require 'RMagick'
 module Burp
   module Util
   
-    def self.commit(message = "auto commit")
-      raise "missing git repo in burp cms directory" if `cd #{Burp.content_directory}; git st 2>&1`.match(/Not a git repository/)
-      `cd #{Burp.content_directory}; git add .; git commit -a -m "Burp: #{message}"`
+    def self.commit(message = "auto commit", options)
+      options[:path] ||= Burp.content_directory
+      raise "missing git repo in burp cms directory" if `cd #{options[:path]}; git st 2>&1`.match(/Not a git repository/)
+      `cd #{options[:path]}; git add .; git commit -a -m "Burp: #{message}"`
     end
     
     def self.create_smaller_images(file_path)
