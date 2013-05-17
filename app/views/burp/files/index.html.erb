@@ -9,7 +9,18 @@
     </noscript>
 </div>
 
-<table>
+<table class="table table-striped">
+  <thead>
+    <th>
+      Path
+    </th>
+    <th>
+      Uploaded at
+    </th>
+    <th class="file-size">
+      Size
+    </th>
+  </thead>
   <tbody>
   <% @files.each do |file| %>  
     <tr>
