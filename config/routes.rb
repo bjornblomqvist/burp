@@ -24,7 +24,10 @@ Burp::Engine.routes.draw do
 
 end
 
-Rails.application.routes.draw do
+Rails.application.routes.prepend do
   mount Burp::Engine => "/burp"
+end
+
+Rails.application.routes.draw do
   match '/:path' => 'burp::catch_all#show', :constraints => { :path => /.*/ }
 end
