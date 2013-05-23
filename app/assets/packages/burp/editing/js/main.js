@@ -286,8 +286,9 @@ $(function() {
       initDone = true;
       
       wrapContent();
-      selectSnippet(snippets().names[0]);
+      selectSnippet(snippets().names.sort(function(a, b) { return a.toLowerCase() > b.toLowerCase(); })[0]);
       addEditor();
+      
       loadSnippet();
       
       $('#gallery').trigger('refresh');
