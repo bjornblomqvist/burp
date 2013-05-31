@@ -3,7 +3,8 @@
 .dnd-editable-menu {
   
   .group {
-    padding: 0px; 
+    padding: 0px;
+    display: inline;
   }
   
   > .group {
@@ -83,5 +84,30 @@
         background: #F89406;
     }
   }
+}
+
+.dnd-editable-menu.not-editable {
+  a {
+    text-decoration: none;
+    cursor: default;
+    color: inherit;
+  }
   
+  .group .group-name {
+    color: inherit;
+    cursor: default;
+    font-size: inherit;
+    line-height: inherit;
+    font-weight: inherit;
+    display: inline;
+    margin: 0px;
+
+    &:hover {
+      color: inherit;
+    }
+  }
+  
+  > .group > .group-name {
+    display:none;
+  }
 }

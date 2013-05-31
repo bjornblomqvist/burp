@@ -1,5 +1,4 @@
 
-  
   - Document steps to do things
     - Upload an image
       - Go to the files page
@@ -15,9 +14,6 @@
 
 
   - Fix handeling of all form errors
-
-  - Fix so that links draged from the "Pages not in the above menu" are editable after the drag. 
-    - The problem is that they have no id. Could be solved by doing a ajax update of the tree
   
   - Fix so that style elment content dont get escaped by the markdown parser
 

@@ -20,6 +20,8 @@ module Burp
           @pages_not_in_menu.children << Link.new(page.title => page.path)
         end
       end
+      
+      render :layout => false if params[:no_layout]
     end
     
     def update
