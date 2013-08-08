@@ -214,7 +214,7 @@ DEPENDENCIES
   jquery-ui-rails
   less-rails
   mayi (~> 1.0.0)
-  rails (~> 3.2.14)
+  rails (~> 3.2)
   rdoc (~> 3.12)
   rmagick
   rspec
