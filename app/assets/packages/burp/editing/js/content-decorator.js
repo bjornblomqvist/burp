@@ -17,7 +17,6 @@
   
   function ContentDecorator(element, options) {
     this.element = $(element);
-    this.parking = $('<div style="display: none;"></div>');
 
     if (typeof(options) === 'object') {
       this.onUpdate = options['update'];
@@ -283,10 +282,8 @@
         }
       });
       
-      // $(this.element).park('.movable');
       this.element.html("");
       this.element.append(tempElement.children());
-      // $(this.element).unpark();
     },
     
     makeDroppable: function(elements, createCallback) {
