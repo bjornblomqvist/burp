@@ -165,6 +165,7 @@
               }
               
               $("#gallery").removeClass('delete-active');
+              $(document).trigger("image-drop-done.burp");
             }
           });
           
@@ -284,6 +285,12 @@
       
       this.element.html("");
       this.element.append(tempElement.children());
+      
+      initializeMovable(this, this.element.find('img'), function(element, positionClass) { 
+        $(element).removeClass('left center right');
+        $(element).addClass(positionClass);
+        return element;
+      });
     },
     
     makeDroppable: function(elements, createCallback) {

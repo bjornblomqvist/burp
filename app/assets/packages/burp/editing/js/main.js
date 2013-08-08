@@ -65,6 +65,10 @@ $(function() {
        $(this).attr("type",'text/javascript');
      });
      
+     element.find('img.movable').each(function() {
+       $(this).removeClass('movable ui-draggable ui-droppable');
+     });
+     
      editor.setValue(Html2Markdown(element.children()));
   }
   
@@ -176,6 +180,12 @@ $(function() {
       loadHTML();
       editor.refresh();
     } });
+    
+    
+    $(document).on('image-drop-done.burp', function() {
+      loadHTML();
+      editor.refresh();
+    });
 
     var snippet_names = [];
     $.each(snippets().snippets,function(name,snippet) {

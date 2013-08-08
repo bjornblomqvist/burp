@@ -4,10 +4,8 @@
 //= require jquery.ui.droppable
 //= require ../gritter/gritter.js
 //= require ../../javascripts/burp/lib/fileupload.js
-//= require ./editing/js/md5.js
 //= require ./editing/js/marked.js
 //= require ./editing/js/jquery.html2markdown.js
-//= require ./editing/js/stay.js
 //= require ./editing/js/admin-dock.js
 //= require ./editing/js/content-decorator.js
 //= require ./editing/dep/CodeMirror-2.3/lib/codemirror.js
