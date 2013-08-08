@@ -61,6 +61,10 @@ $(function() {
        }
      });
      
+     element.find('script[type="text/dont-run-javascript"]').each(function() {
+       $(this).attr("type",'text/javascript');
+     });
+     
      editor.setValue(Html2Markdown(element.children()));
   }
   
