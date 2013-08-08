@@ -3,10 +3,10 @@ rerun = File.file?('rerun.txt') ? IO.read('rerun.txt') : ""
 rerun_opts = rerun.to_s.strip.empty? ? "--format #{ENV['CUCUMBER_FORMAT'] || 'progress'} features" : "--format #{ENV['CUCUMBER_FORMAT'] || 'pretty'} #{rerun}"
 std_opts = "--format #{ENV['CUCUMBER_FORMAT'] || 'progress'} --strict --color --tags ~@wip"
 %>
-default: --drb --port 4012 <%= std_opts %> features --guess -r ./features
-pretty: --drb  --color --port 4012 features --guess -r ./features
-wip: --drb --port 4012 --color --tags @wip --wip features --guess -r ./features
+default: --port 4012 <%= std_opts %> features --guess -r ./features
+pretty:  --color --port 4012 features --guess -r ./features
+wip: --port 4012 --color --tags @wip --wip features --guess -r ./features
 rerun: <%= rerun_opts %> --format rerun --out rerun.txt --strict --tags ~@wip --guess -r ./features
-autotest: --color --drb --port 4012 --format pretty --guess -r ./features
-autotest-all: --color --format pretty --tags @auto --drb --port 4012 --guess -r ./features
-current: --drb --port 4012 --tags @current --guess -r ./features --format pretty --strict
+autotest: --color --port 4012 --format pretty --guess -r ./features
+autotest-all: --color --format pretty --tags @auto --port 4012 --guess -r ./features
+current: --port 4012 --tags @current --guess -r ./features --format pretty --strict
