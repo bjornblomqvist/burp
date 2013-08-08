@@ -1,5 +1,5 @@
 /*global
-  marked MD5
+  marked
 */
 (function($) {
   
