@@ -77,7 +77,6 @@ module Burp
   
         @page.title = params[:page][:title] if params[:page][:title]
         @page.path = params[:page][:path] if params[:page][:path]
-        @page.misc = params[:page][:misc] if params[:page][:misc]
         
         if params[:page][:snippets]
           @page.snippets = {}

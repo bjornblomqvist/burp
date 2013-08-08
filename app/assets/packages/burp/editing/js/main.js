@@ -1,5 +1,5 @@
 /*global
-    snippets CodeMirror ContentDecorator qq
+    snippets CodeMirror ContentDecorator qq Html2Markdown
 */
 
 $(function() {
@@ -51,36 +51,29 @@ $(function() {
     }
   }
   
+  function loadHTML() {
+     
+     var element = snippets().snippets[snippetName].elements().clone();
+     element.find('.markdown').each(function() {
+       $(this).removeClass('markdown');
+       if($(this).attr('class') === "") {
+         $(this).removeAttr('class');
+       }
+     });
+     
+     editor.setValue(Html2Markdown(element.children()));
+  }
+  
   function loadSnippet() {
      var path = window.burp_path || window.location.pathname;
      if(path === "/") {
        path = "/$root";
      }
-
-     $.ajax("/burp/pages/"+path,{
-       cache:false,
-       dataType:'json',
-       success:function(data) {
-         if(data === null) {
-           // No page yet so our code needs a bit help
-           data = {};
-         }
-
-         // We default to the html
-         var value = originalHtml;
-         if(data.misc && data.misc.markdown && data.misc.markdown[snippetName]) {
-           value = data.misc.markdown[snippetName];
-         } else if(data.snippets[snippetName]) {
-           value = data.snippets[snippetName];
-         }
-
-         originalValue = value;
-         editor.setValue(value);
-         editor.clearHistory();
-
-         update(editor.getValue());
-       }
-     });
+     
+     loadHTML();
+     editor.clearHistory();
+     update(editor.getValue());
+     originalValue = editor.getValue();
    }
   
   function loadFiles() {
@@ -176,6 +169,7 @@ $(function() {
     $.adminDock.title('');
     $.adminDock.footer.addButton({ icon: 'picture', text: "Pictures", showModule: $('#gallery') });
     $.adminDock.footer.addButton({ icon: 'edit', text: "Edit text", showModule: $('#myContentEditor'), show: function() {
+      loadHTML();
       editor.refresh();
     } });
 
@@ -255,8 +249,6 @@ $(function() {
           data = data || {snippets:{}};
           
           data.snippets[snippetName] = contentDecorator.getHtml();
-          data.misc = data.misc || {markdown:{}};
-          data.misc.markdown[snippetName] = contentDecorator.getMarkdown();
 
           $.ajax("/burp/pages/"+path,{
             type:"post",

@@ -283,10 +283,10 @@
         }
       });
       
-      $(this.element).park('.movable');
+      // $(this.element).park('.movable');
       this.element.html("");
       this.element.append(tempElement.children());
-      $(this.element).unpark();
+      // $(this.element).unpark();
     },
     
     makeDroppable: function(elements, createCallback) {
