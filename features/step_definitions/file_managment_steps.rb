@@ -9,7 +9,7 @@ When /^I go and upload a file$/ do
 end
 
 Then /^there should be one file that i can link to$/ do
-  page.find("a:contains(\"dummy_text.txt\")").should have_content("dummy_text.txt")
+  find("a", :text => 'dummy_text.txt')
 end
 
 Given /^there is a file$/ do

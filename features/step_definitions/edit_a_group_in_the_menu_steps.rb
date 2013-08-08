@@ -9,7 +9,7 @@ Given /^I am editing a menu that has a group$/ do
 end
 
 When /^I change the name of the group$/ do
-  find(".group-name:contains('About bits2life')").click 
+  find(".group-name", :text => "About bits2life").click 
   has_css?("#my-pop-over", :visible => true) # Wait for the form to appear
   fill_in "Name", :with => "A new group name"
   click_button("Save")
@@ -20,7 +20,7 @@ Then /^the groups name should have changed to the new name$/ do
 end
 
 When /^I remove the group$/ do
-  find(".group-name:contains('About bits2life')").click 
+  find(".group-name", :text => "About bits2life").click 
   sleep 0.5
   click_button("Remove")
   page.driver.browser.switch_to.alert.tap do |alert|
@@ -35,7 +35,7 @@ Then /^I should not any longer see the group in the menu$/ do
 end
 
 When /^I change the name of the group but decide not to keep the changes$/ do
-  find(".group-name:contains('About bits2life')").click 
+  find(".group-name", :text => "About bits2life").click 
   has_css?("#my-pop-over",  :visible => true) # Wait for the form to appear
   fill_in "Name", :with => "A new group name"
   click_button("Cancel")
