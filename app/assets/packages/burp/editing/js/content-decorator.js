@@ -1,5 +1,5 @@
 /*global
-  marked
+  marked markdown2Html
 */
 (function($) {
   
@@ -238,7 +238,8 @@
     },
     
     updateContent: function() {
-      var html = marked(this.markdown).replace(/\s+/g,' ');
+      var html = window.markdown2Html(this.markdown).replace(/\s+/g,' ');
+      
       if(this.lastHtml === html) {
         return;
       }

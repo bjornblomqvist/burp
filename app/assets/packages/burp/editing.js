@@ -5,6 +5,7 @@
 //= require ../gritter/gritter.js
 //= require ../../javascripts/burp/lib/fileupload.js
 //= require ./editing/js/marked.js
+//= require ./editing/js/markdown-fix.js
 //= require ./editing/js/jquery.html2markdown.js
 //= require ./editing/js/admin-dock.js
 //= require ./editing/js/content-decorator.js
