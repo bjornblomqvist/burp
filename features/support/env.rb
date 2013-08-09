@@ -79,4 +79,10 @@ Before do
   end
 end
 
+# After do |scenario|
+#   if(scenario.failed?)
+#     sleep 40
+#   end
+# end
+
 
