@@ -238,7 +238,7 @@
     },
     
     updateContent: function() {
-      var html = window.markdown2Html(this.markdown).replace(/\s+/g,' ');
+      var html = window.markdown2Html(this.markdown);
       
       if(this.lastHtml === html) {
         return;
