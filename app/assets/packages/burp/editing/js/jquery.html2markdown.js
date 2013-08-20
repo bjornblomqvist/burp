@@ -27,12 +27,30 @@ function getBeforePadding(element,padding) {
   return padding;
 } 
 
+function removeTralingWhiteSpace(element) {
+  if(element && element.nodeType === 3) {
+    element.data = element.data.replace(/\s+$/,'');
+  }
+}
+
+function removeStartingWhiteSpace(element) {
+  if(element && element.nodeType === 3) {
+    element.data = element.data.replace(/^\s+/,'');
+  }
+}
+
+function shouldSkip(element) {
+  return $(element).get(0).attributes.length > 0;
+}
+
 function Html2Markdown(value) {
   var dom = $("<div id=\"root\"></div>");
   dom.append(value);
   
   dom.find("> hr").each(function() {
-    $(this).replaceWith(getBeforePadding(this,"\n\n") + "---" + getAfterPadding(this,"\n\n"));
+    if(!shouldSkip(this)) {
+      $(this).replaceWith(getBeforePadding(this,"\n\n") + "---" + getAfterPadding(this,"\n\n"));
+    }
   });
   
   dom.find("em > strong").each(function() {
@@ -40,7 +58,9 @@ function Html2Markdown(value) {
   });
   
   dom.find("> p > em, > em, > ul > li > em").each(function() {
-    $(this).replaceWith("_"+$(this).html()+"_"); 
+    if(!shouldSkip(this)) {
+      $(this).replaceWith("_"+$(this).html()+"_"); 
+    }
   });
   
   
@@ -56,22 +76,43 @@ function Html2Markdown(value) {
   });
   
   dom.find("ul").each(function() {
-    $(this).find('li').each(function() {
-      $(this).replaceWith("- "+$(this).html()+getAfterPadding(this,"\n"));
-    });
+    if(!shouldSkip(this)) {  
+      $(this).contents().each(function() {
+        if(this.nodeType === 3) {
+          $(this).remove();
+        }
+      });
     
-    $(this).replaceWith(getBeforePadding(this,"\n\n") + $(this).html() + getAfterPadding(this,"\n\n"));
+      $(this).find('li').each(function() {
+        removeTralingWhiteSpace($(this).get(0).previousSibling);
+        $(this).replaceWith(getBeforePadding(this,"\n") + "- "+$(this).html() + getAfterPadding(this,"\n"));
+      });
+    
+      $(this).replaceWith(getBeforePadding(this,"\n\n") + $(this).html() + getAfterPadding(this,"\n\n"));
+    }
   });
   
   dom.find("ol").each(function() {
-    $(this).find('li').each(function(index,value) {
-      $(this).replaceWith((index+1)+". "+$(this).html()+getAfterPadding(this,"\n"));
-    });
-    $(this).replaceWith(getBeforePadding(this,"\n\n")+$(this).html());
+    if(!shouldSkip(this)) {    
+      
+      $(this).contents().each(function() {
+        if(this.nodeType === 3) {
+          $(this).remove();
+        }
+      });
+      
+      $(this).find('li').each(function(index,value) {
+        removeTralingWhiteSpace($(this).get(0).previousSibling);
+        $(this).replaceWith(getBeforePadding(this,"\n")+(index+1)+". "+$(this).html()+getAfterPadding(this,"\n"));
+      });
+      $(this).replaceWith(getBeforePadding(this,"\n\n")+$(this).html());
+    }
   });
   
   dom.find('blockquote').each(function() {
-    $(this).replaceWith("> "+$.trim($(this).html()).replace(/\n{2,20}/g,"\n\n").replace(/\n/g,'\n> ').replace(/> \n/g,">\n"));
+    if(!shouldSkip(this)) {  
+      $(this).replaceWith("> "+$.trim($(this).html()).replace(/\n{2,20}/g,"\n\n").replace(/\n/g,'\n> ').replace(/> \n/g,">\n"));
+    }
   });
   
   $.each(["h1",'h2','h3','h4','h5'],function(index,value) {
@@ -83,6 +124,11 @@ function Html2Markdown(value) {
     }
     
     dom.find("> "+value).each(function() {
+      
+      // Remove any auto ids
+      if($(this).attr("id") === $(this).html().toLowerCase().replace(/[^\w]+/g, '-')) {
+        $(this).removeAttr("id");
+      }
       
       if($(this).get(0).attributes.length === 0) {      
         $(this).find("> strong").each(function() {
