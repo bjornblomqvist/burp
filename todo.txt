@@ -30,6 +30,3 @@
     - Basic markdown howto
     - Burp api
     
-  - HTML to markdown so that the markdown can include the images
-    - em,strong,ul,li,h1,h2,h3,h4,h5,p,img[src],a[href]
-    
