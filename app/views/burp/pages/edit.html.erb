@@ -1,18 +1,18 @@
 
 
-<%= twitter_bootstrap_form_for @page, :url => "./",:html => {:id => "edit-page-form",:class => 'form-horizontal'} do |f| %>
+<%= bootstrap_form_for @page, :url => "./",:html => {:id => "edit-page-form",:class => 'form-horizontal'} do |f| %>
 
-  <%= f.fieldset "Page" do %>
-    <%= f.text_field :title, "Title" %>
+  <fieldset>
+    <legend>Page</legend>
+    <%= f.text_field :title %>
     <%= f.text_field :path, :placeholder => "/enter/a/path" %>
-  <% end %>
+  </fieldset>
   
   <%= f.actions do %>
-    <%= f.submit 'Save' %>
+    <%= f.submit(:include_cancel => false, :value => (@page.persisted? ? 'Save' : "Create"), :class => "btn btn-primary") %>
     <%= button_tag  'Cancel', :onclick => "document.location = '#{pages_path}'; return false;", :class => 'btn' %>
     <% if @page %>
-      <%= button_tag  'Remove', :onclick => "$('#destroy-link').click(); return false;", :class => 'btn' %>
-      <%= link_to 'Destroy', page_path(@page), :confirm => 'Are you sure?',:id => 'destroy-link', :method => :delete, :style => "display: none;" %>
+      <%= link_to 'Remove', page_path(@page), :confirm => 'Are you sure?', :class => 'btn btn-warning',  :method => :delete %>
     <% end %>
   <% end %>
 <% end %>

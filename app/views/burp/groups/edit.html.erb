@@ -1,18 +1,18 @@
 
 
-<%= twitter_bootstrap_form_for :group, :url => "./", :method => (@group ? :put : :post),:html => {:id => "edit-group-form",:class => 'form-horizontal'} do |f| %>
-
-  <%= f.fieldset "Group" do %>
-    <%= f.text_field :name, "Name" %>
-  <% end %>
+<%= bootstrap_form_for :group, :url => "./", :method => (@group ? :put : :post),:html => {:id => "edit-group-form",:class => 'form-horizontal'} do |f| %>
+  
+  <fieldset>
+    <legend>Group</legend>
+    <%= f.text_field :name %>
+  </fieldset>
   
   
   <%= f.actions do %>
-    <%= f.submit @group ? 'Save' : "Create" %>
+    <%= f.submit(:include_cancel => false, :value => (@group ? 'Save' : "Create"), :class => "btn btn-primary") %>
     <%= button_tag  'Cancel', :onclick => "document.location = '#{edit_menu_path(@menu)}'; return false;", :class => 'btn' %>
     <% if @group %>
-      <%= button_tag  'Remove', :onclick => "$('#remove-link').click(); return false;", :class => 'btn btn-warning' %>
-      <%= link_to 'Destroy', menu_group_path(@menu,@group), :confirm => 'Are you sure?', :id => 'remove-link', :method => :delete, :style => "display: none;" %>
+      <%= link_to 'Remove', menu_group_path(@menu,@group), :confirm => 'Are you sure?', :class => 'btn btn-warning', :method => :delete %>
     <% end %>
   <% end %>
 <% end %>

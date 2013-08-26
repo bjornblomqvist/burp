@@ -22,7 +22,7 @@ end
 When /^I remove the group$/ do
   find(".group-name", :text => "About bits2life").click 
   sleep 0.5
-  click_button("Remove")
+  click_on("Remove")
   page.driver.browser.switch_to.alert.tap do |alert|
     alert.text.should include("Are you sure?")
     alert.accept

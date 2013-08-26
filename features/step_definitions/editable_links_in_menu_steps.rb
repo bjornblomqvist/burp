@@ -34,7 +34,7 @@ end
 When /^I remove the link$/ do
   click_link("Google")
   has_css?("#my-pop-over",  :visible => true) # Wait for the form to appear
-  click_button("Remove")
+  click_on("Remove")
   page.driver.browser.switch_to.alert.tap do |alert|
     alert.text.should include("Are you sure?")
     alert.accept

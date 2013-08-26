@@ -13,7 +13,7 @@ end
 
 Then /^that page should show the new title when viewed$/ do
   visit "/test/a-page"
-  page.find("title", :visible => false).should have_content("The new title")
+  page.has_title?("The new title")
 end
 
 When /^I go and change the path of that page$/ do
@@ -27,7 +27,7 @@ end
 
 Then /^that page should be found on the new path$/ do
   visit "/a-better-path"
-  page.find("title", :visible => false).should have_content("A test title")
+  page.has_title?("A test title")
 end
 
 Given /^there are no pages$/ do
@@ -43,12 +43,12 @@ When /^I go and add a page$/ do
   click_link "New page"
   fill_in "Title", :with => "New page title"
   fill_in "Path", :with => "/the-new-page"
-  click_button "Save"
+  click_button "Create"
 end
 
 Then /^I there should be a page$/ do
   visit "/the-new-page"
-  page.find("title", :visible => false).should have_content("New page title")
+  page.has_title?("New page title")
 end
 
 When /^I remove the page$/ do
@@ -56,7 +56,7 @@ When /^I remove the page$/ do
   click_link "Pages"
   click_link "Start page"
   has_css?("#my-pop-over", :visible => true) # Wait for the form to appear
-  click_button "Remove"
+  click_on "Remove"
   page.driver.browser.switch_to.alert.tap do |alert|
     alert.text.should include("Are you sure?")
     alert.accept
@@ -73,7 +73,11 @@ When /^I go and add a page without a page path$/ do
   click_link "Pages"
   click_link "New page"
   fill_in "Title", :with => "New page title"
-  click_button "Save"
+  
+  # We turn off HTML5 validation so that we can test the error handeling
+  page.execute_script('$("form").attr("novalidate","novalidate");')
+  
+  click_button "Create"
 end
 
 Then /^I should be told that i must enter a page path$/ do

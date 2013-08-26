@@ -44,7 +44,7 @@ profile['extensions.firebug.net.enableSites'] = true
 profile['extensions.firebug.defaultPanelName'] = 'console'
 profile['extensions.firebug.previousPlacement'] = 3
 
-profile.add_extension "#{File.dirname(__FILE__)}/firebug-1.10.4-fx.xpi"
+profile.add_extension "#{File.dirname(__FILE__)}/firebug-1.12.0-fx.xpi"
 
 @driver = Capybara::Selenium::Driver.new(nil, :profile => profile)
 @driver.browser
@@ -70,6 +70,14 @@ rescue NameError
   raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
 end
 
+After do |scenario|
+  if scenario.failed? && ENV['STOP_ON_ERROR']
+    STDERR.puts "\n\nSomething faild! So we are breaking here =)"
+    STDERR.puts "\nHit enter to continue.\n\n"
+    STDIN.gets
+  end
+end
+
 Before do
   BurpFactory.clear
   Capybara.reset_sessions!
@@ -78,11 +86,4 @@ Before do
     File.unlink(path) 
   end
 end
-
-# After do |scenario|
-#   if(scenario.failed?)
-#     sleep 40
-#   end
-# end
-
 

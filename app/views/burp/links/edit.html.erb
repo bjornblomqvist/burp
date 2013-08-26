@@ -1,19 +1,19 @@
 
 
-<%= twitter_bootstrap_form_for :link, :url => "./", :method => (@link ? :put : :post),:html => {:id => "edit-link-form",:class => 'form-horizontal'} do |f| %>
-
-  <%= f.fieldset "Link" do %>
-    <%= f.text_field :name, "Name" %>
-    <%= f.text_field :url, "Url" %>
-  <% end %>
+<%= bootstrap_form_for :link, :url => "./", :method => (@link ? :put : :post),:html => {:id => "edit-link-form",:class => 'form-horizontal'} do |f| %>
+  
+  <fieldset>
+    <legend>Link</legend>
+    <%= f.text_field :name %>
+    <%= f.text_field :url %>  
+  </fieldset>
   
   
   <%= f.actions do %>
-    <%= f.submit @link ? 'Save' : "Create" %>
+    <%= f.submit(:include_cancel => false, :value => (@link ? 'Save' : "Create"), :class => "btn btn-primary") %>
     <%= button_tag  'Cancel', :onclick => "document.location = '#{edit_menu_path(@menu)}'; return false;", :class => 'btn' %>
     <% if @link %>
-      <%= button_tag  'Remove', :onclick => "$('#remove-link').click(); return false;", :class => 'btn btn-warning' %>
-      <%= link_to 'Destroy', menu_link_path(@menu,@link), :confirm => 'Are you sure?', :id => 'remove-link', :method => :delete, :style => "display: none;" %>
+      <%= link_to 'Remove', menu_link_path(@menu,@link), :confirm => 'Are you sure?',:class => 'btn btn-warning', :method => :delete %>
     <% end %>
   <% end %>
 <% end %>

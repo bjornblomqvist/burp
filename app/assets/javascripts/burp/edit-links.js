@@ -1,5 +1,5 @@
 /*global
-  
+  showFormInPopover
 */
 
 
@@ -30,34 +30,7 @@ $(function() {
       var path = $(target).is("a") ? "./links/"+id : "./groups/"+id;
       
       $.get(path+"/edit",function(data) {
-        
-        var the_form = $(data).find("form");
-        the_form.attr("action",path);
-
-        $("#my-pop-over").remove();
-        $('.modal').clone().attr("id",'my-pop-over').appendTo("body");
-        $("#my-pop-over .modal-body").append(the_form);
-        
-        $("#my-pop-over .modal-header h3").text(the_form.find(" > fieldset > legend").text());
-        the_form.find(" > fieldset > legend").remove();
-        
-        the_form.find(".form-actions").hide();
-        the_form.find(".form-actions button").each(function() {
-          var _this = this;
-          var new_button = $(this).clone().attr("onclick",'');
-          new_button.appendTo("#my-pop-over .modal-footer");
-          new_button.click(function() {
-            if($(this).text() === "Cancel") {
-              $("#my-pop-over").modal("hide");
-            } else {
-              $(_this).click();
-            }
-          });
-        });
-        
-        $("#my-pop-over").modal('show').one('shown',function() {
-          $(this).find('input').not("input[type=button],input[type=hidden],input[type=submit]").first().focus();
-        });
+        showFormInPopover($(data).find("form"), path);
       });
     });
   });
@@ -74,34 +47,7 @@ $(function() {
       var path = target.attr('href');
       
       $.get(path,function(data) {
-        
-        var the_form = $(data).find("form");
-        the_form.attr("action",path.replace(/\/(edit|new)$/,''));
-
-        $("#my-pop-over").remove();
-        $('.modal').clone().attr("id",'my-pop-over').appendTo("body");
-        $("#my-pop-over .modal-body").append(the_form);
-        
-        $("#my-pop-over .modal-header h3").text(the_form.find(" > fieldset > legend").text());
-        the_form.find(" > fieldset > legend").remove();
-        
-        the_form.find(".form-actions").hide();
-        the_form.find(".form-actions button").each(function() {
-          var _this = this;
-          var new_button = $(this).clone().attr("onclick",'');
-          new_button.appendTo("#my-pop-over .modal-footer");
-          new_button.click(function() {
-            if($(this).text() === "Cancel") {
-              $("#my-pop-over").modal("hide");
-            } else {
-              $(_this).click();
-            }
-          });
-        });
-        
-        $("#my-pop-over").modal('show').one('shown',function() {
-          $(this).find('input').not("input[type=button],input[type=hidden],input[type=submit]").first().focus();
-        });
+        showFormInPopover($(data).find("form"), path);
       });
     });
   });

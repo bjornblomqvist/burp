@@ -14,7 +14,7 @@ end
 
 require 'rake'
 require 'jeweler'
-require 'burp/version'
+require_relative 'lib/burp/version'
 
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options

@@ -1,31 +1,17 @@
 source "https://rubygems.org"
 
-# Declare your gem's dependencies in burp.gemspec.
-# Bundler will treat runtime dependencies like base dependencies, and
-# development dependencies will be added by default to the :development group.
-gemspec
-
-# jquery-rails is used by the dummy application
 gem "rails", "~> 3.2"
 gem "jquery-rails"
 gem 'jquery-ui-rails'
 gem 'less-rails'
 gem 'mayi', "~> 1.0.0"
 gem 'therubyracer'
-gem "twitter_bootstrap_form_for", "~> 2.0.1.0.rc1"
+gem 'bootstrap_forms'
 gem 'term-ansicolor'
 gem 'rmagick', :require => false
 
-# Declare any dependencies that are still in development here instead of in
-# your gemspec. These might include edge Rails or gems from your path or
-# Git. Remember to move these dependencies to your gemspec before releasing
-# your gem to rubygems.org.
-
-# To use debugger
-# gem 'debugger'
-
 group :development do
-  gem "rspec", "~> 2.8.0"
+  gem "rspec"
   gem "rdoc", "~> 3.12"
   gem "bundler"
   gem "jeweler", "~> 1.8.4"
@@ -37,4 +23,5 @@ group :test do
   gem 'database_cleaner'
 	gem 'rspec'
 	gem 'rspec-rails'
+	gem 'sqlite3'
 end
