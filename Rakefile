@@ -21,8 +21,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "burp_cms"
   gem.homepage = "http://github.com/bjornblomqvist/burp"
   gem.license = "LGPL3"
-  gem.summary = %Q{ A CMS that tryes hard to not get in your way! }
-  gem.description = %Q{ A CMS that tryes hard to not get in your way! }
+  gem.summary = %Q{ A CMS that tries hard to not get in your way! }
+  gem.description = %Q{ A CMS that tries hard to not get in your way! }
   gem.email = "darwin@bits2life.com"
   gem.authors = ["Darwin"]
   gem.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
