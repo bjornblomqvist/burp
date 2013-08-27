@@ -1,6 +1,5 @@
 source "https://rubygems.org"
 
-gem "rails", "~> 3.2"
 gem "jquery-rails"
 gem 'jquery-ui-rails'
 gem 'less-rails'
@@ -11,6 +10,7 @@ gem 'term-ansicolor'
 gem 'rmagick', :require => false
 
 group :development do
+  gem "rails", "~> 3.2"
   gem "rspec"
   gem "rdoc", "~> 3.12"
   gem "bundler"
