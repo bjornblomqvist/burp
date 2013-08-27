@@ -20,11 +20,11 @@ Burp::Engine.routes.draw do
   end
   
   # Catch all to 404 error
-  match "/*path" => "error#no_such_page"
+  get "/*path" => "error#no_such_page"
 
 end
 
 Rails.application.routes.draw do
   mount Burp::Engine => "/burp"
-  match '/:path' => 'burp::catch_all#show', :constraints => { :path => /.*/ }
+  get '/:path' => 'burp/catch_all#show', :constraints => { :path => /.*/ }
 end

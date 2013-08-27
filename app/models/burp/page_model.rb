@@ -11,8 +11,8 @@ module Burp
     attr_accessor :path, :title, :snippets
   
     validates_presence_of :path, :message => "You must enter a path"
-    validates :path, :format => { :with => /^\//, :message => "Must start with a slash" }
-    validates :path, :format => { :with => /^[a-zA-Z0-9\-\.\/]+$/, :message => "Invalid path" }
+    validates :path, :format => { :with => /\A\//, :message => "Must start with a slash" }
+    validates :path, :format => { :with => /\A[a-zA-Z0-9\-\.\/]+\z/, :message => "Invalid path" }
     validate do 
       if File.exist?("#{on_disk_path}/page.json") && @original_path != path
         errors.add(:path, "Path already taken, #{path}")
