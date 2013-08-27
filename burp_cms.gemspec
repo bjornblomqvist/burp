@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "burp_cms"
-  s.version = "1.3.14"
+  s.version = "1.3.15"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Darwin"]
-  s.date = "2013-08-26"
+  s.date = "2013-08-27"
   s.description = " A CMS that tries hard to not get in your way! "
   s.email = "darwin@bits2life.com"
   s.extra_rdoc_files = [
@@ -77,6 +77,7 @@ Gem::Specification.new do |s|
     "app/assets/javascripts/burp/cms_helper.js",
     "app/assets/javascripts/burp/edit-links.js",
     "app/assets/javascripts/burp/edit-page.js",
+    "app/assets/javascripts/burp/form_popover.js",
     "app/assets/javascripts/burp/lib/bootstrap.min.js",
     "app/assets/javascripts/burp/lib/debug.js",
     "app/assets/javascripts/burp/lib/fileupload.js",
@@ -196,6 +197,7 @@ Gem::Specification.new do |s|
     "app/views/burp/static/index.html.erb",
     "app/views/layouts/burp/application.html.erb",
     "config/cucumber.yml",
+    "config/initializers/init.rb",
     "config/routes.rb",
     "lib/burp/capistrano.rb",
     "lib/burp/engine.rb",

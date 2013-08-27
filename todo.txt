@@ -1,4 +1,9 @@
 
+  - Fix sa that we use bootstrap_forms gem
+  - Update bootstrap_forms so that it can also work with rails 4.0
+  - Update burp to also work with rails 4.0
+
+
   - Document steps to do things
     - Upload an image
       - Go to the files page
