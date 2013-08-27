@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = "burp_cms"
-  s.version = "1.3.18"
+  s.version = "1.3.19"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Darwin"]
@@ -88,7 +88,7 @@ Gem::Specification.new do |s|
     "app/assets/packages/burp/editing/css/dropzone.css",
     "app/assets/packages/burp/editing/css/edit-content.less",
     "app/assets/packages/burp/editing/css/gallery.css",
-    "app/assets/packages/burp/editing/dep/CodeMirror-2.3/LICENSE",
+    "app/assets/packages/burp/editing/dep/CodeMirror-2.3/LICENSE.txt",
     "app/assets/packages/burp/editing/dep/CodeMirror-2.3/keymap/emacs.js",
     "app/assets/packages/burp/editing/dep/CodeMirror-2.3/keymap/vim.js",
     "app/assets/packages/burp/editing/dep/CodeMirror-2.3/lib/codemirror.css",
