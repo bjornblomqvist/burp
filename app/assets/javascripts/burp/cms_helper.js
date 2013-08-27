@@ -6,7 +6,7 @@
     
     var snippets = {names:[],snippets:{}};
     
-    var snippetComments = $("*").contents().filter(function() {
+    var snippetComments = $("*:not(iframe)").contents().filter(function() {
       try {
         return this.nodeType == 8 && this.data.match(/snippet data-type=\"start\"/);
       } catch (e) {
