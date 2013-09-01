@@ -287,11 +287,13 @@
       this.element.html("");
       this.element.append(tempElement.children());
       
-      initializeMovable(this, this.element.find('img'), function(element, positionClass) { 
-        $(element).removeClass('left center right');
-        $(element).addClass(positionClass);
-        return element;
-      });
+      setTimeout(function() {
+        initializeMovable(_this, _this.element.find('> img'), function(element, positionClass) { 
+          $(element).removeClass('left center right');
+          $(element).addClass(positionClass);
+          return element;
+        });
+      },10);
     },
     
     makeDroppable: function(elements, createCallback) {
