@@ -2,7 +2,6 @@ module Burp
   class ApplicationController < ActionController::Base
     
     protect_from_forgery
-    before_filter :refresh_access
     before_filter :authenticate
     before_filter :init_body_classes
     
@@ -19,12 +18,12 @@ module Burp
     
     private
     
-    def refresh_access
-      Burp.access.refresh
+    def access
+      @access ||= Burp.new_access_instance(request, self)
     end
     
     def authenticate
-      unless Burp.access.may_skip_http_auth? || Rails.env == "test"
+      unless access.may_skip_http_auth? || Rails.env == "test"
       
         if !Rails.application.config.respond_to?(:burp_password) or !Rails.application.config.respond_to?(:burp_username)
           raise "config.burp_username and config.burp_password are not set.\n\nYou can fix this by adding them to application.rb."

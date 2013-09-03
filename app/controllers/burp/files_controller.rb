@@ -8,7 +8,7 @@ module Burp
     
     def index
       
-      Burp.access.may_view_file_list! do
+      access.may_view_file_list! do
       
         @files = FileModel.all
       
@@ -39,7 +39,7 @@ module Burp
       if File.expand_path(file_path) != file_path
         render :text => "403, Forbiden!", :status => 403, :content_type => "text/plain"
       elsif File.exist?(file_path)
-        Burp.access.may_view_file!(file_path) do
+        access.may_view_file!(file_path) do
           
           headers["Cache-Control"] = "Public"
           headers["Last-Modified"] = File.mtime(file_path).utc.rfc2822
@@ -56,7 +56,7 @@ module Burp
     end
     
     def create 
-      Burp.access.may_upload_a_file! do
+      access.may_upload_a_file! do
         Util::UploadHandler.handle(params[:qqfile],request) do |file|
         
           errors = []

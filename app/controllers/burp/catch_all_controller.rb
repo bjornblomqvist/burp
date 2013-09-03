@@ -7,8 +7,9 @@ class Burp::CatchAllController < ApplicationController
     @menu = Burp::Menu.find("main")
     @burp_page_path = params[:burp_page_path] || request.path
     @cms_page = Burp.find_page(@burp_page_path)
-    Burp.access.refresh
-    Burp.access.may_view_page!(@cms_page)
+    
+    @access = self.respond_to?(:access) ? self.access : Burp.new_access_instance(request, self)
+    @access.may_view_page!(@cms_page)
 
     raise ActionController::RoutingError.new('Page not Found') if @cms_page.nil?
 

@@ -3,7 +3,7 @@ source "https://rubygems.org"
 gem "jquery-rails"
 gem 'jquery-ui-rails'
 gem 'less-rails'
-gem 'mayi', "~> 1.0.0"
+gem 'mayi'
 gem 'therubyracer'
 gem 'bootstrap_forms'
 gem 'term-ansicolor'

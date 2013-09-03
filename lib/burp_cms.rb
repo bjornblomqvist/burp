@@ -10,6 +10,7 @@ require "burp/version"
 module Burp
   
   @@content_directory = nil
+  @@access_builder = nil
   
   
   def self.find_page(path)
@@ -21,8 +22,16 @@ module Burp
   
   
   
-  def self.access
-    @@access ||= MayI::Access.new("Burp::Access")
+  def self.new_access_instance(request, controller)
+    if @@access_builder
+      @@access_builder.call(request, controller)
+    else
+      Burp::Access.new
+    end
+  end
+  
+  def self.set_access_builder=(&block)
+    @@access_builder = block
   end
   
   

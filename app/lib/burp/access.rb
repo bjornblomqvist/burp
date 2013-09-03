@@ -1,8 +1,7 @@
 module Burp
   class Access
     
-    def initialize(data)
-    end
+    include MayI
     
     # If true no http auth check will be made. (Ment as a way to remove Burp's default auth method.)
     def may_skip_http_auth
