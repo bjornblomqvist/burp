@@ -30,7 +30,7 @@ module Burp
     end
   end
   
-  def self.set_access_builder=(&block)
+  def self.set_access_builder &block
     @@access_builder = block
   end
   
