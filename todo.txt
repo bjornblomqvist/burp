@@ -1,9 +1,11 @@
 
-  - Update bootstrap_forms so that it can also work with rails 4.0
-  - Update burp to also work with rails 4.0
-
   - Make html output a bit nicer with 
     https://github.com/threedaymonk/htmlbeautifier
+
+  - Change so that we serve uploaded files via /public. We do this by adding a symlink
+  
+  - A preview of files would be nice 
+  
 
   - Document steps to do things
     - Upload an image
@@ -16,8 +18,9 @@
       - Go to the files page
       - Click on remove file for the file to remove
     
+  - File upload in edit mode should show progras just like on the files page
 
-
+  - Change so that we dont wrap the content when editing
 
   - Fix handeling of all form errors
   
