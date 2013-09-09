@@ -1205,7 +1205,7 @@ qq.extend(qq.UploadHandlerXhr.prototype, {
         if(window['jQuery']) {
           var csrf_token = jQuery('meta[name=csrf-token]').attr('content');
           if(csrf_token) {
-            xhr.setRequestHeader("X-CSRF-Token", encodeURIComponent(csrf_token));
+            xhr.setRequestHeader("X-CSRF-Token", csrf_token);
           }
         }
         
