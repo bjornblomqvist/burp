@@ -70,9 +70,8 @@
 </div>
 
 
+<% content_for :inline_javascript do %>
 <script type="text/javascript" charset="utf-8">
-  
-  <% content_for :inline_javascript do %>
   
   $(function() {
     
@@ -89,7 +88,6 @@
       });
     });
   });
-  
-  <% end %>
     
 </script>
+<% end %>

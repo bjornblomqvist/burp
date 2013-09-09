@@ -34,65 +34,63 @@
 </table>
   
 
-  
-  <script type="text/javascript" charset="utf-8">
-  
-    <% content_for :inline_javascript do %>
-      
-      var uploader = new qq.FileUploader({
-          element: document.getElementById('file-uploader'),
-          action: '/burp/files',
-          sizeLimit: 1024 * 1024 * 40,
-          onComplete: function(id, fileName, responseJSON){
-            if(responseJSON.success) {
-              $.get(document.location,function(data) {
-                $('table').replaceWith($(data).find('table'));
-              });
-            } else {
-              var errorMessage = "";
-              $.each(responseJSON.errors,function(index,error) {
-                $.each(error,function(key,value) {
-                  errorMessage += value;
-                });
-              });
-              alert(errorMessage);
-            }
-          },
-          template: '<div class="qq-uploader">' + 
-                  '<div class="file-upload-drop-area" style="display: block;"><span>Drop files here to upload</span></div>' +
-                  '<div class="file-upload-button btn btn-large">Click here to upload</div>' +
-                  '<ul class="qq-upload-list"></ul>' + 
-               '</div>',
-      
-          // template for one item in file list
-          fileTemplate: '<li>' +
-                  '<span class="qq-upload-file"></span>' +
-                  '<span class="qq-upload-spinner"></span>' +
-                  '<span class="qq-upload-size"></span>' +
-                  '<a class="qq-upload-cancel" href="#">Cancel</a>' +
-                  '<span class="qq-upload-failed-text">Failed</span>' +
-              '</li>',        
-      
-          classes: {
-              // used to get elements from templates
-              button: 'file-upload-button',
-              drop: 'file-upload-drop-area',
-              dropActive: 'file-upload-drop-area-active',
-              list: 'qq-upload-list',
-      
-              file: 'qq-upload-file',
-              spinner: 'qq-upload-spinner',
-              size: 'qq-upload-size',
-              cancel: 'qq-upload-cancel',
-      
-              // added to list item when upload completes
-              // used in css to hide progress spinner
-              success: 'qq-upload-success',
-              fail: 'qq-upload-fail'
-          }
-      });
-      
-    <% end %>
+<% content_for :inline_javascript do %>
+<script type="text/javascript" charset="utf-8">
+
     
-  </script>
+    var uploader = new qq.FileUploader({
+        element: document.getElementById('file-uploader'),
+        action: '/burp/files',
+        sizeLimit: 1024 * 1024 * 40,
+        onComplete: function(id, fileName, responseJSON){
+          if(responseJSON.success) {
+            $.get(document.location,function(data) {
+              $('table').replaceWith($(data).find('table'));
+            });
+          } else {
+            var errorMessage = "";
+            $.each(responseJSON.errors,function(index,error) {
+              $.each(error,function(key,value) {
+                errorMessage += value;
+              });
+            });
+            alert(errorMessage);
+          }
+        },
+        template: '<div class="qq-uploader">' + 
+                '<div class="file-upload-drop-area" style="display: block;"><span>Drop files here to upload</span></div>' +
+                '<div class="file-upload-button btn btn-large">Click here to upload</div>' +
+                '<ul class="qq-upload-list"></ul>' + 
+             '</div>',
+    
+        // template for one item in file list
+        fileTemplate: '<li>' +
+                '<span class="qq-upload-file"></span>' +
+                '<span class="qq-upload-spinner"></span>' +
+                '<span class="qq-upload-size"></span>' +
+                '<a class="qq-upload-cancel" href="#">Cancel</a>' +
+                '<span class="qq-upload-failed-text">Failed</span>' +
+            '</li>',        
+    
+        classes: {
+            // used to get elements from templates
+            button: 'file-upload-button',
+            drop: 'file-upload-drop-area',
+            dropActive: 'file-upload-drop-area-active',
+            list: 'qq-upload-list',
+    
+            file: 'qq-upload-file',
+            spinner: 'qq-upload-spinner',
+            size: 'qq-upload-size',
+            cancel: 'qq-upload-cancel',
+    
+            // added to list item when upload completes
+            // used in css to hide progress spinner
+            success: 'qq-upload-success',
+            fail: 'qq-upload-fail'
+        }
+    });
+</script>
+<% end %>
+
   
