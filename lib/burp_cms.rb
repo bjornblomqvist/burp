@@ -69,5 +69,28 @@ module Burp
     Thread.current[:thread_local_content_directory] = path
   end
   
+  def self.menu(request)
+    group = Group.new("") 
+    group.children << Link.new(:name => "Pages", :url => "/burp/pages")
+    if Burp::Menu.count == 1
+      group.children << Link.new(:name => "Menu", :url => "/burp/menus/#{Burp::Menu.all.first.id}/edit")
+    else
+      group.children << Link.new(:name => "Menus", :url => "/burp/menus")
+    end
+    group.children << Link.new(:name => "Files", :url => "/burp/files")
+    group.children << Link.new(:name => "Help", :url => "/burp/herp", :class => "markdown")
+    
+    @@menu_processors.values.each do |block|
+      block.call(group, request)
+    end
+    
+    group
+  end
+  
+  @@menu_processors = {}
+  
+  def self.add_menu_processor(name, &block)
+    @@menu_processors[name] = block
+  end
   
 end
