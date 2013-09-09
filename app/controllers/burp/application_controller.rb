@@ -40,7 +40,6 @@ module Burp
             username == Rails.application.config.burp_username && password == Rails.application.config.burp_password
           end
         end
-      
       end
     end
     

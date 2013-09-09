@@ -73,7 +73,7 @@ module Burp
     group = Group.new("") 
     group.children << Link.new(:name => "Pages", :url => "/burp/pages")
     if Burp::Menu.count == 1
-      group.children << Link.new(:name => "Menu", :url => "/burp/menus/#{Burp::Menu.all.first.id}/edit")
+      group.children << Link.new(:name => "Menu", :url => "/burp/menus/#{Burp::Menu.all.first.name}/edit")
     else
       group.children << Link.new(:name => "Menus", :url => "/burp/menus")
     end
