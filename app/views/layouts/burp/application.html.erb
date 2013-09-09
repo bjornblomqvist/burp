@@ -24,7 +24,7 @@
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li><%= link_to "Pages", "/burp/pages"  %></li>
-              <li><%= Burp::Menu.count == 1 ? (link_to "Menu", edit_menu_path(Burp::Menu.all.first)) : (link_to "Menus", "/burp/menus")  %></li>
+              <li><%= Burp::Menu.count == 1 ? (link_to "Menu", burp_engine.edit_menu_path(Burp::Menu.all.first)) : (link_to "Menus", "/burp/menus")  %></li>
               <li><%= link_to "Files", "/burp/files"  %></li>
               <li class="markdown"><%= link_to "Help", "/burp/help" %></li>
             </ul>

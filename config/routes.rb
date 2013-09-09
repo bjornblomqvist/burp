@@ -25,6 +25,6 @@ Burp::Engine.routes.draw do
 end
 
 Rails.application.routes.draw do
-  mount Burp::Engine => "/burp"
+  mount Burp::Engine => "/burp", :as => "burp_engine"
   get '/:path' => 'burp/catch_all#show', :constraints => { :path => /.*/ }
 end
