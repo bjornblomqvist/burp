@@ -16,6 +16,21 @@ module Burp
       @body_classes += " #{(request.user_agent || '').match(/(lion)/i) ? "noscrollbars" : "scrollbars"} "
     end
     
+    helper_method :menu
+    def menu
+      group = Group.new("") 
+      group.children << Link.new(:name => "Pages", :url => "/burp/pages")
+      if Burp::Menu.count == 1
+        group.children << Link.new(:name => "Menu", :url => burp_engine.edit_menu_path(Burp::Menu.all.first))
+      else
+        group.children << Link.new(:name => "Menus", :url => "/burp/menus")
+      end
+      group.children << Link.new(:name => "Files", :url => "/burp/files")
+      group.children << Link.new(:name => "Help", :url => "/burp/herp", :class => "markdown")
+      
+      group
+    end
+    
     private
     
     def access

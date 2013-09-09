@@ -106,5 +106,13 @@ module Burp
       to_hash.hash
     end
     
+    def self.bootstrap_nav(group)
+      %{
+      <ul class="nav">
+        #{group.children.map { |child| child.is_a?(Link) ? "<li class=\"#{child.css_class}\">#{child.to_html}</li>" : "" }.join("\n\t\t\t")}
+      </ul>
+      }.html_safe
+    end
+    
   end
 end

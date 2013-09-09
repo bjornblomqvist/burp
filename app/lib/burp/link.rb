@@ -3,11 +3,16 @@ module Burp
     
     attr_reader :id
     attr_accessor :url,:name
+    attr_accessor :css_class
 
-    def initialize(options)
-      self.name = options.keys.first
-      self.url = options.values.first
-
+    def initialize(options)      
+      self.name ||= options[:name]
+      self.url ||= options[:url]
+      self.css_class ||= options[:class]
+      
+      self.name ||= options.keys.first
+      self.url ||= options.values.first
+      
       raise ArgumentError.new("Missing a url") unless url
       raise ArgumentError.new("Missing a name") unless name
     end
@@ -21,7 +26,7 @@ module Burp
     end
 
     def to_html(request = nil,name = nil)
-      %{<a class="#{current_class(request)}" #{id ? "id='#{id}'" : ""} href="#{url}">#{name || self.name}</a>}.html_safe
+      %{<a class="#{current_class(request)} #{css_class}" #{id ? "id='#{id}'" : ""} href="#{url}">#{name || self.name}</a>}.html_safe
     end
     
     def to_param
