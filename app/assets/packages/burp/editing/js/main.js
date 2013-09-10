@@ -36,9 +36,9 @@ $(function() {
   }
   
   function cleanup(container) {
-    container.find("p > img").each(function(index,img) {
-      if($(img).parent().children().length === 1) {
-        $(img).unwrap();
+    container.find("p").each(function() {
+      if($(this).children().length === $(this).find('img').length) {
+        $(this).children().unwrap();
       }
     });
   }
