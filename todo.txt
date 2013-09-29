@@ -1,4 +1,6 @@
 
+  - Image remove should remove scalled versions
+
   - Make html output a bit nicer with 
     https://github.com/threedaymonk/htmlbeautifier
 
