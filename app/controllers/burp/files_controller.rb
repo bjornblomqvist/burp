@@ -1,4 +1,4 @@
-
+# encoding: UTF-8
 require 'fileutils'
 
 module Burp
@@ -65,12 +65,14 @@ module Burp
           if errors.length > 0
             render :json => {:errors => errors}
           else
+            target_path = upload_directory_path + make_url_safe(File.basename(file.path))
+            
             FileUtils.mkdir_p(upload_directory_path)
-            FileUtils.mv(file.path,upload_directory_path+File.basename(file.path))
+            FileUtils.mv(file.path, target_path)
             
-            Burp::Util.create_smaller_images(upload_directory_path+File.basename(file.path)) if file.path.match(/(jpg|jpeg|gif|png)$/i)
+            Burp::Util.create_smaller_images(target_path) if target_path.match(/(jpg|jpeg|gif|png)$/i)
             
-            Util.commit("Burp: file upload",:path => upload_directory_path)
+            Util.commit("Burp: file upload", :path => upload_directory_path)
             render :json => {:success => true}
           end
         end
@@ -79,6 +81,17 @@ module Burp
     end
     
     private
+    
+    FROM_CHARACTERS = " ÀÁÂÃàáâãÇçĆćČčÐðÈÉÊËèéêëÌÍÎÏìíîïŁłÑñŃńÒÓÔòóôŘřŚśšÙÚÛùúûÜÝüýÅåÄÆäæÖØöø"
+    TO_CHARACTERS   = "-AAAAaaaaCcCcCcDdEEEEeeeeIIIIiiiillNnNnOOOoooRrSssUUUuuuUYuyAaAAaaOOoo"
+    OTHER = "̌̀̂́̊̈ ̃ ̧"
+    
+    def make_url_safe(file_name)
+      file_name.chars.map do |char|
+        i = FROM_CHARACTERS.index(char)
+        i ? TO_CHARACTERS[i] : (OTHER.include?(char) ? "" : char)
+      end.join('')
+    end
     
     def disposition(file_path)
       file_path.match(/\.(png|jpeg|gif|jpg|pdf|txt)$/) && !params.has_key?(:download) ? 'inline' : 'attachment'
