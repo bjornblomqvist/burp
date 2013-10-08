@@ -78,7 +78,7 @@ module Burp
       group.children << Link.new(:name => "Menus", :url => "/burp/menus")
     end
     group.children << Link.new(:name => "Files", :url => "/burp/files")
-    group.children << Link.new(:name => "Help", :url => "/burp/herp", :class => "markdown")
+    group.children << Link.new(:name => "Help", :url => "/burp/help", :class => "markdown")
     
     @@menu_processors.values.each do |block|
       block.call(group, request)
