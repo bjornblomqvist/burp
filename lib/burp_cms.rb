@@ -16,7 +16,7 @@ module Burp
   def self.find_page(path)
     page_model = Burp::PageModel.find(path)
     if page_model 
-      Page.new(:snippets => page_model.snippets, :title => page_model.title)
+      Page.new(:snippets => page_model.snippets, :title => page_model.title, :page_id => page_model.id)
     end
   end
   

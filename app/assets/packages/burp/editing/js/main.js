@@ -250,7 +250,7 @@ $(function() {
     
     $.adminDock.footer.addButton({ icon: 'save', text: 'Save', secondary: true, click:function() {
       
-      var path = window.burp_path || window.location.pathname;
+      var path = window.burp_path || snippets().snippets[snippetName].pageId || window.location.pathname;
       if(path === "/") {
         path = "/$root";
       }

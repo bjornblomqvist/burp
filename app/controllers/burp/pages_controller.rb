@@ -85,13 +85,20 @@ module Burp
           end
         end
         
-        @page.save
-          
-        respond_to do |format|
-          format.html {
-            redirect_to pages_path
-          }
-          format.json { render :json =>  {:success => true} }
+        if @page.save          
+          respond_to do |format|
+            format.html {
+              redirect_to pages_path
+            }
+            format.json { render :json =>  {:success => true} }
+          end
+        else
+          respond_to do |format|
+            format.html {
+              render :edit
+            }
+            format.json { render :json =>  {:success => false} }
+          end
         end
       end
     end
