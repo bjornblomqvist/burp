@@ -16,6 +16,13 @@
 //= require ./burp
 //= require_tree .
 
+<%
+  begin
+    require_asset("customize-burp.js")
+  rescue => e
+  end    
+%>
+
 $(function() {
   var csrf_token = $('meta[name=csrf-token]').attr('content');
   $.ajaxSetup({ headers: { "X-CSRF-Token": csrf_token } });

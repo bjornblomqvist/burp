@@ -12,6 +12,18 @@
  *= require_tree .
  */
  
+<%
+  begin
+    require_asset("customize-burp")
+  rescue => e
+  end
+
+  begin
+    require_asset("customize-burp.less")
+  rescue => e
+  end    
+%>
+ 
 .nav-collapse.collapse {
   height: auto !important;
   overflow: visible !important;
