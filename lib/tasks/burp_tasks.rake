@@ -1,7 +1,7 @@
 require 'fileutils'
 require 'term/ansicolor'
 
-class MyPrinter
+class BurpRakeHelper
   extend Term::ANSIColor
   
   def self.print_yellow text
@@ -11,6 +11,22 @@ class MyPrinter
   def self.print_green text
     print green, text, reset, "\n"
   end
+  
+  
+  def self.write(path)
+    css_path = "#{Rails.root}#{path}"
+    print "\t#{css_path}"
+    if File.exist?(css_path) 
+      BurpRakeHelper.print_yellow " Skipping"
+    else
+      FileUtils.mkdir_p(File.dirname(css_path))
+      File.open(css_path,"w") do |file|
+        yield file
+      end
+      BurpRakeHelper.print_green " OK"
+    end
+  end
+  
 end
 
 namespace :burp do
@@ -23,66 +39,45 @@ namespace :burp do
     
     print "\t#{cms_root}"
     if File.exist?(cms_root) 
-      MyPrinter.print_yellow " Skipping"
+      BurpRakeHelper.print_yellow " Skipping"
     else
       FileUtils.mkdir_p(cms_root)
-      MyPrinter.print_green " OK"
+      BurpRakeHelper.print_green " OK"
     end
     
     print "\t#{cms_root}/.git"
     if File.exist?("#{cms_root}/.git") 
-      MyPrinter.print_yellow " Skipping"
+      BurpRakeHelper.print_yellow " Skipping"
     else
       `git init #{cms_root}`
-      MyPrinter.print_green " OK"
+      BurpRakeHelper.print_green " OK"
     end
     
-    menu_path = "#{Rails.root}/app/cms/menus/main.yaml"
-    print "\t#{menu_path}"
-    if File.exist?(menu_path) 
-      MyPrinter.print_yellow " Skipping"
-    else
-      FileUtils.mkdir_p(File.dirname(menu_path))
-      File.open(menu_path,"w") do |file|
-        file.write("---\n:name: root\n:children:\n")
-      end
-      MyPrinter.print_green " OK"
+    BurpRakeHelper.write('/app/cms/menus/main.yaml') do |file|
+      file.write("---\n:name: root\n:children:\n")
     end
     
-    js_path = "#{Rails.root}/app/assets/javascripts/burp.js"
-    print "\t#{js_path}"
-    if File.exist?(js_path) 
-      MyPrinter.print_yellow " Skipping"
-    else
-      File.open(js_path,"w") do |file|
-        file.write("// Includes burp related javascript.\n//\n//= require 'burp/editing'\n//= require 'burp/cms_helper'")
-      end
-      MyPrinter.print_green " OK"
+    BurpRakeHelper.write('/app/assets/javascripts/burp.js') do |file|
+      file.write("// Includes burp related javascript.\n//\n//= require 'burp/editing'\n//= require 'burp/cms_helper'")
     end
     
-    css_path = "#{Rails.root}/app/assets/stylesheets/burp.css"
-    print "\t#{css_path}"
-    if File.exist?(css_path) 
-      MyPrinter.print_yellow " Skipping"
-    else
-      File.open(css_path,"w") do |file|
-        file.write("/*\n * Includes burp related stylesheet.\n *\n *= require 'burp/editing'\n */")
-      end
-      MyPrinter.print_green " OK"
+    BurpRakeHelper.write("/app/assets/stylesheets/burp.css") do |file|
+      file.write("/*\n * Includes burp related stylesheet.\n *\n *= require 'burp/editing'\n */")
     end
     
-    access_path = "#{Rails.root}/config/initializers/burp_access.rb"
-    print "\t#{access_path}"
-    if File.exist?(access_path) 
-      MyPrinter.print_yellow " Skipping"
-    else
-      File.open(access_path,"w") do |file|
-        file.write(%{
+    BurpRakeHelper.write("/app/assets/stylesheets/customize-burp.less") do |file|
+      file.write("/*\n * Add your customizations to the burp admin here.\n *\n */\n\n")
+    end
+    
+    BurpRakeHelper.write("/app/assets/javascripts/customize-burp.js") do |file|
+      file.write("/*\n * Add your customizations to the burp admin here.\n *\n */\n\n")
+    end
+    
+    BurpRakeHelper.write("/config/initializers/burp_access.rb") do |file|
+      file.write(%{
 Rails.application.config.burp_username = "#{Rails.application.class.parent_name.downcase}"
 Rails.application.config.burp_password = "#{('a'..'z').to_a.shuffle[0,6].join}"
-        })
-      end
-      MyPrinter.print_green " OK"
+      })
     end
     
     puts ""
