@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "burp_cms"
-  s.version = "1.3.28"
+  s.version = "1.3.29"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Darwin"]
-  s.date = "2013-10-25"
+  s.date = "2013-11-05"
   s.description = " A CMS that tries hard to not get in your way! "
   s.email = "darwin@bits2life.com"
   s.extra_rdoc_files = [
@@ -72,7 +72,7 @@ Gem::Specification.new do |s|
     "app/assets/images/burp/remove-page-from-menu-2.png",
     "app/assets/images/burp/remove-page-from-menu-3.png",
     "app/assets/images/burp/remove-page-from-menu-4.png",
-    "app/assets/javascripts/burp/application.js",
+    "app/assets/javascripts/burp/application.js.erb",
     "app/assets/javascripts/burp/burp.js",
     "app/assets/javascripts/burp/cms_helper.js",
     "app/assets/javascripts/burp/edit-links.js",
@@ -159,7 +159,7 @@ Gem::Specification.new do |s|
     "app/assets/packages/gritter/index.html",
     "app/assets/packages/gritter/js/jquery.gritter.js",
     "app/assets/packages/gritter/js/jquery.gritter.min.js",
-    "app/assets/stylesheets/burp/application.less",
+    "app/assets/stylesheets/burp/application.less.erb",
     "app/assets/stylesheets/burp/bootstrap.less",
     "app/assets/stylesheets/burp/docs.less",
     "app/assets/stylesheets/burp/fileupload.less",
