@@ -21,6 +21,12 @@ $(function($) {
   function setBodyPadding() {
     var height = $.adminDock.visible() ? dockElement.height() : 0;
     $('body').css('padding-bottom', (originalBodyPadding + height) + 'px');
+    
+    if($.adminDock.visible()) {
+      $('html').addClass("burp-editor-showing");
+    } else {
+      $('html').removeClass("burp-editor-showing");
+    }
   }
   
   var activeModuleButton = null;
@@ -133,7 +139,7 @@ $(function($) {
           var element = $('<li class="toolbar-selector"><a href="javascript: void 0;"></a></li>');
           var button = element.find('a');
 
-          button.css('width', '' + width + 'px');
+          button.css('width', String() + width + 'px');
           button.append("<i class='icon-sort'></i>");
           button.append("<label>" + options['default'] + "</label>");
           button.click(function(event) {
