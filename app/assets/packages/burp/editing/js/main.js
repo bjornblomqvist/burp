@@ -31,7 +31,7 @@ $(function() {
     });
     
     // Remove unwanted stuff
-    $('.burp-remove').remove();
+    $('.burp-remove, .remove-on-save').remove();
     $('.burp-unwrap').each(function() {$(this).replaceWith(this.children);});
   }
   
