@@ -149,16 +149,16 @@
   background: red;
 }
   
-body > img.movable {
+body > img.movable.ui-draggable-dragging {
   margin: 0px;
   padding: 0px;
-  -webkit-box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
   display: block;
   max-height: 60px;
   max-width: 400px;
-  opacity: 0.9 !important;
+  opacity: 1 !important;
   position: fixed !important;
 }
 
