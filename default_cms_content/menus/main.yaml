@@ -1,0 +1,13 @@
+---
+:name: main
+:children:
+- :name: Start page
+  :url: /
+- :name: About
+  :url: /about
+- :name: News
+  :url: /news
+- :name: Products
+  :url: /products
+- :name: Contact
+  :url: /contact

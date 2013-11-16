@@ -33,6 +33,7 @@ namespace :burp do
   desc "Ads directories and confiugartion needed by burp"
   task :init do
     
+    add_default_cms_content = false
     cms_root = "#{Rails.root}/app/cms"
     
     puts "\n\tBurp init\n\n"
@@ -43,6 +44,7 @@ namespace :burp do
     else
       FileUtils.mkdir_p(cms_root)
       BurpRakeHelper.print_green " OK"
+      add_default_cms_content = true
     end
     
     print "\t#{cms_root}/.git"
@@ -51,10 +53,6 @@ namespace :burp do
     else
       `git init #{cms_root}`
       BurpRakeHelper.print_green " OK"
-    end
-    
-    BurpRakeHelper.write('/app/cms/menus/main.yaml') do |file|
-      file.write("---\n:name: root\n:children:\n")
     end
     
     BurpRakeHelper.write('/app/assets/javascripts/burp.js') do |file|
@@ -79,6 +77,15 @@ Rails.application.config.burp_username = "#{Rails.application.class.parent_name.
 Rails.application.config.burp_password = "#{('a'..'z').to_a.shuffle[0,6].join}"
       })
     end
+    
+    puts ""
+    puts "\tCopying default CMS content"
+    puts ""
+    
+    default_cms_content_dir = File.expand_path(File.dirname(__FILE__)+"/../../default_cms_content/")
+    
+    result = `cp -rvn #{default_cms_content_dir}/* #{Rails.root}/app/cms/`
+    puts "\t" + result.gsub(/\n/,"\n\t")
     
     puts ""
   end

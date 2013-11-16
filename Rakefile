@@ -25,7 +25,7 @@ Jeweler::Tasks.new do |gem|
   gem.description = %Q{ A CMS that tries hard to not get in your way! }
   gem.email = "darwin@bits2life.com"
   gem.authors = ["Darwin"]
-  gem.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  gem.files = Dir["{app,config,db,lib,default_cms_content}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   gem.version     = Burp::VERSION
   # dependencies defined in Gemfile
 end
