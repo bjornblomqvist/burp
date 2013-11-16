@@ -1,5 +1,10 @@
 module Burp
   class Engine < ::Rails::Engine
+    
+    # These require are need so that jquery and jquery-ui are included into the asset pipeline.
+    require 'jquery-rails'
+    require 'jquery-ui-rails'
+    
     isolate_namespace Burp
     
     config.autoload_paths << File.expand_path("../../../app/lib", __FILE__)
