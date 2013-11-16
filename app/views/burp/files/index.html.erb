@@ -20,14 +20,17 @@
     <th class="file-size">
       Size
     </th>
+    <th class="actions">
+      Actions
+    </th>
   </thead>
   <tbody>
   <% @files.each do |file| %>  
     <tr>
       <td><%= link_to file.public_path, file.public_path, :title => "Click to open" %></a></td>
-      <td class="upload-time"><%= link_to file.mtime.strftime("%Y-%m-%d %H:%M"), file.public_path, :title => "Click to open" %></a></td>
-      <td class="file-size"><%= link_to number_to_human_size(file.size, :precision => 2), file.public_path, :title => "Click to open" %></a></td>
-      <td><%= link_to 'Remove', file_path(file), :confirm => 'Are you sure?', :id => 'remove-link', :title => "Click to remove file.", :method => :delete %></td>
+      <td class="upload-time"><%= file.mtime.strftime("%Y-%m-%d %H:%M") %></a></td>
+      <td class="file-size"><%= number_to_human_size(file.size, :precision => 2) %></a></td>
+      <td class="actions"><%= link_to 'Remove', file_path(file), :confirm => 'Are you sure?', :id => 'remove-link', :title => "Click to remove file.", :method => :delete %></td>
     </tr>
   <% end %>
   </tbody>
