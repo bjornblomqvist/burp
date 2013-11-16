@@ -38,13 +38,16 @@
     <th>
       Path
     </th>
+    <th>
+      Actions
+    </th>
   </thead>
   <tbody>
   <% @pages.sort{|a,b| a.path <=> b.path}.each do |page| %>
   <tr>
-    <td><%= link_to "#{page.title}", edit_page_path(page), :title => "Click to edit", :class => "edit-page-link" %></td>
-    <td><%= link_to "#{page.path}", edit_page_path(page), :title => "Click to edit", :class => "edit-page-link" %></td>
-    <td><%= link_to "Go to page", page.path %></td>
+    <td><%= page.title %></td>
+    <td><%= link_to "#{page.path}", page.path, :title => "Click to go to page" %></td>
+    <td><%= link_to "Edit", edit_page_path(page), :title => "Click to edit", :class => "edit-page-link" %></td>
   </tr>
   <% end %>
   </tbody>
