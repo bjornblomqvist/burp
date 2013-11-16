@@ -11,7 +11,7 @@
   <%= f.actions do %>
     <%= f.submit(:include_cancel => false, :value => (@page.persisted? ? 'Save' : "Create"), :class => "btn btn-primary") %>
     <%= button_tag  'Cancel', :onclick => "document.location = '#{pages_path}'; return false;", :class => 'btn' %>
-    <% if @page %>
+    <% if @page.persisted? %>
       <%= link_to 'Remove', page_path(@page), :confirm => 'Are you sure?', :class => 'btn btn-warning',  :method => :delete %>
     <% end %>
   <% end %>
