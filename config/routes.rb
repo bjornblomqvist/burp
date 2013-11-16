@@ -1,6 +1,7 @@
 Burp::Engine.routes.draw do
-  get "/" => "static#index"
+  get "/" => "pages#index"
   get "/help" => "static#help"
+  get "/about" => "static#about"
   
   resources :files
   get "/files/" => "files#index"

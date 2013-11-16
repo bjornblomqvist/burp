@@ -20,7 +20,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="/burp/">Burp</a>
+          <a class="brand" href="/"><%= Rails.application.class.parent_name %></a>
           <div class="nav-collapse collapse">
             <%= Burp::Group.bootstrap_nav(menu, request) %>
           </div>
@@ -50,7 +50,8 @@
 
       <footer>
         <hr>
-        <p>&copy; Björn Blomqvist, Ceyebr AB 2012 - 2013</p>
+        <p style="float: right;"><strong>Version: <%= Burp::VERSION %></strong></p>
+        <p>Thank you for creating with <a href="/burp/about">Burp</a></p>
       </footer>
 
     </div>

@@ -4,6 +4,10 @@ module Burp
       access.may_view_static_page!(params[:action])
     end 
     
+    def about
+      
+    end
+    
     def help
       
     end
