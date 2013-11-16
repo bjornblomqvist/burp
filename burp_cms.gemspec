@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "burp_cms"
-  s.version = "1.3.31"
+  s.version = "1.3.32"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Darwin"]
-  s.date = "2013-11-06"
+  s.date = "2013-11-16"
   s.description = " A CMS that tries hard to not get in your way! "
   s.email = "darwin@bits2life.com"
   s.extra_rdoc_files = [
@@ -193,12 +193,52 @@ Gem::Specification.new do |s|
     "app/views/burp/menus/index.html.erb",
     "app/views/burp/pages/edit.html.erb",
     "app/views/burp/pages/index.html.erb",
+    "app/views/burp/static/about.html.erb",
     "app/views/burp/static/help.html.erb",
     "app/views/burp/static/index.html.erb",
     "app/views/layouts/burp/application.html.erb",
     "config/cucumber.yml",
     "config/initializers/init.rb",
     "config/routes.rb",
+    "default_cms_content/menus/main.yaml",
+    "default_cms_content/pages/#root/main.html",
+    "default_cms_content/pages/#root/page.json",
+    "default_cms_content/pages/about/main.html",
+    "default_cms_content/pages/about/page.json",
+    "default_cms_content/pages/contact/main.html",
+    "default_cms_content/pages/contact/page.json",
+    "default_cms_content/pages/news/main.html",
+    "default_cms_content/pages/news/page.json",
+    "default_cms_content/pages/products/main.html",
+    "default_cms_content/pages/products/page.json",
+    "default_cms_content/uploads/1000x600.jpg",
+    "default_cms_content/uploads/150x100.jpg",
+    "default_cms_content/uploads/150x300.jpg",
+    "default_cms_content/uploads/400x200.jpg",
+    "default_cms_content/uploads/400x400.jpg",
+    "default_cms_content/uploads/600x300.jpg",
+    "default_cms_content/uploads/700x500.jpg",
+    "default_cms_content/uploads/large/1000x600.jpg",
+    "default_cms_content/uploads/large/150x100.jpg",
+    "default_cms_content/uploads/large/150x300.jpg",
+    "default_cms_content/uploads/large/400x200.jpg",
+    "default_cms_content/uploads/large/400x400.jpg",
+    "default_cms_content/uploads/large/600x300.jpg",
+    "default_cms_content/uploads/large/700x500.jpg",
+    "default_cms_content/uploads/medium/1000x600.jpg",
+    "default_cms_content/uploads/medium/150x100.jpg",
+    "default_cms_content/uploads/medium/150x300.jpg",
+    "default_cms_content/uploads/medium/400x200.jpg",
+    "default_cms_content/uploads/medium/400x400.jpg",
+    "default_cms_content/uploads/medium/600x300.jpg",
+    "default_cms_content/uploads/medium/700x500.jpg",
+    "default_cms_content/uploads/small/1000x600.jpg",
+    "default_cms_content/uploads/small/150x100.jpg",
+    "default_cms_content/uploads/small/150x300.jpg",
+    "default_cms_content/uploads/small/400x200.jpg",
+    "default_cms_content/uploads/small/400x400.jpg",
+    "default_cms_content/uploads/small/600x300.jpg",
+    "default_cms_content/uploads/small/700x500.jpg",
     "lib/burp/capistrano.rb",
     "lib/burp/engine.rb",
     "lib/burp/version.rb",
