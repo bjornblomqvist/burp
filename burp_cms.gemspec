@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "burp_cms"
-  s.version = "1.3.32"
+  s.version = "1.3.33"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Darwin"]
-  s.date = "2013-11-16"
+  s.date = "2013-11-28"
   s.description = " A CMS that tries hard to not get in your way! "
   s.email = "darwin@bits2life.com"
   s.extra_rdoc_files = [
