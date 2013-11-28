@@ -26,6 +26,7 @@ module Burp
         
         if value[0] < image.columns # We only downscale
           image.resize_to_fit(value[0],value[1]).write(target_path) { self.quality = 75 }
+          FileUtils.chmod(0644, target_path)
         else
           File.unlink(target_path) if File.exist?(target_path)
           File.symlink("../#{File.basename(file_path)}",target_path)

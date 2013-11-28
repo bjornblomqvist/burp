@@ -69,6 +69,7 @@ module Burp
             
             FileUtils.mkdir_p(upload_directory_path)
             FileUtils.mv(file.path, target_path)
+            FileUtils.chmod(0644, target_path)
             
             Burp::Util.create_smaller_images(target_path) if target_path.match(/(jpg|jpeg|gif|png)$/i)
             
