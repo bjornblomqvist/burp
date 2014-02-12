@@ -11,6 +11,14 @@
       The hope is to teach the users that its a tree of links
   - Add indicator to page listing to show if a page is in one of the menus
   - Add so that we can have id and classes for links and groups in the menu
+  - Add view option in the file listing to show thumbnails of images
+  - Add persona based login solution with basic roles (Admin, user).
+    User can do the usual things. Admin can add users and other admins. Admin can not remove him/her self.
+      https://developer.mozilla.org/en-US/Persona
+  
+  
+  
+  - Collect usage scenarios for how we would like to have multable templates / layouts. 
     
 
   - Make html output a bit nicer with 
