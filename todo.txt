@@ -1,5 +1,17 @@
 
-  - Image remove should remove scalled versions
+  - Image remove should also remove scalled versions
+  - Installation instructions should actualy work.
+    - Follow them and fix everything that is broken
+  - Fix so that javascript changes to the dom does not show up in the editor
+    - Change so that when we update the page from the editor we keep around the original version for the next edit
+    - Add special attributes to all elements so that we corectly put new images in the right place in the stored away html
+  - Fix bug with HTML2Markdown for blockquotes. See restaurangagaton.se  
+  - Change so that Menus are just groups and links. 
+    - Have the url part of links do Typeahead. See (http://getbootstrap.com/2.3.2/javascript.html#typeahead) and http://twitter.github.io/typeahead.js
+      The hope is to teach the users that its a tree of links
+  - Add indicator to page listing to show if a page is in one of the menus
+  - Add so that we can have id and classes for links and groups in the menu
+    
 
   - Make html output a bit nicer with 
     https://github.com/threedaymonk/htmlbeautifier
