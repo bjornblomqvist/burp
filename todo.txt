@@ -1,5 +1,4 @@
 
-  - Image remove should also remove scalled versions
   - Fix so that javascript changes to the dom does not show up in the editor
     - Change so that when we update the page from the editor we keep around the original version for the next edit
     - Add special attributes to all elements so that we corectly put new images in the right place in the stored away html

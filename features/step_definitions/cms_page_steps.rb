@@ -6,7 +6,7 @@ end
 When /^I go and change the title of that page$/ do
   visit "/burp/"
   click_link "Pages"
-  click_link "A test title"
+  find("tr", :text => "A test title").click_link "Edit"
   fill_in "Title", :with => "The new title"
   click_button "Save"
 end
@@ -19,7 +19,7 @@ end
 When /^I go and change the path of that page$/ do
   visit "/burp/"
   click_link "Pages"
-  click_link "A test title"
+  find("tr", :text => "A test title").click_link "Edit"
   has_css?("#my-pop-over", :visible => true) # Wait for the form to appear
   fill_in "Path", :with => "/a-better-path"
   click_button "Save"
@@ -54,7 +54,7 @@ end
 When /^I remove the page$/ do
   visit "/burp/"
   click_link "Pages"
-  click_link "Start page"
+  find("tr", :text => "Start page").click_link "Edit"
   has_css?("#my-pop-over", :visible => true) # Wait for the form to appear
   click_on "Remove"
   page.driver.browser.switch_to.alert.tap do |alert|

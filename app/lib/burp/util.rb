@@ -16,7 +16,7 @@ module Burp
     def self.remove_all_versions_of_image(file_path)
       SIZES.each_pair do |key,value|
         target_path = "#{upload_directory_path}#{key.to_s}/#{File.basename(file_path)}"
-        File.unlink(target_path)
+        File.unlink(target_path) if File.exist?(target_path)
       end
     end
     
