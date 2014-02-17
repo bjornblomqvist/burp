@@ -76,6 +76,10 @@ $(function() {
            $(this).attr("type",'text/javascript');
          });
          
+         element.find('img.movable').each(function() {
+           $(this).removeClass('movable ui-draggable ui-droppable');
+         });
+         
          editor.setValue(Html2Markdown(element.children()));
 
          onDone();
