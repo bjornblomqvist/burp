@@ -35,6 +35,15 @@ $(function() {
     $('.burp-unwrap').each(function() {$(this).replaceWith(this.children);});
   }
   
+  function getPathFor(snippetName) {
+    var path = window.burp_path || snippets().snippets[snippetName].pageId || window.location.pathname;
+    if(path === "/") {
+      path = "/$root";
+    }
+    
+    return path;
+  }
+  
   function cleanup(container) {
     container.find("p").each(function() {
       if($(this).children().length === $(this).find('img').length) {
@@ -51,37 +60,37 @@ $(function() {
     }
   }
   
-  function loadHTML() {
+  function loadHTML(onDone) {
      
-     var element = snippets().snippets[snippetName].elements().clone();
-     element.find('.markdown').each(function() {
-       $(this).removeClass('markdown');
-       if($(this).attr('class') === "") {
-         $(this).removeAttr('class');
+     var path = getPathFor(snippetName);
+     
+     $.ajax("/burp/pages/"+path,{
+       cache:false,
+       dataType:'json',
+       success:function(data) {
+         data = data || {snippets:{}};         
+         
+         var element = $("<div>" + data.snippets[snippetName] + "</div>");
+         
+         element.find('script[type="text/dont-run-javascript"]').each(function() {
+           $(this).attr("type",'text/javascript');
+         });
+         
+         editor.setValue(Html2Markdown(element.children()));
+
+         onDone();
        }
      });
-     
-     element.find('script[type="text/dont-run-javascript"]').each(function() {
-       $(this).attr("type",'text/javascript');
-     });
-     
-     element.find('img.movable').each(function() {
-       $(this).removeClass('movable ui-draggable ui-droppable');
-     });
-     
-     editor.setValue(Html2Markdown(element.children()));
   }
   
   function loadSnippet() {
-     var path = window.burp_path || window.location.pathname;
-     if(path === "/") {
-       path = "/$root";
-     }
+     var path = getPathFor(snippetName);
      
-     loadHTML();
-     editor.clearHistory();
-     update(editor.getValue());
-     originalValue = editor.getValue();
+     loadHTML(function() {
+       editor.clearHistory();
+       update(editor.getValue());
+       originalValue = editor.getValue();
+     });
    }
   
   function loadFiles() {
@@ -177,14 +186,16 @@ $(function() {
     $.adminDock.title('');
     $.adminDock.footer.addButton({ icon: 'picture', text: "Pictures", showModule: $('#gallery') });
     $.adminDock.footer.addButton({ icon: 'edit', text: "Edit text", showModule: $('#myContentEditor'), show: function() {
-      loadHTML();
-      editor.refresh();
+      loadHTML(function() {
+        editor.refresh();
+      });
     } });
     
     
     $(document).on('image-drop-done.burp', function() {
-      loadHTML();
-      editor.refresh();
+      loadHTML(function() {
+        editor.refresh();
+      });
     });
 
     var snippet_names = [];
@@ -250,10 +261,7 @@ $(function() {
     
     $.adminDock.footer.addButton({ icon: 'save', text: 'Save', secondary: true, click:function() {
       
-      var path = window.burp_path || snippets().snippets[snippetName].pageId || window.location.pathname;
-      if(path === "/") {
-        path = "/$root";
-      }
+      var path = getPathFor(snippetName);
       
       $.ajax("/burp/pages/"+path,{
         cache:false,

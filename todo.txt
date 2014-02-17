@@ -1,7 +1,4 @@
 
-  - Fix so that javascript changes to the dom does not show up in the editor
-    - Change so that when we update the page from the editor we keep around the original version for the next edit
-    - Add special attributes to all elements so that we corectly put new images in the right place in the stored away html
   - Fix bug with HTML2Markdown for blockquotes. See restaurangagaton.se  
   - Change so that Menus are just groups and links. 
     - Have the url part of links do Typeahead. See (http://getbootstrap.com/2.3.2/javascript.html#typeahead) and http://twitter.github.io/typeahead.js
