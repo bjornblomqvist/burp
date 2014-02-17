@@ -25,12 +25,13 @@ module Burp
       if File.expand_path(file_path) != file_path
         render :text => "403, Forbiden!", :status => 403, :content_type => "text/plain"
       else
-        File.unlink(file_path)
+        File.unlink(file_path)  
+        Util.remove_all_versions_of_image(file_path)
       end
       
       Util.commit("Burp: removed a file")
       
-      redirect_to files_path
+      redirect_to files_path, notice: "#{File.basename(file_path)} has been removed."
     end
     
     def show
