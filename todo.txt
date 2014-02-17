@@ -1,5 +1,4 @@
 
-  - Fix bug with HTML2Markdown for blockquotes. See restaurangagaton.se  
   - Change so that Menus are just groups and links. 
     - Have the url part of links do Typeahead. See (http://getbootstrap.com/2.3.2/javascript.html#typeahead) and http://twitter.github.io/typeahead.js
       The hope is to teach the users that its a tree of links

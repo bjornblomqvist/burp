@@ -20,7 +20,7 @@
     $(nodes).each(function(index, element) {
       var last = newArray.length-1;
       if(includeForMarkdown(element)) {
-        var data = $("<div></div>").append(element).html();
+        var data = (element.nodeType === 3) ? element.data : $("<div></div>").append(element).html();
 
         if(typeof(newArray[last]) === 'string') {
           newArray[last] = newArray[last] + data;
