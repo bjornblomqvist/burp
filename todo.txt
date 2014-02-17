@@ -1,7 +1,5 @@
 
   - Image remove should also remove scalled versions
-  - Installation instructions should actualy work.
-    - Follow them and fix everything that is broken
   - Fix so that javascript changes to the dom does not show up in the editor
     - Change so that when we update the page from the editor we keep around the original version for the next edit
     - Add special attributes to all elements so that we corectly put new images in the right place in the stored away html
@@ -15,6 +13,8 @@
   - Add persona based login solution with basic roles (Admin, user).
     User can do the usual things. Admin can add users and other admins. Admin can not remove him/her self.
       https://developer.mozilla.org/en-US/Persona
+
+  - Add travis-ci
   
   
   
@@ -27,6 +27,20 @@
   - Change so that we serve uploaded files via /public. We do this by adding a symlink
   
   - A preview of files would be nice 
+  
+  
+  
+  
+  - Extra data for pages
+    - Metadata (Description, Keywords)
+    - Freetext extra for the header or bottom of page
+    - Template to use if more than one
+    
+  - Extra for menu link
+    - Placeholder to be replaced by code and never renderd.
+    - Class
+    
+  - Write API Documentation
   
 
   - Document steps to do things
