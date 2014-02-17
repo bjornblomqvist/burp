@@ -9,6 +9,7 @@ class BurpFactory
     path_to_burp_files_directory = Burp.content_directory+"/"
     FileUtils.mkdir_p(path_to_burp_files_directory)
     FileUtils.mkdir_p(path_to_burp_files_directory+"menus/")
+    FileUtils.mkdir_p(path_to_burp_files_directory+"uploads/")
     
     `cd #{path_to_burp_files_directory}; git init` if File.exist?(path_to_burp_files_directory) && File.directory?(path_to_burp_files_directory)
     
