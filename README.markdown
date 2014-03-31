@@ -59,7 +59,7 @@ To use snippets on pages not cought by the CatchAllController. The or part is to
 
     before_filter :load_cms_page
     def load_cms_page
-      @cms_page = Burp.find_page(request.path) || Burp::Page.new(:snippets => [], :title => "", :id => request.path)
+      @cms_page = Burp.find_page(request.path) || Burp::Page.new(:id => request.path)
     end
 
 ## Title
