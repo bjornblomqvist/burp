@@ -148,7 +148,7 @@
                 }
                 
                 if($(this).parent().is(".bottom-dropbox")) {
-                  $(contentEditor.element).append(img);
+                  snippets().snippets[contentEditor.snippetName].append(img);
                 } else if(img !== markdown) {
                   $(img).insertBefore(markdown);
                 }
