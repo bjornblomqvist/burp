@@ -4,6 +4,12 @@
 
 (function() {
   
+  marked.setOptions({
+    gfm: true,
+    pedantic: false,
+    sanitize: false
+  });
+  
   function includeForMarkdown(element) {
     // Include text
     if(element.nodeType === 3) {

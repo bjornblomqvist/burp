@@ -12,7 +12,7 @@ module Burp
     # Enabling assets precompiling under rails 3.1
     if Rails.version >= '3.1'
       initializer :assets do |config|
-        Rails.application.config.assets.precompile += %w( burp/editing.css burp/editing.js burp/cms_helper.js)
+        Rails.application.config.assets.precompile += %w( burp/editing.css burp/editing.js burp/snippets.js)
       end
     end
     

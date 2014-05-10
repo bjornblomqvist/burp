@@ -1,22 +1,12 @@
 /*global
-  marked markdown2Html
+  markdown2Html snippets
 */
 (function($) {
   
   var javascript_warning_has_been_shown = false;
   
-  marked.setOptions({
-    gfm: true,
-    pedantic: false,
-    sanitize: false
-  });
-  
-  function unescapeJavascript(script) {
-    return script.replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/&lt;/g,"<").replace(/&gt;/g,"<");
-  }
-  
-  function ContentDecorator(element, options) {
-    this.element = $(element);
+  function ContentDecorator(snippetName, options) {
+    this.snippetName = snippetName;
 
     if (typeof(options) === 'object') {
       this.onUpdate = options['update'];
@@ -59,7 +49,8 @@
           var bodyOffset =  $('body').offset();
           var bodyPosition = $('body').css('position');
           
-          contentEditor.element.find('> h1,> h2,> h3,> h4,> h5,> p,> img,> blockquote,> ul,> ol').each(function() {
+          var snippetElements = snippets().snippets[contentEditor.snippetName].elements();
+          $(snippetElements).filter('h1, h2, h3, h4, h5, p, img, blockquote, ul, ol').each(function() {
       
             var position = $(this).offset();
             var size = {width:$(this).outerWidth(),height:$(this).outerHeight()};
@@ -139,6 +130,8 @@
             },
             drop: function(event, ui) {              
               
+              console.debug("drop start");
+              
               if(!ui.draggable.data("removed")) {
                 var className = $(this).removeClass('dropzone')[0].className;
                 var img = createCallback(ui.draggable[0], className);
@@ -149,7 +142,10 @@
                   return element;
                 });
 
+                console.debug('this', this);
+                console.debug('parent', $(this).parent());
                 var markdown = $(this).parent().data("target-element");
+                console.debug("markdown", markdown);
                 
                 var src = $(img).attr('src');
                 if(src.match(/\/files\/small\//)) {
@@ -161,11 +157,15 @@
                 } else if(img !== markdown) {
                   $(img).insertBefore(markdown);
                 }
+                
                 clearDropBoxes();
               }
               
               $("#gallery").removeClass('delete-active');
               $(document).trigger("image-drop-done.burp");
+              
+
+              console.debug("drop end");
             }
           });
           
@@ -184,8 +184,10 @@
     }
   }
   
-  function removeDraggable( element ) {
-    element.find( ".movable" ).draggable( "destroy" );
+  function removeDraggable( contentEditor ) {
+    var elements = snippets().snippets[contentEditor.snippetName].elements();
+    elements.find( ".movable" ).draggable( "destroy" );
+    elements.filter( ".movable" ).draggable( "destroy" );
   }
   
   function removeRemoveZone() {
@@ -208,7 +210,7 @@
     
     
     cleanup: function() {
-      removeDraggable(this.element);
+      removeDraggable(this);
       removeRemoveZone();
     },
     

@@ -12,29 +12,6 @@ $(function() {
   var contentDecorator;
   var editor;
   
-  function wrapContent() {
-    $.each(snippets().snippets,function(name,snippet) {
-      console.debug(name,snippet);
-      
-      // Fix so that we dont run javascript again
-      $(snippet.elements()).each(function() {
-        if($(this).is("script")) {
-          $(this).attr("type",'text/dont-run-javascript');
-        } else {
-          $(this).find("script").each(function() {
-            $(this).attr("type",'text/dont-run-javascript');
-          });
-        }
-      });
-      
-      snippet.update($('<div data-snippet-name="'+name+'" class="snippet-wrapper snippet-'+name+'"></div>').append($(snippet.elements())));
-    });
-    
-    // Remove unwanted stuff
-    $('.burp-remove, .remove-on-save').remove();
-    $('.burp-unwrap').each(function() {$(this).replaceWith(this.children);});
-  }
-  
   function getPathFor(snippetName) {
     var path = window.burp_path || snippets().snippets[snippetName].pageId || window.location.pathname;
     if(path === "/") {
@@ -44,7 +21,7 @@ $(function() {
     return path;
   }
   
-  function cleanup(container) {
+  function unwrapImagesFromParagraphs(container) {
     container.find("p").each(function() {
       if($(this).children().length === $(this).find('img').length) {
         $(this).children().unwrap();
@@ -52,49 +29,57 @@ $(function() {
     });
   }
   
-  function update(value) {
-    if(value !== lastValue) {
-      lastValue = value;
-      contentDecorator.setMarkdown(value);
-      cleanup($('.snippet-'+snippetName));
+  var snippetCache = {};
+  
+  function getHTMLForSnippet(_snippetName, callback) {
+    var path = getPathFor(snippetName);
+    
+    var cacheKey = path + _snippetName;
+    if(snippetCache[cacheKey]) {
+      setTimeout(function() {
+        callback(snippetCache[cacheKey]);
+      }, 0);
+    } else {    
+      $.ajax("/burp/pages/"+path,{
+         cache:false,
+         dataType:'json',
+         success:function(data) {
+           data = data || {snippets:{}};
+           snippetCache[cacheKey] = data.snippets[snippetName];
+           callback(snippetCache[cacheKey]);
+         }
+       });
     }
   }
   
-  function loadHTML(onDone) {
-     
-     var path = getPathFor(snippetName);
-     
-     $.ajax("/burp/pages/"+path,{
-       cache:false,
-       dataType:'json',
-       success:function(data) {
-         data = data || {snippets:{}};         
-         
-         var element = $("<div>" + data.snippets[snippetName] + "</div>");
-         
-         element.find('script[type="text/dont-run-javascript"]').each(function() {
-           $(this).attr("type",'text/javascript');
-         });
-         
-         element.find('img.movable').each(function() {
-           $(this).removeClass('movable ui-draggable ui-droppable');
-         });
-         
-         editor.setValue(Html2Markdown(element.children()));
-
-         onDone();
-       }
-     });
-  }
+  var snippetEditorState = {};
   
-  function loadSnippet() {
+  function loadSnippet(snippetName, callback) {
      var path = getPathFor(snippetName);
      
-     loadHTML(function() {
-       editor.clearHistory();
-       update(editor.getValue());
-       originalValue = editor.getValue();
-     });
+     if(typeof(callback) === "undefined") {
+       callback = function() {};
+     }
+     
+     if(snippetEditorState[snippetName]) {
+        callback(snippetEditorState[snippetName]);
+     } else {
+       getHTMLForSnippet(snippetName, function(html) {
+
+          var element = $("<div>" + html + "</div>");
+
+          element.find('script[type="text/dont-run-javascript"]').each(function() {
+           $(this).attr("type",'text/javascript');
+          });
+
+          element.find('img.movable').each(function() {
+           $(this).removeClass('movable ui-draggable ui-droppable');
+          });
+
+          snippetEditorState[snippetName] = Html2Markdown(element.children());
+          callback(snippetEditorState[snippetName]);
+       });
+     }
    }
   
   function loadFiles() {
@@ -132,18 +117,26 @@ $(function() {
   }
   
   function selectSnippet(_snippetName) {
+
+    snippetName = _snippetName;
+    loadSnippet(snippetName, function(snippet) {
+      editor.setValue(snippet);
+      editor.refresh();
+    });
     
     if(contentDecorator) {
       contentDecorator.cleanup();
-      contentDecorator.removeDroppable($('#gallery img'));
+      //contentDecorator.removeDroppable($('#gallery img'));
     }
-    
-    snippetName = _snippetName;
-    originalHtml = $('.snippet-'+snippetName).html();
-    contentDecorator = new ContentDecorator('.snippet-'+snippetName);
+
+    contentDecorator = new ContentDecorator(snippetName);
     contentDecorator.addRemoveZone('#gallery');
-    $('#code').val(originalHtml);
-    
+  }
+  
+  function updateSnippetWithMarkdown(snippetName, markdown) {
+    var html = markdown2Html(markdown);
+    var elements = burp.disableScriptElements($(html));
+    snippets().snippets[snippetName].update(elements);
   }
     
   function addEditor() {
@@ -157,8 +150,9 @@ $(function() {
       matchBrackets: true,
       lineWrapping: true,
       theme: "default",
-      onChange:function(editor,changes) {
-        update(editor.getValue());
+      onChange:function(editor, changes) {
+        snippetEditorState[snippetName] = editor.getValue();
+        updateSnippetWithMarkdown(snippetName, snippetEditorState[snippetName]);
       }
     });
     
@@ -182,24 +176,16 @@ $(function() {
       editor.replaceRange(content,editor.getCursor(true),editor.getCursor(false));
     });
 
-    contentDecorator.addRemoveZone('#gallery');
-    
-    // update(editor.getValue());
     loadFiles();
   
     $.adminDock.title('');
     $.adminDock.footer.addButton({ icon: 'picture', text: "Pictures", showModule: $('#gallery') });
     $.adminDock.footer.addButton({ icon: 'edit', text: "Edit text", showModule: $('#myContentEditor'), show: function() {
-      loadHTML(function() {
-        editor.refresh();
-      });
+      editor.refresh();
     } });
     
     
     $(document).on('image-drop-done.burp', function() {
-      loadHTML(function() {
-        editor.refresh();
-      });
     });
 
     var snippet_names = [];
@@ -217,13 +203,15 @@ $(function() {
         'default': snippet_names[0],
         change: function(option) {
         
-        
           selectSnippet(option);
-          loadSnippet();
-        
+          loadSnippet(snippetName, function(snippet) {
+            editor.setValue(snippet);
+            editor.refresh();
+          });
+          
           $('#gallery img').removeClass('movable');
           contentDecorator.makeDroppable('#gallery img', function(element, positionClass) {
-            return $("<img src='" + $(element).attr('src') + "' class='" + positionClass + "' />");
+             return $("<img src='" + $(element).attr('src') + "' class='" + positionClass + "' />");
           });
         
           console.debug("Switching to " + option);
@@ -257,35 +245,44 @@ $(function() {
     }});
     
     $.adminDock.footer.addButton({ icon: 'undo', text: 'Discard', secondary: true, click:function() {
-      // We set this as it holds all the images as when we started
-      $('.snippet-'+snippetName).html(originalHtml);
-      contentDecorator.init();
-      editor.setValue(originalValue);
+      
+      var oldSnippetEditorState = snippetEditorState;
+      snippetEditorState = {};
+      
+      $.each(oldSnippetEditorState, function(snippetName, editorState) {
+        loadSnippet(snippetName, function(snippet) {
+          updateSnippetWithMarkdown(snippetName, snippet);
+        });
+      });
+      
+      loadSnippet(snippetName, function(snippet) {
+        editor.setValue(snippet);
+        editor.refresh();
+      });
     }});
     
     $.adminDock.footer.addButton({ icon: 'save', text: 'Save', secondary: true, click:function() {
       
       var path = getPathFor(snippetName);
+      snippetCache = {};
       
       $.ajax("/burp/pages/"+path,{
-        cache:false,
-        dataType:'json',
-        success:function(data) {
+        cache: false,
+        dataType: 'json',
+        success: function(data) {
           
           data = data || {snippets:{}};
           
-          data.snippets[snippetName] = contentDecorator.getHtml();
-
+          $.each(snippetEditorState, function(snippetName, snippetState) {
+            data.snippets[snippetName] = markdown2Html(snippetEditorState[snippetName]);
+          })
+          
           $.ajax("/burp/pages/"+path,{
             type:"post",
             data:{page:data,'_method':"put"},
             dataType:'json',
             success:function() {
-              
-              originalValue = contentDecorator.getMarkdown();
-              originalHtml = contentDecorator.getHtml();
-              
-              alert("The page was saved!");
+              alert("The page has been saved!");
             }
           });
         }
@@ -299,22 +296,28 @@ $(function() {
   
   var initDone = false;
   
-  function init() {
-    if(!initDone) {
-      initDone = true;
+  function init(callback) {
+    trigger_http_basic_auth(function() {
+      if(!initDone) {
+        initDone = true;
       
-      wrapContent();
-      selectSnippet(snippets().names.sort(function(a, b) { return a.toLowerCase() > b.toLowerCase(); })[0]);
-      addEditor();
+        selectSnippet(snippets().names.sort(function(a, b) { return a.toLowerCase() > b.toLowerCase(); })[0]);
+        addEditor();
       
-      loadSnippet();
+        loadSnippet(snippetName, function(snippet) {
+          editor.setValue(snippet);
+          editor.refresh();
+        });
       
-      $('#gallery').trigger('refresh');
-      setTimeout(function() { $('#gallery').trigger('refresh'); },300);
-      setTimeout(function() { $('#gallery').trigger('refresh'); },600);
-      setTimeout(function() { $('#gallery').trigger('refresh'); },1200);
-      setTimeout(function() { $('#gallery').trigger('refresh'); },5000);
-    }
+        $('#gallery').trigger('refresh');
+        setTimeout(function() { $('#gallery').trigger('refresh'); },300);
+        setTimeout(function() { $('#gallery').trigger('refresh'); },600);
+        setTimeout(function() { $('#gallery').trigger('refresh'); },1200);
+        setTimeout(function() { $('#gallery').trigger('refresh'); },5000);
+      }
+    
+      callback();
+    });
   }
   
   function trigger_http_basic_auth(callback) {
@@ -325,21 +328,19 @@ $(function() {
     }
   }
   
-  var start_time;
+  function isCtrlOrAltEscape(event) {
+    return (event.altKey === true || event.ctrlKey === true ) && event.keyCode === 27;
+  }
+  
+  function isCtrlAltSpace(event) {
+    return event.altKey === true && event.ctrlKey === true && event.keyCode === 32;
+  }
   
   $(window).keydown(function(event) {
-    if (
-      ((event.altKey === true || event.ctrlKey === true ) && event.keyCode === 27) ||
-      (event.altKey === true && event.ctrlKey === true && event.keyCode === 32)
-      ) {
-        
-      if(!start_time || start_time.getTime() + 1000 < new Date().getTime()) {
-        trigger_http_basic_auth(function() {
-          init();
-          $.adminDock.toggle();
-          start_time = null;
-        });
-      }
+    if (isCtrlOrAltEscape(event) || isCtrlAltSpace(event)) {        
+      init(function() {
+        $.adminDock.toggle();
+      });
     }
   });
   

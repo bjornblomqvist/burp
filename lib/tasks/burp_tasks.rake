@@ -56,7 +56,7 @@ namespace :burp do
     end
     
     BurpRakeHelper.write('/app/assets/javascripts/burp.js') do |file|
-      file.write("// Includes burp related javascript.\n//\n//= require 'burp/editing'\n//= require 'burp/cms_helper'")
+      file.write("// Includes burp related javascript.\n//\n//= require 'burp/editing'\n//= require 'burp/snippets'")
     end
     
     BurpRakeHelper.write("/app/assets/stylesheets/burp.css") do |file|
