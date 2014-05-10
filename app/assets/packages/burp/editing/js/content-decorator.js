@@ -200,6 +200,10 @@
       });
     },
     
+    setSnippetName: function(snippetName) {
+      this.snippetName = snippetName;
+    },
+    
     
     cleanup: function() {
       removeDraggable(this);

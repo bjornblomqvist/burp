@@ -124,13 +124,7 @@ $(function() {
       editor.refresh();
     });
     
-    if(contentDecorator) {
-      contentDecorator.cleanup();
-      //contentDecorator.removeDroppable($('#gallery img'));
-    }
-
-    contentDecorator = new ContentDecorator(snippetName);
-    contentDecorator.addRemoveZone('#gallery');
+    contentDecorator.setSnippetName(snippetName);
   }
   
   function updateSnippetWithMarkdown(snippetName, markdown) {
@@ -301,8 +295,13 @@ $(function() {
       if(!initDone) {
         initDone = true;
       
+        contentDecorator = new ContentDecorator("");
+      
         selectSnippet(snippets().names.sort(function(a, b) { return a.toLowerCase() > b.toLowerCase(); })[0]);
         addEditor();
+        
+        contentDecorator.addRemoveZone('#gallery');
+      
       
         loadSnippet(snippetName, function(snippet) {
           editor.setValue(snippet);
