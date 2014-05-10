@@ -130,8 +130,6 @@
             },
             drop: function(event, ui) {              
               
-              console.debug("drop start");
-              
               if(!ui.draggable.data("removed")) {
                 var className = $(this).removeClass('dropzone')[0].className;
                 var img = createCallback(ui.draggable[0], className);
@@ -142,10 +140,7 @@
                   return element;
                 });
 
-                console.debug('this', this);
-                console.debug('parent', $(this).parent());
                 var markdown = $(this).parent().data("target-element");
-                console.debug("markdown", markdown);
                 
                 var src = $(img).attr('src');
                 if(src.match(/\/files\/small\//)) {
@@ -163,9 +158,6 @@
               
               $("#gallery").removeClass('delete-active');
               $(document).trigger("image-drop-done.burp");
-              
-
-              console.debug("drop end");
             }
           });
           
