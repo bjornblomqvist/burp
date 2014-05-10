@@ -176,16 +176,6 @@
     }
   }
   
-  function removeDraggable( contentEditor ) {
-    var elements = snippets().snippets[contentEditor.snippetName].elements();
-    elements.find( ".movable" ).draggable( "destroy" );
-    elements.filter( ".movable" ).draggable( "destroy" );
-  }
-  
-  function removeRemoveZone() {
-    $('.remove-zone').removeClass('remove-zone').droppable( "destroy" );
-  }
-  
   $.extend(ContentDecorator.prototype, {
     
     init: function() {
@@ -204,102 +194,67 @@
       this.snippetName = snippetName;
     },
     
-    
-    cleanup: function() {
-      removeDraggable(this);
-      removeRemoveZone();
-    },
-    
-    getHtml: function() {
-      
-      var html = this.element.clone();
-      html.find('script[type="text/dont-run-javascript"]').each(function() {
-        $(this).attr("type",'text/javascript');
-      });
-      
-      return html.find('.movable').removeClass('ui-draggable ui-droppable').end().html();
-    },
-    
-    getMarkdown: function() {
-      return this.markdown;
-    },
-    
-    setMarkdown: function(markdown) {
-      if (this.markdown !== markdown) {
-        this.markdown = markdown;
-        this.updateContent();
-
-        if (this.onUpdate) {
-          this.onUpdate();
-        }
-      }
-    },
-    
-    updateContent: function() {
-      var html = window.markdown2Html(this.markdown);
-      
-      if(this.lastHtml === html) {
-        return;
-      }
-      this.lastHtml = html;
-      
-      var children = $(html);
-      
-      // Fix script escaping of text in script elements
-      children.each(function() {
-        if($(this).is("script")) {
-          $(this).text(unescapeJavascript($(this).text()));
-          $(this).attr('type','text/dont-run-javascript');
-        } else {
-          $(this).find('script').each(function() {
-            $(this).text(unescapeJavascript($(this).text()));
-            $(this).attr('type','text/dont-run-javascript');
-          });
-        }
-      });
-      
-      var tempElement = $('<div></div>');
-      tempElement.append(children);
-      
-      if(tempElement.find("script").length > 0 && !javascript_warning_has_been_shown) {
-        $.gritter.add({
-          title: 'WARNING!',
-          text: ' Javascript found! The javascript will not be previewed but it will be saved.<br><br>Save and reload to test the javascript.',
-          time: 20000
-        });
-        
-        javascript_warning_has_been_shown = true;
-      }
-      
-      // Fixes so that we don't reload images on each update
-      var _this = this;
-      tempElement.find('img').each(function() {
-        var element = _this.element.find('img[src="'+$(this).attr('src')+'"]');
-        if(element.length === 1) {
-          if(element[0].outerHTML === this.outerHTML) {
-            $(this).replaceWith(element);
-          }
-        }
-      });
-      
-      this.element.html("");
-      this.element.append(tempElement.children());
-      
-      setTimeout(function() {
-        initializeMovable(_this, _this.element.find('> img'), function(element, positionClass) { 
-          $(element).removeClass('left center right');
-          $(element).addClass(positionClass);
-          return element;
-        });
-      },10);
-    },
+    // updateContent: function() {
+    //       var html = window.markdown2Html(this.markdown);
+    //       
+    //       if(this.lastHtml === html) {
+    //         return;
+    //       }
+    //       this.lastHtml = html;
+    //       
+    //       var children = $(html);
+    //       
+    //       // Fix script escaping of text in script elements
+    //       children.each(function() {
+    //         if($(this).is("script")) {
+    //           $(this).text(unescapeJavascript($(this).text()));
+    //           $(this).attr('type','text/dont-run-javascript');
+    //         } else {
+    //           $(this).find('script').each(function() {
+    //             $(this).text(unescapeJavascript($(this).text()));
+    //             $(this).attr('type','text/dont-run-javascript');
+    //           });
+    //         }
+    //       });
+    //       
+    //       var tempElement = $('<div></div>');
+    //       tempElement.append(children);
+    //       
+    //       if(tempElement.find("script").length > 0 && !javascript_warning_has_been_shown) {
+    //         $.gritter.add({
+    //           title: 'WARNING!',
+    //           text: ' Javascript found! The javascript will not be previewed but it will be saved.<br><br>Save and reload to test the javascript.',
+    //           time: 20000
+    //         });
+    //         
+    //         javascript_warning_has_been_shown = true;
+    //       }
+    //       
+    //       // Fixes so that we don't reload images on each update
+    //       var _this = this;
+    //       tempElement.find('img').each(function() {
+    //         var element = _this.element.find('img[src="'+$(this).attr('src')+'"]');
+    //         if(element.length === 1) {
+    //           if(element[0].outerHTML === this.outerHTML) {
+    //             $(this).replaceWith(element);
+    //           }
+    //         }
+    //       });
+    //       
+    //       this.element.html("");
+    //       this.element.append(tempElement.children());
+    //       
+    //       setTimeout(function() {
+    //         initializeMovable(_this, _this.element.find('> img'), function(element, positionClass) { 
+    //           $(element).removeClass('left center right');
+    //           $(element).addClass(positionClass);
+    //           return element;
+    //         });
+    //       },10);
+    //     },
     
     makeDroppable: function(elements, createCallback) {
       initializeMovable(this, elements, createCallback);
-    },
-    
-    removeDroppable: function(elements) {
-      $(elements).draggable( 'destroy' );
     },
     
     addRemoveZone: function(element) {
