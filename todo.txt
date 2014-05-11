@@ -1,4 +1,6 @@
-
+  
+  
+  - Fix problem where we save all snippets on page to the current page. Evan the global once that have there own path.
   
   - Change so that Menus are just groups and links. 
     - Have the url part of links do Typeahead. See (http://getbootstrap.com/2.3.2/javascript.html#typeahead) and http://twitter.github.io/typeahead.js
