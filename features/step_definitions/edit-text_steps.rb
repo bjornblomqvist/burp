@@ -28,7 +28,7 @@ When /^I change a section and reload the page$/ do
   page.find(".dock-toolbar .icon-save").click
   sleep 0.2
   page.driver.browser.switch_to.alert.tap do |alert|
-    alert.text.should include("The page was saved!")
+    alert.text.should include("The page has been saved!")
     alert.accept
   end
   page.driver.browser.switch_to.default_content
