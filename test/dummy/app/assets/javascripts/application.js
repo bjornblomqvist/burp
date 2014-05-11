@@ -13,5 +13,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require 'burp/editing'
-//= require 'burp/snippets'
+//= require 'burp/cms_helper'
 //= require_tree .
