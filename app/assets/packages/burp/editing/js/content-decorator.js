@@ -16,14 +16,15 @@
       },
       append: function(snippetName, element) {
         console.debug('append', snippetName, element);
+      },
+      setPositionClass: function(className, element) {
+        console.debug('setPositionClass', className, element);
       }
     };
 
     if (typeof(options) === 'object') {
       this.onUpdate = options['update'];
     }
-    
-    this.init();
   }
   
   window.ContentDecorator = ContentDecorator;
@@ -32,10 +33,13 @@
     $('body > .dropbox').remove();
   }
 
-  function initializeMovable(contentEditor, elements, createCallback) {
+  function initializeMovable(contentEditor, elements, cloneImage) {
     if (!$(elements).hasClass('movable')) {
       
       $(elements).addClass('movable');
+      if(typeof(cloneImage) === "undefined") {
+        cloneImage = false;
+      }
       
       $(elements).draggable({
         cursor: 'move',
@@ -142,28 +146,34 @@
             drop: function(event, ui) {              
               
               if(!ui.draggable.data("removed")) {
-                var className = $(this).removeClass('dropzone')[0].className;
-                var img = createCallback(ui.draggable[0], className);
-
-                initializeMovable(contentEditor, img, function(element, positionClass) { 
-                  $(element).removeClass('left center right ui-droppable movable ui-draggable');
-                  $(element).addClass(positionClass);
-                  return element;
-                });
-
+                
+                var className = $(this).removeClass('dropzone ui-droppable')[0].className;
+                var imageElement = ui.draggable[0];
                 var markdown = $(this).parent().data("target-element");
                 
-                var src = $(img).attr('src');
-                if(src.match(/\/files\/small\//)) {
-                  $(img).attr('src',src.replace(/\/files\/small\//,'/files/large/'));
-                }
+                $(imageElement).removeClass('left center right');
+                $(imageElement).addClass(className);
                 
-                if($(this).parent().is(".bottom-dropbox")) {
-                  snippets().snippets[contentEditor.snippetName].append(img);
-                  contentEditor.callbacks.append(contentEditor.snippetName, img);
-                } else if(img !== markdown) {
-                  $(img).insertBefore(markdown);
-                  contentEditor.callbacks.insertBefore($(markdown), img);
+                if(markdown === imageElement) {
+                  contentEditor.callbacks.setPositionClass(className, $(imageElement));
+                } else {
+
+                  // var src = $(img).attr('src');
+                  // if(src.match(/\/files\/small\//)) {
+                  //   $(img).attr('src', src.replace(/\/files\/small\//,'/files/large/'));
+                  // }
+                  
+                  if(cloneImage) {
+                    imageElement = $(imageElement).clone();
+                  }
+
+                  if($(this).parent().is(".bottom-dropbox")) {
+                    snippets().snippets[contentEditor.snippetName].append($(imageElement));
+                    contentEditor.callbacks.append(contentEditor.snippetName, $(imageElement));
+                  } else {
+                    $(imageElement).insertBefore(markdown);
+                    contentEditor.callbacks.insertBefore($(markdown), $(imageElement));
+                  }
                 }
                 
                 clearDropBoxes();
@@ -190,18 +200,6 @@
   }
   
   $.extend(ContentDecorator.prototype, {
-    
-    init: function() {
-      var contentEditor = this;
-      $(this.element).find("> .movable").each(function() {
-        $(this).removeClass('movable');
-        initializeMovable(contentEditor, this, function(element, positionClass) { 
-          $(element).removeClass('left center right ui-droppable movable ui-draggable');
-          $(element).addClass(positionClass);
-          return element;
-        });
-      });
-    },
     
     setSnippetName: function(snippetName) {
       this.snippetName = snippetName;
@@ -270,8 +268,8 @@
     //       },10);
     //     },
     
-    makeDroppable: function(elements, createCallback) {
-      initializeMovable(this, elements, createCallback);
+    makeDroppable: function(elements, cloneImage) {
+      initializeMovable(this, elements, cloneImage);
     },
     
     addRemoveZone: function(element) {

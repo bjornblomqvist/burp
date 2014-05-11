@@ -90,9 +90,7 @@ $(function() {
         }
       });
 
-      contentDecorator.makeDroppable('#gallery img', function(element, positionClass) {
-        return $("<img src='" + $(element).attr('src') + "' class='" + positionClass + "' />");
-      });
+      contentDecorator.makeDroppable('#gallery img', true);
       
       $('#gallery').trigger('reset');
     });
@@ -156,9 +154,7 @@ $(function() {
     domSnippetState[snippetName] = elements.clone();
     snippets().snippets[snippetName].update(elements);
     
-    contentDecorator.makeDroppable(elements, function(element, positionClass) {
-      return $("<img src='" + $(element).attr('src') + "' class='" + positionClass + "' />");
-    });
+    contentDecorator.makeDroppable(elements, false);
   }
     
   function addEditor() {
@@ -348,13 +344,16 @@ $(function() {
           insertBefore: function(beforeElement, element) {
             $(element).removeClass('ui-droppable movable ui-draggable');
             
+            var remove_eid = element.attr('eid');
+            var remove_cssSelector = '[eid="'+ remove_eid +'"]';
+            
             var eid = beforeElement.attr('eid');
             var snippetName = eid.split(/-/)[0];
-            
             var cssSelector = '[eid="'+ eid +'"]';
             
             var root = $('<div></div>');
             root.append(domSnippetState[snippetName]);
+            root.find(remove_cssSelector).remove();
             element.insertBefore(root.find(cssSelector));
             domSnippetState[snippetName] = root.children();
             
@@ -368,6 +367,25 @@ $(function() {
             $(element).removeClass('ui-droppable movable ui-draggable');
             
             domSnippetState[snippetName] = $('<div></div>').append(domSnippetState[snippetName]).append(element).children();
+            
+            snippetEditorState[snippetName] = Html2Markdown(removeIDs(domSnippetState[snippetName]));
+            loadSnippet(snippetName, function(snippet) {
+              editor.setValue(snippet);
+              editor.refresh();
+            });
+          },
+          setPositionClass: function(positionClassName, imageElement) {
+            
+            var eid = $(imageElement).attr('eid');
+            var snippetName = eid.split(/-/)[0];
+            
+            var cssSelector = '[eid="'+ eid +'"]';
+            
+            var root = $('<div></div>');
+            root.append(domSnippetState[snippetName]);
+            root.find(cssSelector).removeClass("left right center");
+            root.find(cssSelector).addClass(positionClassName);
+            domSnippetState[snippetName] = root.children();
             
             snippetEditorState[snippetName] = Html2Markdown(removeIDs(domSnippetState[snippetName]));
             loadSnippet(snippetName, function(snippet) {
