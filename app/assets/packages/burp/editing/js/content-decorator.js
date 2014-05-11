@@ -7,6 +7,17 @@
   
   function ContentDecorator(snippetName, options) {
     this.snippetName = snippetName;
+    this.callbacks = {
+      remove: function(element) {
+        console.debug("remove", element);
+      },
+      insertBefore: function(beforeElement, element) {
+        console.debug('insertBefore', beforeElement, element);
+      },
+      append: function(snippetName, element) {
+        console.debug('append', snippetName, element);
+      }
+    };
 
     if (typeof(options) === 'object') {
       this.onUpdate = options['update'];
@@ -135,7 +146,7 @@
                 var img = createCallback(ui.draggable[0], className);
 
                 initializeMovable(contentEditor, img, function(element, positionClass) { 
-                  $(element).removeClass('left center right');
+                  $(element).removeClass('left center right ui-droppable movable ui-draggable');
                   $(element).addClass(positionClass);
                   return element;
                 });
@@ -149,8 +160,10 @@
                 
                 if($(this).parent().is(".bottom-dropbox")) {
                   snippets().snippets[contentEditor.snippetName].append(img);
+                  contentEditor.callbacks.append(contentEditor.snippetName, img);
                 } else if(img !== markdown) {
                   $(img).insertBefore(markdown);
+                  contentEditor.callbacks.insertBefore($(markdown), img);
                 }
                 
                 clearDropBoxes();
@@ -183,7 +196,7 @@
       $(this.element).find("> .movable").each(function() {
         $(this).removeClass('movable');
         initializeMovable(contentEditor, this, function(element, positionClass) { 
-          $(element).removeClass('left center right');
+          $(element).removeClass('left center right ui-droppable movable ui-draggable');
           $(element).addClass(positionClass);
           return element;
         });
@@ -192,6 +205,10 @@
     
     setSnippetName: function(snippetName) {
       this.snippetName = snippetName;
+    },
+    
+    setCallbacks: function(callbacks) {
+      this.callbacks = callbacks;
     },
     
     // updateContent: function() {
@@ -258,6 +275,7 @@
     },
     
     addRemoveZone: function(element) {
+      var contentEditor = this;
       $(element).addClass('remove-zone');
       $(element).droppable({
         hoverClass: 'remove-hover',
@@ -266,6 +284,7 @@
           if(ui.draggable.parents("#gallery").length === 0) {
             setTimeout(function() {
               // jquery-ui breaks if we remove the element during the callback
+              contentEditor.callbacks.remove(ui.draggable);
               ui.draggable.remove();
             },0);
             ui.draggable.data("removed",true);

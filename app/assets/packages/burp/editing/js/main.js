@@ -1,5 +1,5 @@
 /*global
-    snippets CodeMirror ContentDecorator qq Html2Markdown
+    snippets CodeMirror ContentDecorator qq Html2Markdown markdown2Html burp
 */
 
 $(function() {
@@ -119,10 +119,46 @@ $(function() {
     contentDecorator.setSnippetName(snippetName);
   }
   
+  function removeIDs(elements) {
+    
+    $(elements).each(function() {
+      $(this).removeAttr("eid");
+    });
+    
+    $(elements).find('*').each(function() {
+      $(this).removeAttr("eid");
+    });
+    
+    return elements;
+  }
+  
+  function addIDs(snippetName, elements) {
+    
+    var count = 0;
+    
+    $(elements).each(function() {
+      $(this).attr("eid", snippetName + "-" + String(count++));
+    });
+    
+    $(elements).find('*').each(function() {
+      $(this).attr("eid", snippetName + "-" +String(count++));
+    });
+    
+    return elements;
+  }
+  
+  var domSnippetState = {};
+  
   function updateSnippetWithMarkdown(snippetName, markdown) {
     var html = markdown2Html(markdown);
     var elements = burp.disableScriptElements($(html));
+    elements = addIDs(snippetName, elements);
+    domSnippetState[snippetName] = elements.clone();
     snippets().snippets[snippetName].update(elements);
+    
+    contentDecorator.makeDroppable(elements, function(element, positionClass) {
+      return $("<img src='" + $(element).attr('src') + "' class='" + positionClass + "' />");
+    });
   }
     
   function addEditor() {
@@ -194,11 +230,6 @@ $(function() {
             editor.setValue(snippet);
             editor.refresh();
           });
-          
-          $('#gallery img').removeClass('movable');
-          contentDecorator.makeDroppable('#gallery img', function(element, positionClass) {
-             return $("<img src='" + $(element).attr('src') + "' class='" + positionClass + "' />");
-          });
         
           console.debug("Switching to " + option);
         }
@@ -261,7 +292,7 @@ $(function() {
           
           $.each(snippetEditorState, function(snippetName, snippetState) {
             data.snippets[snippetName] = markdown2Html(snippetEditorState[snippetName]);
-          })
+          });
           
           $.ajax("/burp/pages/"+path,{
             type:"post",
@@ -282,18 +313,74 @@ $(function() {
   
   var initDone = false;
   
+  function trigger_http_basic_auth(callback) {
+    if(initDone) {
+      callback();
+    } else {
+      $.get("/burp/",callback);
+    }
+  }
+  
   function init(callback) {
     trigger_http_basic_auth(function() {
       if(!initDone) {
         initDone = true;
       
         contentDecorator = new ContentDecorator("");
+        contentDecorator.setCallbacks({
+          remove: function(element) {
+            var eid = element.attr('eid');
+            var snippetName = eid.split(/-/)[0];
+            
+            var cssSelector = '[eid="'+ eid +'"]';
+            
+            var root = $('<div></div>');
+            root.append(domSnippetState[snippetName]);
+            root.find(cssSelector).remove();
+            domSnippetState[snippetName] = root.children();
+            
+            snippetEditorState[snippetName] = Html2Markdown(removeIDs(domSnippetState[snippetName]));
+            loadSnippet(snippetName, function(snippet) {
+              editor.setValue(snippet);
+              editor.refresh();
+            });
+          },
+          insertBefore: function(beforeElement, element) {
+            $(element).removeClass('ui-droppable movable ui-draggable');
+            
+            var eid = beforeElement.attr('eid');
+            var snippetName = eid.split(/-/)[0];
+            
+            var cssSelector = '[eid="'+ eid +'"]';
+            
+            var root = $('<div></div>');
+            root.append(domSnippetState[snippetName]);
+            element.insertBefore(root.find(cssSelector));
+            domSnippetState[snippetName] = root.children();
+            
+            snippetEditorState[snippetName] = Html2Markdown(removeIDs(domSnippetState[snippetName]));
+            loadSnippet(snippetName, function(snippet) {
+              editor.setValue(snippet);
+              editor.refresh();
+            });
+          },
+          append: function(snippetName, element) {
+            $(element).removeClass('ui-droppable movable ui-draggable');
+            
+            domSnippetState[snippetName] = $('<div></div>').append(domSnippetState[snippetName]).append(element).children();
+            
+            snippetEditorState[snippetName] = Html2Markdown(removeIDs(domSnippetState[snippetName]));
+            loadSnippet(snippetName, function(snippet) {
+              editor.setValue(snippet);
+              editor.refresh();
+            });
+          }
+        });
       
         selectSnippet(snippets().names.sort(function(a, b) { return a.toLowerCase() > b.toLowerCase(); })[0]);
         addEditor();
         
         contentDecorator.addRemoveZone('#gallery');
-      
       
         loadSnippet(snippetName, function(snippet) {
           editor.setValue(snippet);
@@ -309,14 +396,6 @@ $(function() {
     
       callback();
     });
-  }
-  
-  function trigger_http_basic_auth(callback) {
-    if(initDone) {
-      callback();
-    } else {
-      $.get("/burp/",callback);
-    }
   }
   
   function isCtrlOrAltEscape(event) {
