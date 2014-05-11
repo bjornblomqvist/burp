@@ -366,6 +366,15 @@ $(function() {
           append: function(snippetName, element) {
             $(element).removeClass('ui-droppable movable ui-draggable');
             
+            if(element.attr('eid') !== undefined) {
+              var remove_eid = element.attr('eid');
+              var remove_cssSelector = '[eid="'+ remove_eid +'"]';
+              var root = $('<div></div>');
+              root.append(domSnippetState[snippetName]);
+              root.find(remove_cssSelector).remove();
+              domSnippetState[snippetName] = root.children();
+            }
+            
             domSnippetState[snippetName] = $('<div></div>').append(domSnippetState[snippetName]).append(element).children();
             
             snippetEditorState[snippetName] = Html2Markdown(removeIDs(domSnippetState[snippetName]));
