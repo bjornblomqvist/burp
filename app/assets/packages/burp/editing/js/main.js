@@ -154,7 +154,7 @@ $(function() {
     domSnippetState[snippetName] = elements.clone();
     snippets().snippets[snippetName].update(elements);
     
-    contentDecorator.makeDroppable(elements, false);
+    contentDecorator.makeDroppable(elements.filter("img"), false);
   }
     
   function addEditor() {
