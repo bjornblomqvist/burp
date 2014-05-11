@@ -8,7 +8,7 @@ module Burp
     include ActiveModel::Conversion
     extend ActiveModel::Naming
 
-    attr_accessor :path, :title, :snippets
+    attr_accessor :path, :title, :snippets, :meta_description
   
     validates_presence_of :path, :message => "You must enter a path"
     validates :path, :format => { :with => /\A\//, :message => "Must start with a slash" }
@@ -49,7 +49,7 @@ module Burp
       
         page_data = File.exist?("#{on_disk_path}/page.json") ? JSON.parse(File.read("#{on_disk_path}/page.json")) : {}
       
-        PageModel.new(:snippets => data,:title => page_data['title'], :path => path, :original_path => path)
+        PageModel.new(:snippets => data, :title => page_data['title'], :meta_description => page_data['meta_description'], :path => path, :original_path => path)
       else
         nil
       end
@@ -110,7 +110,7 @@ module Burp
     def save_metadata
     
       File.open("#{on_disk_path}/page.json","w:utf-8") do |file|
-        file.write(JSON.pretty_generate({:title => title}))
+        file.write(JSON.pretty_generate({:title => title, :meta_description => meta_description}))
       end
     
     end

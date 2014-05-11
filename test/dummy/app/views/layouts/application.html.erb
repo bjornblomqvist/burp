@@ -2,6 +2,7 @@
 <html>
 <head>
   <title><%= @cms_page.title %></title>
+  <meta name="description" content="<%= @cms_page.meta_description %>" >
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>

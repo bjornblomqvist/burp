@@ -3,12 +3,13 @@ module Burp
 
   class Page 
 
-    attr_accessor :snippets, :title, :page_id
+    attr_accessor :snippets, :title, :page_id, :meta_description
 
     def initialize(options = {})
       @snippets = options[:snippets] || {}
       @title = options[:title] || ""
       @page_id = options[:page_id] || ""
+      @meta_description = options[:meta_description] || ""
     end
 
     def [](location_name)
