@@ -156,6 +156,9 @@ $(function() {
     
     contentDecorator.makeDroppable(elements.filter("img"), false);
   }
+  
+  var lastChange = 0;
+  var maxUpdatesPerSec = 2;
     
   function addEditor() {
     
@@ -170,7 +173,16 @@ $(function() {
       theme: "default",
       onChange:function(editor, changes) {
         snippetEditorState[snippetName] = editor.getValue();
-        updateSnippetWithMarkdown(snippetName, snippetEditorState[snippetName]);
+        var timeToWait = lastChange + (1000 / maxUpdatesPerSec) - new Date().getTime();
+        lastChange = new Date().getTime();
+        if(timeToWait > 0) {
+          setTimeout(function() {
+            console.debug("waiting for: " + timeToWait);
+            updateSnippetWithMarkdown(snippetName, snippetEditorState[snippetName]);
+          }, timeToWait);
+        } else {
+          updateSnippetWithMarkdown(snippetName, snippetEditorState[snippetName]);
+        }
       }
     });
     
