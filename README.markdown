@@ -65,6 +65,10 @@ To use snippets on pages not cought by the CatchAllController. The or part is to
 ## Title
 
     <title><%= @cms_page.title %></title>
+    
+## Meta description
+
+    <meta name="description" content="<%= @cms_page.meta_description %>" >
 
 ## Menu
 
