@@ -42,7 +42,6 @@
       }
       
       $(elements).draggable({
-        cursor: 'move',
         revert: true,
         revertDuration: 0,
         opacity: 0.6,
