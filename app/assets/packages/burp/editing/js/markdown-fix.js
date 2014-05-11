@@ -40,6 +40,16 @@
     return newArray;
   }
 
+  function unwrapImagesFromParagraphs(container) {
+    container.find("p").each(function() {
+      if($(this).children().length === $(this).find('img').length) {
+        $(this).children().unwrap();
+      }
+    });
+    
+    return container;
+  }
+
   function toHtml(markdown) {
 
     var elements = [];
@@ -51,8 +61,8 @@
         elements.push(value);
       }
     });
-
-    return $("<div></div>").append(elements).html();
+    
+    return unwrapImagesFromParagraphs($("<div></div>").append(elements)).html();
   }
   
   window.markdown2Html = toHtml;

@@ -21,14 +21,6 @@ $(function() {
     return path;
   }
   
-  function unwrapImagesFromParagraphs(container) {
-    container.find("p").each(function() {
-      if($(this).children().length === $(this).find('img').length) {
-        $(this).children().unwrap();
-      }
-    });
-  }
-  
   var snippetCache = {};
   
   function getHTMLForSnippet(_snippetName, callback) {
