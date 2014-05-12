@@ -174,15 +174,16 @@ $(function() {
       theme: "default",
       onChange:function(editor, changes) {
         if(typeof(timeoutID) === "undefined") {
-          snippetEditorState[snippetName] = editor.getValue();
           var timeToWait = lastChange + (1000 / maxUpdatesPerSec) - new Date().getTime();
           lastChange = new Date().getTime();
           if(timeToWait > 0) {
             timeoutID = setTimeout(function() {
               timeoutID = undefined;
+              snippetEditorState[snippetName] = editor.getValue();
               updateSnippetWithMarkdown(snippetName, snippetEditorState[snippetName]);
             }, timeToWait);
           } else {
+            snippetEditorState[snippetName] = editor.getValue();
             updateSnippetWithMarkdown(snippetName, snippetEditorState[snippetName]);
           }
         }
