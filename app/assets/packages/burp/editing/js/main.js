@@ -159,6 +159,7 @@ $(function() {
   
   var lastChange = 0;
   var maxUpdatesPerSec = 2;
+  var timeoutID;  
     
   function addEditor() {
     
@@ -172,16 +173,18 @@ $(function() {
       lineWrapping: true,
       theme: "default",
       onChange:function(editor, changes) {
-        snippetEditorState[snippetName] = editor.getValue();
-        var timeToWait = lastChange + (1000 / maxUpdatesPerSec) - new Date().getTime();
-        lastChange = new Date().getTime();
-        if(timeToWait > 0) {
-          setTimeout(function() {
-            console.debug("waiting for: " + timeToWait);
+        if(typeof(timeoutID) === "undefined") {
+          snippetEditorState[snippetName] = editor.getValue();
+          var timeToWait = lastChange + (1000 / maxUpdatesPerSec) - new Date().getTime();
+          lastChange = new Date().getTime();
+          if(timeToWait > 0) {
+            timeoutID = setTimeout(function() {
+              timeoutID = undefined;
+              updateSnippetWithMarkdown(snippetName, snippetEditorState[snippetName]);
+            }, timeToWait);
+          } else {
             updateSnippetWithMarkdown(snippetName, snippetEditorState[snippetName]);
-          }, timeToWait);
-        } else {
-          updateSnippetWithMarkdown(snippetName, snippetEditorState[snippetName]);
+          }
         }
       }
     });
