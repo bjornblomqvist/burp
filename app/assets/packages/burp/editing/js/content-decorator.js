@@ -221,7 +221,10 @@
     //     },
     
     makeDroppable: function(elements, cloneImage) {
-      initializeMovable(this, elements, cloneImage);
+      var contentEditor = this;
+      $(elements).one('mouseover', function() {
+        initializeMovable(contentEditor, this, cloneImage);
+      });
     },
     
     addRemoveZone: function(element) {
