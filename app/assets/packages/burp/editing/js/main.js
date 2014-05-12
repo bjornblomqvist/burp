@@ -158,7 +158,7 @@ $(function() {
   }
   
   var lastChange = 0;
-  var maxUpdatesPerSec = 2;
+  var maxUpdatesPerSec = 4;
   var timeoutID;  
     
   function addEditor() {
