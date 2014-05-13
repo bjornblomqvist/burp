@@ -13,7 +13,7 @@ $(function() {
   var editor;
   
   function getPathFor(snippetName) {
-    var path = window.burp_path || snippets().snippets[snippetName].pageId || window.location.pathname;
+    var path = snippets().snippets[snippetName].pageId || window.burp_path || window.location.pathname;
     if(path === "/") {
       path = "/$root";
     }
@@ -292,31 +292,39 @@ $(function() {
     
     $.adminDock.footer.addButton({ icon: 'save', text: 'Save', secondary: true, click:function() {
       
-      var path = getPathFor(snippetName);
       snippetCache = {};
       
-      $.ajax("/burp/pages/"+path,{
-        cache: false,
-        dataType: 'json',
-        success: function(data) {
-          
-          data = data || {snippets:{}};
-          
-          $.each(snippetEditorState, function(snippetName, snippetState) {
-            data.snippets[snippetName] = markdown2Html(snippetEditorState[snippetName]);
-          });
-          
-          $.ajax("/burp/pages/"+path,{
-            type:"post",
-            data:{page:data,'_method':"put"},
-            dataType:'json',
-            success:function() {
-              alert("The page has been saved!");
-            }
-          });
-        }
+      var paths = {};
+      
+      $.each(snippetEditorState, function(snippetName, data) {
+        var path = getPathFor(snippetName);
+        paths[path] = paths[path] || [];
+        paths[path].push(snippetName);
       });
       
+      
+      var ajaxRequests = [];
+      
+      $.each(paths, function(path, snippetNames) {
+        
+        var  data = {snippets:{}};
+
+        $.each(snippetNames, function(index, snippetName) {
+          data.snippets[snippetName] = markdown2Html(snippetEditorState[snippetName]);
+        });
+
+        ajaxRequests.push($.ajax("/burp/pages/"+path,{
+          type:"post",
+          data:{page:data, '_method':"put"},
+          dataType:'json',
+          success:function() {}
+        }));
+        
+      });
+      
+      $.when(ajaxRequests).done(function() {
+        alert("The page has been saved!");
+      });
       
     }});
   
