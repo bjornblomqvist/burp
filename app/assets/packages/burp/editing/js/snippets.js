@@ -2,6 +2,17 @@
   
   var $ = jQuery;
   
+  function getData(string) {
+    var data = {};
+    
+    $.each(string.match(/data-(.*?)="(.*?)"/g) || [], function(index, value) {
+      var match = value.match(/data-(.*?)="(.*?)"/);
+      data[match[1]] = match[2];
+    });
+    
+    return data;
+  }
+  
   window.snippets = function() {
     
     var snippets = {names:[],snippets:{}};
@@ -15,15 +26,15 @@
       }
     });
     
-    snippetComments.map(function() {
+    snippetComments.each(function() {
       
-      var name = this.data.match(/data-name=\"(.*?)\"/)[1];
-      var pageId = this.data.match(/data-page-id=\"(.*?)\"/)[1];
+      var data = getData(this.data);
       
-      snippets.names.push(name);
+      snippets.names.push(data['name']);
       
-      snippets.snippets[name] = {
-        pageId:pageId,
+      snippets.snippets[data['name']] = {
+        pageId:data['page-id'],
+        data:data,
         comment:this,
         elements:function() {
           
