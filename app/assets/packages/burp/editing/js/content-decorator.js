@@ -100,12 +100,15 @@
           
           // Add empty area dropbox
           if(wrappers.length === 0) {
-            var position = $(contentEditor.element).offset();
-            var size = {width:$(contentEditor.element).outerWidth(),height:$(contentEditor.element).outerHeight()};
+            
+            var comment = snippets().snippets.footer.comment;
+            var aElement = comment.previousElementSibling || comment.nextElementSibling || comment.parentElement;
+            var position = $(aElement).offset();
+            var size = {width:$(aElement).outerWidth(),height:$(aElement).outerHeight()};
             if(navigator.userAgent.match(/Firefox|Safari/)) {
-              position.left = $(contentEditor.element)[0].offsetLeft;
+              position.left = $(aElement)[0].offsetLeft;
             } else {
-              position.left -= $(contentEditor.element).offsetParent().offset().left;
+              position.left -= $(aElement).offsetParent().offset().left;
             }
             
             if(size.height < 20) {
@@ -118,9 +121,9 @@
             
             var element2 = $('<div class="dropbox"></div>');
             wrappers.push(element2[0]);
-      
+                              
             element2.addClass("bottom-dropbox");
-      
+                              
             element2.css(size);
             element2.css(position);
             element2.css({'position':'absolute'});
