@@ -6,7 +6,7 @@ $(function() {
   
   var elements = $('<div style="display: none;"><div id="gallery" style="display: none;"><ul class="images"></ul><i class="prev icon-large enabled icon-caret-left"></i><i class="next icon-large enabled icon-caret-right"></i></div><div id="myContentEditor" style="display: none;"><textarea id="code" style="width: 100%; height: 300px;"></textarea></div></div>');
   var lastValue;
-  var snippetName;
+  var current_snippetName;
   var originalHtml;
   var originalValue;
   var contentDecorator;
@@ -23,14 +23,12 @@ $(function() {
   
   var snippetCache = {};
   
-  function getHTMLForSnippet(_snippetName, callback) {
+  function getHTMLForSnippet(snippetName, callback) {
     var path = getPathFor(snippetName);
     
-    var cacheKey = path + _snippetName;
+    var cacheKey = path + snippetName;
     if(snippetCache[cacheKey]) {
-      setTimeout(function() {
-        callback(snippetCache[cacheKey]);
-      }, 0);
+      callback(snippetCache[cacheKey]);
     } else {    
       $.ajax("/burp/pages/"+path,{
          cache:false,
@@ -108,13 +106,13 @@ $(function() {
   
   function selectSnippet(_snippetName) {
 
-    snippetName = _snippetName;
-    loadSnippet(snippetName, function(snippet) {
+    current_snippetName = _snippetName;
+    loadSnippet(current_snippetName, function(snippet) {
       editor.setValue(snippet);
       editor.refresh();
     });
     
-    contentDecorator.setSnippetName(snippetName);
+    contentDecorator.setSnippetName(current_snippetName);
   }
   
   function removeIDs(elements) {
@@ -179,12 +177,12 @@ $(function() {
           if(timeToWait > 0) {
             timeoutID = setTimeout(function() {
               timeoutID = undefined;
-              snippetEditorState[snippetName] = editor.getValue();
-              updateSnippetWithMarkdown(snippetName, snippetEditorState[snippetName]);
+              snippetEditorState[current_snippetName] = editor.getValue();
+              updateSnippetWithMarkdown(current_snippetName, snippetEditorState[current_snippetName]);
             }, timeToWait);
           } else {
-            snippetEditorState[snippetName] = editor.getValue();
-            updateSnippetWithMarkdown(snippetName, snippetEditorState[snippetName]);
+            snippetEditorState[current_snippetName] = editor.getValue();
+            updateSnippetWithMarkdown(current_snippetName, snippetEditorState[current_snippetName]);
           }
         }
       }
@@ -238,7 +236,7 @@ $(function() {
         change: function(option) {
         
           selectSnippet(option);
-          loadSnippet(snippetName, function(snippet) {
+          loadSnippet(current_snippetName, function(snippet) {
             editor.setValue(snippet);
             editor.refresh();
           });
@@ -284,7 +282,7 @@ $(function() {
         });
       });
       
-      loadSnippet(snippetName, function(snippet) {
+      loadSnippet(current_snippetName, function(snippet) {
         editor.setValue(snippet);
         editor.refresh();
       });
@@ -433,7 +431,7 @@ $(function() {
         
         contentDecorator.addRemoveZone('#gallery');
       
-        loadSnippet(snippetName, function(snippet) {
+        loadSnippet(current_snippetName, function(snippet) {
           editor.setValue(snippet);
           editor.refresh();
         });
