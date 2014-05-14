@@ -54,6 +54,7 @@ $(function() {
      if(snippetEditorState[snippetName]) {
         callback(snippetEditorState[snippetName]);
      } else {
+       
        getHTMLForSnippet(snippetName, function(html) {
 
           var element = $("<div>" + html + "</div>");
@@ -150,6 +151,7 @@ $(function() {
     var elements = burp.disableScriptElements($(html));
     elements = addIDs(snippetName, elements);
     domSnippetState[snippetName] = elements.clone();
+    
     snippets().snippets[snippetName].update(elements);
     
     contentDecorator.makeDroppable(elements.filter("img"), false);
