@@ -67,7 +67,7 @@ $(function() {
            $(this).removeClass('movable ui-draggable ui-droppable');
           });
 
-          snippetEditorState[snippetName] = Html2Markdown(element.children());
+          snippetEditorState[snippetName] = Html2Markdown(element.html());
           callback(snippetEditorState[snippetName]);
        });
      }
