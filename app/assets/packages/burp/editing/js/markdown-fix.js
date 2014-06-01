@@ -55,8 +55,17 @@
     var elements = [];
 
     $.each(mergeTextAndInlineNodes($("<div></div>").append(markdown).contents()), function(index, value) {
-      if(typeof(value) === "string") {
-        elements.push(marked(value));
+      if(typeof(value) === "string" && value.match(/^\s+$/)) {
+        elements.push(value);
+      } else if(typeof(value) === "string") {
+        var html = marked(value);
+        if(html.startsWith("<")) {
+            elements.push("\n\n");
+        }
+        elements.push(html);
+        if(html.endsWith(">\n")) {
+            elements.push("\n");
+        }
       } else {
         elements.push(value);
       }

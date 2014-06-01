@@ -55,8 +55,6 @@
     
   - File upload in edit mode should show progras just like on the files page
 
-  - Change so that we dont wrap the content when editing
-
   - Fix handeling of all form errors
   
   - Fix so that style elment content dont get escaped by the markdown parser
