@@ -96,7 +96,7 @@ module Burp
     end
     
     def disposition(file_path)
-      file_path.match(/\.(png|jpeg|gif|jpg|pdf|txt)$/) && !params.has_key?(:download) ? 'inline' : 'attachment'
+      file_path.match(/\.(png|jpeg|gif|jpg|pdf|txt)$/i) && !params.has_key?(:download) ? 'inline' : 'attachment'
     end
     
     def upload_directory_path
