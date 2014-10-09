@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 gem "jquery-rails"
+gem 'jquery-migrate-rails'
 gem 'jquery-ui-rails'
 gem 'less-rails'
 gem 'mayi'
