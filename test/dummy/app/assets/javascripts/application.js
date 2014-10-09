@@ -11,7 +11,6 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-//= require jquery-migrate-min
 //= require jquery_ujs
 //= require 'burp/editing'
 //= require 'burp/cms_helper'
