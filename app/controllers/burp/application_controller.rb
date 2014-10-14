@@ -4,6 +4,12 @@ module Burp
     protect_from_forgery
     before_filter :authenticate
     before_filter :init_body_classes
+    before_filter :set_site_name
+    
+    def set_site_name
+      @site_name = Rails.application.config.respond_to?(:site_name) ?
+        Rails.application.config.site_name : Rails.application.class.parent_name.split(/(?=[A-Z])/).join(" ").downcase.capitalize
+    end
     
     def init_body_classes 
 

@@ -20,7 +20,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="/"><%= Rails.application.config.respond_to?(:site_name) ? Rails.application.config.site_name : Rails.application.class.parent_name %></a>
+          <a class="brand" href="/"><%= @site_name %></a>
           <div class="nav-collapse collapse">
             <%= Burp::Group.bootstrap_nav(menu, request) %>
           </div>
