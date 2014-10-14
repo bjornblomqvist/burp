@@ -27,9 +27,16 @@
   <tbody>
   <% @files.each do |file| %>  
     <tr>
-      <td><%= link_to file.public_path, file.public_path, :title => "Click to open" %></a></td>
-      <td class="upload-time"><%= file.mtime.strftime("%Y-%m-%d %H:%M") %></a></td>
-      <td class="file-size"><%= number_to_human_size(file.size, :precision => 2) %></a></td>
+      <td>
+        <%= link_to(file.public_path, :title => "Click to open") do %>
+          <%= file.public_path %>
+          <% if file.public_path.match(/\.(png|jpeg|gif|jpg)$/i) %>
+            <img class="preview" src="<%= file.public_path.gsub(/files\//,"files/small/") %>">
+          <% end %>
+        <% end %>
+      </td>
+      <td class="upload-time"><%= file.mtime.strftime("%Y-%m-%d %H:%M") %></td>
+      <td class="file-size"><%= number_to_human_size(file.size, :precision => 2) %></td>
       <td class="actions"><%= link_to 'Remove', file_path(file), :confirm => 'Are you sure?', :id => 'remove-link', :title => "Click to remove file.", :method => :delete %></td>
     </tr>
   <% end %>
