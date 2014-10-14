@@ -1,7 +1,7 @@
 When /^I add a new link$/ do
   click_link("New link")
   fill_in "Name", :with => "A new link"
-  fill_in "Url", :with => "http://www.google.com/"
+  fill_in "URL", :with => "http://www.google.com/"
   click_button("Create")
 end
 
@@ -23,7 +23,7 @@ When /^I change the name of the link$/ do
   click_link("Google")
   has_css?("#my-pop-over", :visible => true) # Wait for the form to appear
   fill_in "Name", :with => "Google now with www"
-  fill_in "Url", :with => "http://www.google.com/"
+  fill_in "URL", :with => "http://www.google.com/"
   click_button("Save")
 end
 
@@ -50,7 +50,7 @@ When /^I enter a new name for the link but i dont save the changes$/ do
   click_link("Google")
   has_css?("#my-pop-over",  :visible => true) # Wait for the form to appear
   fill_in "Name", :with => "Google now with www"
-  fill_in "Url", :with => "http://www.google.com/"
+  fill_in "URL", :with => "http://www.google.com/"
   click_button("Cancel")
 end
 

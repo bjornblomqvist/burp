@@ -8,7 +8,7 @@ When /^I go and add a link to the first menu$/ do
   click_link "Menu"
   click_link "New link"
   fill_in "Name", :with => "A new link"
-  fill_in "Url", :with => "http://video.google.com/"
+  fill_in "URL", :with => "http://video.google.com/"
   click_button "Create"
 end
 
