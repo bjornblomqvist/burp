@@ -16,10 +16,6 @@
 
   <h4>Add a group or link</h4>
   <p>Click on "New link" or "New group" bellow the menu to add a new <strong style="color: green;">link</strong> or <strong style="color: orange;">group</strong>.</p>
-
-  <h4>Quikly add a cms page</h4>
-  <p>Drag and drop a <strong style="color: green;">link</strong> from the <strong>"Pages not in the above menu"</strong> list.<p>
-  <p>NOTE! <strong>"Pages not in the above menu"</strong> is a generated list of pages, any <strong style="color: green;">links</strong> or <strong style="color: orange;">groups</strong> draged to it will be removed from the menu and lost when this page is reloaded.</p>
 </div>
 
 <h1><%= @menu.name.capitalize %></h1>
@@ -30,15 +26,6 @@
 
 <%= link_to "» New link", new_menu_link_path(@menu), :class => 'new-link-link' %><br>
 <%= link_to "» New group", new_menu_group_path(@menu), :class => 'new-group-link' %>
-
-<hr>
-<h3>Pages not in the above menu</h3>
-<span class="dnd-editable-menu not-editable">
-<%= @pages_not_in_menu.to_html %>
-</span>
-
-
-
 
 <div class="modal hide fade">
   <div class="modal-header">
