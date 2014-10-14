@@ -25,6 +25,7 @@ Given(/^there is a large image with scaled down versions$/) do
   BurpFactory.create :basic_site
   visit "/burp/files/"
   find(:css,"input[type=file]",:visible => false).set(File.expand_path("./features/test_files/large-test-image.jpg"))
+  page.should have_content("/burp/files/large-test-image.jpg")
 end
 
 When /^I go and remove it$/ do
