@@ -4,7 +4,7 @@ Given /^I am on the edit menu page$/ do
 end
 
 When /^I add a new group$/ do
-  click_link("New group")
+  click_link("Add group")
   fill_in "Name", :with => "A new group"
   click_button("Create")
 end

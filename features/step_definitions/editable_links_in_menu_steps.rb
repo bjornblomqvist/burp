@@ -1,5 +1,5 @@
 When /^I add a new link$/ do
-  click_link("New link")
+  click_link("Add link")
   fill_in "Name", :with => "A new link"
   fill_in "URL", :with => "http://www.google.com/"
   click_button("Create")

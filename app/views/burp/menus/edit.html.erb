@@ -15,7 +15,7 @@
   <p>Click on any <strong style="color: orange;">group</strong> or <strong style="color: green;">link</strong> to edit it and then click the remove button.</p>
 
   <h4>Add a group or link</h4>
-  <p>Click on "New link" or "New group" bellow the menu to add a new <strong style="color: green;">link</strong> or <strong style="color: orange;">group</strong>.</p>
+  <p>Click on "Add link" or "Add group" bellow the menu to add a new <strong style="color: green;">link</strong> or <strong style="color: orange;">group</strong>.</p>
 </div>
 
 <h1><%= @menu.name.capitalize %></h1>
@@ -23,9 +23,9 @@
 <span class="dnd-editable-menu editable">
 <%= @menu.to_html %>
 </span>
-
-<%= link_to "» New link", new_menu_link_path(@menu), :class => 'new-link-link' %><br>
-<%= link_to "» New group", new_menu_group_path(@menu), :class => 'new-group-link' %>
+<br>
+<%= link_to "Add link", new_menu_link_path(@menu), :class => 'new-link-link btn' %>
+<%= link_to "Add group", new_menu_group_path(@menu), :class => 'new-group-link btn' %>
 
 <div class="modal hide fade">
   <div class="modal-header">

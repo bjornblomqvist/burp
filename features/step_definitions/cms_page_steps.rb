@@ -40,7 +40,7 @@ end
 When /^I go and add a page$/ do
   visit "/burp/"
   click_link "Pages"
-  click_link "New page"
+  click_link "Add page"
   fill_in "Title", :with => "New page title"
   fill_in "Path", :with => "/the-new-page"
   click_button "Create"
@@ -71,7 +71,7 @@ end
 When /^I go and add a page without a page path$/ do
   visit "/burp/"
   click_link "Pages"
-  click_link "New page"
+  click_link "Add page"
   fill_in "Title", :with => "New page title"
   
   # We turn off HTML5 validation so that we can test the error handeling
