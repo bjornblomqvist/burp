@@ -4,6 +4,7 @@ module Burp
     # These require are need so that jquery and jquery-ui are included into the asset pipeline.
     require 'jquery-rails'
     require 'jquery-ui-rails'
+    require 'jquery-migrate-rails'
     
     isolate_namespace Burp
     
