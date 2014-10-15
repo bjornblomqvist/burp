@@ -3,11 +3,6 @@
     - Have the url part of links do Typeahead. See (http://getbootstrap.com/2.3.2/javascript.html#typeahead) and http://twitter.github.io/typeahead.js
       The hope is to teach the users that its a tree of links
       
-  - Add indicator to page listing to show if a page is in one of the menus
-    - Show a star or link next to the pages that are in a menu
-      http://fortawesome.github.io/Font-Awesome/icons/ (fa-exclamation-circle)
-      
-      
   - Add so that we can have id and classes for links and groups in the menu
   - Add persona based login solution with basic roles (Admin, user).
     User can do the usual things. Admin can add users and other admins. Admin can not remove him/her self.
