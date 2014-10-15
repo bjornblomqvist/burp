@@ -10,6 +10,8 @@ gem 'bootstrap_forms'
 gem 'term-ansicolor'
 gem 'rmagick', :require => false
 
+gem 'font-awesome-less', '~> 4.2'
+
 group :development do
   gem "rails", "~> 3.2"
   gem "rspec"

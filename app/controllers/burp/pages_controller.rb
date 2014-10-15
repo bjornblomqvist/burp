@@ -4,6 +4,9 @@ module Burp
     def index
       access.may_view_page_list! do
         @pages = PageModel.all
+        @urls = Menu.all.map do |menu|
+          menu.all_children.map {|child| child.is_a?(Group) ? nil : child.url}
+        end.flatten.compact
       end
     end
     

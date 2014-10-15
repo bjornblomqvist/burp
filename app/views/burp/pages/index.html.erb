@@ -44,8 +44,8 @@
   </thead>
   <tbody>
   <% @pages.sort{|a,b| a.path <=> b.path}.each do |page| %>
-  <tr>
-    <td><%= page.title %></td>
+  <tr class="<%= @urls.include?(page.path) ? "" : "not-linked" %>">
+    <td><%= page.title %> <i title="This page is not linked in any menu" class="fa fa-exclamation-circle"></i></td>
     <td><%= link_to "#{page.path}", page.path, :title => "Click to go to page" %></td>
     <td><%= link_to "Edit", edit_page_path(page), :title => "Click to edit", :class => "edit-page-link" %></td>
   </tr>

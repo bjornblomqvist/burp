@@ -5,6 +5,7 @@ module Burp
     require 'jquery-rails'
     require 'jquery-ui-rails'
     require 'jquery-migrate-rails'
+    require 'font-awesome-less'
     
     isolate_namespace Burp
     
