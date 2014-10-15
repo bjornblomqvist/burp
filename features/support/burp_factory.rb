@@ -2,7 +2,7 @@ require "fileutils"
 
 class BurpFactory
   
-  def self.create type
+  def self.create type = nil
     
     raise "Cant create dummy site as #{Burp.content_directory} is not empty!" if File.exist?(Burp.content_directory)
     
@@ -13,11 +13,12 @@ class BurpFactory
     
     `cd #{path_to_burp_files_directory}; git init` if File.exist?(path_to_burp_files_directory) && File.directory?(path_to_burp_files_directory)
     
+    default_menu = Burp::Menu.new("main")
+    default_menu.save
+    
     if type == :basic_site
-      page = Burp::PageModel.new(:path => "/", :snippets => {:main => ""}, :title => "Start page")
-      page.save
+      Burp::PageModel.new(:path => "/", :snippets => {:main => ""}, :title => "Start page").save
       
-      default_menu = Burp::Menu.new("main")
       default_menu.children << Burp::Link.new(:url => "/", :name => "Start page")
       default_menu.save
     end
