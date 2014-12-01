@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gem "jquery-rails"
 gem 'jquery-migrate-rails'
-gem 'jquery-ui-rails'
+gem 'jquery-ui-rails', "~> 4.0"
 gem 'less-rails'
 gem 'mayi'
 gem 'therubyracer'
