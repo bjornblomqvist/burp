@@ -120,7 +120,13 @@ and use it like this in your views.
         </footer>
       </body>
     </html>
-    
+
+## Changes
+
+**1.7.1**
+
+- Fixed so that dependancy on jquery-ui-rails set to the correct version.
+  
 ## Authors
 
 Authors: Björn Blomqvist
