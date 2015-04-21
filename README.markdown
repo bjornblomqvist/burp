@@ -1,7 +1,3 @@
-
-
-
-
 # Burp
 
 _The Big Universal Rubik's cube Processor_
@@ -32,13 +28,15 @@ So we created a new one in hope that we and others would like it. We have 3 guid
 ## Installation
 
 Add the gem to your Gemfile
-
-    gem 'burp_cms'
+```ruby
+gem 'burp_cms'
+```
     
 Install the gem and init burp.
-
-    bundle install
-    rake burp:init
+```bash
+bundle install
+rake burp:init
+```
 
 You can find the admin on /burp/ and the default admin password in ./config/initializers/burp_access.rb.
 
@@ -50,93 +48,90 @@ matches one of the CMS pages then that CMS page is loaded and shown.
 ### Snippets
 
 An example for a sidebar snippet.
-
-    <%= @cms_page[:sidebar] %>
+```erb
+<%= @cms_page[:sidebar] %>
+```
 
 #### Snippets on other pages
 
 To use snippets on pages not cought by the CatchAllController. The or part is to stop errors do to nil. 
-
-    before_filter :load_cms_page
-    def load_cms_page
-      @cms_page = Burp.find_page(request.path) || Burp::Page.new(:id => request.path)
-    end
+```ruby
+before_filter :load_cms_page
+def load_cms_page
+  @cms_page = Burp.find_page(request.path) || Burp::Page.new(:id => request.path)
+end
+```
 
 ## Title
-
-    <title><%= @cms_page.title %></title>
+```erb
+<title><%= @cms_page.title %></title>
+```
     
 ## Meta description
-
-    <meta name="description" content="<%= @cms_page.meta_description %>" >
+```erb
+<meta name="description" content="<%= @cms_page.meta_description %>" >
+```
 
 ## Menu
 
 ### Render the menu
-
-    <%= @menu.to_html(request) %>
+```erb
+<%= @menu.to_html(request) %>
+```
     
 Or do it manualy
-
-    <nav>
-      <ul>
-        <% @menu.children.select{|child| child.is_a?(Burp::Link) }.each do |child| %>
-        <li class="<%= child.css_class %> <%= child.current?(request) ? "active" : "" %>"><%= child.to_html %></li>
-        <% end %>
-      </ul>
-    </nav>
+```erb
+<nav>
+  <ul>
+    <% @menu.children.select{|child| child.is_a?(Burp::Link) }.each do |child| %>
+    <li class="<%= child.css_class %> <%= child.current?(request) ? "active" : "" %>"><%= child.to_html %></li>
+    <% end %>
+  </ul>
+</nav>
+```
 
 ### Use menu on none CMS pages.  
 
 The @menu variable is only available for pages served with the catch_all controller. Do the below in the ApplicationController to have it available on all pages.
-
-    before_filter :load_menu
-    def load_menu
-      @menu = Burp::Menu.find("main")
-    end
+```ruby
+before_filter :load_menu
+def load_menu
+  @menu = Burp::Menu.find("main")
+end
+```
     
 ## Global content like footers/headers
 
 There is curently no builtin solution for this. Until we add this one can use the solution below to get the same as global snippets.
 
 Add this to application_controller
-
-    helper_method :global_snippets
-    def global_snippets
-      @global_snippets ||= Burp.find_page("/global-snippets") || Burp::Page.new(:snippets => {}, :title => "Not a real page, Dont remove!", :page_id => "/global-snippets")
-    end
+```ruby
+helper_method :global_snippets
+def global_snippets
+  @global_snippets ||= Burp.find_page("/global-snippets") || Burp::Page.new(:snippets => {}, :title => "Not a real page, Dont remove!", :page_id => "/global-snippets")
+end
+```
 
 and use it like this in your views.
 
-    <html>
-      ...
-      <body>
-        <header>
-          <%= global_snippets[:header] %>
-        </header>
-        ....
-        <footer>
-          <%= global_snippets[:footer] %>
-        </footer>
-      </body>
-    </html>
+```erb
+<html>
+  <body>
+    <header>
+      <%= global_snippets[:header] %>
+    </header>
+    <footer>
+      <%= global_snippets[:footer] %>
+    </footer>
+  </body>
+</html>
+```
 
 ## Changes
 
 **1.7.1**
 
 - Fixed so that dependancy on jquery-ui-rails set to the correct version.
-  
-## Authors
-
-Authors: Björn Blomqvist
-
-Special thanks to the following people and companies:
-
-* [Erik Hansson](https://github.com/erikhansson/)
-* [Christer Fahlstrom](https://www.facebook.com/christer.fahlstrom)
-* [Ceyebr AB](http://ceyebr.com/)
-    
 
 ## Contributing
 * Fork the project
@@ -145,4 +140,4 @@ Special thanks to the following people and companies:
 
 ## Copyright
 
-Copyright (c) 2012 - 2013 Björn Blomqvist. See LICENSE.txt (LGPL) for further details.
+Copyright (c) 2012 - 2015 Björn Blomqvist. See LICENSE.txt (LGPL) for further details.
