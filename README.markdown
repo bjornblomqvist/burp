@@ -1,18 +1,12 @@
 # Burp
 
-_The Big Universal Rubik's cube Processor_
+**A CMS that gets out of your way!**
 
-Until we figure out how solve a Rubiks cube your welcome to use Burp as a CMS.
+Burp has 3 guiding goals.
 
-### Why Burp?
-
-We think most CMS are some where between bad and awful!
-
-So we created a new one in hope that we and others would like it. We have 3 guiding goals that help us stay away from bad and awful.
-
-- Don't hinder the developer.
-- Don't try to solve everything.
-- Don't be ugly.
+- Keep it simple
+- Look nice
+- Library not framework
 
 ## Screenshots
 
