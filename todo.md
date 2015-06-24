@@ -1,4 +1,5 @@
 - Setup a demo page
+- Setup website, burp.com with this image as mascot http://venkman-project.deviantart.com/art/Bubble-Burp-109862317
 - Fix so that it is easy to get started
 - The usage insturtions must actualy work
 - Setup travis-ci
