@@ -27,7 +27,7 @@ gem 'burp_cms'
 ```
     
 Install the gem and init burp.
-```bash
+```shell
 bundle install
 rake burp:init
 ```
